@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class Player implements Character
 {
-    public Point pos;
-    public int speed;
+    public Point pos; //position
+    public int speed; //speed
     private KeyHandler keyHandler;
 
     public Player(KeyHandler keyHandler) {
@@ -22,17 +22,20 @@ public class Player implements Character
 	this.pos = new Point(100, 100);
     }
 
+    /**
+     * Updates position
+     */
     public void update() {
 	if (keyHandler.getKey("up")) {
 	    pos.y -= speed;
 	}
-	if (keyHandler.getKey("down")) {
+	else if (keyHandler.getKey("down")) {
 	    pos.y += speed;
 	}
 	if (keyHandler.getKey("left")) {
 	    pos.x -= speed;
 	}
-	if (keyHandler.getKey("right")) {
+	else if (keyHandler.getKey("right")) {
 	    pos.x += speed;
 	}
     }

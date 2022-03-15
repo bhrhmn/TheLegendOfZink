@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
  */
 public class ZinkPanel extends JPanel
 {
-    private static int originalTileSize = 16;
-    private static int factor = 3;
-    public static int tileSize = originalTileSize * factor;
-    public static final int ROWS = 12;
-    public static final int COLUMNS = 16;
+    private static final int ORIGINAL_TILE_SIZE = 16;
+    private static final int FACTOR = 3;
+    public static int tileSize = ORIGINAL_TILE_SIZE * FACTOR; //skriv kommentar
+    private static final int ROWS = 12;
+    private static final int COLUMNS = 16;
 
     private static final int FPS = 60;
 
@@ -29,12 +29,15 @@ public class ZinkPanel extends JPanel
         startTimer();
     }
 
+    /**
+     * starts timer
+     */
     public void startTimer() {
-        Timer timer = new Timer(1000 / FPS, doOneStep);
-        timer.start();
+        Timer gameTimer = new Timer(1000 / FPS, doOneStep);
+        gameTimer.start();
     }
 
-    public final Action doOneStep = new AbstractAction()
+    private final Action doOneStep = new AbstractAction()
     {
         @Override public void actionPerformed(final ActionEvent e) {
             tick();
@@ -50,7 +53,7 @@ public class ZinkPanel extends JPanel
     }
 
     /**
-     * Changes the players position depending on which keys are currently pressed
+     * calls on player function update
      */
     private void update() {
         player.update();
