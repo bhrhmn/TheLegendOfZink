@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Handles input from keyboard
+ */
 public class KeyHandler extends KeyAdapter
 {
 
