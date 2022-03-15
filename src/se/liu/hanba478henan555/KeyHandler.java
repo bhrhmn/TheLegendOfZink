@@ -23,12 +23,12 @@ public class KeyHandler extends KeyAdapter
      * @param key
      * @return
      */
-    public boolean getKey(String key){
+    public boolean getKey(Direction key){
 	switch (key){
-	    case "up" -> {return keyMap.get(KeyEvent.VK_W);}
-	    case "down" -> {return keyMap.get(KeyEvent.VK_S);}
-	    case "left" -> {return keyMap.get(KeyEvent.VK_A);}
-	    case "right" -> {return keyMap.get(KeyEvent.VK_D);}
+	    case UP -> {return keyMap.get(KeyEvent.VK_W);}
+	    case DOWN -> {return keyMap.get(KeyEvent.VK_S);}
+	    case LEFT -> {return keyMap.get(KeyEvent.VK_A);}
+	    case RIGHT -> {return keyMap.get(KeyEvent.VK_D);}
 	    default -> {return false;}
 	}
     }

@@ -12,7 +12,7 @@ public class Player implements Character
      * speed
      */
     public int speed;
-    
+
     private KeyHandler keyHandler;
 
     public Player(KeyHandler keyHandler) {
@@ -33,16 +33,16 @@ public class Player implements Character
      * Updates position
      */
     public void update() {
-	if (keyHandler.getKey("up")) {
+	if (keyHandler.getKey(Direction.UP)) {
 	    pos.y -= speed;
 	}
-	else if (keyHandler.getKey("down")) {
+	else if (keyHandler.getKey(Direction.DOWN)) {
 	    pos.y += speed;
 	}
-	if (keyHandler.getKey("left")) {
+	if (keyHandler.getKey(Direction.LEFT)) {
 	    pos.x -= speed;
 	}
-	else if (keyHandler.getKey("right")) {
+	else if (keyHandler.getKey(Direction.RIGHT)) {
 	    pos.x += speed;
 	}
     }
