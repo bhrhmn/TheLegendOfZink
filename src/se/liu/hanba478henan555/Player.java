@@ -2,17 +2,12 @@ package se.liu.hanba478henan555;
 
 import java.awt.*;
 
-public class Player implements Character
+/**
+ * Maincharacter of the game
+ * charcter which user controlls
+ */
+public class Player extends AbstractEntity
 {
-    /**
-     * position
-     */
-    public Point pos;
-    /**
-     * speed
-     */
-    public int speed;
-
     private KeyHandler keyHandler;
 
     public Player(KeyHandler keyHandler) {
@@ -21,12 +16,8 @@ public class Player implements Character
     }
 
     private void setDefaultValues() {
-	this.speed = 4;
-	setDefaultPosition();
-    }
-
-    private void setDefaultPosition() {
-	this.pos = new Point(100, 100);
+	this.speed = 4; // sets speed of player
+	this.pos = new Point(100, 100); // sets default position of player
     }
 
     /**

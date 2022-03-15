@@ -5,14 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Updates the frame
+ * Handles the appearence of the frame
  */
 public class ZinkPanel extends JPanel
 {
     private static final int ORIGINAL_TILE_SIZE = 16;
     private static final int FACTOR = 3;
     /**
-     * Size of a tile
+     Size of a tile
      */
     public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;
 

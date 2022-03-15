@@ -1,6 +1,9 @@
 package se.liu.hanba478henan555;
 
-public interface Character
+/**
+ * Interface for every moving character
+ */
+public interface Entity
 {
     public void attack();
     public void takeDamage();
