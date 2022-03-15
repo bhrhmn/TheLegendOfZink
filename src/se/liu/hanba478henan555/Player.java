@@ -4,8 +4,15 @@ import java.awt.*;
 
 public class Player implements Character
 {
-    public Point pos; //position
-    public int speed; //speed
+    /**
+     * position
+     */
+    public Point pos;
+    /**
+     * speed
+     */
+    public int speed;
+    
     private KeyHandler keyHandler;
 
     public Player(KeyHandler keyHandler) {
@@ -42,7 +49,7 @@ public class Player implements Character
 
     public void draw(Graphics2D g2) {
 	g2.setColor(new Color(73, 11, 171));
-	g2.fillRect(pos.x, pos.y, ZinkPanel.tileSize, ZinkPanel.tileSize);
+	g2.fillRect(pos.x, pos.y, ZinkPanel.TILE_SIZE, ZinkPanel.TILE_SIZE);
 
 	g2.dispose(); //?????
     }

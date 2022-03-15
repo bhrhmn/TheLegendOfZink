@@ -14,7 +14,8 @@ public class ZinkPanel extends JPanel
     /**
      * Size of a tile
      */
-    public static int tileSize = ORIGINAL_TILE_SIZE * FACTOR;
+    public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;
+
     private static final int ROWS = 12;
     private static final int COLUMNS = 16;
 
@@ -25,7 +26,7 @@ public class ZinkPanel extends JPanel
     private Player player = new Player(keyHandler);
 
     public ZinkPanel() {
-        this.setPreferredSize(new Dimension(COLUMNS * tileSize, ROWS * tileSize));
+        this.setPreferredSize(new Dimension(COLUMNS * TILE_SIZE, ROWS * TILE_SIZE));
         this.setBackground(new Color(169, 69, 69));
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
