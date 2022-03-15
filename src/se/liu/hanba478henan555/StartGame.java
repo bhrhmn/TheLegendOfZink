@@ -2,6 +2,9 @@ package se.liu.hanba478henan555;
 
 import javax.swing.*;
 
+/**
+ * Creates frame and starts game
+ */
 public class StartGame
 {
     public static void main(String[] args) {
@@ -15,5 +18,7 @@ public class StartGame
 
 	frame.setLocationRelativeTo(null);
 	frame.setVisible(true);
+
+	zinkPanel.startTimer();
     }
 }

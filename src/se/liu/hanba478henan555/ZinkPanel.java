@@ -30,7 +30,6 @@ public class ZinkPanel extends JPanel
         this.setBackground(new Color(169, 69, 69));
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
-        startTimer();
     }
 
     /**
