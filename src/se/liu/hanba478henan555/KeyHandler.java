@@ -11,7 +11,7 @@ import java.util.Map;
 public class KeyHandler extends KeyAdapter
 {
 
-    private HashMap<Integer, Boolean> keyMap = new HashMap<>(Map.ofEntries(
+    private Map<Integer, Boolean> keyMap = new HashMap<>(Map.ofEntries(
 	    Map.entry(KeyEvent.VK_W, false),
 	    Map.entry(KeyEvent.VK_A, false),
 	    Map.entry(KeyEvent.VK_S, false),
