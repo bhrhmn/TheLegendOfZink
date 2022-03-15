@@ -11,7 +11,10 @@ public class ZinkPanel extends JPanel
 {
     private static final int ORIGINAL_TILE_SIZE = 16;
     private static final int FACTOR = 3;
-    public static int tileSize = ORIGINAL_TILE_SIZE * FACTOR; //skriv kommentar
+    /**
+     * Size of a tile
+     */
+    public static int tileSize = ORIGINAL_TILE_SIZE * FACTOR;
     private static final int ROWS = 12;
     private static final int COLUMNS = 16;
 
