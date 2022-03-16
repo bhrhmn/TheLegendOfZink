@@ -25,12 +25,5 @@ public abstract class AbstractEntity implements Entity
 	    left1 = null,left2 = null,right1 = null,
 	    	right2 = null,down1 = null,down2 = null;
 
-    public void getImages() {
-	try {
-
-	    up1 = ImageIO.read(getClass().getResourceAsStream("/images/hello_world.png"));
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-    }
+    public int spriteCounter;
 }
