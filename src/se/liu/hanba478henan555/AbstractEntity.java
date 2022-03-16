@@ -1,9 +1,7 @@
 package se.liu.hanba478henan555;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 /**
  * docstring
@@ -25,5 +23,13 @@ public abstract class AbstractEntity implements Entity
 	    left1 = null,left2 = null,right1 = null,
 	    	right2 = null,down1 = null,down2 = null;
 
+    /**
+     * Used to count frames
+     */
     public int spriteCounter;
+
+    /**
+     * Controlls when the sprite change
+     */
+    public int spriteFrames;
 }

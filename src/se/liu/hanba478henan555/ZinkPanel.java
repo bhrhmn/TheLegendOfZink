@@ -24,6 +24,7 @@ public class ZinkPanel extends JPanel
     private KeyHandler keyHandler = new KeyHandler();
 
     private Player player = new Player(keyHandler);
+    private Room room = new Room();
 
     public ZinkPanel() {
         this.setPreferredSize(new Dimension(COLUMNS * TILE_SIZE, ROWS * TILE_SIZE));
@@ -65,7 +66,7 @@ public class ZinkPanel extends JPanel
     @Override public void paintComponent(final Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
+        room.draw(g2);
         player.draw(g2);
 
     }

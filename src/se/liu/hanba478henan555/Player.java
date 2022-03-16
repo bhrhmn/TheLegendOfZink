@@ -15,6 +15,7 @@ public class Player extends AbstractEntity
     private KeyHandler keyHandler;
     private Direction currentKey;
 
+
     public Player(KeyHandler keyHandler) {
 	setDefaultValues();
 	getPlayerImage();
@@ -24,6 +25,7 @@ public class Player extends AbstractEntity
     }
 
     private void setDefaultValues() {
+	this.spriteFrames = 10;
 	this.speed = 4; // sets speed of player
 	this.pos = new Point(100, 100); // sets default position of player
     }
@@ -47,41 +49,43 @@ public class Player extends AbstractEntity
      * Updates position
      */
     public void update() {
-	//TODO will only be true while key is pressed
-	if (true){
+	if (keyHandler.getKey(Direction.UP) || keyHandler.getKey(Direction.DOWN) ||
+	    keyHandler.getKey(Direction.LEFT) || keyHandler.getKey(Direction.RIGHT)) {
+
 	    spriteCounter++;
-	}
-	if (keyHandler.getKey(Direction.UP)) {
-	    currentKey = Direction.UP;
-	    pos.y -= speed;
-	}
-	else if (keyHandler.getKey(Direction.DOWN)) {
-	    currentKey = Direction.DOWN;
-	    pos.y += speed;
-	}
-	if (keyHandler.getKey(Direction.LEFT)) {
-	    currentKey = Direction.LEFT;
-	    pos.x -= speed;
-	}
-	else if (keyHandler.getKey(Direction.RIGHT)) {
-	    currentKey = Direction.RIGHT;
-	    pos.x += speed;
+
+	    if (keyHandler.getKey(Direction.UP)) {
+		currentKey = Direction.UP;
+		pos.y -= speed;
+	    }
+	    else if (keyHandler.getKey(Direction.DOWN)) {
+		currentKey = Direction.DOWN;
+		pos.y += speed;
+	    }
+	    if (keyHandler.getKey(Direction.LEFT)) {
+		currentKey = Direction.LEFT;
+		pos.x -= speed;
+	    }
+	    else if (keyHandler.getKey(Direction.RIGHT)) {
+		currentKey = Direction.RIGHT;
+		pos.x += speed;
+	    }
 	}
 
     }
 
+    /**
+     * Shows the player on screen facing the direction of the last pressed key
+     * @param g2
+     */
     public void draw(Graphics2D g2) {
-	//g2.setColor(new Color(73, 11, 171));
-	//g2.fillRect(pos.x, pos.y, ZinkPanel.TILE_SIZE, ZinkPanel.TILE_SIZE);
-
-	//g2.dispose(); //?????
 	BufferedImage image = null;
 	switch (currentKey){
-	    case UP:{
+	    case UP: {
 		image = changeSprite(up1,up2);
 		break;
 	    }
-	    case DOWN:{
+	    case DOWN: {
 		image = changeSprite(down1,down2);
 		break;
 	    }
@@ -98,11 +102,12 @@ public class Player extends AbstractEntity
     }
 
     private BufferedImage changeSprite(BufferedImage b1, BufferedImage b2){
-
-	if (spriteCounter % 12 == 0) {
-	    System.out.println(spriteCounter);
+	if (spriteCounter <= spriteFrames)
 	    return b2;
-	}
+
+	if(spriteCounter >= spriteFrames*2)
+	    spriteCounter = 0;
+
 	return b1;
     }
 
