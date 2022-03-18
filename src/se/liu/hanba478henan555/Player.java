@@ -14,20 +14,24 @@ public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
     private PlayerInput currentKey;
-
+    private int rows,colums,tileSize;
 
     public Player(KeyHandler keyHandler) {
-	setDefaultValues();
-	getPlayerImage();
 	this.keyHandler = keyHandler;
 	this.currentKey = PlayerInput.UP;
+	this.tileSize = ZinkPanel.getTileSize();
+	this.colums = ZinkPanel.getColumns();
+	this.rows = ZinkPanel.getRows();
+
+	setDefaultValues();
+	getPlayerImage();
 
     }
 
     private void setDefaultValues() {
 	this.spriteFrames = 10;
 	this.speed = 4; // sets speed of player
-	this.pos = new Point(ZinkPanel.ROWS*ZinkPanel.TILE_SIZE / 2, ZinkPanel.COLUMNS*ZinkPanel.TILE_SIZE / 2); // sets default position of player to the middle of the screen
+	this.pos = new Point(rows*tileSize / 2, colums*tileSize / 2); // sets default position of player to the middle of the screen
     }
 
     private void getPlayerImage(){
@@ -98,7 +102,7 @@ public class Player extends AbstractEntity
 		break;
 	    }
 	}
-	g2.drawImage(image, pos.x, pos.y, ZinkPanel.TILE_SIZE, ZinkPanel.TILE_SIZE ,null);
+	g2.drawImage(image, pos.x, pos.y, tileSize, tileSize ,null);
     }
 
     private BufferedImage changeSprite(BufferedImage b1, BufferedImage b2){

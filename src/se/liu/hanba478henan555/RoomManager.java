@@ -13,12 +13,18 @@ public class RoomManager
 {
     private Tile[] tileTypes;
     private int[][] roomTileData;
+    private int rows,colums,tileSize;
 
     public RoomManager() {
+	this.tileSize = ZinkPanel.getTileSize();
+	this.colums = ZinkPanel.getColumns();
+	this.rows = ZinkPanel.getRows();
+
 	this.tileTypes = new Tile[10];
-	this.roomTileData = new int[ZinkPanel.ROWS][ZinkPanel.COLUMNS];
+	this.roomTileData = new int[rows][colums];
 	loadMap("src/se/liu/hanba478henan555/rooms/room_1.txt");
 	getTileTypes();
+
     }
 
     private void getTileTypes() {
@@ -37,9 +43,9 @@ public class RoomManager
 	try{
 	    Scanner scanner = new Scanner(new BufferedReader(new FileReader(roomFile)));
 	    while (scanner.hasNextLine()){
-		for(int y = 0; y < ZinkPanel.COLUMNS; y++){
+		for(int y = 0; y < colums; y++){
 		    String[] line = scanner.nextLine().trim().split(" ");
-		    for (int x = 0; x < ZinkPanel.ROWS; x++){
+		    for (int x = 0; x < rows; x++){
 			roomTileData[x][y] = Integer.parseInt(line[x]);
 		    }
 		}
@@ -52,10 +58,10 @@ public class RoomManager
     }
 
     public void draw(Graphics2D g2) {
-	for (int y =0 ; y < ZinkPanel.COLUMNS; y++) {
-	    for(int x = 0; x < ZinkPanel.ROWS; x++){
+	for (int y =0 ; y < colums; y++) {
+	    for(int x = 0; x < rows; x++){
 		int tileType = roomTileData[x][y];
-		g2.drawImage(tileTypes[tileType].image,x*ZinkPanel.TILE_SIZE,y*ZinkPanel.TILE_SIZE,ZinkPanel.TILE_SIZE, ZinkPanel.TILE_SIZE, null );
+		g2.drawImage(tileTypes[tileType].image,x*tileSize,y*tileSize,tileSize, tileSize, null );
 	    }
 	}
 

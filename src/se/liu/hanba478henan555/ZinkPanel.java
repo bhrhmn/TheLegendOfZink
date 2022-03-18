@@ -14,10 +14,10 @@ public class ZinkPanel extends JPanel
     /**
      Size of a tile
      */
-    public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;
+    private static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;
 
-    public static final int ROWS = 16;
-    public static final int COLUMNS = 12;
+    private static final int ROWS = 16;
+    private static final int COLUMNS = 12;
 
     private static final int FPS = 60;
 
@@ -33,6 +33,17 @@ public class ZinkPanel extends JPanel
         this.setFocusable(true);
     }
 
+    public static int getRows(){
+        return ROWS;
+    }
+
+    public static int getColumns(){
+        return COLUMNS;
+    }
+
+    public static int getTileSize(){
+        return TILE_SIZE;
+    }
     /**
      * starts timer
      */
