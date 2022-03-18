@@ -15,13 +15,16 @@ public class Player extends AbstractEntity
     private KeyHandler keyHandler;
     private PlayerInput currentKey;
     private int rows,colums,tileSize;
+    private CollisionHandler cl;
 
-    public Player(KeyHandler keyHandler) {
+    public Player(ZinkPanel zp,KeyHandler keyHandler) {
 	this.keyHandler = keyHandler;
 	this.currentKey = PlayerInput.UP;
-	this.tileSize = ZinkPanel.getTileSize();
-	this.colums = ZinkPanel.getColumns();
-	this.rows = ZinkPanel.getRows();
+	this.cl = zp.collisionHandler;
+
+	this.tileSize = zp.getTileSize();
+	this.colums = zp.getColumns();
+	this.rows = zp.getRows();
 
 	setDefaultValues();
 	getPlayerImage();
@@ -29,6 +32,7 @@ public class Player extends AbstractEntity
     }
 
     private void setDefaultValues() {
+	this.collision = true;
 	this.spriteFrames = 10;
 	this.speed = 4; // sets speed of player
 	this.pos = new Point(rows*tileSize / 2, colums*tileSize / 2); // sets default position of player to the middle of the screen
@@ -53,26 +57,34 @@ public class Player extends AbstractEntity
      * Updates position
      */
     public void update() {
+
 	if (keyHandler.getKey(PlayerInput.UP) || keyHandler.getKey(PlayerInput.DOWN) ||
 	    keyHandler.getKey(PlayerInput.LEFT) || keyHandler.getKey(PlayerInput.RIGHT)) {
-
 	    spriteCounter++;
 
 	    if (keyHandler.getKey(PlayerInput.UP)) {
 		currentKey = PlayerInput.UP;
 		pos.y -= speed;
+		if (cl.tileCollision(this,PlayerInput.UP))
+		    pos.y += speed;
 	    }
 	    else if (keyHandler.getKey(PlayerInput.DOWN)) {
 		currentKey = PlayerInput.DOWN;
 		pos.y += speed;
+		if (cl.tileCollision(this,PlayerInput.DOWN))
+		    pos.y -= speed;
 	    }
 	    if (keyHandler.getKey(PlayerInput.LEFT)) {
 		currentKey = PlayerInput.LEFT;
 		pos.x -= speed;
+		if (cl.tileCollision(this,PlayerInput.LEFT))
+		    pos.x += speed;
 	    }
 	    else if (keyHandler.getKey(PlayerInput.RIGHT)) {
 		currentKey = PlayerInput.RIGHT;
 		pos.x += speed;
+		if (cl.tileCollision(this,PlayerInput.RIGHT))
+		    pos.x -= speed;
 	    }
 	}
 
@@ -103,6 +115,8 @@ public class Player extends AbstractEntity
 	    }
 	}
 	g2.drawImage(image, pos.x, pos.y, tileSize, tileSize ,null);
+
+
     }
 
     private BufferedImage changeSprite(BufferedImage b1, BufferedImage b2){

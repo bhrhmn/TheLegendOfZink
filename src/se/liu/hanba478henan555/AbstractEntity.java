@@ -32,4 +32,6 @@ public abstract class AbstractEntity implements Entity
      * Controlls when the sprite change
      */
     public int spriteFrames;
+
+    public boolean collision = false;
 }

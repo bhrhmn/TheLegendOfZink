@@ -23,25 +23,26 @@ public class ZinkPanel extends JPanel
 
     private KeyHandler keyHandler = new KeyHandler();
 
-    private Player player = new Player(keyHandler);
-    private RoomManager roomManager = new RoomManager();
+    public  CollisionHandler collisionHandler = new CollisionHandler(this);
+    private Player player = new Player(this,keyHandler);
+    public  RoomManager roomManager = new RoomManager(this);
 
     public ZinkPanel() {
         this.setPreferredSize(new Dimension(ROWS * TILE_SIZE, COLUMNS * TILE_SIZE));
-        this.setBackground(new Color(169, 69, 69));
+        this.setBackground(new Color(255, 53, 184));
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
     }
 
-    public static int getRows(){
+    public int getRows(){
         return ROWS;
     }
 
-    public static int getColumns(){
+    public int getColumns(){
         return COLUMNS;
     }
 
-    public static int getTileSize(){
+    public int getTileSize(){
         return TILE_SIZE;
     }
     /**
