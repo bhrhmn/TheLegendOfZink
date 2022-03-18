@@ -7,11 +7,18 @@ public abstract class AbstractObject
 {
     protected BufferedImage image = null;
     protected String name = null;
-    protected boolean collision = false;
     protected Point pos = null;
+    protected ZinkPanel zp;
 
-    public void draw(Graphics2D g2, ZinkPanel zinkPanel){
-        g2.drawImage(image, pos.x * zinkPanel.getTileSize(), pos.y * zinkPanel.getTileSize(), zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
+    protected boolean collision = false;
+    protected Rectangle collisionArea = null;
+
+    public AbstractObject(final ZinkPanel zp) {
+        this.zp = zp;
+    }
+
+    public void draw(Graphics2D g2){
+        g2.drawImage(image, pos.x * zp.getTileSize(), pos.y * zp.getTileSize(), zp.getTileSize(), zp.getTileSize(), null);
     }
 
     public String getName() {

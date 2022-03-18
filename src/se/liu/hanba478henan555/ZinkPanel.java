@@ -9,15 +9,15 @@ import java.awt.event.ActionEvent;
  */
 public class ZinkPanel extends JPanel
 {
-    private static final int ORIGINAL_TILE_SIZE = 16;
+    private static final int ORIGINAL_TILE_SIZE = 16; //ha kvar get eller static?
     private static final int FACTOR = 3;
     /**
      Size of a tile
      */
-    private static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;
+    private static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR; //ha kvar get eller static?
 
-    private static final int ROWS = 16;
-    private static final int COLUMNS = 12;
+    private static final int ROWS = 16; //ha kvar get eller static?
+    private static final int COLUMNS = 12; //ha kvar get eller static?
 
     private static final int FPS = 60;
 
@@ -90,7 +90,7 @@ public class ZinkPanel extends JPanel
 
         for (final AbstractObject object : objects) {
             if(object != null){
-                object.draw(g2, this);
+                object.draw(g2);
             }
         }
 

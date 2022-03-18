@@ -14,7 +14,7 @@ public class PlaceSuperObjects
     }
 
     public void placeObjects(){
-	zinkPanel.objects[0] = new Key();
+	zinkPanel.objects[0] = new Key(zinkPanel);
 	zinkPanel.objects[0].pos = new Point(5,5);
     }
 }

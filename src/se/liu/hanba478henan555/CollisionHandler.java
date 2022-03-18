@@ -14,13 +14,17 @@ public class CollisionHandler
         this.tileSize = zinkPanel.getTileSize();
     }
 
+    public boolean objectCollision(AbstractEntity entity, PlayerInput dir) {
+        return false;
+    }
+
     public boolean tileCollision(AbstractEntity entity, PlayerInput dir){
 
         Point topLeft  = new Point((entity.pos.x+entity.collisionArea.x)/tileSize , (entity.pos.y+entity.collisionArea.y)/tileSize);
         Point topRight = new Point((entity.pos.x+tileSize-entity.collisionArea.x)/tileSize , (entity.pos.y+entity.collisionArea.y)/tileSize);
 
-        Point bottomLeft  = new Point((entity.pos.x+entity.collisionArea.x)/tileSize , (entity.pos.y+tileSize-entity.collisionArea.y)/tileSize);
-        Point bottomRight = new Point((entity.pos.x+tileSize-entity.collisionArea.x)/tileSize , (entity.pos.y+tileSize-entity.collisionArea.y)/tileSize);
+        Point bottomLeft  = new Point((entity.pos.x+entity.collisionArea.x)/tileSize , (entity.pos.y+tileSize-(entity.collisionArea.y/2))/tileSize);
+        Point bottomRight = new Point((entity.pos.x+tileSize-entity.collisionArea.x)/tileSize , (entity.pos.y+tileSize-(entity.collisionArea.y/2))/tileSize);
 
         switch (dir){
             case UP:{
