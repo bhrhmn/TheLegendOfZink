@@ -2,6 +2,9 @@ package se.liu.hanba478henan555;
 
 import java.awt.*;
 
+/**
+ * Places objects on frame
+ */
 public class PlaceSuperObjects
 {
     private ZinkPanel zinkPanel;

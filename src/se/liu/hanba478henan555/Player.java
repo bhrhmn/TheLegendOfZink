@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * Maincharacter of the game
- * charcter which user controlls
+ * character which user controlls
  */
 public class Player extends AbstractEntity
 {
@@ -28,7 +28,7 @@ public class Player extends AbstractEntity
 	this.rows = zp.getRows();
 
 	setDefaultValues();
-	getPlayerImage();
+	loadPlayerImage();
 
     }
 
@@ -45,7 +45,7 @@ public class Player extends AbstractEntity
 	this.pos = new Point(rows*tileSize / 2, colums*tileSize / 2); // sets default position of player to the middle of the screen
     }
 
-    private void getPlayerImage(){
+    private void loadPlayerImage(){
 	try {
 	    up1 = ImageIO.read(new File("src/se/liu/hanba478henan555/player/boy_up_1.png"));
 	    up2 = ImageIO.read(new File("src/se/liu/hanba478henan555/player/boy_up_2.png"));
@@ -85,6 +85,10 @@ public class Player extends AbstractEntity
 
     }
 
+    /**
+     * Moves player and checks for collision
+     * @param pi
+     */
     private void movePlayer(PlayerInput pi){
 	switch (pi){
 	    case UP: {

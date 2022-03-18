@@ -2,6 +2,9 @@ package se.liu.hanba478henan555;
 
 import java.awt.*;
 
+/**
+ * Handles collision
+ */
 public class CollisionHandler
 {
     private ZinkPanel zinkPanel = null;
@@ -13,7 +16,6 @@ public class CollisionHandler
 
     public boolean tileCollision(AbstractEntity entity, PlayerInput dir){
 
-        System.out.println();
         Point topLeft  = new Point((entity.pos.x+entity.collisionArea.x)/tileSize , (entity.pos.y+entity.collisionArea.y)/tileSize);
         Point topRight = new Point((entity.pos.x+tileSize-entity.collisionArea.x)/tileSize , (entity.pos.y+entity.collisionArea.y)/tileSize);
 

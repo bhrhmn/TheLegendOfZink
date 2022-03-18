@@ -9,6 +9,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Manages background
+ */
 public class RoomManager
 {
     private Tile[] tileTypes;

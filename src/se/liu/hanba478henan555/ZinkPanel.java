@@ -25,8 +25,9 @@ public class ZinkPanel extends JPanel
     public  CollisionHandler collisionHandler = new CollisionHandler(this);
     private Player player = new Player(this,keyHandler);
     public  RoomManager roomManager = new RoomManager(this);
-    public AbstractObject[] objects = new AbstractObject[1];
+    public  AbstractObject[] objects = new AbstractObject[1];
     private PlaceSuperObjects placeSuperObjects = new PlaceSuperObjects(this);
+
     public ZinkPanel() {
         this.setPreferredSize(new Dimension(ROWS * TILE_SIZE, COLUMNS * TILE_SIZE));
         this.setBackground(new Color(255, 53, 184));

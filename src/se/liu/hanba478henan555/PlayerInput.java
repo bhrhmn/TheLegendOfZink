@@ -1,7 +1,7 @@
 package se.liu.hanba478henan555;
 
 /**
- * docstring
+ * Different types of input from player
  */
 public enum PlayerInput
 {
