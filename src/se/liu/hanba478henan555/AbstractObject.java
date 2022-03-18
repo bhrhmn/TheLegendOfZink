@@ -3,6 +3,9 @@ package se.liu.hanba478henan555;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Abstract
+ */
 public abstract class AbstractObject
 {
     protected BufferedImage image = null;
@@ -13,7 +16,7 @@ public abstract class AbstractObject
     protected boolean collision = false;
     protected Rectangle collisionArea = null;
 
-    public AbstractObject(final ZinkPanel zp) {
+    protected AbstractObject(final ZinkPanel zp) {
         this.zp = zp;
     }
 
