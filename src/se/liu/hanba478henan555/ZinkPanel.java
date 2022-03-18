@@ -22,11 +22,11 @@ public class ZinkPanel extends JPanel
     private static final int FPS = 60;
 
     private KeyHandler keyHandler = new KeyHandler();
-
     public  CollisionHandler collisionHandler = new CollisionHandler(this);
     private Player player = new Player(this,keyHandler);
     public  RoomManager roomManager = new RoomManager(this);
-
+    public AbstractObject[] objects = new AbstractObject[1];
+    private PlaceSuperObjects placeSuperObjects = new PlaceSuperObjects(this);
     public ZinkPanel() {
         this.setPreferredSize(new Dimension(ROWS * TILE_SIZE, COLUMNS * TILE_SIZE));
         this.setBackground(new Color(255, 53, 184));
@@ -45,6 +45,8 @@ public class ZinkPanel extends JPanel
     public int getTileSize(){
         return TILE_SIZE;
     }
+
+    public int getOriginalTileSize(){return ORIGINAL_TILE_SIZE;}
     /**
      * starts timer
      */
@@ -53,7 +55,11 @@ public class ZinkPanel extends JPanel
         gameTimer.start();
     }
 
-    private final Action doOneStep = new AbstractAction()
+    public void setUpGame(){
+        placeSuperObjects.placeObjects();
+    }
+
+    @SuppressWarnings("CloneableClassWithoutClone") private final Action doOneStep = new AbstractAction()
     {
         @Override public void actionPerformed(final ActionEvent e) {
             tick();
@@ -80,6 +86,12 @@ public class ZinkPanel extends JPanel
         Graphics2D g2 = (Graphics2D) g;
         roomManager.draw(g2);
         player.draw(g2);
+
+        for (final AbstractObject object : objects) {
+            if(object != null){
+                object.draw(g2, this);
+            }
+        }
 
     }
 

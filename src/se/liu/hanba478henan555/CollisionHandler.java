@@ -12,11 +12,13 @@ public class CollisionHandler
     }
 
     public boolean tileCollision(AbstractEntity entity, PlayerInput dir){
-        Point topLeft  = new Point(entity.pos.x/tileSize , entity.pos.y/tileSize);
-        Point topRight = new Point((entity.pos.x+tileSize)/tileSize , entity.pos.y/tileSize);
 
-        Point bottomLeft  = new Point(entity.pos.x/tileSize , (entity.pos.y+tileSize)/tileSize);
-        Point bottomRight = new Point((entity.pos.x+tileSize)/tileSize , (entity.pos.y+tileSize)/tileSize);
+        System.out.println();
+        Point topLeft  = new Point((entity.pos.x+entity.collisionArea.x)/tileSize , (entity.pos.y+entity.collisionArea.y)/tileSize);
+        Point topRight = new Point((entity.pos.x+tileSize-entity.collisionArea.x)/tileSize , (entity.pos.y+entity.collisionArea.y)/tileSize);
+
+        Point bottomLeft  = new Point((entity.pos.x+entity.collisionArea.x)/tileSize , (entity.pos.y+tileSize-entity.collisionArea.y)/tileSize);
+        Point bottomRight = new Point((entity.pos.x+tileSize-entity.collisionArea.x)/tileSize , (entity.pos.y+tileSize-entity.collisionArea.y)/tileSize);
 
         switch (dir){
             case UP:{

@@ -33,5 +33,6 @@ public abstract class AbstractEntity implements Entity
      */
     public int spriteFrames;
 
+    public Rectangle collisionArea = null;
     public boolean collision = false;
 }

@@ -14,7 +14,7 @@ public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
     private PlayerInput currentKey;
-    private int rows,colums,tileSize;
+    private int rows,colums,tileSize, originalTileSize;
     private CollisionHandler cl;
 
     public Player(ZinkPanel zp,KeyHandler keyHandler) {
@@ -23,6 +23,7 @@ public class Player extends AbstractEntity
 	this.cl = zp.collisionHandler;
 
 	this.tileSize = zp.getTileSize();
+	this.originalTileSize = zp.getOriginalTileSize();
 	this.colums = zp.getColumns();
 	this.rows = zp.getRows();
 
@@ -32,6 +33,12 @@ public class Player extends AbstractEntity
     }
 
     private void setDefaultValues() {
+	this.collisionArea = new Rectangle();
+	collisionArea.x =  originalTileSize / 2;
+	collisionArea.y = originalTileSize;
+	collisionArea.width = originalTileSize * 2;
+	collisionArea.height = originalTileSize * 2;
+
 	this.collision = true;
 	this.spriteFrames = 10;
 	this.speed = 4; // sets speed of player
@@ -63,31 +70,52 @@ public class Player extends AbstractEntity
 	    spriteCounter++;
 
 	    if (keyHandler.getKey(PlayerInput.UP)) {
+		movePlayer(PlayerInput.UP);
+	    }
+	    else if (keyHandler.getKey(PlayerInput.DOWN)) {
+		movePlayer(PlayerInput.DOWN);
+	    }
+	    if (keyHandler.getKey(PlayerInput.LEFT)) {
+		movePlayer(PlayerInput.LEFT);
+	    }
+	    else if (keyHandler.getKey(PlayerInput.RIGHT)) {
+		movePlayer(PlayerInput.RIGHT);
+	    }
+	}
+
+    }
+
+    private void movePlayer(PlayerInput pi){
+	switch (pi){
+	    case UP: {
 		currentKey = PlayerInput.UP;
 		pos.y -= speed;
 		if (cl.tileCollision(this,PlayerInput.UP))
 		    pos.y += speed;
+		break;
 	    }
-	    else if (keyHandler.getKey(PlayerInput.DOWN)) {
+	    case DOWN: {
 		currentKey = PlayerInput.DOWN;
 		pos.y += speed;
 		if (cl.tileCollision(this,PlayerInput.DOWN))
 		    pos.y -= speed;
+		break;
 	    }
-	    if (keyHandler.getKey(PlayerInput.LEFT)) {
-		currentKey = PlayerInput.LEFT;
-		pos.x -= speed;
-		if (cl.tileCollision(this,PlayerInput.LEFT))
-		    pos.x += speed;
-	    }
-	    else if (keyHandler.getKey(PlayerInput.RIGHT)) {
+	    case RIGHT: {
 		currentKey = PlayerInput.RIGHT;
 		pos.x += speed;
 		if (cl.tileCollision(this,PlayerInput.RIGHT))
 		    pos.x -= speed;
+		break;
+	    }
+	    case LEFT: {
+		currentKey = PlayerInput.LEFT;
+		pos.x -= speed;
+		if (cl.tileCollision(this,PlayerInput.LEFT))
+		    pos.x += speed;
+		break;
 	    }
 	}
-
     }
 
     /**
