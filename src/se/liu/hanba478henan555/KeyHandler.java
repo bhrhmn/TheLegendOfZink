@@ -23,7 +23,7 @@ public class KeyHandler extends KeyAdapter
      * @param key
      * @return
      */
-    public boolean getKey(Direction key){
+    public boolean getKey(PlayerInput key){
 	switch (key){
 	    case UP -> {return keyMap.get(KeyEvent.VK_W);}
 	    case DOWN -> {return keyMap.get(KeyEvent.VK_S);}

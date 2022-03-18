@@ -3,7 +3,7 @@ package se.liu.hanba478henan555;
 /**
  * docstring
  */
-public enum Direction
+public enum PlayerInput
 {
-    UP, DOWN, LEFT, RIGHT
+    UP, DOWN, LEFT, RIGHT, ATTACK
 }

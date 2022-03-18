@@ -16,18 +16,18 @@ public class ZinkPanel extends JPanel
      */
     public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;
 
-    private static final int ROWS = 12;
-    private static final int COLUMNS = 16;
+    public static final int ROWS = 16;
+    public static final int COLUMNS = 12;
 
     private static final int FPS = 60;
 
     private KeyHandler keyHandler = new KeyHandler();
 
     private Player player = new Player(keyHandler);
-    private Room room = new Room();
+    private RoomManager roomManager = new RoomManager();
 
     public ZinkPanel() {
-        this.setPreferredSize(new Dimension(COLUMNS * TILE_SIZE, ROWS * TILE_SIZE));
+        this.setPreferredSize(new Dimension(ROWS * TILE_SIZE, COLUMNS * TILE_SIZE));
         this.setBackground(new Color(169, 69, 69));
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
@@ -66,7 +66,7 @@ public class ZinkPanel extends JPanel
     @Override public void paintComponent(final Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        room.draw(g2);
+        roomManager.draw(g2);
         player.draw(g2);
 
     }

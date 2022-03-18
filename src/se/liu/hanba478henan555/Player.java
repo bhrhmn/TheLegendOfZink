@@ -13,21 +13,21 @@ import java.io.IOException;
 public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
-    private Direction currentKey;
+    private PlayerInput currentKey;
 
 
     public Player(KeyHandler keyHandler) {
 	setDefaultValues();
 	getPlayerImage();
 	this.keyHandler = keyHandler;
-	this.currentKey = Direction.UP;
+	this.currentKey = PlayerInput.UP;
 
     }
 
     private void setDefaultValues() {
 	this.spriteFrames = 10;
 	this.speed = 4; // sets speed of player
-	this.pos = new Point(100, 100); // sets default position of player
+	this.pos = new Point(ZinkPanel.ROWS*ZinkPanel.TILE_SIZE / 2, ZinkPanel.COLUMNS*ZinkPanel.TILE_SIZE / 2); // sets default position of player to the middle of the screen
     }
 
     private void getPlayerImage(){
@@ -49,25 +49,25 @@ public class Player extends AbstractEntity
      * Updates position
      */
     public void update() {
-	if (keyHandler.getKey(Direction.UP) || keyHandler.getKey(Direction.DOWN) ||
-	    keyHandler.getKey(Direction.LEFT) || keyHandler.getKey(Direction.RIGHT)) {
+	if (keyHandler.getKey(PlayerInput.UP) || keyHandler.getKey(PlayerInput.DOWN) ||
+	    keyHandler.getKey(PlayerInput.LEFT) || keyHandler.getKey(PlayerInput.RIGHT)) {
 
 	    spriteCounter++;
 
-	    if (keyHandler.getKey(Direction.UP)) {
-		currentKey = Direction.UP;
+	    if (keyHandler.getKey(PlayerInput.UP)) {
+		currentKey = PlayerInput.UP;
 		pos.y -= speed;
 	    }
-	    else if (keyHandler.getKey(Direction.DOWN)) {
-		currentKey = Direction.DOWN;
+	    else if (keyHandler.getKey(PlayerInput.DOWN)) {
+		currentKey = PlayerInput.DOWN;
 		pos.y += speed;
 	    }
-	    if (keyHandler.getKey(Direction.LEFT)) {
-		currentKey = Direction.LEFT;
+	    if (keyHandler.getKey(PlayerInput.LEFT)) {
+		currentKey = PlayerInput.LEFT;
 		pos.x -= speed;
 	    }
-	    else if (keyHandler.getKey(Direction.RIGHT)) {
-		currentKey = Direction.RIGHT;
+	    else if (keyHandler.getKey(PlayerInput.RIGHT)) {
+		currentKey = PlayerInput.RIGHT;
 		pos.x += speed;
 	    }
 	}
