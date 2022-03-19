@@ -13,6 +13,6 @@ public class PlaceSuperObjects
 
     public void placeObjects(){
 	zinkPanel.objects[0] = new Key(zinkPanel);
-	zinkPanel.objects[0].setValues("key", 6, 4);
+	zinkPanel.objects[0].setValues(ObjectType.KEY, 6, 4);
     }
 }

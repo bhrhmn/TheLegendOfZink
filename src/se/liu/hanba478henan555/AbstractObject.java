@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 public abstract class AbstractObject implements GameObject
 {
     protected BufferedImage image = null;
-    protected String name = null;
+    protected ObjectType objectType = null;
     protected Point pos = null;
     protected ZinkPanel zinkPanel;
 
@@ -23,13 +23,12 @@ public abstract class AbstractObject implements GameObject
         g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
     }
 
-    @Override public String getName() {
-        return name;
+    public ObjectType getObjectType() {
+        return objectType;
     }
 
-
-    @Override public void setValues(String name, int x, int y) {
-        this.name = name;
+    @Override public void setValues(ObjectType objectType, int x, int y) {
+        this.objectType = objectType;
         this.pos = new Point(x*zinkPanel.getTileSize(), y*zinkPanel.getTileSize());
         setCollisionArea();
     }
