@@ -9,26 +9,26 @@ import java.io.IOException;
  */
 public class Key extends AbstractObject
 {
-	public Key(final ZinkPanel zp){
-	    super(zp);
-	    this.name = "key";
-	    readImage();
-	}
+    public Key(final ZinkPanel zp){
+	super(zp);
+	readImage();
+    }
 
-	private void readImage() {
-	    try {
-		image = ImageIO.read(getClass().getResourceAsStream("./objects/key.png"));
-	    }catch (IOException e){
-		e.printStackTrace();
-	    }
+    private void readImage() {
+	try {
+	    image = ImageIO.read(getClass().getResourceAsStream("./objects/key.png"));
+	}catch (IOException e){
+	    e.printStackTrace();
 	}
+    }
 
-	private void setCollisionArea() {
-	    this.collisionArea = new Rectangle();
-	    int size = zp.getOriginalTileSize();
-	    collisionArea.x =  size / 2;
-	    collisionArea.y = size;
-	    collisionArea.width = size * 2;
-	    collisionArea.height = size * 2;
-	}
+    @Override public void setCollisionArea() {
+	int size = zinkPanel.getOriginalTileSize();
+	this.collisionArea = new Rectangle(size /2 + this.pos.x, size + this.pos.y,
+					   size * 2, size * 2);
+    }
+
+    @Override public void hasCollided() {
+	System.out.println("Din mamma är så sexig ;)");
+    }
 }

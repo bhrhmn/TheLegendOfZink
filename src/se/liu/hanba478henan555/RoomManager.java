@@ -33,7 +33,7 @@ public class RoomManager
 	try {
 	    tileTypes[0] = new Tile();
 	    tileTypes[0].image = ImageIO.read(new File("src/se/liu/hanba478henan555/tiles/wall.png"));
-	    tileTypes[0].collsion = true;
+	    tileTypes[0].collision = true;
 
 
 	    tileTypes[1] = new Tile();
@@ -69,7 +69,7 @@ public class RoomManager
     }
 
     public boolean tileHasCollision(Point pos){
-	return tileTypes[roomTileData[pos.x][pos.y]].collsion;
+	return tileTypes[roomTileData[pos.x][pos.y]].collision;
     }
 
 

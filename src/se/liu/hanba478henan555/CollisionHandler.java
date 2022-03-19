@@ -14,17 +14,21 @@ public class CollisionHandler
         this.tileSize = zinkPanel.getTileSize();
     }
 
-    public boolean objectCollision(AbstractEntity entity, PlayerInput dir) {
-        return false;
+    public void objectCollision(AbstractEntity entity) {
+        for (AbstractObject abstractObject : zinkPanel.objects) {
+            if (abstractObject.hasCollision(entity.collisionArea)) {
+                abstractObject.hasCollided();
+            }
+        }
     }
 
     public boolean tileCollision(AbstractEntity entity, PlayerInput dir){
 
-        Point topLeft  = new Point((entity.pos.x+entity.collisionArea.x)/tileSize , (entity.pos.y+entity.collisionArea.y)/tileSize);
-        Point topRight = new Point((entity.pos.x+tileSize-entity.collisionArea.x)/tileSize , (entity.pos.y+entity.collisionArea.y)/tileSize);
+        Point topLeft  = new Point((entity.collisionArea.x)/tileSize , (entity.collisionArea.y)/tileSize);
+        Point topRight = new Point((entity.collisionArea.x+entity.collisionArea.width)/tileSize , (entity.collisionArea.y)/tileSize);
 
-        Point bottomLeft  = new Point((entity.pos.x+entity.collisionArea.x)/tileSize , (entity.pos.y+tileSize-(entity.collisionArea.y/2))/tileSize);
-        Point bottomRight = new Point((entity.pos.x+tileSize-entity.collisionArea.x)/tileSize , (entity.pos.y+tileSize-(entity.collisionArea.y/2))/tileSize);
+        Point bottomLeft  = new Point((entity.collisionArea.x)/tileSize , (entity.collisionArea.height+entity.collisionArea.y)/tileSize);
+        Point bottomRight = new Point((entity.collisionArea.width+entity.collisionArea.x)/tileSize , (entity.collisionArea.height+entity.collisionArea.y)/tileSize);
 
         switch (dir){
             case UP:{

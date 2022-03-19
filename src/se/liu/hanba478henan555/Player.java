@@ -33,16 +33,14 @@ public class Player extends AbstractEntity
     }
 
     private void setDefaultValues() {
+	this.pos = new Point(rows*tileSize / 2, colums*tileSize / 2); // sets default position of player to the middle of the screen
 	this.collisionArea = new Rectangle();
-	collisionArea.x =  originalTileSize / 2;
-	collisionArea.y = originalTileSize;
-	collisionArea.width = originalTileSize * 2;
-	collisionArea.height = originalTileSize * 2;
+	collisionArea.width = tileSize*2/3;
+	collisionArea.height = tileSize*2/3;
 
 	this.collision = true;
 	this.spriteFrames = 10;
 	this.speed = 4; // sets speed of player
-	this.pos = new Point(rows*tileSize / 2, colums*tileSize / 2); // sets default position of player to the middle of the screen
     }
 
     private void loadPlayerImage(){
@@ -64,7 +62,7 @@ public class Player extends AbstractEntity
      * Updates position
      */
     public void update() {
-
+	setCollisionAreaRelativePos();
 	if (keyHandler.getKey(PlayerInput.UP) || keyHandler.getKey(PlayerInput.DOWN) ||
 	    keyHandler.getKey(PlayerInput.LEFT) || keyHandler.getKey(PlayerInput.RIGHT)) {
 	    spriteCounter++;
@@ -82,6 +80,7 @@ public class Player extends AbstractEntity
 		movePlayer(PlayerInput.RIGHT);
 	    }
 	}
+	cl.objectCollision(this);
 
     }
 
@@ -90,36 +89,52 @@ public class Player extends AbstractEntity
      * @param pi
      */
     private void movePlayer(PlayerInput pi){
+	Point currentPos = new Point(pos.x, pos.y);
 	switch (pi){
 	    case UP: {
-		currentKey = PlayerInput.UP;
-		pos.y -= speed;
-		if (cl.tileCollision(this,PlayerInput.UP))
-		    pos.y += speed;
+		changePosition(PlayerInput.UP, PointXY.Y, -1);
 		break;
 	    }
 	    case DOWN: {
-		currentKey = PlayerInput.DOWN;
-		pos.y += speed;
-		if (cl.tileCollision(this,PlayerInput.DOWN))
-		    pos.y -= speed;
+		changePosition(PlayerInput.DOWN, PointXY.Y, 1);
 		break;
 	    }
 	    case RIGHT: {
-		currentKey = PlayerInput.RIGHT;
-		pos.x += speed;
-		if (cl.tileCollision(this,PlayerInput.RIGHT))
-		    pos.x -= speed;
+		changePosition(PlayerInput.RIGHT, PointXY.X, 1);
 		break;
 	    }
 	    case LEFT: {
-		currentKey = PlayerInput.LEFT;
-		pos.x -= speed;
-		if (cl.tileCollision(this,PlayerInput.LEFT))
-		    pos.x += speed;
+		changePosition(PlayerInput.LEFT, PointXY.X, -1);
 		break;
 	    }
 	}
+
+    }
+
+    private void changePosition(PlayerInput input, PointXY xy, int direction) {
+	currentKey = input;
+	int add = speed * direction;
+	if (xy == PointXY.X) {
+	    pos.x += add;
+	    collisionArea.x += add;
+	    if (cl.tileCollision(this,input)){
+		pos.x -= add;
+		collisionArea.x -= add;
+	    }
+	}
+	else if (xy == PointXY.Y) {
+	    pos.y += add;
+	    collisionArea.y += add;
+	    if (cl.tileCollision(this,input)){
+		pos.y -= add;
+		collisionArea.y -= add;
+	    }
+	}
+    }
+
+    private void setCollisionAreaRelativePos() {
+	collisionArea.x = pos.x + originalTileSize/2;
+	collisionArea.y = pos.y + originalTileSize;
     }
 
     /**
@@ -147,8 +162,6 @@ public class Player extends AbstractEntity
 	    }
 	}
 	g2.drawImage(image, pos.x, pos.y, tileSize, tileSize ,null);
-
-
     }
 
     private BufferedImage changeSprite(BufferedImage b1, BufferedImage b2){
