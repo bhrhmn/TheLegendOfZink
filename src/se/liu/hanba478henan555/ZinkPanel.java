@@ -29,7 +29,8 @@ public class ZinkPanel extends JPanel
     public  RoomManager roomManager = new RoomManager(this);
 
     public  PlaySound sound = new PlaySound();
-    private PlaySound music = new PlaySound();
+
+    private Sound music = new Sound();
 
     public  Player player = new Player(this,keyHandler);
     public AbstractObject[] gameObjects = new AbstractObject[10];
@@ -68,7 +69,10 @@ public class ZinkPanel extends JPanel
     }
 
     public void setUpGame(){
-        music.playMusic();
+        music.setClip(0);
+        music.play();
+        music.loop();
+
         placeSuperObjects.placeObjects();
     }
 
