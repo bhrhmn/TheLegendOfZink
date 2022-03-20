@@ -3,7 +3,6 @@ package se.liu.hanba478henan555;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 
 /**
  * Handles the appearence of the frame
@@ -27,10 +26,13 @@ public class ZinkPanel extends JPanel
 
     private KeyHandler keyHandler = new KeyHandler();
     public  CollisionHandler collisionHandler = new CollisionHandler(this);
-    public  Player player = new Player(this,keyHandler);
     public  RoomManager roomManager = new RoomManager(this);
+    public  PlaySound sound = new PlaySound();
+
+    public  Player player = new Player(this,keyHandler);
     public AbstractObject[] gameObjects = new AbstractObject[10];
     private PlaceSuperObjects placeSuperObjects = new PlaceSuperObjects(this);
+
     public ZinkPanel() {
         this.setPreferredSize(new Dimension(ROWS * TILE_SIZE, COLUMNS * TILE_SIZE));
         this.setBackground(new Color(255, 53, 184));
@@ -64,6 +66,7 @@ public class ZinkPanel extends JPanel
     }
 
     public void setUpGame(){
+        sound.playMusic();
         placeSuperObjects.placeObjects();
     }
 

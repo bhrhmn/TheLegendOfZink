@@ -16,7 +16,7 @@ public class Player extends AbstractEntity
     private PlayerInput currentKey;
     private int rows,colums,tileSize, originalTileSize, ammountOfDoorKeys;
     private CollisionHandler cl;
-
+    private ZinkPanel zinkPanel;
 
 
     public Player(ZinkPanel zp,KeyHandler keyHandler) {
@@ -29,16 +29,20 @@ public class Player extends AbstractEntity
 	this.colums = zp.getColumns();
 	this.rows = zp.getRows();
 
+	this.zinkPanel = zp;
+
 	setDefaultValues();
 	loadPlayerImage();
 
     }
 
     public void removeAmmountOfDoorkeys(){
+	zinkPanel.sound.playSoundEffect(2);
 	ammountOfDoorKeys -= 1;
     }
 
     public void addAmmountOfDoorKeys(){
+	zinkPanel.sound.playSoundEffect(1);
 	ammountOfDoorKeys += 1;
     }
 

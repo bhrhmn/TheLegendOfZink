@@ -31,6 +31,7 @@ public class PlaceSuperObjects
 	placeKey(46,1, 4);
 
 	placeDoor(42,1,5);
+
     }
 
 
