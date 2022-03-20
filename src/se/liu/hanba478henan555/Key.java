@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class Key extends AbstractObject
 {
-    public Key(final ZinkPanel zp){
+    public Key(ZinkPanel zp){
 	super(zp);
 	readImage();
     }
@@ -28,7 +28,8 @@ public class Key extends AbstractObject
 					   size * 2, size * 2);
     }
 
-    @Override public void hasCollided() {
-	System.out.println("Din mamma är så sexig ;)");
+    @Override public void whenCollided(int i) {
+	//TODO detta är cringe vi kan inte bara .remove(this), VARFÖR? bajs
+	zinkPanel.gameObjects[i] = null;
     }
 }

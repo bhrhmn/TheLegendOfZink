@@ -17,7 +17,6 @@ public class Player extends AbstractEntity
     private int rows,colums,tileSize, originalTileSize;
     private CollisionHandler cl;
 
-    public final int screenX,screenY;
 
     public Player(ZinkPanel zp,KeyHandler keyHandler) {
 	this.keyHandler = keyHandler;
@@ -28,9 +27,6 @@ public class Player extends AbstractEntity
 	this.originalTileSize = zp.getOriginalTileSize();
 	this.colums = zp.getColumns();
 	this.rows = zp.getRows();
-
-	this.screenX = zp.getRows() / 2 -(tileSize/2);
-	this.screenY = zp.getColumns() / 2-(tileSize/2);
 
 	setDefaultValues();
 	loadPlayerImage();
@@ -138,8 +134,8 @@ public class Player extends AbstractEntity
     }
 
     private void setCollisionAreaRelativePos() {
-	collisionArea.x = pos.x + originalTileSize/2;
-	collisionArea.y = pos.y + originalTileSize;
+	collisionArea.x = pos.x + originalTileSize / 2;
+	collisionArea.y = pos.y + originalTileSize / 2;
     }
 
     /**

@@ -3,6 +3,7 @@ package se.liu.hanba478henan555;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 /**
  * Handles the appearence of the frame
@@ -28,9 +29,8 @@ public class ZinkPanel extends JPanel
     public  CollisionHandler collisionHandler = new CollisionHandler(this);
     public  Player player = new Player(this,keyHandler);
     public  RoomManager roomManager = new RoomManager(this);
-    public  AbstractObject[] objects = new AbstractObject[1];
+    public AbstractObject[] gameObjects = new AbstractObject[10];
     private PlaceSuperObjects placeSuperObjects = new PlaceSuperObjects(this);
-
     public ZinkPanel() {
         this.setPreferredSize(new Dimension(ROWS * TILE_SIZE, COLUMNS * TILE_SIZE));
         this.setBackground(new Color(255, 53, 184));
@@ -74,6 +74,7 @@ public class ZinkPanel extends JPanel
         }
     };
 
+
     /**
      * Updates and animates game
      */
@@ -97,7 +98,6 @@ public class ZinkPanel extends JPanel
     }
 
 
-
     @Override public void paintComponent(final Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -106,7 +106,7 @@ public class ZinkPanel extends JPanel
         player.draw(g2);
 
 
-        for (final AbstractObject object : objects) {
+        for (final AbstractObject object : gameObjects) {
             if(object != null){
                 object.draw(g2);
             }

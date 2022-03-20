@@ -15,12 +15,14 @@ public class CollisionHandler
     }
 
     public void objectCollision(AbstractEntity entity) {
-        for (AbstractObject abstractObject : zinkPanel.objects) {
-            if (abstractObject.hasCollision(entity.collisionArea)) {
-                abstractObject.hasCollided();
+        for (int i = 0; i < zinkPanel.gameObjects.length; i++){
+            GameObject gameObject = zinkPanel.gameObjects[i];
+            if (gameObject != null && gameObject.hasCollision(entity.collisionArea)) {
+                gameObject.whenCollided(i);
             }
         }
-    }
+
+   }
 
     public boolean tileCollision(AbstractEntity entity, PlayerInput dir){
 
