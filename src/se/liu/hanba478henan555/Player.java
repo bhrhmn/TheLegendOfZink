@@ -14,8 +14,9 @@ public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
     private PlayerInput currentKey;
-    private int rows,colums,tileSize, originalTileSize;
+    private int rows,colums,tileSize, originalTileSize, ammountOfDoorKeys;
     private CollisionHandler cl;
+
 
 
     public Player(ZinkPanel zp,KeyHandler keyHandler) {
@@ -33,12 +34,29 @@ public class Player extends AbstractEntity
 
     }
 
+    public void removeAmmountOfDoorkeys(){
+	ammountOfDoorKeys -= 1;
+    }
+
+    public void addAmmountOfDoorKeys(){
+	ammountOfDoorKeys += 1;
+    }
+
+    public int getAmmountOfDoorKeys(){
+	return ammountOfDoorKeys;
+    }
+
+    public PlayerInput getCurrentKey(){
+	return currentKey;
+    }
+
     private void setDefaultValues() {
 	this.pos = new Point(rows*tileSize / 2, colums*tileSize / 2); // sets default position of player to the middle of the screen
 	this.collisionArea = new Rectangle();
 	collisionArea.width = tileSize*2/3;
 	collisionArea.height = tileSize*2/3;
 
+	this.ammountOfDoorKeys = 0;
 	this.collision = true;
 	this.spriteFrames = 10;
 	this.speed = 4; // sets speed of player
@@ -74,7 +92,7 @@ public class Player extends AbstractEntity
 	    else if (keyHandler.getKey(PlayerInput.DOWN)) {
 		movePlayer(PlayerInput.DOWN);
 	    }
-	    if (keyHandler.getKey(PlayerInput.LEFT)) {
+	    else if (keyHandler.getKey(PlayerInput.LEFT)) {
 		movePlayer(PlayerInput.LEFT);
 	    }
 	    else if (keyHandler.getKey(PlayerInput.RIGHT)) {
@@ -82,14 +100,13 @@ public class Player extends AbstractEntity
 	    }
 	}
 	cl.objectCollision(this);
-
     }
 
     /**
      * Moves player and checks for collision
      * @param pi
      */
-    private void movePlayer(PlayerInput pi){
+    public void movePlayer(PlayerInput pi){
 	Point currentPos = new Point(pos.x, pos.y);
 	switch (pi){
 	    case UP: {

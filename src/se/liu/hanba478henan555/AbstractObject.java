@@ -14,9 +14,13 @@ public abstract class AbstractObject implements GameObject
     protected ZinkPanel zinkPanel;
 
     protected Rectangle collisionArea = null;
+    protected int index = -1;
+    protected ObjectType gameObject = null;
 
-    protected AbstractObject(final ZinkPanel zp) {
+    protected AbstractObject(final ZinkPanel zp,final ObjectType gameObject,final int index) {
         this.zinkPanel = zp;
+        this.index = index;
+        this.gameObject = gameObject;
     }
 
     @Override public void draw(Graphics2D g2){
@@ -27,8 +31,7 @@ public abstract class AbstractObject implements GameObject
         return objectType;
     }
 
-    @Override public void setValues(ObjectType objectType, int x, int y) {
-        this.objectType = objectType;
+    @Override public void setValues(int x, int y) {
         this.pos = new Point(x*zinkPanel.getTileSize(), y*zinkPanel.getTileSize());
         setCollisionArea();
     }

@@ -12,5 +12,5 @@ public interface GameObject
     public boolean hasCollision(Rectangle rectangle);
     public void whenCollided();
     public void setCollisionArea();
-    public void setValues(ObjectType objectType, int x, int y);
+    public void setValues(int x, int y);
 }
