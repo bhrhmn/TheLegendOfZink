@@ -2,24 +2,23 @@ package se.liu.hanba478henan555;
 
 public class PlaySound extends Sound
 {
-    private Sound sound;
     public PlaySound(){
-	this.sound = new Sound();
+	super();
     }
 
     public void playMusic(){
-	sound.setClip(0);
-	sound.play();
-	sound.loop();
+	this.setClip(0);
+	this.play();
+	this.loop();
     }
 
     public void stopMusic(){
-	sound.stop();
+	this.stop();
     }
 
     public void playSoundEffect(int index){
-	sound.setClip(index);
-	sound.play();
+	this.setClip(index);
+	this.play();
     }
 
 }
