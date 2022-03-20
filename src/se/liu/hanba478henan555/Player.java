@@ -85,21 +85,26 @@ public class Player extends AbstractEntity
 	if (keyHandler.getKey(PlayerInput.UP) || keyHandler.getKey(PlayerInput.DOWN) ||
 	    keyHandler.getKey(PlayerInput.LEFT) || keyHandler.getKey(PlayerInput.RIGHT)) {
 	    spriteCounter++;
-
 	    if (keyHandler.getKey(PlayerInput.UP)) {
-		movePlayer(PlayerInput.UP);
+		movePlayerBasedOnInput(PlayerInput.UP);
 	    }
 	    else if (keyHandler.getKey(PlayerInput.DOWN)) {
-		movePlayer(PlayerInput.DOWN);
+		movePlayerBasedOnInput(PlayerInput.DOWN);
 	    }
 	    else if (keyHandler.getKey(PlayerInput.LEFT)) {
-		movePlayer(PlayerInput.LEFT);
+		movePlayerBasedOnInput(PlayerInput.LEFT);
 	    }
 	    else if (keyHandler.getKey(PlayerInput.RIGHT)) {
-		movePlayer(PlayerInput.RIGHT);
+		movePlayerBasedOnInput(PlayerInput.RIGHT);
 	    }
 	}
 	cl.objectCollision(this);
+    }
+
+
+    private void movePlayerBasedOnInput(PlayerInput pi){
+	currentKey = pi;
+	movePlayer(currentKey);
     }
 
     /**
@@ -107,7 +112,6 @@ public class Player extends AbstractEntity
      * @param pi
      */
     public void movePlayer(PlayerInput pi){
-	Point currentPos = new Point(pos.x, pos.y);
 	switch (pi){
 	    case UP: {
 		changePosition(PlayerInput.UP, PointXY.Y, -1);
@@ -126,11 +130,9 @@ public class Player extends AbstractEntity
 		break;
 	    }
 	}
-
     }
 
     private void changePosition(PlayerInput input, PointXY xy, int direction) {
-	currentKey = input;
 	int add = speed * direction;
 	if (xy == PointXY.X) {
 	    pos.x += add;
@@ -161,6 +163,7 @@ public class Player extends AbstractEntity
      */
     public void draw(Graphics2D g2) {
 	BufferedImage image = null;
+
 	switch (currentKey){
 	    case UP: {
 		image = changeSprite(up1,up2);

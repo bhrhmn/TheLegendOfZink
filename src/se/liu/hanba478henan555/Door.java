@@ -32,12 +32,14 @@ public class Door extends AbstractObject
 	    zinkPanel.gameObjects[index] = null;
 	    return;
 	}
-
 	PlayerInput lastKey = player.getCurrentKey();
-	for(PlayerInput push : PlayerInput.values()){
-	    if (!push.equals(lastKey))
-		player.movePlayer(push);
+	switch (lastKey){
+	    case UP -> player.movePlayer(PlayerInput.DOWN);
+	    case DOWN -> player.movePlayer(PlayerInput.UP);
+	    case RIGHT -> player.movePlayer(PlayerInput.LEFT);
+	    case LEFT -> player.movePlayer(PlayerInput.RIGHT);
 	}
+
 
     }
 }
