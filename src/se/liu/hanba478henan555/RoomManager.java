@@ -16,17 +16,17 @@ public class RoomManager
 {
     private Tile[] tileTypes;
     public int[][] roomTileData;
-    private int rows,colums,tileSize;
+    private int tileSize,worldRows,worldColumns;
 
     public RoomManager(ZinkPanel zp) {
 	this.tileSize = zp.getTileSize();
-	this.colums = zp.getColumns();
-	this.rows = zp.getRows();
+	this.worldColumns = zp.getWorldColumns();
+	this.worldRows = zp.getWorldRows();
 
 	this.tileTypes = new Tile[10];
-	this.roomTileData = new int[rows][colums];
+	this.roomTileData = new int[worldRows][worldColumns];
 	defineTileTypes();
-	loadMap("src/se/liu/hanba478henan555/rooms/room_1.txt");
+	loadMap("src/se/liu/hanba478henan555/world/world.txt");
     }
 
     private void defineTileTypes() {
@@ -50,9 +50,9 @@ public class RoomManager
 	try{scanner = new Scanner(new BufferedReader(new FileReader(roomFile)));
 	} catch (FileNotFoundException e){ e.printStackTrace();}
 
-	for(int y = 0; y < colums; y++){
+	for(int y = 0; y < worldColumns; y++){
 	    String[] line = scanner.nextLine().trim().split(" ");
-	    for (int x = 0; x < rows; x++){
+	    for (int x = 0; x < worldRows; x++){
 		roomTileData[x][y] = Integer.parseInt(line[x]);
 	    }
 	}
@@ -60,10 +60,13 @@ public class RoomManager
     }
 
     public void draw(Graphics2D g2) {
-	for (int y =0 ; y < colums; y++) {
-	    for(int x = 0; x < rows; x++){
+	for (int y =0; y < worldColumns; y++) {
+	    for(int x = 0; x < worldRows; x++){
 		int tileType = roomTileData[x][y];
-		g2.drawImage(tileTypes[tileType].image,x*tileSize,y*tileSize,tileSize, tileSize, null );
+
+		g2.drawImage(tileTypes[tileType].image,
+			     x*tileSize ,y*tileSize,
+			     	tileSize, tileSize, null );
 	    }
 	}
     }
@@ -71,7 +74,4 @@ public class RoomManager
     public boolean tileHasCollision(Point pos){
 	return tileTypes[roomTileData[pos.x][pos.y]].collision;
     }
-
-
-
 }

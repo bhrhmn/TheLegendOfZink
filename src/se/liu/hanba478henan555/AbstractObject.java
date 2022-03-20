@@ -34,9 +34,6 @@ public abstract class AbstractObject implements GameObject
     }
 
     @Override public boolean hasCollision(Rectangle rectangle) {
-        if(!collisionArea.intersects(rectangle)) {
-            System.out.println("Ej intersekt");
-        }
         return collisionArea.intersects(rectangle);
     }
 }

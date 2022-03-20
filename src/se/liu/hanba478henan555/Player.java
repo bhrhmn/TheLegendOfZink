@@ -17,6 +17,8 @@ public class Player extends AbstractEntity
     private int rows,colums,tileSize, originalTileSize;
     private CollisionHandler cl;
 
+    public final int screenX,screenY;
+
     public Player(ZinkPanel zp,KeyHandler keyHandler) {
 	this.keyHandler = keyHandler;
 	this.currentKey = PlayerInput.UP;
@@ -26,6 +28,9 @@ public class Player extends AbstractEntity
 	this.originalTileSize = zp.getOriginalTileSize();
 	this.colums = zp.getColumns();
 	this.rows = zp.getRows();
+
+	this.screenX = zp.getRows() / 2 -(tileSize/2);
+	this.screenY = zp.getColumns() / 2-(tileSize/2);
 
 	setDefaultValues();
 	loadPlayerImage();
