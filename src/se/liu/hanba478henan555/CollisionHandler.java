@@ -18,7 +18,7 @@ public class CollisionHandler
         for (int i = 0; i < zinkPanel.gameObjects.length; i++){
             GameObject gameObject = zinkPanel.gameObjects[i];
             if (gameObject != null && gameObject.hasCollision(entity.collisionArea)) {
-                gameObject.whenCollided(i);
+                gameObject.whenCollided();
             }
         }
 

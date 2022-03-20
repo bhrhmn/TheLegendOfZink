@@ -9,8 +9,10 @@ import java.io.IOException;
  */
 public class Key extends AbstractObject
 {
-    public Key(ZinkPanel zp){
+    int index;
+    public Key(ZinkPanel zp,int i){
 	super(zp);
+	this.index = i;
 	readImage();
     }
 
@@ -25,11 +27,11 @@ public class Key extends AbstractObject
     @Override public void setCollisionArea() {
 	int size = zinkPanel.getOriginalTileSize();
 	this.collisionArea = new Rectangle(size /2 + this.pos.x, size + this.pos.y,
-					   size * 2, size * 2);
+					   zinkPanel.getTileSize(), zinkPanel.getTileSize());
     }
 
-    @Override public void whenCollided(int i) {
+    @Override public void whenCollided() {
 	//TODO detta är cringe vi kan inte bara .remove(this), VARFÖR? bajs
-	zinkPanel.gameObjects[i] = null;
+	zinkPanel.gameObjects[index] = null;
     }
 }

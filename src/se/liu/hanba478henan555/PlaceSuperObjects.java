@@ -12,7 +12,7 @@ public class PlaceSuperObjects
     }
 
     public void placeKey(int x, int y, int i){
-	Key key = new Key(zinkPanel);
+	Key key = new Key(zinkPanel,i);
 	key.setValues(ObjectType.KEY, x,y);
 	zinkPanel.gameObjects[i] = key;
     }
@@ -21,6 +21,9 @@ public class PlaceSuperObjects
 	placeKey(6,4,  0);
 	placeKey(1,1,  1);
 	placeKey(10,10,2);
+
+	placeKey(10,21,3);
+	placeKey(46,1,4);
     }
 
 
