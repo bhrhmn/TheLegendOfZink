@@ -13,7 +13,7 @@ public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
     private PlayerInput currentKey;
-    private int rows,colums,tileSize, originalTileSize, ammountOfDoorKeys;
+    private int rows, columns,tileSize, originalTileSize, ammountOfDoorKeys;
     private CollisionHandler cl;
     private ZinkPanel zinkPanel;
 
@@ -25,7 +25,7 @@ public class Player extends AbstractEntity
 
 	this.tileSize = zp.getTileSize();
 	this.originalTileSize = zp.getOriginalTileSize();
-	this.colums = zp.getColumns();
+	this.columns = zp.getColumns();
 	this.rows = zp.getRows();
 
 	this.zinkPanel = zp;
@@ -54,7 +54,7 @@ public class Player extends AbstractEntity
     }
 
     private void setDefaultValues() {
-	this.pos = new Point(rows*tileSize / 2, colums*tileSize / 2); // sets default position of player to the middle of the screen
+	this.pos = new Point(columns * tileSize / 2, rows * tileSize / 2); // sets default position of player to the middle of the screen
 	this.collisionArea = new Rectangle();
 	collisionArea.width = tileSize*2/3;
 	collisionArea.height = tileSize*2/3;

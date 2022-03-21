@@ -1,6 +1,7 @@
 package se.liu.hanba478henan555;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Creates frame and starts game

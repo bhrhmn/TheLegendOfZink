@@ -24,7 +24,7 @@ public class RoomManager
 	this.worldRows = zp.getWorldRows();
 
 	this.tileTypes = new Tile[10];
-	this.roomTileData = new int[worldRows][worldColumns];
+	this.roomTileData = new int[worldColumns][worldRows];
 	defineTileTypes();
 	loadMap("src/se/liu/hanba478henan555/world/world.txt");
     }
@@ -50,9 +50,9 @@ public class RoomManager
 	try{scanner = new Scanner(new BufferedReader(new FileReader(roomFile)));
 	} catch (FileNotFoundException e){ e.printStackTrace();}
 
-	for(int y = 0; y < worldColumns; y++){
+	for(int y = 0; y < worldRows; y++){
 	    String[] line = scanner.nextLine().trim().split(" ");
-	    for (int x = 0; x < worldRows; x++){
+	    for (int x = 0; x < worldColumns; x++){
 		roomTileData[x][y] = Integer.parseInt(line[x]);
 	    }
 	}
@@ -60,8 +60,8 @@ public class RoomManager
     }
 
     public void draw(Graphics2D g2) {
-	for (int y =0; y < worldColumns; y++) {
-	    for(int x = 0; x < worldRows; x++){
+	for (int y =0; y < worldRows; y++) {
+	    for(int x = 0; x < worldColumns; x++){
 		int tileType = roomTileData[x][y];
 
 		g2.drawImage(tileTypes[tileType].image,
