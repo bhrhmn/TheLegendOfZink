@@ -59,7 +59,7 @@ public class ZinkPanel extends JPanel
 
     public int getWorldRows(){return WORLD_ROWS;}
 
-    public int getWorldColumns(){return  WORLD_COLUMNS;}
+    public int getWorldColumns(){return WORLD_COLUMNS;}
     /**
      * starts timer
      */
@@ -69,9 +69,9 @@ public class ZinkPanel extends JPanel
     }
 
     public void setUpGame(){
-        music.setClip(0);
-        music.play();
-        music.loop();
+        //music.setClip(0);
+        //music.play();
+        //music.loop();
 
         placeSuperObjects.placeObjects();
     }
