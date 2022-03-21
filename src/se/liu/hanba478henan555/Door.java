@@ -34,6 +34,7 @@ public class Door extends AbstractObject
 	if (player.getAmmountOfDoorKeys() > 0){
 	    player.removeAmmountOfDoorkeys();
 	    zinkPanel.gameObjects.remove(this);
+	    zinkPanel.getInventory().showDoorMessage();
 	    return;
 	}
 	PlayerInput lastKey = player.getCurrentKey();

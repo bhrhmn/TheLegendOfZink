@@ -61,6 +61,8 @@ public class ZinkPanel extends JPanel
 
     public Point getScreenStartPoint() {return screenStartPoint;}
 
+    public Inventory getInventory() {return inventory;}
+
     /**
      * starts timer
      */
@@ -70,7 +72,7 @@ public class ZinkPanel extends JPanel
     }
 
     public void setUpGame(){
-        sound.playMusic();
+        //sound.playMusic();
         placeSuperObjects.placeObjects();
     }
 
@@ -123,5 +125,6 @@ public class ZinkPanel extends JPanel
         inventory.draw(g2);
 
     }
+
 
 }

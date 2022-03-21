@@ -29,7 +29,9 @@ public class Key extends AbstractObject
     }
 
     @Override public void whenCollided() {
+	zinkPanel.getInventory().showKeyMessage();
 	zinkPanel.player.addAmmountOfDoorKeys();
 	zinkPanel.gameObjects.remove(this);
+
     }
 }
