@@ -4,7 +4,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Abstract
+ * Abstract for the game objects.
+ * Defines the functions draw, setValues, hasCollided and getters.
  */
 public abstract class AbstractObject implements GameObject
 {
@@ -31,11 +32,21 @@ public abstract class AbstractObject implements GameObject
         return objectType;
     }
 
+    /**
+     * Sets startvalues such as position and collisionArea
+     * @param x x-coordinate for position
+     * @param y y-coordinate for position
+     */
     @Override public void setValues(int x, int y) {
         this.pos = new Point(x*zinkPanel.getTileSize(), y*zinkPanel.getTileSize());
         setCollisionArea();
     }
 
+    /**
+     * Checks if collisionArea intersects with the given Rectangle
+     * @param rectangle
+     * @return Returns a boolean
+     */
     @Override public boolean hasCollision(Rectangle rectangle) {
         return collisionArea.intersects(rectangle);
     }

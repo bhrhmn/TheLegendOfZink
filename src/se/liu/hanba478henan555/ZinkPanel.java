@@ -68,10 +68,7 @@ public class ZinkPanel extends JPanel
     }
 
     public void setUpGame(){
-        music.setClip(0);
-        music.play();
-        music.loop();
-
+        sound.playMusic();
         placeSuperObjects.placeObjects();
     }
 

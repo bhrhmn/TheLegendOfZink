@@ -4,6 +4,10 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * Game-object Door
+ * Acts as a Wall-tile unless player has a Key-object
+ */
 public class Door extends AbstractObject
 {
     public Door(ZinkPanel zp,int i){

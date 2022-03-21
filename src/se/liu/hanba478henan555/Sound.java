@@ -8,6 +8,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * Handles audio
+ */
 public class Sound
 {
     Clip clip = null;

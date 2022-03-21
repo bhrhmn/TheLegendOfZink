@@ -1,5 +1,8 @@
 package se.liu.hanba478henan555;
 
+/**
+ * PlaySound
+ */
 public class PlaySound extends Sound
 {
     public PlaySound(){
