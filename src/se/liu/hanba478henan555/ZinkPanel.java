@@ -3,6 +3,8 @@ package se.liu.hanba478henan555;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles the appearence of the frame
@@ -34,7 +36,7 @@ public class ZinkPanel extends JPanel
     private Sound music = new Sound();
 
     public  Player player = new Player(this,keyHandler);
-    public  AbstractObject[] gameObjects = new AbstractObject[10];
+    public List<AbstractObject> gameObjects = new ArrayList<>();
     private PlaceSuperObjects placeSuperObjects = new PlaceSuperObjects(this);
     private Inventory inventory = new Inventory(this);
 

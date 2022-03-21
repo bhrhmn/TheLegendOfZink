@@ -9,8 +9,8 @@ import java.io.IOException;
  */
 public class Key extends AbstractObject
 {
-    public Key(ZinkPanel zp,int i){
-	super(zp,ObjectType.KEY,i);
+    public Key(ZinkPanel zp){
+	super(zp,ObjectType.KEY);
 	readImage();
     }
 
@@ -30,6 +30,6 @@ public class Key extends AbstractObject
 
     @Override public void whenCollided() {
 	zinkPanel.player.addAmmountOfDoorKeys();
-	zinkPanel.gameObjects[index] = null; //TODO detta är cringe vi kan inte bara .remove(this), VARFÖR? bajs
+	zinkPanel.gameObjects.remove(this);
     }
 }

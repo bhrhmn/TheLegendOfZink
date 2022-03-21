@@ -15,8 +15,8 @@ public class CollisionHandler
     }
 
     public void objectCollision(AbstractEntity entity) {
-        for (int i = 0; i < zinkPanel.gameObjects.length; i++){
-            GameObject gameObject = zinkPanel.gameObjects[i];
+        for (int i = 0; i < zinkPanel.gameObjects.size(); i++){
+            GameObject gameObject = zinkPanel.gameObjects.get(i);
             if (gameObject != null && gameObject.hasCollision(entity.collisionArea)) {
                 gameObject.whenCollided();
             }

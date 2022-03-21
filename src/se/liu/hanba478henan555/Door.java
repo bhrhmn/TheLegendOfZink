@@ -10,8 +10,8 @@ import java.io.IOException;
  */
 public class Door extends AbstractObject
 {
-    public Door(ZinkPanel zp,int i){
-	super(zp,ObjectType.DOOR,i);
+    public Door(ZinkPanel zp){
+	super(zp,ObjectType.DOOR);
 	readImage();
     }
 
@@ -33,7 +33,7 @@ public class Door extends AbstractObject
 	Player player = zinkPanel.player;
 	if (player.getAmmountOfDoorKeys() > 0){
 	    player.removeAmmountOfDoorkeys();
-	    zinkPanel.gameObjects[index] = null;
+	    zinkPanel.gameObjects.remove(this);
 	    return;
 	}
 	PlayerInput lastKey = player.getCurrentKey();

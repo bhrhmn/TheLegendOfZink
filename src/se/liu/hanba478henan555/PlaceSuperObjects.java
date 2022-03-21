@@ -11,26 +11,26 @@ public class PlaceSuperObjects
 	this.zinkPanel = zp;
     }
 
-    public void placeDoor(int x, int y, int index){
-	Door door = new Door(zinkPanel, index);
+    public void placeDoor(int x, int y){
+	Door door = new Door(zinkPanel);
 	door.setValues(x,y);
-	zinkPanel.gameObjects[index] = door;
+	zinkPanel.gameObjects.add(door);
     }
 
-    private void placeKey(int x, int y, int index){
-	Key key = new Key(zinkPanel,index);
+    private void placeKey(int x, int y){
+	Key key = new Key(zinkPanel);
 	key.setValues(x,y);
-	zinkPanel.gameObjects[index] = key;
+	zinkPanel.gameObjects.add(key);
     }
 
     public void placeObjects(){
-	placeDoor(6,4, 0);
-	placeKey(1,1,  1);
-	placeKey(10,10,2);
-	placeKey(10,21,3);
-	placeKey(46,1, 4);
+	placeDoor(6,4);
+	placeKey(1,1);
+	placeKey(10,10);
+	placeKey(10,21);
+	placeKey(46,1);
 
-	placeDoor(42,1,5);
+	placeDoor(42,1);
 
     }
 
