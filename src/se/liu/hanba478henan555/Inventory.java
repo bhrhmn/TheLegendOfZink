@@ -16,7 +16,7 @@ public class Inventory
 
     private ZinkPanel zinkPanel;
     private Player player;
-    private Heart[] hearts = new Heart[3];
+    private Heart[] hearts;
     private Point imagePoint;
     private int playerHearts;
 
@@ -27,6 +27,7 @@ public class Inventory
     public Inventory(ZinkPanel zp) {
 	this.zinkPanel = zp;
 	this.player = zinkPanel.getPlayer();
+	this.hearts  = new Heart[player.getMaxHealth()];
 	this.font = new Font("Comic Sans MS", Font.BOLD, zinkPanel.getTileSize()*2 /3);
 
 	setValues();
@@ -96,5 +97,10 @@ public class Inventory
 	    g2.drawString(message, currentScreenX + screensizeX/3 + font.getSize(),
 			  currentScreenY + screensizeY/2);
 	}
+    }
+
+    public void showGameOverMessage() {
+	message = "Game Over";
+	showingMessage = true;
     }
 }

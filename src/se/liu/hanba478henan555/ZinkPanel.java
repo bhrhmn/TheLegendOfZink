@@ -109,6 +109,11 @@ public class ZinkPanel extends JPanel
      * Updates and animates game
      */
     public void tick() {
+        if (isGameOver) {
+            inventory.showGameOverMessage();
+            repaint();
+            return;
+        }
         update();
         repaint();
     }
@@ -117,7 +122,7 @@ public class ZinkPanel extends JPanel
      * calls on player function update
      */
     private void update() {
-        player.update(); //updates player
+        player.update();
 
         for (AbstractEntity enemy : enemyList) {
             if(enemy != null){
@@ -159,7 +164,7 @@ public class ZinkPanel extends JPanel
 
     }
 
-    public void setIsGameOver(final boolean bool) {
-        isGameOver = bool;
+    public void setIsGameOver(final boolean b) {
+        isGameOver = b;
     }
 }

@@ -134,4 +134,7 @@ public abstract class AbstractEntity implements Entity
     }
 
 
+    public int getMaxHealth() {
+	return maxHealth;
+    }
 }
