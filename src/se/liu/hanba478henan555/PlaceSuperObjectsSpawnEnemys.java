@@ -3,7 +3,7 @@ package se.liu.hanba478henan555;
 import java.awt.*;
 
 /**
- * Places objects on frame
+ * Places objects and enemies on frame
  */
 public class PlaceSuperObjectsSpawnEnemys
 {
@@ -31,6 +31,7 @@ public class PlaceSuperObjectsSpawnEnemys
     }
 
     public void placeObjects(){
+
 	placeDoor(6,4);
 	placeKey(1,1);
 	placeKey(10,10);
@@ -42,6 +43,7 @@ public class PlaceSuperObjectsSpawnEnemys
     }
 
     public void spawnEnemies(){
+
 	spawnEnemy(6,20);
 	spawnEnemy(7,20);
 	spawnEnemy(8,20);

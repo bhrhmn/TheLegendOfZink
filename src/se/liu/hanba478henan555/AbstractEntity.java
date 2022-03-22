@@ -14,6 +14,7 @@ public abstract class AbstractEntity implements Entity
 
     protected ZinkPanel zinkPanel;
     protected CollisionHandler cl;
+    protected BufferedImage currentImage = null;
 
     protected Point pos = new Point(0,0);//om något går fel så är den längst upp till vänster
     protected int speed;
@@ -22,6 +23,7 @@ public abstract class AbstractEntity implements Entity
     protected BufferedImage up1 = null,up2 = null,
 	    left1 = null,left2 = null,right1 = null,
 	    	right2 = null,down1 = null,down2 = null;
+    protected EntityInput entityInput = EntityInput.UP;
 
     protected int spriteCounter;
     protected int spriteFrames;
@@ -29,9 +31,11 @@ public abstract class AbstractEntity implements Entity
     protected Rectangle collisionArea = null;
     protected boolean collision = false;
 
-    protected AbstractEntity(ZinkPanel zp, CollisionHandler cl){
+    protected AbstractEntity(ZinkPanel zp, CollisionHandler cl, Point pos){
 	this.zinkPanel = zp;
 	this.cl = cl;
+	this.pos.x = pos.x * zinkPanel.getTileSize();
+	this.pos.y = pos.y * zinkPanel.getTileSize();
     }
 
     protected BufferedImage setImage(final String s){
@@ -98,6 +102,31 @@ public abstract class AbstractEntity implements Entity
 	    }
 	}
     }
+
+    protected BufferedImage setImageBasedOnDirection() {
+	BufferedImage image = null;
+
+	switch (entityInput){
+	    case UP: {
+		image = changeSprite(up1,up2);
+		break;
+	    }
+	    case DOWN: {
+		image = changeSprite(down1,down2);
+		break;
+	    }
+	    case RIGHT: {
+		image = changeSprite(right1,right2);
+		break;
+	    }
+	    case LEFT: {
+		image = changeSprite(left1,left2);
+		break;
+	    }
+	}
+	return image;
+    }
+
     @Override public boolean hasCollision(Rectangle rectangle) {
 	return collisionArea.intersects(rectangle);
     }

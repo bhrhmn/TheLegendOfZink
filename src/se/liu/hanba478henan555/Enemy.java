@@ -8,20 +8,15 @@ public class Enemy extends AbstractEntity
 {
     private static final int ENEMY_HEALTH = 2;
 
-    private Point position;
-    private EntityInput ei = EntityInput.UP;
     private int moveTick;
 
     public Enemy(ZinkPanel zp,CollisionHandler cl, Point pos){
-	super(zp,cl);
-	this.position = pos;
+	super(zp,cl, pos);
 	setDefaultValues();
 	setImages();
     }
 
     @Override public void setDefaultValues() {
-	this.pos.x  = position.x * zinkPanel.getTileSize();
-	this.pos.y  = position.y * zinkPanel.getTileSize();
 
 	this.collisionArea = new Rectangle();
 	collisionArea.width = zinkPanel.getTileSize()*2/3;
@@ -52,27 +47,28 @@ public class Enemy extends AbstractEntity
 
     @Override public void update() {
 	setCollisionAreaRelativePos();
+	currentImage = setImageBasedOnDirection();
 	spriteCounter++;
 	moveTick++;
 	moveRandom();
-	moveEntity(ei);
+	moveEntity(entityInput);
     }
 
     private void moveRandom(){
-	if (moveTick == 120){
+	if (moveTick == zinkPanel.getFPS() *2){
 	    Random random = new Random();
-	    int i = random.nextInt(101);
-	    if(i <= 25){
-		ei = EntityInput.UP;
+	    int i = random.nextInt(4);
+	    if(i == 0){
+		entityInput = EntityInput.UP;
 	    }
-	    else if(i <= 50){
-		ei = EntityInput.LEFT;
+	    else if(i == 1){
+		entityInput = EntityInput.LEFT;
 	    }
-	    else if(i <= 75){
-		ei = EntityInput.RIGHT;
+	    else if(i == 2){
+		entityInput = EntityInput.RIGHT;
 	    }
 	    else {
-		ei = EntityInput.DOWN;
+		entityInput = EntityInput.DOWN;
 	    }
 	    moveTick = 0;
 	}
@@ -81,25 +77,6 @@ public class Enemy extends AbstractEntity
 
     @Override public void draw(Graphics2D g2){
 	BufferedImage image = changeSprite(up1, up2);
-
-	switch (ei){
-	    case UP: {
-		image = changeSprite(up1,up2);
-		break;
-	    }
-	    case DOWN: {
-		image = changeSprite(down1,down2);
-		break;
-	    }
-	    case RIGHT: {
-		image = changeSprite(right1,right2);
-		break;
-	    }
-	    case LEFT: {
-		image = changeSprite(left1,left2);
-		break;
-	    }
-	}
 	g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize() ,null);
     }
 

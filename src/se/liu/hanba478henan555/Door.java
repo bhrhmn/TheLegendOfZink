@@ -38,7 +38,7 @@ public class Door extends AbstractObject
 	    zinkPanel.sound.playSoundEffect(2);
 	    return;
 	}
-	EntityInput lastKey = player.getCurrentKey();
+	EntityInput lastKey = player.getEntityInput();
 	switch (lastKey){
 	    case UP    -> player.moveEntity(EntityInput.DOWN);
 	    case DOWN  -> player.moveEntity(EntityInput.UP);

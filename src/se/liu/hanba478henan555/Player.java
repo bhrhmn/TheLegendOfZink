@@ -1,7 +1,6 @@
 package se.liu.hanba478henan555;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Maincharacter of the game
@@ -10,24 +9,16 @@ import java.awt.image.BufferedImage;
 public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
-    private EntityInput currentKey;
-    private int rows;
-    private int columns;
     private int tileSize;
     private int ammountOfDoorKeys;
     private static final int PLAYER_HEALTH = 3;
 
 
-    public Player(ZinkPanel zp,CollisionHandler cl, KeyHandler keyHandler) {
-	super(zp,cl);
+    public Player(ZinkPanel zp,CollisionHandler cl, Point pos, KeyHandler keyHandler) {
+	super(zp,cl, pos);
 	this.keyHandler = keyHandler;
-	this.currentKey = EntityInput.UP;
 
 	this.tileSize = zp.getTileSize();
-
-	this.columns = zp.getColumns();
-	this.rows = zp.getRows();
-
 
 	setDefaultValues();
 	setImages();
@@ -45,12 +36,11 @@ public class Player extends AbstractEntity
 	return ammountOfDoorKeys;
     }
 
-    public EntityInput getCurrentKey(){
-	return currentKey;
+    public EntityInput getEntityInput(){
+	return entityInput;
     }
 
     @Override public void setDefaultValues() {
-	this.pos = new Point(columns * tileSize / 2, rows * tileSize / 2); // sets default position of player to the middle of the screen
 	this.collisionArea = new Rectangle();
 	collisionArea.width = tileSize*2/3;
 	collisionArea.height = tileSize*2/3;
@@ -101,32 +91,12 @@ public class Player extends AbstractEntity
     }
 
     private void movePlayerBasedOnInput(EntityInput pi){
-	currentKey = pi;
-	moveEntity(currentKey);
+	entityInput = pi;
+	moveEntity(entityInput);
     }
 
     @Override public void draw(Graphics2D g2) {
-	BufferedImage image = null;
-
-	switch (currentKey){
-	    case UP: {
-		image = changeSprite(up1,up2);
-		break;
-	    }
-	    case DOWN: {
-		image = changeSprite(down1,down2);
-		break;
-	    }
-	    case RIGHT: {
-		image = changeSprite(right1,right2);
-		break;
-	    }
-	    case LEFT: {
-		image = changeSprite(left1,left2);
-		break;
-	    }
-	}
-	g2.drawImage(image, pos.x, pos.y, tileSize, tileSize ,null);
+	g2.drawImage(setImageBasedOnDirection(), pos.x, pos.y, tileSize, tileSize ,null);
     }
 
     @Override public void attack() {

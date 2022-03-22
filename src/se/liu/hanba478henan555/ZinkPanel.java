@@ -33,9 +33,9 @@ public class ZinkPanel extends JPanel
     public  RoomManager roomManager = new RoomManager(this);
 
     public  PlaySound sound = new PlaySound();
-    private Sound music = new Sound();
+    private PlaySound music = new PlaySound();
 
-    public  Player player = new Player(this,collisionHandler,keyHandler);
+    public  Player player = new Player(this,collisionHandler, new Point(7, 8),keyHandler);
 
 
     public List<AbstractEntity> enemyList = new ArrayList<>();
@@ -76,7 +76,8 @@ public class ZinkPanel extends JPanel
     }
 
     public void setUpGame(){
-        //sound.playMusic();
+        //TODO spelet laggar
+        music.playMusic();
         placeSuperObjectsSpawnEnemys.placeObjects();
         placeSuperObjectsSpawnEnemys.spawnEnemies();
     }
@@ -104,7 +105,9 @@ public class ZinkPanel extends JPanel
         player.update(); //updates player
 
         for (AbstractEntity enemy : enemyList) {
-            enemy.update();
+            if(enemy != null){
+                enemy.update();
+            }
         }
 
     }
@@ -142,4 +145,7 @@ public class ZinkPanel extends JPanel
     }
 
 
+    public int getFPS() {
+        return FPS;
+    }
 }
