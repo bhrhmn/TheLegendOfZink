@@ -22,7 +22,10 @@ public class Screen
 
     private int screensizeX, screensizeY;
     private int playerChoice = 0;
-    private int arrowCounter = 0;
+    private int arrowCounter = 0; //TODO: counter är bara en templösning, fixa bättre lösning
+    private int confirmCounter = 0;
+
+    private boolean howToPlay = false;
 
     public Screen(ZinkPanel zp) {
 	this.zinkPanel = zp;
@@ -102,10 +105,15 @@ public class Screen
     }
 
     public void showTitleScreen(Graphics2D g2) {
+	if (howToPlay) {
+	    showHowToPlay(g2);
+	    return;
+	}
+
 	int amountOptions = 2;
-	moveArrow(amountOptions);
 	Font font = new Font("Times New Roman", Font.BOLD, 60);
 	g2.setFont(font);
+	moveArrow(amountOptions);
 	zinkPanel.setBackground(new Color(169, 108, 40));
 
 	String title1 = "The Adventure";
@@ -141,9 +149,25 @@ public class Screen
 	g2.drawString(">", options[playerChoice].x - zinkPanel.getTileSize(), options[playerChoice].y);
     }
 
+    private void showHowToPlay(Graphics2D g2) {
+	if (playerConfirm()) {
+	    howToPlay = false;
+	}
+	Font font = new Font("Times New Roman", Font.PLAIN, 30);
+	g2.setFont(font);
+	String instructions1 = "Move with wasd-keys ";
+	String instructions2 = "Attack enemies with ...";
+	String instructions3 = "Open inventory with ...";
+	g2.drawString(instructions1, zinkPanel.getTileSize(), zinkPanel.getTileSize());
+	g2.drawString(instructions2, zinkPanel.getTileSize(), zinkPanel.getTileSize() + font.getSize());
+	g2.drawString(instructions3, zinkPanel.getTileSize(), zinkPanel.getTileSize() + font.getSize()*2);
+	String exit = "Exit How To Play by pressing ENTER";
+	g2.drawString(exit, screensizeX - getStringLength(g2, exit) - zinkPanel.getTileSize(), screensizeY - g2.getFont().getSize());
+    }
+
     private void moveArrow(int amountOptions) {
 	arrowCounter++;
-	if (zinkPanel.getKeyHandler().getKey(EntityInput.CONFIRM)) {
+	if (playerConfirm()) {
 	    playerChoice();
 	}
 	if (arrowCounter <= 5) {
@@ -159,12 +183,19 @@ public class Screen
 	    startGameChoice();
 	}
 	else if (playerChoice == 1) {
-	    showHowToPlay();
+	    startHowToPlay();
 	}
     }
 
-    private void showHowToPlay() {
-	System.out.println("How to play");
+    private boolean playerConfirm() {
+	confirmCounter++;
+	if (confirmCounter <= 3) return false;
+	confirmCounter = 0;
+	return zinkPanel.getKeyHandler().getKey(EntityInput.CONFIRM);
+    }
+
+    private void startHowToPlay() {
+	howToPlay = true;
     }
 
     private void startGameChoice() {

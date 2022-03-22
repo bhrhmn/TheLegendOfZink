@@ -55,6 +55,4 @@ public class KeyHandler extends KeyAdapter
 	changeMapValue(e,false);
     }
 
-
-
 }
