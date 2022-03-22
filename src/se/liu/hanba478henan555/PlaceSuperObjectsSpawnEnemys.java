@@ -43,6 +43,10 @@ public class PlaceSuperObjectsSpawnEnemys
 
     public void spawnEnemies(){
 	spawnEnemy(6,20);
+	spawnEnemy(7,20);
+	spawnEnemy(8,20);
+	spawnEnemy(9,20);
+
     }
 
 

@@ -24,8 +24,8 @@ public class Enemy extends AbstractEntity
 	this.pos.y  = position.y * zinkPanel.getTileSize();
 
 	this.collisionArea = new Rectangle();
-	collisionArea.width = zinkPanel.getTileSize();
-	collisionArea.height = zinkPanel.getTileSize();
+	collisionArea.width = zinkPanel.getTileSize()*2/3;
+	collisionArea.height = zinkPanel.getTileSize()*2/3;
 
 	this.collision = true;
 	this.spriteFrames = 10;
