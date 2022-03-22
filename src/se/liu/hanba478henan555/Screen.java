@@ -7,12 +7,12 @@ import java.awt.event.ActionListener;
 /**
  * Inventory-class handles showing the Player's inventory on screen
  */
-public class Inventory
+public class Screen
 {
     private boolean showingMessage = false;
-    //private String inventoryMessage = "";
     private String message = "hejsan";
     private Font font;
+    private Timer messageTimer = null;
 
     private ZinkPanel zinkPanel;
     private Player player;
@@ -20,11 +20,11 @@ public class Inventory
     private Point imagePoint;
     private int playerHearts;
 
-    private Timer messageTimer = null;
-
     private int screensizeX, screensizeY;
+    private int playerChoice = 0;
+    private int arrowCounter = 0;
 
-    public Inventory(ZinkPanel zp) {
+    public Screen(ZinkPanel zp) {
 	this.zinkPanel = zp;
 	this.player = zinkPanel.getPlayer();
 	this.hearts  = new Heart[player.getMaxHealth()];
@@ -54,8 +54,6 @@ public class Inventory
 	}
     }
 
-    //private void updateMessage() {inventoryMessage = String.format("x %d", player.getAmmountOfDoorKeys());}
-
     private void updateHearts() {
 	int playerHearts = player.getHealth();
 	for (int i = 0; i < hearts.length; i++) {
@@ -82,6 +80,10 @@ public class Inventory
 
     public void draw(Graphics2D g2) {
 	//TODO: Fixa alla magiska konstanter
+	if (zinkPanel.isShowingTitleScreen()) {
+	    showTitleScreen(g2);
+	    return;
+	}
 	updateHearts();
 	g2.setFont(font);
 	g2.setColor(Color.BLACK);
@@ -97,6 +99,87 @@ public class Inventory
 	    g2.drawString(message, currentScreenX + screensizeX/3 + font.getSize(),
 			  currentScreenY + screensizeY/2);
 	}
+    }
+
+    public void showTitleScreen(Graphics2D g2) {
+	int amountOptions = 2;
+	moveArrow(amountOptions);
+	Font font = new Font("Times New Roman", Font.BOLD, 60);
+	g2.setFont(font);
+	zinkPanel.setBackground(new Color(169, 108, 40));
+
+	String title1 = "The Adventure";
+	String title2 = "of Zink";
+	int shadow = 4;
+	int textLength1 = getStringLength(g2, title1);
+	int textLength2 = getStringLength(g2, title2);
+	int screenMiddleX = screensizeX/2;
+	int screenMiddleY = zinkPanel.getTileSize() *2;
+
+	g2.setColor(Color.darkGray);
+	g2.drawString(title1, screenMiddleX - textLength1/2 +shadow, screenMiddleY +shadow);
+	g2.drawString(title2, screenMiddleX - textLength2/2 +shadow, screenMiddleY + font.getSize() +shadow);
+	g2.setColor(Color.black);
+	g2.drawString(title1, screenMiddleX - textLength1/2, screenMiddleY);
+	g2.drawString(title2, screenMiddleX - textLength2/2, screenMiddleY + font.getSize());
+
+	Point[] options = new Point[amountOptions];
+	Font font2 = new Font("Arial", Font.PLAIN, zinkPanel.getTileSize()*2 /3);
+	g2.setFont(font2);
+	String text = "START GAME";
+	int x1 = screenMiddleX - getStringLength(g2, text)/2;
+	int y1 = zinkPanel.getTileSize() *7;
+	g2.drawString(text, x1, y1);
+	options[0] = new Point(x1, y1);
+
+	String text2 = "How to play";
+	int x2 = screenMiddleX - getStringLength(g2, text2)/2;
+	int y2 = zinkPanel.getTileSize() *8;
+	g2.drawString(text2, x2, y2);
+	options[1] = new Point(x2, y2);
+
+	g2.drawString(">", options[playerChoice].x - zinkPanel.getTileSize(), options[playerChoice].y);
+    }
+
+    private void moveArrow(int amountOptions) {
+	arrowCounter++;
+	if (zinkPanel.getKeyHandler().getKey(EntityInput.CONFIRM)) {
+	    playerChoice();
+	}
+	if (arrowCounter <= 5) {
+	    return;
+	}
+	updatePlayeChoice(EntityInput.UP, -1, amountOptions);
+	updatePlayeChoice(EntityInput.DOWN, 1, amountOptions);
+	arrowCounter = 0;
+    }
+
+    private void playerChoice() {
+	if (playerChoice == 0) {
+	    startGameChoice();
+	}
+	else if (playerChoice == 1) {
+	    showHowToPlay();
+	}
+    }
+
+    private void showHowToPlay() {
+	System.out.println("How to play");
+    }
+
+    private void startGameChoice() {
+	zinkPanel.stopShowingTitleScreen();
+    }
+
+    private void updatePlayeChoice(EntityInput entityInput, int step, int amountOptions) {
+	if (zinkPanel.getKeyHandler().getKey(entityInput)) {
+	    playerChoice += step;
+	    if (playerChoice < 0 || playerChoice == amountOptions) playerChoice = 0;
+	}
+    }
+
+    private int getStringLength(Graphics2D g2, String text) {
+	return (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
     }
 
     public void showGameOverMessage() {

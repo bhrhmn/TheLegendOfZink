@@ -28,7 +28,7 @@ public class Key extends AbstractObject
     }
 
     @Override public void whenCollided() {
-	zinkPanel.getInventory().showKeyMessage();
+	zinkPanel.getScreen().showKeyMessage();
 	zinkPanel.getPlayer().addAmmountOfDoorKeys();
 	zinkPanel.getSound().playSoundEffect(1);
 	zinkPanel.getGameObjects().remove(this);

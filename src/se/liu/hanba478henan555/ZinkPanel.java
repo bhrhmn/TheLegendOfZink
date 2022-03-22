@@ -18,7 +18,7 @@ public class ZinkPanel extends JPanel
      */
     private static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;
 
-    private static final int COLUMNS = 16;   //rows och columns ska vara tvärtom??
+    private static final int COLUMNS = 16;
     private static final int ROWS = 12;
 
     private static final int WORLD_COLUMNS = 48;
@@ -44,11 +44,11 @@ public class ZinkPanel extends JPanel
     private List<AbstractObject> gameObjects = new ArrayList<>();
 
     private PlaceSuperObjectsSpawnEnemies placeSuperObjectsSpawnEnemies = new PlaceSuperObjectsSpawnEnemies(this);
-    private Inventory inventory = new Inventory(this);
+    private Screen screen = new Screen(this);
+    private boolean showingTitleScreen = true;
 
     public ZinkPanel() {
         this.setPreferredSize(new Dimension(COLUMNS * TILE_SIZE, ROWS * TILE_SIZE));
-        this.setBackground(new Color(255, 53, 184));
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
     }
@@ -67,7 +67,7 @@ public class ZinkPanel extends JPanel
 
     public Point getScreenStartPoint() {return screenStartPoint;}
 
-    public Inventory getInventory() {return inventory;}
+    public Screen getScreen() {return screen;}
 
     public List<AbstractEntity> getEnemyList() {return enemyList;}
 
@@ -82,6 +82,10 @@ public class ZinkPanel extends JPanel
     public PlaySound getSound() {return sound;}
 
     public Player getPlayer() {return player;}
+
+    public boolean isShowingTitleScreen() {return showingTitleScreen;}
+
+    public KeyHandler getKeyHandler() {return keyHandler;}
 
     /**
      * starts timer
@@ -110,7 +114,7 @@ public class ZinkPanel extends JPanel
      */
     public void tick() {
         if (isGameOver) {
-            inventory.showGameOverMessage();
+            screen.showGameOverMessage();
             repaint();
             return;
         }
@@ -146,6 +150,10 @@ public class ZinkPanel extends JPanel
     @Override public void paintComponent(final Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        if (showingTitleScreen) {
+            screen.showTitleScreen(g2);
+            return;
+        }
         moveScreen(g2);
         roomManager.draw(g2);
 
@@ -160,11 +168,15 @@ public class ZinkPanel extends JPanel
         }
 
         player.draw(g2);
-        inventory.draw(g2);
+        screen.draw(g2);
 
     }
 
     public void setIsGameOver(final boolean b) {
         isGameOver = b;
+    }
+
+    public void stopShowingTitleScreen() {
+        showingTitleScreen = false;
     }
 }
