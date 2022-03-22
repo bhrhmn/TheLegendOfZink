@@ -26,6 +26,8 @@ public class ZinkPanel extends JPanel
 
     private static final int FPS = 60;
 
+    private boolean isGameOver = false;
+
     private Point screenStartPoint = new Point(0, 0);
 
     private KeyHandler keyHandler = new KeyHandler();
@@ -157,4 +159,7 @@ public class ZinkPanel extends JPanel
 
     }
 
+    public void setIsGameOver(final boolean bool) {
+        isGameOver = bool;
+    }
 }

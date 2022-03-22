@@ -1,5 +1,6 @@
 package se.liu.hanba478henan555;
 
+import javax.swing.text.Utilities;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

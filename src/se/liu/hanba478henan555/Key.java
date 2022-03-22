@@ -23,7 +23,6 @@ public class Key extends AbstractObject
     }
 
     @Override public void setCollisionArea() {
-	int size = zinkPanel.getOriginalTileSize();
 	this.collisionArea = new Rectangle(this.pos.x, this.pos.y,
 					   zinkPanel.getTileSize(), zinkPanel.getTileSize());
     }

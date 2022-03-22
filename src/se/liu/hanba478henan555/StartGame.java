@@ -12,6 +12,10 @@ public class StartGame
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setResizable(false);
 
+	TitleScreen titleScreen = new TitleScreen();
+	frame.add(titleScreen);
+	frame.pack();
+	
 	ZinkPanel zinkPanel = new ZinkPanel();
 	frame.add(zinkPanel);
 	frame.pack();

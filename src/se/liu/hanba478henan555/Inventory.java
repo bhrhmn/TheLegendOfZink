@@ -3,7 +3,6 @@ package se.liu.hanba478henan555;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 /**
  * Inventory-class handles showing the Player's inventory on screen
@@ -11,14 +10,15 @@ import java.awt.image.BufferedImage;
 public class Inventory
 {
     private boolean showingMessage = false;
-    private String inventoryMessage = "";
+    //private String inventoryMessage = "";
     private String message = "hejsan";
     private Font font;
 
     private ZinkPanel zinkPanel;
     private Player player;
-    private BufferedImage image;
+    private Heart[] hearts = new Heart[3];
     private Point imagePoint;
+    private int playerHearts;
 
     private Timer messageTimer = null;
 
@@ -28,7 +28,6 @@ public class Inventory
 	this.zinkPanel = zp;
 	this.player = zinkPanel.getPlayer();
 	this.font = new Font("Comic Sans MS", Font.BOLD, zinkPanel.getTileSize()*2 /3);
-    	this.image = new Key(zinkPanel).image;
 
 	setValues();
 	setTimer();
@@ -47,25 +46,33 @@ public class Inventory
 	this.screensizeY = zinkPanel.getTileSize() * zinkPanel.getRows();
 	int coordinate = zinkPanel.getTileSize()/3;
 	this.imagePoint = new Point(coordinate, coordinate);
+	for (int i = 0; i < 3; i++) {
+	    Heart h = new Heart(zinkPanel);
+	    h.setFullHeart();
+	    hearts[i] = h;
+	}
     }
 
-    private void updateMessage() {
-	inventoryMessage = String.format("x %d", player.getAmmountOfDoorKeys());
+    //private void updateMessage() {inventoryMessage = String.format("x %d", player.getAmmountOfDoorKeys());}
+
+    private void updateHearts() {
+	int playerHearts = player.getHealth();
+	for (int i = 0; i < hearts.length; i++) {
+	    if (i >= playerHearts) hearts[i].setEmptyHeart();
+	    else hearts[i].setFullHeart();
+	}
     }
 
-    public void showKeyMessage() {
-	showObjectMessage(ObjectType.KEY);
-    }
+    public void showKeyMessage() {showObjectMessage(ObjectType.KEY);}
 
-    public void showDoorMessage() {
-	showObjectMessage(ObjectType.DOOR);
-    }
+    public void showDoorMessage() {showObjectMessage(ObjectType.DOOR);}
 
     private void showObjectMessage(ObjectType objectType) {
 	switch (objectType) {
 	    case KEY -> message = "You got a key!";
 	    case DOOR -> message = "You opened a door!";
 	    case CHEST -> message = "You opened a chest!";
+	    case HEART -> message = "You got one life!";
 	}
 	showingMessage = true;
 	messageTimer.stop();
@@ -74,21 +81,16 @@ public class Inventory
 
     public void draw(Graphics2D g2) {
 	//TODO: Fixa alla magiska konstanter
-	updateMessage();
-
+	updateHearts();
 	g2.setFont(font);
 	g2.setColor(Color.BLACK);
 	int currentScreenX = zinkPanel.getScreenStartPoint().x * zinkPanel.getTileSize() * zinkPanel.getColumns();
 	int currentScreenY = zinkPanel.getScreenStartPoint().y * zinkPanel.getTileSize() * zinkPanel.getRows();
 	int imageSize = zinkPanel.getTileSize()*2 /3;
-
-	g2.drawImage(image, zinkPanel.getTileSize()/4 + currentScreenX,
-		     zinkPanel.getTileSize()/4 + currentScreenY, imageSize, imageSize, null);
-
-	g2.drawString(inventoryMessage,
-		      zinkPanel.getTileSize() + currentScreenX + imagePoint.x/2,
-		      zinkPanel.getTileSize()/2 + currentScreenY + font.getSize()/2
-			);
+	for (int i = 0; i < hearts.length; i++) {
+	    g2.drawImage(hearts[i].image, zinkPanel.getTileSize()*(i+1) + currentScreenX,
+			 imagePoint.y + currentScreenY, imageSize, imageSize, null);
+	}
 	if (showingMessage) {
 	    //TODO: Fixa bättre plats för message
 	    g2.drawString(message, currentScreenX + screensizeX/3 + font.getSize(),

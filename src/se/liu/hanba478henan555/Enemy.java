@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- *
+ *s
  */
 public class Enemy extends AbstractEntity
 {
@@ -39,12 +39,12 @@ public class Enemy extends AbstractEntity
     @Override public void setImages() {
 	up1    = setImage("./enemy/en_up_1.png");
 	up2    = setImage("./enemy/en_up_2.png");
-	down1  = setImage("./enemy/en_up_1.png");
-	down2  = setImage("./enemy/en_up_2.png");
-	right1 = setImage("./enemy/en_up_1.png");
-	right2 = setImage("./enemy/en_up_2.png");
-	left1  = setImage("./enemy/en_up_1.png");
-	left2  = setImage("./enemy/en_up_2.png");
+	down1  = setImage("./enemy/en_down_1.png");
+	down2  = setImage("./enemy/en_down_2.png");
+	right1 = setImage("./enemy/en_right_1.png");
+	right2 = setImage("./enemy/en_right_2.png");
+	left1  = setImage("./enemy/en_left_1.png");
+	left2  = setImage("./enemy/en_left_2.png");
 
     }
 
@@ -79,7 +79,7 @@ public class Enemy extends AbstractEntity
     }
 
     @Override public void draw(Graphics2D g2){
-	BufferedImage image = changeSprite(up1, up2);
+	BufferedImage image = setImageBasedOnDirection();
 	g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize() ,null);
     }
 

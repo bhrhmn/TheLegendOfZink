@@ -13,7 +13,6 @@ public class Player extends AbstractEntity
     private int ammountOfDoorKeys;
     private static final int PLAYER_HEALTH = 3;
 
-
     public Player(ZinkPanel zp,CollisionHandler cl, Point pos, KeyHandler keyHandler) {
 	super(zp,cl, pos);
 	this.keyHandler = keyHandler;
@@ -100,11 +99,19 @@ public class Player extends AbstractEntity
     }
 
     @Override public void takeDamage() {
-	System.out.println("aj!");
+	health--;
+	if (health == 0){
+	    zinkPanel.setIsGameOver(true);
+	}
+	
     }
 
     @Override public void heal() {
+	if (health < PLAYER_HEALTH) health++;
+    }
 
+    public int getHealth() {
+	return health;
     }
 
 
