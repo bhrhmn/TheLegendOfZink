@@ -29,17 +29,17 @@ public class ZinkPanel extends JPanel
     private Point screenStartPoint = new Point(0, 0);
 
     private KeyHandler keyHandler = new KeyHandler();
-    public  CollisionHandler collisionHandler = new CollisionHandler(this);
-    public  RoomManager roomManager = new RoomManager(this);
+    private CollisionHandler collisionHandler = new CollisionHandler(this);
+    private RoomManager roomManager = new RoomManager(this);
 
-    public  PlaySound sound = new PlaySound();
+    private PlaySound sound = new PlaySound();
     private PlaySound music = new PlaySound();
 
-    public  Player player = new Player(this,collisionHandler, new Point(7, 8),keyHandler);
+    private Player player = new Player(this,collisionHandler, new Point(7, 8),keyHandler);
 
 
-    public List<AbstractEntity> enemyList = new ArrayList<>();
-    public List<AbstractObject> gameObjects = new ArrayList<>();
+    private List<AbstractEntity> enemyList = new ArrayList<>();
+    private List<AbstractObject> gameObjects = new ArrayList<>();
 
     private PlaceSuperObjectsSpawnEnemys placeSuperObjectsSpawnEnemys = new PlaceSuperObjectsSpawnEnemys(this);
     private Inventory inventory = new Inventory(this);
@@ -66,6 +66,20 @@ public class ZinkPanel extends JPanel
     public Point getScreenStartPoint() {return screenStartPoint;}
 
     public Inventory getInventory() {return inventory;}
+
+    public List<AbstractEntity> getEnemyList() {return enemyList;}
+
+    public List<AbstractObject> getGameObjects() {return gameObjects;}
+
+    public int getFPS() {return FPS;}
+
+    public CollisionHandler getCollisionHandler() {return collisionHandler;}
+
+    public RoomManager getRoomManager() {return roomManager;}
+
+    public PlaySound getSound() {return sound;}
+
+    public Player getPlayer() {return player;}
 
     /**
      * starts timer
@@ -144,8 +158,4 @@ public class ZinkPanel extends JPanel
 
     }
 
-
-    public int getFPS() {
-        return FPS;
-    }
 }

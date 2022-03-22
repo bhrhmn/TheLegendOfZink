@@ -36,10 +36,6 @@ public class Player extends AbstractEntity
 	return ammountOfDoorKeys;
     }
 
-    public EntityInput getEntityInput(){
-	return entityInput;
-    }
-
     @Override public void setDefaultValues() {
 	this.collisionArea = new Rectangle();
 	collisionArea.width = tileSize*2/3;

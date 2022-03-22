@@ -30,12 +30,12 @@ public class Door extends AbstractObject
     }
 
     @Override public void whenCollided() {
-	Player player = zinkPanel.player;
+	Player player = zinkPanel.getPlayer();
 	if (player.getAmmountOfDoorKeys() > 0){
 	    player.removeAmmountOfDoorkeys();
-	    zinkPanel.gameObjects.remove(this);
+	    zinkPanel.getGameObjects().remove(this);
 	    zinkPanel.getInventory().showDoorMessage();
-	    zinkPanel.sound.playSoundEffect(2);
+	    zinkPanel.getSound().playSoundEffect(2);
 	    return;
 	}
 	EntityInput lastKey = player.getEntityInput();

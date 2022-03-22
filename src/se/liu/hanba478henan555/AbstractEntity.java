@@ -47,6 +47,8 @@ public abstract class AbstractEntity implements Entity
 	return null;
     }
 
+    public EntityInput getEntityInput(){return entityInput;}
+
     protected BufferedImage changeSprite(BufferedImage b1, BufferedImage b2){
 	if (spriteCounter <= spriteFrames)
 	    return b2;

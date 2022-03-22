@@ -15,8 +15,8 @@ public class CollisionHandler
     }
 
     public void objectCollision(AbstractEntity entity) {
-        for (int i = 0; i < zinkPanel.gameObjects.size(); i++){
-            GameObject gameObject = zinkPanel.gameObjects.get(i);
+        for (int i = 0; i < zinkPanel.getGameObjects().size(); i++){
+            GameObject gameObject = zinkPanel.getGameObjects().get(i);
             if (gameObject != null && gameObject.hasCollision(entity.collisionArea)) {
                 gameObject.whenCollided();
             }
@@ -24,8 +24,8 @@ public class CollisionHandler
    }
 
    public void abstractEntityCollision(AbstractEntity entity){
-       for (int i = 0; i < zinkPanel.enemyList.size(); i++){
-           AbstractEntity enemy = zinkPanel.enemyList.get(i);
+       for (int i = 0; i < zinkPanel.getEnemyList().size(); i++){
+           AbstractEntity enemy = zinkPanel.getEnemyList().get(i);
            if (enemy != null && enemy.hasCollision(entity.collisionArea)) {
                entity.takeDamage();
            }
@@ -42,16 +42,16 @@ public class CollisionHandler
 
         switch (dir){
             case UP:{
-                return zinkPanel.roomManager.tileHasCollision(topRight) || zinkPanel.roomManager.tileHasCollision(topLeft);
+                return zinkPanel.getRoomManager().tileHasCollision(topRight) || zinkPanel.getRoomManager().tileHasCollision(topLeft);
             }
             case DOWN:{
-                return zinkPanel.roomManager.tileHasCollision(bottomLeft) || zinkPanel.roomManager.tileHasCollision(bottomRight);
+                return zinkPanel.getRoomManager().tileHasCollision(bottomLeft) || zinkPanel.getRoomManager().tileHasCollision(bottomRight);
             }
             case LEFT:{
-                return zinkPanel.roomManager.tileHasCollision(bottomLeft) || zinkPanel.roomManager.tileHasCollision(topLeft);
+                return zinkPanel.getRoomManager().tileHasCollision(bottomLeft) || zinkPanel.getRoomManager().tileHasCollision(topLeft);
             }
             case RIGHT:{
-                return zinkPanel.roomManager.tileHasCollision(topRight) || zinkPanel.roomManager.tileHasCollision(bottomRight);
+                return zinkPanel.getRoomManager().tileHasCollision(topRight) || zinkPanel.getRoomManager().tileHasCollision(bottomRight);
             }
             default:{return false;}
         }

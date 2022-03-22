@@ -13,8 +13,8 @@ import java.net.URL;
  */
 public class Sound
 {
-    Clip clip = null;
-    URL[] soundURL = new URL[3];
+    private Clip clip = null;
+    private URL[] soundURL = new URL[3];
 
     public Sound(){
 	soundURL[0] = getClass().getResource("sounds/music.wav");

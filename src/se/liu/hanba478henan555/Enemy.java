@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ *
+ */
 public class Enemy extends AbstractEntity
 {
     private static final int ENEMY_HEALTH = 2;

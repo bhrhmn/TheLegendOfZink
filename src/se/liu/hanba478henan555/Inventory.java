@@ -20,23 +20,27 @@ public class Inventory
     private BufferedImage image;
     private Point imagePoint;
 
-    private Timer messageTimer;
+    private Timer messageTimer = null;
 
-    int screensizeX, screensizeY;
+    private int screensizeX, screensizeY;
 
     public Inventory(ZinkPanel zp) {
 	this.zinkPanel = zp;
-	this.player = zinkPanel.player;
+	this.player = zinkPanel.getPlayer();
 	this.font = new Font("Comic Sans MS", Font.BOLD, zinkPanel.getTileSize()*2 /3);
     	this.image = new Key(zinkPanel).image;
-	this.messageTimer = new Timer(3000, action);
+
 	setValues();
+	setTimer();
     }
 
-    ActionListener action = e -> {
-	showingMessage = false;
-	messageTimer.stop();
-    };
+    private void setTimer() {
+	ActionListener action = e -> {
+	    showingMessage = false;
+	    messageTimer.stop();
+	};
+	this.messageTimer = new Timer(3000, action);
+    }
 
     private void setValues() {
 	this.screensizeX = zinkPanel.getTileSize() * zinkPanel.getColumns();
@@ -50,12 +54,10 @@ public class Inventory
     }
 
     public void showKeyMessage() {
-	//System.out.println("key message");
 	showObjectMessage(ObjectType.KEY);
     }
 
     public void showDoorMessage() {
-	//System.out.println("door message");
 	showObjectMessage(ObjectType.DOOR);
     }
 
@@ -66,10 +68,12 @@ public class Inventory
 	    case CHEST -> message = "You opened a chest!";
 	}
 	showingMessage = true;
+	messageTimer.stop();
 	messageTimer.start();
     }
 
     public void draw(Graphics2D g2) {
+	//TODO: Fixa alla magiska konstanter
 	updateMessage();
 
 	g2.setFont(font);

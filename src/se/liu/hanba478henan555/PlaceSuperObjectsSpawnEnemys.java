@@ -16,18 +16,18 @@ public class PlaceSuperObjectsSpawnEnemys
     public void placeDoor(int x, int y){
 	Door door = new Door(zinkPanel);
 	door.setValues(x,y);
-	zinkPanel.gameObjects.add(door);
+	zinkPanel.getGameObjects().add(door);
     }
 
     private void placeKey(int x, int y){
 	Key key = new Key(zinkPanel);
 	key.setValues(x,y);
-	zinkPanel.gameObjects.add(key);
+	zinkPanel.getGameObjects().add(key);
     }
 
     private void spawnEnemy(int x, int y){
-	Enemy en = new Enemy(zinkPanel, zinkPanel.collisionHandler,new Point(x, y));
-	zinkPanel.enemyList.add(en);
+	Enemy en = new Enemy(zinkPanel, zinkPanel.getCollisionHandler(),new Point(x, y));
+	zinkPanel.getEnemyList().add(en);
     }
 
     public void placeObjects(){
