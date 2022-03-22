@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public class KeyHandler extends KeyAdapter
 {
+    private ZinkPanel zinkPanel = null;
 
     private Map<Integer, Boolean> keyMap = new HashMap<>(Map.ofEntries(
 	    Map.entry(KeyEvent.VK_W, false),
@@ -48,11 +49,18 @@ public class KeyHandler extends KeyAdapter
     }
 
     @Override public void keyPressed(final KeyEvent e) {
+	if (zinkPanel.isShowingTitleScreen() && e.getKeyCode() == KeyEvent.VK_ENTER) {
+	    zinkPanel.getScreen().playerConfirm();
+	}
 	changeMapValue(e,true);
     }
 
     @Override public void keyReleased(final KeyEvent e) {
 	changeMapValue(e,false);
+    }
+
+    public void setZinkPanel(ZinkPanel zinkPanel) {
+	this.zinkPanel = zinkPanel;
     }
 
 }

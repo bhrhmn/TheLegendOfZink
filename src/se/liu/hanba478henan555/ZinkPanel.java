@@ -51,6 +51,7 @@ public class ZinkPanel extends JPanel
         this.setPreferredSize(new Dimension(COLUMNS * TILE_SIZE, ROWS * TILE_SIZE));
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+        keyHandler.setZinkPanel(this);
     }
 
     public int getRows(){return ROWS;}

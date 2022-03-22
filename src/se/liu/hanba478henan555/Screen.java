@@ -22,8 +22,7 @@ public class Screen
 
     private int screensizeX, screensizeY;
     private int playerChoice = 0;
-    private int arrowCounter = 0; //TODO: counter är bara en templösning, fixa bättre lösning
-    private int confirmCounter = 0;
+    private int arrowCounter = 0; //TODO: bättre lösning än counter
 
     private boolean howToPlay = false;
 
@@ -150,9 +149,6 @@ public class Screen
     }
 
     private void showHowToPlay(Graphics2D g2) {
-	if (playerConfirm()) {
-	    howToPlay = false;
-	}
 	Font font = new Font("Times New Roman", Font.PLAIN, 30);
 	g2.setFont(font);
 	String instructions1 = "Move with wasd-keys ";
@@ -167,9 +163,6 @@ public class Screen
 
     private void moveArrow(int amountOptions) {
 	arrowCounter++;
-	if (playerConfirm()) {
-	    playerChoice();
-	}
 	if (arrowCounter <= 5) {
 	    return;
 	}
@@ -178,20 +171,17 @@ public class Screen
 	arrowCounter = 0;
     }
 
-    private void playerChoice() {
+    public void playerConfirm() {
+	if (howToPlay) {
+	    howToPlay = false;
+	    return;
+	}
 	if (playerChoice == 0) {
 	    startGameChoice();
 	}
 	else if (playerChoice == 1) {
 	    startHowToPlay();
 	}
-    }
-
-    private boolean playerConfirm() {
-	confirmCounter++;
-	if (confirmCounter <= 3) return false;
-	confirmCounter = 0;
-	return zinkPanel.getKeyHandler().getKey(EntityInput.CONFIRM);
     }
 
     private void startHowToPlay() {
