@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class RoomManager
 {
     private Tile[] tileTypes;
-    public int[][] roomTileData;
+    private int[][] roomTileData;
     private int tileSize,worldRows,worldColumns;
 
     public RoomManager(ZinkPanel zp) {
@@ -32,12 +32,12 @@ public class RoomManager
     private void defineTileTypes() {
 	try {
 	    tileTypes[0] = new Tile();
-	    tileTypes[0].image = ImageIO.read(new File("src/se/liu/hanba478henan555/tiles/wall.png"));
-	    tileTypes[0].collision = true;
+	    tileTypes[0].setImage(ImageIO.read(new File("src/se/liu/hanba478henan555/tiles/wall.png")));
+	    tileTypes[0].setCollision(true);
 
 
 	    tileTypes[1] = new Tile();
-	    tileTypes[1].image = ImageIO.read(new File("src/se/liu/hanba478henan555/tiles/earth.png"));
+	    tileTypes[1].setImage(ImageIO.read(new File("src/se/liu/hanba478henan555/tiles/earth.png")));
 
 	}catch (IOException e) {
 	    e.printStackTrace();
@@ -64,7 +64,7 @@ public class RoomManager
 	    for(int x = 0; x < worldColumns; x++){
 		int tileType = roomTileData[x][y];
 
-		g2.drawImage(tileTypes[tileType].image,
+		g2.drawImage(tileTypes[tileType].getImage(),
 			     x*tileSize ,y*tileSize,
 			     	tileSize, tileSize, null );
 	    }
@@ -72,6 +72,6 @@ public class RoomManager
     }
 
     public boolean tileHasCollision(Point pos){
-	return tileTypes[roomTileData[pos.x][pos.y]].collision;
+	return tileTypes[roomTileData[pos.x][pos.y]].isCollision();
     }
 }

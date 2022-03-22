@@ -13,7 +13,7 @@ public abstract class AbstractEntity implements Entity
 {
 
     protected ZinkPanel zinkPanel;
-    protected CollisionHandler cl;
+    protected CollisionHandler collisionHandler;
     protected BufferedImage currentImage = null;
 
     protected Point pos = new Point(0,0);//om något går fel så är den längst upp till vänster
@@ -33,7 +33,7 @@ public abstract class AbstractEntity implements Entity
 
     protected AbstractEntity(ZinkPanel zp, CollisionHandler cl, Point pos){
 	this.zinkPanel = zp;
-	this.cl = cl;
+	this.collisionHandler = cl;
 	this.pos.x = pos.x * zinkPanel.getTileSize();
 	this.pos.y = pos.y * zinkPanel.getTileSize();
     }
@@ -90,7 +90,7 @@ public abstract class AbstractEntity implements Entity
 	if (xy == PointXY.X) {
 	    pos.x += add;
 	    collisionArea.x += add;
-	    if (cl.tileCollision(this,input)){
+	    if (collisionHandler.tileCollision(this, input)){
 		pos.x -= add;
 		collisionArea.x -= add;
 	    }
@@ -98,7 +98,7 @@ public abstract class AbstractEntity implements Entity
 	else if (xy == PointXY.Y) {
 	    pos.y += add;
 	    collisionArea.y += add;
-	    if (cl.tileCollision(this,input)){
+	    if (collisionHandler.tileCollision(this, input)){
 		pos.y -= add;
 		collisionArea.y -= add;
 	    }
@@ -137,4 +137,9 @@ public abstract class AbstractEntity implements Entity
     public int getMaxHealth() {
 	return maxHealth;
     }
+
+    public int getHealth() {
+	return health;
+    }
+
 }

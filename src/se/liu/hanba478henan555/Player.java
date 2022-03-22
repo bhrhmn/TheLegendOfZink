@@ -85,8 +85,8 @@ public class Player extends AbstractEntity
 		movePlayerBasedOnInput(EntityInput.RIGHT);
 	    }
 	}
-	cl.objectCollision(this);
-	cl.abstractEntityCollision(this);
+	collisionHandler.objectCollision(this);
+	collisionHandler.abstractEntityCollision(this);
     }
 
     private void movePlayerBasedOnInput(EntityInput pi){
@@ -147,11 +147,5 @@ public class Player extends AbstractEntity
     @Override public void heal() {
 	if (health < PLAYER_HEALTH) health++;
     }
-
-    public int getHealth() {
-	return health;
-    }
-
-
 
 }

@@ -5,11 +5,11 @@ import java.awt.*;
 /**
  * Places objects and enemies on frame
  */
-public class PlaceSuperObjectsSpawnEnemys
+public class PlaceSuperObjectsSpawnEnemies
 {
     private ZinkPanel zinkPanel;
 
-    public PlaceSuperObjectsSpawnEnemys(ZinkPanel zp){
+    public PlaceSuperObjectsSpawnEnemies(ZinkPanel zp){
 	this.zinkPanel = zp;
     }
 

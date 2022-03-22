@@ -5,6 +5,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * Gameobject
+ * Can show a full heart or an empty heart
+ */
 public class Heart extends AbstractObject
 {
     private BufferedImage imageFull = null, imageEmpty = null;

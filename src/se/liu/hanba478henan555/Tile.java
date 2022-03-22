@@ -6,7 +6,22 @@ import java.awt.image.BufferedImage;
  */
 public class Tile
 {
-    public BufferedImage image = null;
-    public boolean collision = false;
+    private BufferedImage image = null;
+    private boolean collision = false;
 
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public boolean isCollision() {
+        return collision;
+    }
+
+    public void setImage(final BufferedImage image) {
+        this.image = image;
+    }
+
+    public void setCollision(final boolean collision) {
+        this.collision = collision;
+    }
 }

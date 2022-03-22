@@ -3,6 +3,10 @@ package se.liu.hanba478henan555;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Titlescreen
+ * shows a pink screen with a word
+ */
 public class TitleScreen extends JPanel
 {
     public TitleScreen() {

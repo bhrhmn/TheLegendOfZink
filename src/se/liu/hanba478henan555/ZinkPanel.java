@@ -43,7 +43,7 @@ public class ZinkPanel extends JPanel
     private List<AbstractEntity> enemyList = new ArrayList<>();
     private List<AbstractObject> gameObjects = new ArrayList<>();
 
-    private PlaceSuperObjectsSpawnEnemys placeSuperObjectsSpawnEnemys = new PlaceSuperObjectsSpawnEnemys(this);
+    private PlaceSuperObjectsSpawnEnemies placeSuperObjectsSpawnEnemies = new PlaceSuperObjectsSpawnEnemies(this);
     private Inventory inventory = new Inventory(this);
 
     public ZinkPanel() {
@@ -93,8 +93,8 @@ public class ZinkPanel extends JPanel
 
     public void setUpGame(){
         music.playMusic();
-        placeSuperObjectsSpawnEnemys.placeObjects();
-        placeSuperObjectsSpawnEnemys.spawnEnemies();
+        placeSuperObjectsSpawnEnemies.placeObjects();
+        placeSuperObjectsSpawnEnemies.spawnEnemies();
     }
 
     @SuppressWarnings("CloneableClassWithoutClone") private final Action doOneStep = new AbstractAction()
