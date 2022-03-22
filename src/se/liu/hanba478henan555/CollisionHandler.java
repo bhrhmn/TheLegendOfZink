@@ -21,10 +21,18 @@ public class CollisionHandler
                 gameObject.whenCollided();
             }
         }
-
    }
 
-    public boolean tileCollision(AbstractEntity entity, PlayerInput dir){
+   public void abstractEntityCollision(AbstractEntity entity){
+       for (int i = 0; i < zinkPanel.enemyList.size(); i++){
+           AbstractEntity enemy = zinkPanel.enemyList.get(i);
+           if (enemy != null && enemy.hasCollision(entity.collisionArea)) {
+               entity.takeDamage();
+           }
+       }
+   }
+
+    public boolean tileCollision(AbstractEntity entity, EntityInput dir){
 
         Point topLeft  = new Point((entity.collisionArea.x)/tileSize , (entity.collisionArea.y)/tileSize);
         Point topRight = new Point((entity.collisionArea.x+entity.collisionArea.width)/tileSize , (entity.collisionArea.y)/tileSize);

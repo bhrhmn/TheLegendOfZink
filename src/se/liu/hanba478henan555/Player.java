@@ -1,9 +1,7 @@
 package se.liu.hanba478henan555;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 /**
  * Maincharacter of the game
@@ -12,36 +10,34 @@ import java.io.IOException;
 public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
-    private PlayerInput currentKey;
-    private int rows, columns,tileSize, originalTileSize, ammountOfDoorKeys;
-    private CollisionHandler cl;
-    private ZinkPanel zinkPanel;
+    private EntityInput currentKey;
+    private int rows;
+    private int columns;
+    private int tileSize;
+    private int ammountOfDoorKeys;
+    private static final int PLAYER_HEALTH = 3;
 
 
-    public Player(ZinkPanel zp,KeyHandler keyHandler) {
+    public Player(ZinkPanel zp,CollisionHandler cl, KeyHandler keyHandler) {
+	super(zp,cl);
 	this.keyHandler = keyHandler;
-	this.currentKey = PlayerInput.UP;
-	this.cl = zp.collisionHandler;
+	this.currentKey = EntityInput.UP;
 
 	this.tileSize = zp.getTileSize();
-	this.originalTileSize = zp.getOriginalTileSize();
+
 	this.columns = zp.getColumns();
 	this.rows = zp.getRows();
 
-	this.zinkPanel = zp;
 
 	setDefaultValues();
-	loadPlayerImage();
-
+	setImages();
     }
 
     public void removeAmmountOfDoorkeys(){
-	zinkPanel.sound.playSoundEffect(2);
 	ammountOfDoorKeys -= 1;
     }
 
     public void addAmmountOfDoorKeys(){
-	zinkPanel.sound.playSoundEffect(1);
 	ammountOfDoorKeys += 1;
     }
 
@@ -49,11 +45,11 @@ public class Player extends AbstractEntity
 	return ammountOfDoorKeys;
     }
 
-    public PlayerInput getCurrentKey(){
+    public EntityInput getCurrentKey(){
 	return currentKey;
     }
 
-    private void setDefaultValues() {
+    @Override public void setDefaultValues() {
 	this.pos = new Point(columns * tileSize / 2, rows * tileSize / 2); // sets default position of player to the middle of the screen
 	this.collisionArea = new Rectangle();
 	collisionArea.width = tileSize*2/3;
@@ -63,108 +59,53 @@ public class Player extends AbstractEntity
 	this.collision = true;
 	this.spriteFrames = 10;
 	this.speed = 4; // sets speed of player
+
+	this.maxHealth = PLAYER_HEALTH;
+	this.health = maxHealth;
     }
 
-    private void loadPlayerImage(){
-	try {
-	    up1 = ImageIO.read(getClass().getResourceAsStream("./player/player_up_1.png"));
-	    up2 = ImageIO.read(getClass().getResourceAsStream("./player/player_up_2.png"));
-	    left1 = ImageIO.read(getClass().getResourceAsStream("./player/player_left_1.png"));
-	    left2 = ImageIO.read(getClass().getResourceAsStream("./player/player_left_2.png"));
-	    right1 = ImageIO.read(getClass().getResourceAsStream("./player/player_right_1.png"));
-	    right2 = ImageIO.read(getClass().getResourceAsStream("./player/player_right_2.png"));
-	    down1 = ImageIO.read(getClass().getResourceAsStream("./player/player_down_1.png"));
-	    down2 = ImageIO.read(getClass().getResourceAsStream("./player/player_down_2.png"));
-	}catch (IOException e){
-	    e.printStackTrace();
-	}
+    @Override public void setImages() {
+	up1    = setImage("./player/player_up_1.png");
+	up2    = setImage("./player/player_up_2.png");
+	left1  = setImage("./player/player_left_1.png");
+	left2  = setImage("./player/player_left_2.png");
+	right1 = setImage("./player/player_right_1.png");
+	right2 = setImage("./player/player_right_2.png");
+	down1  = setImage("./player/player_down_1.png");
+	down2  = setImage("./player/player_down_2.png");
     }
 
     /**
      * Updates position
      */
-    public void update() {
+    @Override public void update() {
 	setCollisionAreaRelativePos();
-	if (keyHandler.getKey(PlayerInput.UP) || keyHandler.getKey(PlayerInput.DOWN) ||
-	    keyHandler.getKey(PlayerInput.LEFT) || keyHandler.getKey(PlayerInput.RIGHT)) {
+	if (keyHandler.getKey(EntityInput.UP) || keyHandler.getKey(EntityInput.DOWN) ||
+	    keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) {
 	    spriteCounter++;
-	    if (keyHandler.getKey(PlayerInput.UP)) {
-		movePlayerBasedOnInput(PlayerInput.UP);
+	    if (keyHandler.getKey(EntityInput.UP)) {
+		movePlayerBasedOnInput(EntityInput.UP);
 	    }
-	    else if (keyHandler.getKey(PlayerInput.DOWN)) {
-		movePlayerBasedOnInput(PlayerInput.DOWN);
+	    else if (keyHandler.getKey(EntityInput.DOWN)) {
+		movePlayerBasedOnInput(EntityInput.DOWN);
 	    }
-	    else if (keyHandler.getKey(PlayerInput.LEFT)) {
-		movePlayerBasedOnInput(PlayerInput.LEFT);
+	    else if (keyHandler.getKey(EntityInput.LEFT)) {
+		movePlayerBasedOnInput(EntityInput.LEFT);
 	    }
-	    else if (keyHandler.getKey(PlayerInput.RIGHT)) {
-		movePlayerBasedOnInput(PlayerInput.RIGHT);
+	    else if (keyHandler.getKey(EntityInput.RIGHT)) {
+		movePlayerBasedOnInput(EntityInput.RIGHT);
 	    }
 	}
 	cl.objectCollision(this);
+	cl.abstractEntityCollision(this);
     }
 
-
-    private void movePlayerBasedOnInput(PlayerInput pi){
+    private void movePlayerBasedOnInput(EntityInput pi){
 	currentKey = pi;
-	movePlayer(currentKey);
+	moveEntity(currentKey);
     }
 
-    /**
-     * Moves player and checks for collision
-     * @param pi
-     */
-    public void movePlayer(PlayerInput pi){
-	switch (pi){
-	    case UP: {
-		changePosition(PlayerInput.UP, PointXY.Y, -1);
-		break;
-	    }
-	    case DOWN: {
-		changePosition(PlayerInput.DOWN, PointXY.Y, 1);
-		break;
-	    }
-	    case RIGHT: {
-		changePosition(PlayerInput.RIGHT, PointXY.X, 1);
-		break;
-	    }
-	    case LEFT: {
-		changePosition(PlayerInput.LEFT, PointXY.X, -1);
-		break;
-	    }
-	}
-    }
-
-    private void changePosition(PlayerInput input, PointXY xy, int direction) {
-	int add = speed * direction;
-	if (xy == PointXY.X) {
-	    pos.x += add;
-	    collisionArea.x += add;
-	    if (cl.tileCollision(this,input)){
-		pos.x -= add;
-		collisionArea.x -= add;
-	    }
-	}
-	else if (xy == PointXY.Y) {
-	    pos.y += add;
-	    collisionArea.y += add;
-	    if (cl.tileCollision(this,input)){
-		pos.y -= add;
-		collisionArea.y -= add;
-	    }
-	}
-    }
-
-    private void setCollisionAreaRelativePos() {
-	collisionArea.x = pos.x + originalTileSize / 2;
-	collisionArea.y = pos.y + originalTileSize / 2;
-    }
-
-    /**
-     * Shows the player on screen facing the direction of the last pressed key
-     * @param g2
-     */
-    public void draw(Graphics2D g2) {
+    @Override public void draw(Graphics2D g2) {
 	BufferedImage image = null;
 
 	switch (currentKey){
@@ -188,26 +129,18 @@ public class Player extends AbstractEntity
 	g2.drawImage(image, pos.x, pos.y, tileSize, tileSize ,null);
     }
 
-    private BufferedImage changeSprite(BufferedImage b1, BufferedImage b2){
-	if (spriteCounter <= spriteFrames)
-	    return b2;
-
-	if(spriteCounter >= spriteFrames*2)
-	    spriteCounter = 0;
-
-	return b1;
-    }
-
     @Override public void attack() {
 
     }
 
     @Override public void takeDamage() {
-
+	System.out.println("aj!");
     }
 
     @Override public void heal() {
 
     }
+
+
 
 }

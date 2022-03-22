@@ -35,9 +35,13 @@ public class ZinkPanel extends JPanel
     public  PlaySound sound = new PlaySound();
     private Sound music = new Sound();
 
-    public  Player player = new Player(this,keyHandler);
+    public  Player player = new Player(this,collisionHandler,keyHandler);
+
+
+    public List<AbstractEntity> enemyList = new ArrayList<>();
     public List<AbstractObject> gameObjects = new ArrayList<>();
-    private PlaceSuperObjects placeSuperObjects = new PlaceSuperObjects(this);
+
+    private PlaceSuperObjectsSpawnEnemys placeSuperObjectsSpawnEnemys = new PlaceSuperObjectsSpawnEnemys(this);
     private Inventory inventory = new Inventory(this);
 
     public ZinkPanel() {
@@ -73,7 +77,8 @@ public class ZinkPanel extends JPanel
 
     public void setUpGame(){
         //sound.playMusic();
-        placeSuperObjects.placeObjects();
+        placeSuperObjectsSpawnEnemys.placeObjects();
+        placeSuperObjectsSpawnEnemys.spawnEnemies();
     }
 
     @SuppressWarnings("CloneableClassWithoutClone") private final Action doOneStep = new AbstractAction()
@@ -96,7 +101,12 @@ public class ZinkPanel extends JPanel
      * calls on player function update
      */
     private void update() {
-        player.update();
+        player.update(); //updates player
+
+        for (AbstractEntity enemy : enemyList) {
+            enemy.update();
+        }
+
     }
 
     private void moveScreen(Graphics g){
@@ -121,6 +131,11 @@ public class ZinkPanel extends JPanel
                 object.draw(g2);
             }
         }
+
+        for (AbstractEntity enemy : enemyList) {
+            enemy.draw(g2);
+        }
+
         player.draw(g2);
         inventory.draw(g2);
 

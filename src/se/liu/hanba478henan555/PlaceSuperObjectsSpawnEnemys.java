@@ -1,13 +1,15 @@
 package se.liu.hanba478henan555;
 
+import java.awt.*;
+
 /**
  * Places objects on frame
  */
-public class PlaceSuperObjects
+public class PlaceSuperObjectsSpawnEnemys
 {
     private ZinkPanel zinkPanel;
 
-    public PlaceSuperObjects(ZinkPanel zp){
+    public PlaceSuperObjectsSpawnEnemys(ZinkPanel zp){
 	this.zinkPanel = zp;
     }
 
@@ -23,6 +25,11 @@ public class PlaceSuperObjects
 	zinkPanel.gameObjects.add(key);
     }
 
+    private void spawnEnemy(int x, int y){
+	Enemy en = new Enemy(zinkPanel, zinkPanel.collisionHandler,new Point(x, y));
+	zinkPanel.enemyList.add(en);
+    }
+
     public void placeObjects(){
 	placeDoor(6,4);
 	placeKey(1,1);
@@ -32,6 +39,10 @@ public class PlaceSuperObjects
 
 	placeDoor(42,1);
 
+    }
+
+    public void spawnEnemies(){
+	spawnEnemy(6,20);
     }
 
 

@@ -2,7 +2,6 @@ package se.liu.hanba478henan555;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
@@ -51,12 +50,12 @@ public class Inventory
     }
 
     public void showKeyMessage() {
-	System.out.println("key message");
+	//System.out.println("key message");
 	showObjectMessage(ObjectType.KEY);
     }
 
     public void showDoorMessage() {
-	System.out.println("door message");
+	//System.out.println("door message");
 	showObjectMessage(ObjectType.DOOR);
     }
 
@@ -78,8 +77,10 @@ public class Inventory
 	int currentScreenX = zinkPanel.getScreenStartPoint().x * zinkPanel.getTileSize() * zinkPanel.getColumns();
 	int currentScreenY = zinkPanel.getScreenStartPoint().y * zinkPanel.getTileSize() * zinkPanel.getRows();
 	int imageSize = zinkPanel.getTileSize()*2 /3;
+
 	g2.drawImage(image, zinkPanel.getTileSize()/4 + currentScreenX,
 		     zinkPanel.getTileSize()/4 + currentScreenY, imageSize, imageSize, null);
+
 	g2.drawString(inventoryMessage,
 		      zinkPanel.getTileSize() + currentScreenX + imagePoint.x/2,
 		      zinkPanel.getTileSize()/2 + currentScreenY + font.getSize()/2

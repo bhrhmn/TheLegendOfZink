@@ -35,14 +35,15 @@ public class Door extends AbstractObject
 	    player.removeAmmountOfDoorkeys();
 	    zinkPanel.gameObjects.remove(this);
 	    zinkPanel.getInventory().showDoorMessage();
+	    zinkPanel.sound.playSoundEffect(2);
 	    return;
 	}
-	PlayerInput lastKey = player.getCurrentKey();
+	EntityInput lastKey = player.getCurrentKey();
 	switch (lastKey){
-	    case UP -> player.movePlayer(PlayerInput.DOWN);
-	    case DOWN -> player.movePlayer(PlayerInput.UP);
-	    case RIGHT -> player.movePlayer(PlayerInput.LEFT);
-	    case LEFT -> player.movePlayer(PlayerInput.RIGHT);
+	    case UP    -> player.moveEntity(EntityInput.DOWN);
+	    case DOWN  -> player.moveEntity(EntityInput.UP);
+	    case RIGHT -> player.moveEntity(EntityInput.LEFT);
+	    case LEFT  -> player.moveEntity(EntityInput.RIGHT);
 	}
 
 
