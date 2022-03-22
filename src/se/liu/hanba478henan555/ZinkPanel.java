@@ -76,7 +76,6 @@ public class ZinkPanel extends JPanel
     }
 
     public void setUpGame(){
-        //TODO spelet laggar
         music.playMusic();
         placeSuperObjectsSpawnEnemys.placeObjects();
         placeSuperObjectsSpawnEnemys.spawnEnemies();
