@@ -27,10 +27,10 @@ public abstract class AbstractObject implements GameObject
 
     /**
      * TODO: fortsätt med den här
+     * Vad skulle göras här?
      */
     @Override public void update() {
         setCollisionAreaRelativePos();
-        System.out.println("update");
     }
 
     @Override public void draw(Graphics2D g2){

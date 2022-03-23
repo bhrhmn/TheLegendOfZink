@@ -35,6 +35,11 @@ public class PlaceSuperObjectsSpawnEnemies
 	zinkPanel.getEnemyList().add(blob);
     }
 
+    private void spawnDragon(int x, int y) {
+	Dragon dragon = new Dragon(zinkPanel, zinkPanel.getCollisionHandler(),new Point(x, y));
+	zinkPanel.getEnemyList().add(dragon);
+    }
+
     public void spawnBloodPile(int x, int y) {
 	BloodPile bloodPile = new BloodPile(zinkPanel);
 	bloodPile.setValues(x,y);
@@ -76,14 +81,16 @@ public class PlaceSuperObjectsSpawnEnemies
 
     public void spawnEnemies(){
 
-	spawnEnemy(6,20);
-	spawnEnemy(7,20);
-	spawnEnemy(8,20);
-	spawnEnemy(9,20);
+	//spawnEnemy(6,20);
+	//spawnEnemy(7,20);
+	//spawnEnemy(8,20);
+	//spawnEnemy(9,20);
 
-	spawnBlob(2, 22);
-	spawnBlob(4, 22);
+	//spawnBlob(2, 22);
+	//spawnBlob(4, 22);
 	spawnBlob(6, 22);
+
+	spawnDragon(2, 8);
 
     }
 

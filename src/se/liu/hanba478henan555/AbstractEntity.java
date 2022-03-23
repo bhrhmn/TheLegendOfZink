@@ -62,16 +62,6 @@ public abstract class AbstractEntity implements Entity
 
     public EntityInput getEntityInput(){return entityInput;}
 
-    protected BufferedImage changeSprite(BufferedImage b1, BufferedImage b2){
-	if (spriteCounter <= spriteFrames)
-	    return b2;
-
-	if(spriteCounter >= spriteFrames*2)
-	    spriteCounter = 0;
-
-	return b1;
-    }
-
     protected void setCollisionAreaRelativePos() {
 	this.collisionArea.x = this.pos.x + zinkPanel.getOriginalTileSize() / 2;
 	this.collisionArea.y = this.pos.y + zinkPanel.getOriginalTileSize() / 2;
@@ -169,9 +159,19 @@ public abstract class AbstractEntity implements Entity
 	return image;
     }
 
-    protected void shootProjectile(ObjectType ob) {
-	Projectile p = new Projectile(zinkPanel, ob, getEntityInput());
-	p.setValues(pos.x, pos.y, getEntityInput());
+    protected BufferedImage changeSprite(BufferedImage b1, BufferedImage b2){
+	if (spriteCounter <= spriteFrames)
+	    return b2;
+
+	if(spriteCounter >= spriteFrames*2)
+	    spriteCounter = 0;
+
+	return b1;
+    }
+
+    protected void shootProjectile(ObjectType ob, EntityInput ei) {
+	Projectile p = new Projectile(zinkPanel, ob, ei);
+	p.setValues(pos.x, pos.y, ei);
 	zinkPanel.getGameObjects().add(p);
     }
 
@@ -190,6 +190,14 @@ public abstract class AbstractEntity implements Entity
     public EntityType getType(){return  type;}
 
     public int getammountOfDamage(){return ammountOfDamage;}
+
+    protected void attackRandom() {
+	Random random = new Random();
+	int randomInt = random.nextInt(10);
+	if (randomInt == 6) {
+	    attack();
+	}
+    }
 
     @Override public void takeDamage(int damage) {
 	knockback();

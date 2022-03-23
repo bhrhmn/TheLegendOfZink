@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Projectile extends AbstractObject
 {
     private EntityInput direction = null;
-    private static final int PROJ_SPEED = 4;
+    private static final int PROJ_SPEED = 10;
     private int lifeSpan;
     protected Projectile(final ZinkPanel zp, final ObjectType go, EntityInput ei) {
 	super(zp, go);
@@ -27,19 +27,16 @@ public class Projectile extends AbstractObject
 	}
     }
 
-
-    public void setValues(int x, int y, EntityInput ei) {
-	moreValues(x,y,ei);
-    }
-
-    @Override public void draw(Graphics2D g2){
+    @Override public void update() {
 	changePos();
 	setCollisionAreaRelativePos();
 	if (lifeSpan >= zinkPanel.getFPS()) {
 	    zinkPanel.getGameObjects().remove(this);
-	    return;
 	}
-	g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
+    }
+
+    public void setValues(int x, int y, EntityInput ei) {
+	moreValues(x,y,ei);
     }
 
     @Override public void whenCollided(final AbstractEntity entity) {

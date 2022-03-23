@@ -1,14 +1,15 @@
 package se.liu.hanba478henan555;
 
 import java.awt.*;
-import java.util.Random;
 
+/**
+ * Enemy
+ * Can shoot projectiles
+ */
 public class Blob extends AbstractEntity
 {
 
     private static final int BLOB_HEALTH = 3;
-
-    private Point projPos = null;
 
     private int attackCounter;
     private int attackSpeed;
@@ -24,7 +25,7 @@ public class Blob extends AbstractEntity
 	    return;
 	}
 	attackCounter = 0;
-	shootProjectile(ObjectType.ENEMY_BOW);
+	shootProjectile(ObjectType.ENEMY_BOW, entityInput);
     }
 
     @Override public void setImages() {
@@ -75,14 +76,6 @@ public class Blob extends AbstractEntity
 	spriteCounter++; moveTick++;
 	moveRandom();
 	moveEntity(entityInput,1,speed);
-    }
-
-    private void attackRandom() {
-	Random random = new Random();
-	int randomInt = random.nextInt(100);
-	if (randomInt == 69) {
-	    attack();
-	}
     }
 
     @Override public void draw(final Graphics2D g2) {

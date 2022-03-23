@@ -138,6 +138,9 @@ public class ZinkPanel extends JPanel
         for (int i = 0; i < enemyList.size(); i++) {
             enemyList.get(i).update();
         }
+        for (int i = 0; i<gameObjects.size(); i++) {
+            gameObjects.get(i).update();
+        }
 
     }
 
