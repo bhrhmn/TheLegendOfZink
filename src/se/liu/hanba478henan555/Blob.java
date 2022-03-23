@@ -15,7 +15,7 @@ public class Blob extends AbstractEntity
     private boolean canAttack;
 
     protected Blob(final ZinkPanel zp, final CollisionHandler cl, final Point pos) {
-	super(zp, cl, pos, EntityType.BLOB);
+	super(zp, cl, pos, EntityType.ENEMY);
 	setDefaultValues();
     }
 
@@ -24,7 +24,7 @@ public class Blob extends AbstractEntity
 	    return;
 	}
 	attackCounter = 0;
-	shootProjectile();
+	shootProjectile(ObjectType.ENEMY_BOW);
     }
 
     @Override public void setImages() {
@@ -52,6 +52,7 @@ public class Blob extends AbstractEntity
 
 	this.maxHealth = BLOB_HEALTH;
 	this.health = maxHealth;
+	this.ammountOfDamage = 1;
 
 	this.attackCounter = 0;
 	this.attackSpeed = 5;

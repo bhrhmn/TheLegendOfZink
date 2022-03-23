@@ -48,6 +48,7 @@ public abstract class AbstractEntity implements Entity
 	this.pos.x = pos.x * zinkPanel.getTileSize();
 	this.pos.y = pos.y * zinkPanel.getTileSize();
 	this.type = et;
+
     }
 
     protected BufferedImage setImage(final String s){
@@ -168,8 +169,8 @@ public abstract class AbstractEntity implements Entity
 	return image;
     }
 
-    protected void shootProjectile() {
-	Projectile p = new Projectile(zinkPanel, ObjectType.ENEMY_BOW, getEntityInput());
+    protected void shootProjectile(ObjectType ob) {
+	Projectile p = new Projectile(zinkPanel, ob, getEntityInput());
 	p.setValues(pos.x, pos.y, getEntityInput());
 	zinkPanel.getGameObjects().add(p);
     }

@@ -150,7 +150,7 @@ public class Player extends AbstractEntity
 	}
 	attackCounter = 0;
 	if (currentWeapoon.equals(ObjectType.PLAYER_BOW)){
-	    shootProjectile();
+	    shootProjectile(ObjectType.PLAYER_BOW);
 	    return;
 	}
 	PlayerSword pl = new PlayerSword(zinkPanel,currentWeapoon, false);
