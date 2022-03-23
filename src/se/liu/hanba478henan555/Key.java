@@ -11,10 +11,9 @@ public class Key extends AbstractObject
 {
     public Key(ZinkPanel zp){
 	super(zp,ObjectType.KEY);
-	readImage();
     }
 
-    private void readImage() {
+    @Override public void readImage() {
 	try {
 	    image = ImageIO.read(getClass().getResourceAsStream("./objects/key.png"));
 	}catch (IOException e){
@@ -27,7 +26,9 @@ public class Key extends AbstractObject
 					   zinkPanel.getTileSize(), zinkPanel.getTileSize());
     }
 
-    @Override public void whenCollided() {
+    @Override public void whenCollided(AbstractEntity entity) {
+	if (!entity.getType().equals(EntityType.PLAYER))
+	    return;
 	zinkPanel.getScreen().showKeyMessage();
 	zinkPanel.getPlayer().addAmmountOfDoorKeys();
 	zinkPanel.getSound().playSoundEffect(1);

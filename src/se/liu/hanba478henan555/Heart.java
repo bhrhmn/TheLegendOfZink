@@ -18,7 +18,7 @@ public class Heart extends AbstractObject
 	readImage();
     }
 
-    private void readImage() {
+    @Override public void readImage() {
 	try {
 	    imageFull = ImageIO.read(getClass().getResourceAsStream("./objects/heart_full.png"));
 	    imageEmpty = ImageIO.read(getClass().getResourceAsStream("./objects/heart_empty.png"));
@@ -36,8 +36,11 @@ public class Heart extends AbstractObject
 	image = imageEmpty;
     }
 
-    @Override public void whenCollided() {
-
+    @Override public void whenCollided(AbstractEntity entity) {
+	if (!entity.getType().equals(EntityType.PLAYER))
+	    return;
+	entity.heal();
+	zinkPanel.getGameObjects().remove(this);
     }
 
     @Override public void setCollisionArea() {

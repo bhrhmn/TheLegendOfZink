@@ -16,6 +16,8 @@ public abstract class AbstractEntity implements Entity
     protected CollisionHandler collisionHandler;
     protected BufferedImage currentImage = null;
 
+
+
     protected Point pos = new Point(0,0);//om något går fel så är den längst upp till vänster
     protected int speed;
     protected int maxHealth, health;
@@ -31,11 +33,19 @@ public abstract class AbstractEntity implements Entity
     protected Rectangle collisionArea = null;
     protected boolean collision = false;
 
-    protected AbstractEntity(ZinkPanel zp, CollisionHandler cl, Point pos){
+    protected EntityType type = null;
+
+    protected int ammountOfDamage = 0;
+
+    protected boolean dead;
+
+    protected AbstractEntity(ZinkPanel zp, CollisionHandler cl, Point pos, EntityType et){
 	this.zinkPanel = zp;
 	this.collisionHandler = cl;
 	this.pos.x = pos.x * zinkPanel.getTileSize();
 	this.pos.y = pos.y * zinkPanel.getTileSize();
+	this.type = et;
+	this.dead = false;
     }
 
     protected BufferedImage setImage(final String s){
@@ -64,29 +74,33 @@ public abstract class AbstractEntity implements Entity
 	this.collisionArea.y = this.pos.y + zinkPanel.getOriginalTileSize() / 2;
     }
 
-    @Override public void moveEntity(EntityInput pi){
+    @Override public void moveEntity(EntityInput pi, int direction, int ammount){
 	switch (pi){
 	    case UP: {
-		changePosition(EntityInput.UP, PointXY.Y, -1);
+		changePosition(EntityInput.UP, PointXY.Y, -direction, ammount);
 		break;
 	    }
 	    case DOWN: {
-		changePosition(EntityInput.DOWN, PointXY.Y, 1);
+		changePosition(EntityInput.DOWN, PointXY.Y, direction, ammount);
 		break;
 	    }
 	    case RIGHT: {
-		changePosition(EntityInput.RIGHT, PointXY.X, 1);
+		changePosition(EntityInput.RIGHT, PointXY.X, direction, ammount);
 		break;
 	    }
 	    case LEFT: {
-		changePosition(EntityInput.LEFT, PointXY.X, -1);
+		changePosition(EntityInput.LEFT, PointXY.X, -direction, ammount);
 		break;
 	    }
 	}
     }
 
-    private void changePosition(EntityInput input, PointXY xy, int direction) {
-	int add = speed * direction;
+    public void knockback(){
+	moveEntity(getEntityInput() ,-1, zinkPanel.getTileSize()/2);
+    }
+
+    public void changePosition(EntityInput input, PointXY xy, int direction, int ammount) {
+	int add = ammount * direction;
 	if (xy == PointXY.X) {
 	    pos.x += add;
 	    collisionArea.x += add;
@@ -107,7 +121,6 @@ public abstract class AbstractEntity implements Entity
 
     protected BufferedImage setImageBasedOnDirection() {
 	BufferedImage image = null;
-
 	switch (entityInput){
 	    case UP: {
 		image = changeSprite(up1,up2);
@@ -133,7 +146,6 @@ public abstract class AbstractEntity implements Entity
 	return collisionArea.intersects(rectangle);
     }
 
-
     public int getMaxHealth() {
 	return maxHealth;
     }
@@ -142,4 +154,7 @@ public abstract class AbstractEntity implements Entity
 	return health;
     }
 
+    public EntityType getType(){return  type;}
+
+    public int getammountOfDamage(){return ammountOfDamage;}
 }

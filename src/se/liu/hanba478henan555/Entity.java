@@ -8,12 +8,12 @@ import java.awt.*;
 public interface Entity
 {
     public void attack();
-    public void takeDamage();
+    public void takeDamage(int damage);
     public void heal();
     public void setImages();
     public void setDefaultValues();
     public void update();
-    public void moveEntity(EntityInput pi);
+    public void moveEntity(EntityInput pi, int direction, int ammount);
     public void draw(Graphics2D g2);
     public boolean hasCollision(Rectangle rectangle);
 }

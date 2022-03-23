@@ -17,7 +17,7 @@ public class Player extends AbstractEntity
     private int damagedFrameCounter = 0;
 
     public Player(ZinkPanel zp,CollisionHandler cl, Point pos, KeyHandler keyHandler) {
-	super(zp,cl, pos);
+	super(zp,cl, pos, EntityType.PLAYER);
 	this.keyHandler = keyHandler;
 
 	this.tileSize = zp.getTileSize();
@@ -69,8 +69,13 @@ public class Player extends AbstractEntity
      */
     @Override public void update() {
 	setCollisionAreaRelativePos();
-	if (keyHandler.getKey(EntityInput.UP) || keyHandler.getKey(EntityInput.DOWN) ||
-	    keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) {
+	if (keyHandler.getKey(EntityInput.ATTACK)){
+	    attack();
+	}
+	if ((keyHandler.getKey(EntityInput.UP) || keyHandler.getKey(EntityInput.DOWN) ||
+	    keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT))
+	    && !damaged) {
+
 	    spriteCounter++;
 	    if (keyHandler.getKey(EntityInput.UP)) {
 		movePlayerBasedOnInput(EntityInput.UP);
@@ -91,7 +96,7 @@ public class Player extends AbstractEntity
 
     private void movePlayerBasedOnInput(EntityInput pi){
 	entityInput = pi;
-	moveEntity(entityInput);
+	moveEntity(entityInput,1, speed);
     }
 
     @Override public void draw(Graphics2D g2) {
@@ -129,16 +134,27 @@ public class Player extends AbstractEntity
     }
 
     @Override public void attack() {
-
+	for ( AbstractObject ob:zinkPanel.getGameObjects() ) {
+	    ObjectType temp = ob.getGameObject();
+	    if(temp == ObjectType.PLAYER_SWORD_BAD ||temp == ObjectType.PLAYER_BOW ||temp == ObjectType.PLAYER_SWORD_GOOD ){
+		return;
+	    }
+	}
+	PlayerSword pl = new PlayerSword(zinkPanel,ObjectType.PLAYER_SWORD_BAD);
+	pl.setValues(pos.x/tileSize, pos.y/tileSize, getEntityInput());
+	zinkPanel.getGameObjects().add(pl);
     }
 
-    @Override public void takeDamage() {
+
+
+    @Override public void takeDamage(int damage) {
 	damaged = true;
 	if (damagedCounter >= 0) {
 	    return;
 	}
+	knockback();
 	damagedCounter = 0;
-	health--;
+	health-= damage;
 	if (health == 0){
 	    zinkPanel.setIsGameOver(true);
 	}

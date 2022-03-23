@@ -8,9 +8,9 @@ import java.awt.*;
 public interface GameObject
 {
     public void draw(Graphics2D g2);
-    public ObjectType getObjectType();
     public boolean hasCollision(Rectangle rectangle);
-    public void whenCollided();
+    public void whenCollided(AbstractEntity entity);
     public void setCollisionArea();
     public void setValues(int x, int y);
+    public void readImage();
 }

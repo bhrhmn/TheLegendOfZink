@@ -17,7 +17,8 @@ public class KeyHandler extends KeyAdapter
 	    Map.entry(KeyEvent.VK_A, false),
 	    Map.entry(KeyEvent.VK_S, false),
 	    Map.entry(KeyEvent.VK_D, false),
-	    Map.entry(KeyEvent.VK_ENTER, false)
+	    Map.entry(KeyEvent.VK_ENTER, false),
+	    Map.entry(KeyEvent.VK_SPACE, false)
     ));
 
     /**
@@ -32,6 +33,7 @@ public class KeyHandler extends KeyAdapter
 	    case LEFT -> {return keyMap.get(KeyEvent.VK_A);}
 	    case RIGHT -> {return keyMap.get(KeyEvent.VK_D);}
 	    case CONFIRM -> {return keyMap.get(KeyEvent.VK_ENTER);}
+	    case ATTACK -> {return  keyMap.get(KeyEvent.VK_SPACE);}
 	    default -> {return false;}
 	}
     }

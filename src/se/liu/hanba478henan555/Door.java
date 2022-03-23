@@ -12,10 +12,9 @@ public class Door extends AbstractObject
 {
     public Door(ZinkPanel zp){
 	super(zp,ObjectType.DOOR);
-	readImage();
     }
 
-    private void readImage() {
+    @Override public void readImage() {
 	try {
 	    image = ImageIO.read(getClass().getResourceAsStream("./objects/door.png"));
 	}catch (IOException e){
@@ -28,7 +27,10 @@ public class Door extends AbstractObject
 					   zinkPanel.getTileSize(), zinkPanel.getTileSize());
     }
 
-    @Override public void whenCollided() {
+
+    @Override public void whenCollided(AbstractEntity entity) {
+	if (!entity.getType().equals(EntityType.PLAYER))
+	    return;
 	Player player = zinkPanel.getPlayer();
 	if (player.getAmmountOfDoorKeys() > 0){
 	    player.removeAmmountOfDoorkeys();
@@ -39,10 +41,10 @@ public class Door extends AbstractObject
 	}
 	EntityInput lastKey = player.getEntityInput();
 	switch (lastKey){
-	    case UP    -> player.moveEntity(EntityInput.DOWN);
-	    case DOWN  -> player.moveEntity(EntityInput.UP);
-	    case RIGHT -> player.moveEntity(EntityInput.LEFT);
-	    case LEFT  -> player.moveEntity(EntityInput.RIGHT);
+	    case UP    -> player.moveEntity(EntityInput.DOWN,1, player.speed);
+	    case DOWN  -> player.moveEntity(EntityInput.UP,1,player.speed);
+	    case RIGHT -> player.moveEntity(EntityInput.LEFT,1,player.speed);
+	    case LEFT  -> player.moveEntity(EntityInput.RIGHT,1,player.speed);
 	}
 
 

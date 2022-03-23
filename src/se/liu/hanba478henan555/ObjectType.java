@@ -5,5 +5,5 @@ package se.liu.hanba478henan555;
  */
 public enum ObjectType
 {
-    KEY, CHEST, DOOR, HEART
+    KEY, CHEST, DOOR, HEART, PLAYER_SWORD_GOOD, PLAYER_SWORD_BAD, PLAYER_BOW
 }

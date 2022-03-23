@@ -40,6 +40,11 @@ public class PlaceSuperObjectsSpawnEnemies
 
 	placeDoor(42,1);
 
+	placeKey(6,14);
+	placeKey(7,14);
+	placeKey(8,14);
+
+
     }
 
     public void spawnEnemies(){

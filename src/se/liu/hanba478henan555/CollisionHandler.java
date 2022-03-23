@@ -18,7 +18,7 @@ public class CollisionHandler
         for (int i = 0; i < zinkPanel.getGameObjects().size(); i++){
             GameObject gameObject = zinkPanel.getGameObjects().get(i);
             if (gameObject != null && gameObject.hasCollision(entity.collisionArea)) {
-                gameObject.whenCollided();
+                gameObject.whenCollided(entity);
             }
         }
    }
@@ -26,8 +26,8 @@ public class CollisionHandler
    public void abstractEntityCollision(AbstractEntity entity){
        for (int i = 0; i < zinkPanel.getEnemyList().size(); i++){
            AbstractEntity enemy = zinkPanel.getEnemyList().get(i);
-           if (enemy != null && enemy.hasCollision(entity.collisionArea)) {
-               entity.takeDamage();
+           if (enemy != null && enemy.hasCollision(entity.collisionArea) && !enemy.getType().equals(entity.getType()) && enemy.collision) {
+               entity.takeDamage(enemy.getammountOfDamage());
            }
        }
    }

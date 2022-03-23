@@ -13,14 +13,15 @@ public class Enemy extends AbstractEntity
 
     private int moveTick;
 
+    private BufferedImage image = null;
+
     public Enemy(ZinkPanel zp,CollisionHandler cl, Point pos){
-	super(zp,cl, pos);
+	super(zp,cl, pos, EntityType.ENEMY);
 	setDefaultValues();
 	setImages();
     }
 
     @Override public void setDefaultValues() {
-
 	this.collisionArea = new Rectangle();
 	collisionArea.width = zinkPanel.getTileSize()*2/3;
 	collisionArea.height = zinkPanel.getTileSize()*2/3;
@@ -33,6 +34,8 @@ public class Enemy extends AbstractEntity
 	this.health = maxHealth;
 
 	this.moveTick = 0;
+
+	this.ammountOfDamage = 1;
     }
 
 
@@ -49,12 +52,17 @@ public class Enemy extends AbstractEntity
     }
 
     @Override public void update() {
+	if (dead){
+	    image = setImage("./enemy/dead.png");
+	    return;
+	}
+	image = setImageBasedOnDirection();
 	setCollisionAreaRelativePos();
+	collisionHandler.objectCollision(this);
 	currentImage = setImageBasedOnDirection();
-	spriteCounter++;
-	moveTick++;
+	spriteCounter++; moveTick++;
 	moveRandom();
-	moveEntity(entityInput);
+	moveEntity(entityInput,1,speed);
     }
 
     private void moveRandom(){
@@ -79,15 +87,26 @@ public class Enemy extends AbstractEntity
     }
 
     @Override public void draw(Graphics2D g2){
-	BufferedImage image = setImageBasedOnDirection();
 	g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize() ,null);
+
     }
 
     @Override public void attack() {
 
     }
 
-    @Override public void takeDamage() {
+
+    @Override public void takeDamage(int damage) {
+	health-=damage;
+	knockback();
+	if (health <= 0){
+	    death();
+	}
+    }
+
+    private void death(){
+	this.dead = true;
+	this.collision = false;
 
     }
 

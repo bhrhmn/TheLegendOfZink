@@ -40,7 +40,7 @@ public class ZinkPanel extends JPanel
     private Player player = new Player(this,collisionHandler, new Point(7, 8),keyHandler);
 
 
-    private List<AbstractEntity> enemyList = new ArrayList<>();
+    private List<Enemy> enemyList = new ArrayList<>();
     private List<AbstractObject> gameObjects = new ArrayList<>();
 
     private PlaceSuperObjectsSpawnEnemies placeSuperObjectsSpawnEnemies = new PlaceSuperObjectsSpawnEnemies(this);
@@ -70,7 +70,7 @@ public class ZinkPanel extends JPanel
 
     public Screen getScreen() {return screen;}
 
-    public List<AbstractEntity> getEnemyList() {return enemyList;}
+    public List<Enemy> getEnemyList() {return enemyList;}
 
     public List<AbstractObject> getGameObjects() {return gameObjects;}
 
@@ -129,7 +129,7 @@ public class ZinkPanel extends JPanel
     private void update() {
         player.update();
 
-        for (AbstractEntity enemy : enemyList) {
+        for (final AbstractEntity enemy : enemyList) {
             if(enemy != null){
                 enemy.update();
             }
