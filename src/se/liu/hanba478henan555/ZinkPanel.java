@@ -119,7 +119,7 @@ public class ZinkPanel extends JPanel
             repaint();
             return;
         }
-        update();
+        if (!isShowingTitleScreen()) update();
         repaint();
     }
 
@@ -158,12 +158,9 @@ public class ZinkPanel extends JPanel
         moveScreen(g2);
         roomManager.draw(g2);
 
-        for (final AbstractObject object : gameObjects) {
-            if(object != null){
-                object.draw(g2);
-            }
+        for (int i = 0; i<gameObjects.size(); i++) {
+            gameObjects.get(i).draw(g2);
         }
-
         for (AbstractEntity enemy : enemyList) {
             enemy.draw(g2);
         }

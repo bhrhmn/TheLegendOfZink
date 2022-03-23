@@ -16,8 +16,6 @@ public abstract class AbstractEntity implements Entity
     protected CollisionHandler collisionHandler;
     protected BufferedImage currentImage = null;
 
-
-
     protected Point pos = new Point(0,0);//om något går fel så är den längst upp till vänster
     protected int speed;
     protected int maxHealth, health;
@@ -36,6 +34,9 @@ public abstract class AbstractEntity implements Entity
     protected EntityType type = null;
 
     protected int ammountOfDamage = 0;
+    protected boolean damaged = false;
+    protected int damagedCounter = -1;
+    protected int damagedFrameCounter = 0;
 
     protected boolean dead;
 
@@ -75,6 +76,10 @@ public abstract class AbstractEntity implements Entity
     }
 
     @Override public void moveEntity(EntityInput pi, int direction, int ammount){
+
+	if (damaged) {
+	    return;
+	}
 	switch (pi){
 	    case UP: {
 		changePosition(EntityInput.UP, PointXY.Y, -direction, ammount);
@@ -157,4 +162,49 @@ public abstract class AbstractEntity implements Entity
     public EntityType getType(){return  type;}
 
     public int getammountOfDamage(){return ammountOfDamage;}
+
+    @Override public void takeDamage(int damage) {
+	knockback();
+	damaged = true;
+	if (damagedCounter >= 0) {
+	    return;
+	}
+
+	damagedCounter = 0;
+	health-= damage;
+	if (health == 0){
+	    noHealth();
+	}
+    }
+
+    protected void noHealth() {
+	dead = true;
+	collision = false;
+    }
+
+    /**
+     * player switches between fully visible to partially visible 3 times
+     * @param g2
+     */
+    protected void damageAnimation(final Graphics2D g2) {
+	damagedFrameCounter++;
+	int freezeTime = 10;
+	if (damagedCounter == 3) {
+	    damaged = false;
+	    damagedCounter = -1;
+	    return;
+	}
+	if (damagedFrameCounter < freezeTime) {
+	    setAlphaComposite(g2, 0.2f);
+	}
+	else if (damagedFrameCounter >= freezeTime*2) {
+	    setAlphaComposite(g2, 1.0f);
+	    damagedCounter++;
+	    damagedFrameCounter = 0;
+	}
+    }
+
+    protected void setAlphaComposite(final Graphics2D g2, final float alpha) {
+	g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+    }
 }

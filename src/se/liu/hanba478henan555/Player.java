@@ -12,9 +12,12 @@ public class Player extends AbstractEntity
     private int tileSize;
     private int ammountOfDoorKeys;
     private static final int PLAYER_HEALTH = 3;
-    private boolean damaged = false;
-    private int damagedCounter = -1;
-    private int damagedFrameCounter = 0;
+
+    private int attackSpeed = zinkPanel.getFPS()/2;
+    private int attackCounter = 0;
+
+    private boolean walkable = true;
+
 
     public Player(ZinkPanel zp,CollisionHandler cl, Point pos, KeyHandler keyHandler) {
 	super(zp,cl, pos, EntityType.PLAYER);
@@ -68,13 +71,18 @@ public class Player extends AbstractEntity
      * Updates position
      */
     @Override public void update() {
+	attacking();
+	if (!walkable && attackSpeed < attackCounter) {
+	    attackCounter++;
+	    return;
+	}
+	attackCounter = 0;
 	setCollisionAreaRelativePos();
 	if (keyHandler.getKey(EntityInput.ATTACK)){
 	    attack();
 	}
 	if ((keyHandler.getKey(EntityInput.UP) || keyHandler.getKey(EntityInput.DOWN) ||
-	    keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT))
-	    && !damaged) {
+	    keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) && walkable) {
 
 	    spriteCounter++;
 	    if (keyHandler.getKey(EntityInput.UP)) {
@@ -94,6 +102,17 @@ public class Player extends AbstractEntity
 	collisionHandler.abstractEntityCollision(this);
     }
 
+    private void attacking() {
+	for ( AbstractObject ob:zinkPanel.getGameObjects() ) {
+	    ObjectType temp = ob.getGameObject();
+	    if(temp == ObjectType.PLAYER_SWORD_BAD ||temp == ObjectType.PLAYER_BOW ||temp == ObjectType.PLAYER_SWORD_GOOD ){
+		walkable = false;
+		return;
+	    }
+	    walkable = true;
+	}
+    }
+
     private void movePlayerBasedOnInput(EntityInput pi){
 	entityInput = pi;
 	moveEntity(entityInput,1, speed);
@@ -107,61 +126,22 @@ public class Player extends AbstractEntity
 	setAlphaComposite(g2, 1.0f);
     }
 
-    /**
-     * player switches between fully visible to partially visible 3 times
-     * @param g2
-     */
-    private void damageAnimation(final Graphics2D g2) {
-	damagedFrameCounter++;
-	int freezeTime = 10;
-	if (damagedCounter == 3) {
-	    damaged = false;
-	    damagedCounter = -1;
-	    return;
-	}
-	if (damagedFrameCounter < freezeTime) {
-	    setAlphaComposite(g2, 0.3f);
-	}
-	else if (damagedFrameCounter >= freezeTime*2) {
-	    setAlphaComposite(g2, 1.0f);
-	    damagedCounter++;
-	    damagedFrameCounter = 0;
-	}
-    }
-
-    private void setAlphaComposite(final Graphics2D g2, final float alpha) {
-	g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-    }
-
     @Override public void attack() {
-	for ( AbstractObject ob:zinkPanel.getGameObjects() ) {
-	    ObjectType temp = ob.getGameObject();
-	    if(temp == ObjectType.PLAYER_SWORD_BAD ||temp == ObjectType.PLAYER_BOW ||temp == ObjectType.PLAYER_SWORD_GOOD ){
-		return;
-	    }
-	}
 	PlayerSword pl = new PlayerSword(zinkPanel,ObjectType.PLAYER_SWORD_BAD);
-	pl.setValues(pos.x/tileSize, pos.y/tileSize, getEntityInput());
+	pl.setValues(pos.x,pos.y, getEntityInput());
 	zinkPanel.getGameObjects().add(pl);
     }
 
-
-
-    @Override public void takeDamage(int damage) {
-	damaged = true;
-	if (damagedCounter >= 0) {
-	    return;
-	}
-	knockback();
-	damagedCounter = 0;
-	health-= damage;
-	if (health == 0){
-	    zinkPanel.setIsGameOver(true);
-	}
+    @Override protected void noHealth() {
+	dead = true;
+	zinkPanel.setIsGameOver(true);
     }
 
     @Override public void heal() {
 	if (health < PLAYER_HEALTH) health++;
     }
 
+    public int getAttackSpeed() {
+	return attackSpeed;
+    }
 }

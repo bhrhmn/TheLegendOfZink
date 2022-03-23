@@ -53,10 +53,9 @@ public class Enemy extends AbstractEntity
 
     @Override public void update() {
 	if (dead){
-	    image = setImage("./enemy/dead.png");
+	    currentImage = setImage("./enemy/dead.png");
 	    return;
 	}
-	image = setImageBasedOnDirection();
 	setCollisionAreaRelativePos();
 	collisionHandler.objectCollision(this);
 	currentImage = setImageBasedOnDirection();
@@ -87,22 +86,18 @@ public class Enemy extends AbstractEntity
     }
 
     @Override public void draw(Graphics2D g2){
-	g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize() ,null);
-
+	if (damaged) {
+	    System.out.println(damaged);
+	    damageAnimation(g2);
+	}
+	g2.drawImage(currentImage, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize() ,null);
+	setAlphaComposite(g2, 1.0f);
     }
 
     @Override public void attack() {
 
     }
 
-
-    @Override public void takeDamage(int damage) {
-	health-=damage;
-	knockback();
-	if (health <= 0){
-	    death();
-	}
-    }
 
     private void death(){
 	this.dead = true;
