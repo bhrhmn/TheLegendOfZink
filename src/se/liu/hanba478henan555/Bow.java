@@ -4,6 +4,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * A weapon that allows a Player to shoot projectiles
+ */
 public class Bow extends AbstractObject
 {
     public Bow(ZinkPanel zp){

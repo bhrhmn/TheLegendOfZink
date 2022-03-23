@@ -1,15 +1,15 @@
 package se.liu.hanba478henan555;
 
-
-import org.jetbrains.annotations.NotNull;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Map;
 
+/**
+ * An object which allows a player to attack using it
+ * will cause damage when collision with an enemy happen
+ */
 public class PlayerSword extends AbstractObject
 {
 
@@ -72,7 +72,5 @@ public class PlayerSword extends AbstractObject
         this.collisionArea = new Rectangle(this.pos.x, this.pos.y,
                                            zinkPanel.getTileSize(), zinkPanel.getTileSize());
     }
-
-
 
 }

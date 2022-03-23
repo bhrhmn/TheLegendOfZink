@@ -13,9 +13,7 @@ public class ZinkPanel extends JPanel
 {
     private static final int ORIGINAL_TILE_SIZE = 16;
     private static final int FACTOR = 3;
-    /**
-     Size of a tile
-     */
+
     private static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;
 
     private static final int COLUMNS = 16;
@@ -35,11 +33,16 @@ public class ZinkPanel extends JPanel
     private CollisionHandler collisionHandler = new CollisionHandler(this);
     private RoomManager roomManager = new RoomManager(this);
 
+    /**
+     * Used when playing soundeffects
+     */
     public PlaySound sound = new PlaySound();
+    /**
+     * Plays backgroundmusic
+     */
     public PlaySound music = new PlaySound();
 
     private Player player = new Player(this,collisionHandler, new Point(7, 8),keyHandler);
-
 
     private List<AbstractEntity> enemyList = new ArrayList<>();
     private List<AbstractObject> gameObjects = new ArrayList<>();

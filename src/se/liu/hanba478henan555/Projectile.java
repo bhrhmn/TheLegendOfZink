@@ -5,6 +5,10 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * An object that can cause damage
+ * will disappear after a fixed time
+ */
 public class Projectile extends AbstractObject
 {
     private EntityInput direction = null;

@@ -4,6 +4,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * A GameObject with which nothing happens when collided
+ */
 public class BloodPile extends AbstractObject
 {
 
