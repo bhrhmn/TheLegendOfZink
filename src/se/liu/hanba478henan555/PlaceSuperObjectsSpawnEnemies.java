@@ -30,6 +30,12 @@ public class PlaceSuperObjectsSpawnEnemies
 	zinkPanel.getEnemyList().add(en);
     }
 
+    public void spawnBloodPile(int x, int y) {
+	BloodPile bloodPile = new BloodPile(zinkPanel);
+	bloodPile.setValues(x,y);
+	zinkPanel.getGameObjects().add(bloodPile);
+    }
+
     public void placeObjects(){
 
 	placeDoor(6,4);

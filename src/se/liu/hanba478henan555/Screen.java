@@ -25,6 +25,7 @@ public class Screen
     private int arrowCounter = 0; //TODO: bättre lösning än counter
 
     private boolean howToPlay = false;
+    private boolean showingInventory = false;
 
     public Screen(ZinkPanel zp) {
 	this.zinkPanel = zp;
@@ -86,6 +87,10 @@ public class Screen
 	    showTitleScreen(g2);
 	    return;
 	}
+	if (showingInventory) {
+	    showInventory(g2);
+	    return;
+	}
 	updateHearts();
 	g2.setFont(font);
 	g2.setColor(Color.BLACK);
@@ -101,6 +106,10 @@ public class Screen
 	    g2.drawString(message, currentScreenX + screensizeX/3 + font.getSize(),
 			  currentScreenY + screensizeY/2);
 	}
+    }
+
+    private void showInventory(Graphics2D g2) {
+	drawSubScreen(g2, zinkPanel.getTileSize(), zinkPanel.getTileSize(), screensizeX - zinkPanel.getTileSize()*2, screensizeY/2);
     }
 
     public void showTitleScreen(Graphics2D g2) {
@@ -172,6 +181,16 @@ public class Screen
     }
 
     public void playerConfirm() {
+	if (zinkPanel.isShowingTitleScreen()) {
+	    titleScreenConfirm();
+	    return;
+	}
+	boolean gamemode = showingInventory;
+	showingInventory = !gamemode;
+	zinkPanel.setGameRunning(gamemode);
+    }
+
+    private void titleScreenConfirm() {
 	if (howToPlay) {
 	    howToPlay = false;
 	    return;
@@ -206,5 +225,16 @@ public class Screen
     public void showGameOverMessage() {
 	message = "Game Over";
 	showingMessage = true;
+    }
+
+    private void drawSubScreen(Graphics2D g2, int x, int y, int width, int height) {
+	setAlphaComposite(g2, 0.8f);
+	g2.setColor(Color.black);
+	g2.fillRect(x, y, width, height);
+	setAlphaComposite(g2, 1.0f);
+    }
+
+    private void setAlphaComposite(final Graphics2D g2, final float alpha) {
+	g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
     }
 }

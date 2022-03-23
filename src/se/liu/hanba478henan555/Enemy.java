@@ -52,10 +52,6 @@ public class Enemy extends AbstractEntity
     }
 
     @Override public void update() {
-	if (dead){
-	    currentImage = setImage("./enemy/dead.png");
-	    return;
-	}
 	setCollisionAreaRelativePos();
 	collisionHandler.objectCollision(this);
 	currentImage = setImageBasedOnDirection();
@@ -98,12 +94,6 @@ public class Enemy extends AbstractEntity
 
     }
 
-
-    private void death(){
-	this.dead = true;
-	this.collision = false;
-
-    }
 
     @Override public void heal() {
 

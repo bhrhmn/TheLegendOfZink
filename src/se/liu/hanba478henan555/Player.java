@@ -13,7 +13,7 @@ public class Player extends AbstractEntity
     private int ammountOfDoorKeys;
     private static final int PLAYER_HEALTH = 3;
 
-    private int attackSpeed = zinkPanel.getFPS()/2;
+    private int attackSpeed = zinkPanel.getFPS()/3;
     private int attackCounter = 0;
 
     private boolean walkable = true;
@@ -132,8 +132,7 @@ public class Player extends AbstractEntity
 	zinkPanel.getGameObjects().add(pl);
     }
 
-    @Override protected void noHealth() {
-	dead = true;
+    protected void death() {
 	zinkPanel.setIsGameOver(true);
     }
 

@@ -38,7 +38,6 @@ public abstract class AbstractEntity implements Entity
     protected int damagedCounter = -1;
     protected int damagedFrameCounter = 0;
 
-    protected boolean dead;
 
     protected AbstractEntity(ZinkPanel zp, CollisionHandler cl, Point pos, EntityType et){
 	this.zinkPanel = zp;
@@ -46,7 +45,6 @@ public abstract class AbstractEntity implements Entity
 	this.pos.x = pos.x * zinkPanel.getTileSize();
 	this.pos.y = pos.y * zinkPanel.getTileSize();
 	this.type = et;
-	this.dead = false;
     }
 
     protected BufferedImage setImage(final String s){
@@ -173,13 +171,16 @@ public abstract class AbstractEntity implements Entity
 	damagedCounter = 0;
 	health-= damage;
 	if (health == 0){
-	    noHealth();
+	    death();
 	}
     }
 
-    protected void noHealth() {
-	dead = true;
-	collision = false;
+
+    protected void death(){
+	zinkPanel.getEnemyList().remove(this);
+	BloodPile bloodPile = new BloodPile(zinkPanel);
+	bloodPile.setValues(this.pos.x/ zinkPanel.getTileSize(), this.pos.y/ zinkPanel.getTileSize());
+	zinkPanel.getGameObjects().add(bloodPile);
     }
 
     /**

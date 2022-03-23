@@ -27,6 +27,7 @@ public class ZinkPanel extends JPanel
     private static final int FPS = 60;
 
     private boolean isGameOver = false;
+    private boolean isGameRunning;
 
     private Point screenStartPoint = new Point(0, 0);
 
@@ -88,12 +89,17 @@ public class ZinkPanel extends JPanel
 
     public KeyHandler getKeyHandler() {return keyHandler;}
 
+    public void setGameRunning(boolean b) {
+        isGameRunning = b;
+    }
+
     /**
      * starts timer
      */
     public void startTimer() {
         Timer gameTimer = new Timer(1000 / FPS, doOneStep);
         gameTimer.start();
+        isGameRunning = true;
     }
 
     public void setUpGame(){
@@ -119,7 +125,7 @@ public class ZinkPanel extends JPanel
             repaint();
             return;
         }
-        if (!isShowingTitleScreen()) update();
+        if (!isShowingTitleScreen() && isGameRunning) update();
         repaint();
     }
 
@@ -129,10 +135,8 @@ public class ZinkPanel extends JPanel
     private void update() {
         player.update();
 
-        for (final AbstractEntity enemy : enemyList) {
-            if(enemy != null){
-                enemy.update();
-            }
+        for (int i = 0; i < enemyList.size(); i++) {
+            enemyList.get(i).update();
         }
 
     }
@@ -155,14 +159,18 @@ public class ZinkPanel extends JPanel
             screen.showTitleScreen(g2);
             return;
         }
+        if (!isGameRunning) {
+            screen.draw(g2);
+            return;
+        }
         moveScreen(g2);
         roomManager.draw(g2);
 
         for (int i = 0; i<gameObjects.size(); i++) {
             gameObjects.get(i).draw(g2);
         }
-        for (AbstractEntity enemy : enemyList) {
-            enemy.draw(g2);
+        for (int i = 0; i < enemyList.size(); i++) {
+            enemyList.get(i).draw(g2);
         }
 
         player.draw(g2);
