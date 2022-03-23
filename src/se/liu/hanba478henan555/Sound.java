@@ -14,12 +14,17 @@ import java.net.URL;
 public class Sound
 {
     private Clip clip = null;
-    private URL[] soundURL = new URL[3];
+    private URL[] soundURL = new URL[6];
 
     public Sound(){
 	soundURL[0] = getClass().getResource("sounds/music.wav");
 	soundURL[1] = getClass().getResource("sounds/key.wav");
 	soundURL[2] = getClass().getResource("sounds/door.wav");
+	soundURL[3] = getClass().getResource("sounds/death.wav");
+	soundURL[4] = getClass().getResource("sounds/hit.wav");
+	soundURL[5] = getClass().getResource("sounds/swosh_sword.wav");
+
+
     }
 
     public void setClip(int index){

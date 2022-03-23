@@ -170,13 +170,15 @@ public abstract class AbstractEntity implements Entity
 
 	damagedCounter = 0;
 	health-= damage;
-	if (health == 0){
+	zinkPanel.sound.playSoundEffect(4);
+	if (health <= 0){
 	    death();
 	}
     }
 
 
     protected void death(){
+	zinkPanel.sound.playSoundEffect(3);
 	zinkPanel.getEnemyList().remove(this);
 	BloodPile bloodPile = new BloodPile(zinkPanel);
 	bloodPile.setValues(this.pos.x/ zinkPanel.getTileSize(), this.pos.y/ zinkPanel.getTileSize());

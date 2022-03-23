@@ -5,15 +5,25 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class PlayerSword extends AbstractObject
 {
 
     private int lifeSpan = 0;
     private boolean onGround;
+
+    private Map<ObjectType, Integer> swordDamage = new EnumMap<>(Map.ofEntries(
+            Map.entry(ObjectType.PLAYER_SWORD_BAD, 1),
+            Map.entry(ObjectType.PLAYER_SWORD_GOOD, 2)));
+
+
     protected PlayerSword(final ZinkPanel zp, final ObjectType gameObject, boolean onGround) {
         super(zp, gameObject);
         this.onGround = onGround;
+
+        if (!onGround){zinkPanel.sound.playSoundEffect(5);}
     }
 
     public void setValues(int x, int y, EntityInput ei) {
@@ -54,7 +64,11 @@ public class PlayerSword extends AbstractObject
 
     @Override public void readImage() {
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("./player/sword_weak.png"));
+            switch (gameObject){
+                case PLAYER_SWORD_BAD -> {image = ImageIO.read(getClass().getResourceAsStream("./player/sword_weak.png"));}
+                case PLAYER_SWORD_GOOD -> {image = ImageIO.read(getClass().getResourceAsStream("./player/sword_strong.png"));}
+            }
+
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -69,7 +83,7 @@ public class PlayerSword extends AbstractObject
             return;
         }
         if (!entity.getType().equals(EntityType.ENEMY)){return;}
-        entity.takeDamage(1);
+        entity.takeDamage(swordDamage.get(gameObject));
     }
 
     @Override public void setCollisionArea() {
@@ -95,7 +109,7 @@ public class PlayerSword extends AbstractObject
         BufferedImage result = gc.createCompatibleImage(neww, newh, transparency);
         Graphics2D g = result.createGraphics();
         g.translate((neww - w) / 2, (newh - h) / 2);
-        g.rotate(angle, w / 2, h / 2);
+        g.rotate(angle, w / 2.0f, h / 2.0f);
         g.drawRenderedImage(image, null);
         return result;
     }

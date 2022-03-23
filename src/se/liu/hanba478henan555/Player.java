@@ -16,11 +16,12 @@ public class Player extends AbstractEntity
 
     private int attackSpeed = zinkPanel.getFPS()/3;
     private int attackCounter = 0;
-
-    private boolean walkable = true;
+    private boolean canAttack = true;
 
     private List<AbstractObject> inventory = new ArrayList<>();
     private int invetorySize = 20;
+
+    private ObjectType currentWeapoon = null;
 
     public Player(ZinkPanel zp,CollisionHandler cl, Point pos, KeyHandler keyHandler) {
 	super(zp,cl, pos, EntityType.PLAYER);
@@ -31,6 +32,19 @@ public class Player extends AbstractEntity
 	setDefaultValues();
 	setImages();
 
+    }
+
+    public void selectCurrentWeapon(int i){
+	ObjectType temp = inventory.get(i).getGameObject();
+	if(!(temp == ObjectType.PLAYER_SWORD_BAD || temp == ObjectType.PLAYER_SWORD_GOOD|| temp == ObjectType.PLAYER_BOW)){
+	    return;
+	}
+	zinkPanel.sound.playSoundEffect(1);
+	currentWeapoon = temp;
+    }
+
+    public ObjectType getCurrentWeapoon() {
+	return currentWeapoon;
     }
 
     public void removeAmmountOfDoorkeys(){
@@ -89,18 +103,18 @@ public class Player extends AbstractEntity
      * Updates position
      */
     @Override public void update() {
-	attacking();
-	if (!walkable && attackSpeed < attackCounter) {
-	    attackCounter++;
-	    return;
+	if (attackCounter <= attackSpeed){
+	    canAttack = false;
+	}else{
+	    canAttack = true;
 	}
-	attackCounter = 0;
+	attackCounter++;
 	setCollisionAreaRelativePos();
 	if (keyHandler.getKey(EntityInput.ATTACK)){
 	    attack();
 	}
 	if ((keyHandler.getKey(EntityInput.UP) || keyHandler.getKey(EntityInput.DOWN) ||
-	    keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) && walkable) {
+	    keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) && canAttack) {
 
 	    spriteCounter++;
 	    if (keyHandler.getKey(EntityInput.UP)) {
@@ -120,17 +134,6 @@ public class Player extends AbstractEntity
 	collisionHandler.abstractEntityCollision(this);
     }
 
-    private void attacking() {
-	for ( AbstractObject ob:zinkPanel.getGameObjects() ) {
-	    ObjectType temp = ob.getGameObject();
-	    if(inventory.contains(ob) && (temp == ObjectType.PLAYER_SWORD_BAD ||temp == ObjectType.PLAYER_BOW ||temp == ObjectType.PLAYER_SWORD_GOOD )){
-		walkable = false;
-		return;
-	    }
-	    walkable = true;
-	}
-    }
-
     private void movePlayerBasedOnInput(EntityInput pi){
 	entityInput = pi;
 	moveEntity(entityInput,1, speed);
@@ -145,9 +148,14 @@ public class Player extends AbstractEntity
     }
 
     @Override public void attack() {
-	PlayerSword pl = new PlayerSword(zinkPanel,ObjectType.PLAYER_SWORD_BAD, false);
+	if(!canAttack || currentWeapoon == null){
+	    return;
+	}
+
+	PlayerSword pl = new PlayerSword(zinkPanel,currentWeapoon, false);
 	pl.setValues(pos.x,pos.y, getEntityInput());
 	zinkPanel.getGameObjects().add(pl);
+	attackCounter = 0;
     }
 
     protected void death() {

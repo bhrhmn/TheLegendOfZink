@@ -27,7 +27,7 @@ public class ZinkPanel extends JPanel
     private static final int FPS = 60;
 
     private boolean isGameOver = false;
-    private boolean isGameRunning;
+    private boolean gameRunning;
 
     private Point screenStartPoint = new Point(0, 0);
 
@@ -35,8 +35,8 @@ public class ZinkPanel extends JPanel
     private CollisionHandler collisionHandler = new CollisionHandler(this);
     private RoomManager roomManager = new RoomManager(this);
 
-    private PlaySound sound = new PlaySound();
-    private PlaySound music = new PlaySound();
+    public PlaySound sound = new PlaySound();
+    public PlaySound music = new PlaySound();
 
     private Player player = new Player(this,collisionHandler, new Point(7, 8),keyHandler);
 
@@ -90,7 +90,7 @@ public class ZinkPanel extends JPanel
     public KeyHandler getKeyHandler() {return keyHandler;}
 
     public void setGameRunning(boolean b) {
-        isGameRunning = b;
+        gameRunning = b;
     }
 
     /**
@@ -99,7 +99,7 @@ public class ZinkPanel extends JPanel
     public void startTimer() {
         Timer gameTimer = new Timer(1000 / FPS, doOneStep);
         gameTimer.start();
-        isGameRunning = true;
+        gameRunning = true;
     }
 
     public void setUpGame(){
@@ -125,7 +125,7 @@ public class ZinkPanel extends JPanel
             repaint();
             return;
         }
-        if (!isShowingTitleScreen() && isGameRunning) update();
+        if (!isShowingTitleScreen() && gameRunning) update();
         repaint();
     }
 

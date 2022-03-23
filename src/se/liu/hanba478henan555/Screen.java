@@ -3,7 +3,7 @@ package se.liu.hanba478henan555;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.List;
+
 
 /**
  * Inventory-class handles showing the Player's inventory on screen
@@ -34,7 +34,7 @@ public class Screen
     private int inventoryHeight = 3;
     private int slotCol = 0;
     private int slotRow = 0;
-    private int slotSpeed = 4;
+    private static final int SLOT_SPEED = 2;//TODO: FIXA
     private int slotCounter = 0;
     private int marginal;
 
@@ -108,9 +108,11 @@ public class Screen
 	    showTitleScreen(g2);
 	    return;
 	}
+
 	if (showingInventory) {
 	    showInventory(g2);
 	}
+
 	updateHearts();
 	g2.setFont(font);
 	g2.setColor(Color.BLACK);
@@ -200,10 +202,15 @@ public class Screen
 	    return;
 	}
 	resetSlotPos();
-	boolean gamemode = showingInventory;
-	System.out.println(showingInventory);
-	showingInventory = !gamemode;
-	zinkPanel.setGameRunning(gamemode);
+	zinkPanel.setGameRunning(showingInventory);
+	showingInventory = !showingInventory;
+	if(showingInventory){
+	    zinkPanel.music.stopMusic();
+	    zinkPanel.sound.playSoundEffect(1);
+	}else {
+	    zinkPanel.sound.playSoundEffect(1);
+	    zinkPanel.music.playMusic();
+	}
     }
 
     private void titleScreenConfirm() {
@@ -235,10 +242,13 @@ public class Screen
     }
 
     private void showInventory(Graphics2D g2) {
-
 	//frame
-	int frameX = zinkPanel.getTileSize()*9;
-	int frameY = zinkPanel.getTileSize();
+	int posX = (player.pos.x  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
+	int posY = (player.pos.y  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
+
+	int frameX = (posX / zinkPanel.getColumns() *zinkPanel.getColumns()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*9;
+	int frameY = (posY / zinkPanel.getRows() * zinkPanel.getRows()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*2;
+
 	int framewidth = zinkPanel.getTileSize() * 6;
 	int frameHeigth = zinkPanel.getTileSize() * 5;
 	drawWindow(g2, frameX, frameY, framewidth, frameHeigth);
@@ -252,6 +262,11 @@ public class Screen
 
 	//draw items
 	for (int i = 0; i < player.getInventory().size(); i++) {
+	    if(player.getInventory().get(i).getGameObject().equals(player.getCurrentWeapoon())){
+		g2.setColor(Color.ORANGE);
+		g2.fillRoundRect(slotX,slotY,zinkPanel.getTileSize(),zinkPanel.getTileSize(),10,10);
+	    }
+
 	    g2.drawImage(player.getInventory().get(i).image, slotX, slotY, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
 	    slotX += slotSize;
 	    if (i == 4 || i == 9 || i == 14) {
@@ -279,16 +294,14 @@ public class Screen
 
     private void drawSlots(final Graphics2D g2, final int slotWidth, final int slotHeight, final int size,
 			   final Point start) {
-	List<AbstractObject> playerInventory = player.getInventory();
 	setSlotBorder(g2);
 	moveSlot();
 	g2.drawRect(start.x + scale(slotPos.x) +marginal*slotPos.x, start.y + scale(slotPos.y) +marginal*slotPos.y, size, size);
-
     }
 
     private void moveSlot() {
 	slotCounter++;
-	if (slotCounter<slotSpeed) {
+	if (slotCounter < SLOT_SPEED) {
 	    return;
 	}
 	slotCounter = 0;
@@ -312,6 +325,13 @@ public class Screen
 	    if (slotCol != inventoryWidth) {
 		slotCol++;
 	    }
+	}
+	else if (keyHandler.getKey(EntityInput.ATTACK)){
+	    int index = (slotRow*inventoryWidth+slotCol) + slotRow%inventoryWidth;
+	    if (index < player.getInventory().size()){
+		zinkPanel.getPlayer().selectCurrentWeapon(index);
+	    }
+
 	}
     }
 
