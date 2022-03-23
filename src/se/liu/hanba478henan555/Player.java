@@ -19,7 +19,7 @@ public class Player extends AbstractEntity
     private boolean canAttack = true;
 
     private List<AbstractObject> inventory = new ArrayList<>();
-    private int invetorySize = 20;
+    private int inventorySize = 20;
 
     private ObjectType currentWeapoon = null;
 
@@ -150,9 +150,7 @@ public class Player extends AbstractEntity
 	}
 	attackCounter = 0;
 	if (currentWeapoon.equals(ObjectType.PLAYER_BOW)){
-	    Projectile p = new Projectile(zinkPanel, ObjectType.PLAYER_BOW, getEntityInput());
-	    p.setValues(pos.x, pos.y, getEntityInput());
-	    zinkPanel.getGameObjects().add(p);
+	    shootProjectile();
 	    return;
 	}
 	PlayerSword pl = new PlayerSword(zinkPanel,currentWeapoon, false);

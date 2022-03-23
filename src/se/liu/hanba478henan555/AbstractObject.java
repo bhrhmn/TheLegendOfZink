@@ -25,6 +25,14 @@ public abstract class AbstractObject implements GameObject
 
     }
 
+    /**
+     * TODO: fortsätt med den här
+     */
+    @Override public void update() {
+        setCollisionAreaRelativePos();
+        System.out.println("update");
+    }
+
     @Override public void draw(Graphics2D g2){
         g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
     }

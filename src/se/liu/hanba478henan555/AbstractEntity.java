@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * Abstract class of Entity
@@ -27,6 +28,8 @@ public abstract class AbstractEntity implements Entity
 
     protected int spriteCounter;
     protected int spriteFrames;
+
+    protected int moveTick;
 
     protected Rectangle collisionArea = null;
     protected boolean collision = false;
@@ -98,6 +101,26 @@ public abstract class AbstractEntity implements Entity
 	}
     }
 
+    protected void moveRandom(){
+	if (moveTick == zinkPanel.getFPS() *2){
+	    Random random = new Random();
+	    int i = random.nextInt(4);
+	    if(i == 0){
+		entityInput = EntityInput.UP;
+	    }
+	    else if(i == 1){
+		entityInput = EntityInput.LEFT;
+	    }
+	    else if(i == 2){
+		entityInput = EntityInput.RIGHT;
+	    }
+	    else {
+		entityInput = EntityInput.DOWN;
+	    }
+	    moveTick = 0;
+	}
+    }
+
     public void knockback(){
 	moveEntity(getEntityInput() ,-1, zinkPanel.getTileSize()/2);
     }
@@ -143,6 +166,12 @@ public abstract class AbstractEntity implements Entity
 	    }
 	}
 	return image;
+    }
+
+    protected void shootProjectile() {
+	Projectile p = new Projectile(zinkPanel, ObjectType.ENEMY_BOW, getEntityInput());
+	p.setValues(pos.x, pos.y, getEntityInput());
+	zinkPanel.getGameObjects().add(p);
     }
 
     @Override public boolean hasCollision(Rectangle rectangle) {

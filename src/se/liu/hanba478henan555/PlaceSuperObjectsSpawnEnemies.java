@@ -30,6 +30,11 @@ public class PlaceSuperObjectsSpawnEnemies
 	zinkPanel.getEnemyList().add(en);
     }
 
+    private void spawnBlob(int x, int y) {
+	Blob blob = new Blob(zinkPanel, zinkPanel.getCollisionHandler(), new Point(x, y));
+	zinkPanel.getEnemyList().add(blob);
+    }
+
     public void spawnBloodPile(int x, int y) {
 	BloodPile bloodPile = new BloodPile(zinkPanel);
 	bloodPile.setValues(x,y);
@@ -75,6 +80,10 @@ public class PlaceSuperObjectsSpawnEnemies
 	spawnEnemy(7,20);
 	spawnEnemy(8,20);
 	spawnEnemy(9,20);
+
+	spawnBlob(2, 22);
+	spawnBlob(4, 22);
+	spawnBlob(6, 22);
 
     }
 

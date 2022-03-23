@@ -41,7 +41,7 @@ public class ZinkPanel extends JPanel
     private Player player = new Player(this,collisionHandler, new Point(7, 8),keyHandler);
 
 
-    private List<Enemy> enemyList = new ArrayList<>();
+    private List<AbstractEntity> enemyList = new ArrayList<>();
     private List<AbstractObject> gameObjects = new ArrayList<>();
 
     private PlaceSuperObjectsSpawnEnemies placeSuperObjectsSpawnEnemies = new PlaceSuperObjectsSpawnEnemies(this);
@@ -71,7 +71,7 @@ public class ZinkPanel extends JPanel
 
     public Screen getScreen() {return screen;}
 
-    public List<Enemy> getEnemyList() {return enemyList;}
+    public List<AbstractEntity> getEnemyList() {return enemyList;}
 
     public List<AbstractObject> getGameObjects() {return gameObjects;}
 

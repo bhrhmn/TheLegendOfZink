@@ -2,7 +2,6 @@ package se.liu.hanba478henan555;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 /**
  * Enemy
@@ -12,8 +11,6 @@ import java.util.Random;
 public class Enemy extends AbstractEntity
 {
     private static final int ENEMY_HEALTH = 2;
-
-    private int moveTick;
 
     private BufferedImage image = null;
 
@@ -30,7 +27,7 @@ public class Enemy extends AbstractEntity
 
 	this.collision = true;
 	this.spriteFrames = 10;
-	this.speed = 2; // sets speed of player
+	this.speed = 2;
 
 	this.maxHealth = ENEMY_HEALTH;
 	this.health = maxHealth;
@@ -60,27 +57,6 @@ public class Enemy extends AbstractEntity
 	spriteCounter++; moveTick++;
 	moveRandom();
 	moveEntity(entityInput,1,speed);
-    }
-
-    private void moveRandom(){
-	if (moveTick == zinkPanel.getFPS() *2){
-	    Random random = new Random();
-	    int i = random.nextInt(4);
-	    if(i == 0){
-		entityInput = EntityInput.UP;
-	    }
-	    else if(i == 1){
-		entityInput = EntityInput.LEFT;
-	    }
-	    else if(i == 2){
-		entityInput = EntityInput.RIGHT;
-	    }
-	    else {
-		entityInput = EntityInput.DOWN;
-	    }
-	    moveTick = 0;
-	}
-
     }
 
     @Override public void draw(Graphics2D g2){
