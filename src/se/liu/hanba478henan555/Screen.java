@@ -3,6 +3,7 @@ package se.liu.hanba478henan555;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * Inventory-class handles showing the Player's inventory on screen
@@ -21,11 +22,24 @@ public class Screen
     private int playerHearts;
 
     private int screensizeX, screensizeY;
+    private Point currentScreen = new Point(0, 0);
     private int playerChoice = 0;
     private int arrowCounter = 0; //TODO: bättre lösning än counter
 
     private boolean howToPlay = false;
     private boolean showingInventory = false;
+
+    private Point slotPos = new Point(0,0);
+    private int inventoryWidth = 4;
+    private int inventoryHeight = 3;
+    private int slotCol = 0;
+    private int slotRow = 0;
+    private int slotSpeed = 4;
+    private int slotCounter = 0;
+    private int marginal;
+
+    private final static int ROUND_CORNERS = 25;
+
 
     public Screen(ZinkPanel zp) {
 	this.zinkPanel = zp;
@@ -46,6 +60,7 @@ public class Screen
     }
 
     private void setValues() {
+	this.marginal = zinkPanel.getTileSize()/2;
 	this.screensizeX = zinkPanel.getTileSize() * zinkPanel.getColumns();
 	this.screensizeY = zinkPanel.getTileSize() * zinkPanel.getRows();
 	int coordinate = zinkPanel.getTileSize()/3;
@@ -63,6 +78,11 @@ public class Screen
 	    if (i >= playerHearts) hearts[i].setEmptyHeart();
 	    else hearts[i].setFullHeart();
 	}
+    }
+
+    private void updateCurrentScreen() {
+	currentScreen.x = zinkPanel.getScreenStartPoint().x * zinkPanel.getTileSize() * zinkPanel.getColumns();
+	currentScreen.y = zinkPanel.getScreenStartPoint().y * zinkPanel.getTileSize() * zinkPanel.getRows();
     }
 
     public void showKeyMessage() {showObjectMessage(ObjectType.KEY);}
@@ -83,33 +103,27 @@ public class Screen
 
     public void draw(Graphics2D g2) {
 	//TODO: Fixa alla magiska konstanter
+	updateCurrentScreen();
 	if (zinkPanel.isShowingTitleScreen()) {
 	    showTitleScreen(g2);
 	    return;
 	}
 	if (showingInventory) {
 	    showInventory(g2);
-	    return;
 	}
 	updateHearts();
 	g2.setFont(font);
 	g2.setColor(Color.BLACK);
-	int currentScreenX = zinkPanel.getScreenStartPoint().x * zinkPanel.getTileSize() * zinkPanel.getColumns();
-	int currentScreenY = zinkPanel.getScreenStartPoint().y * zinkPanel.getTileSize() * zinkPanel.getRows();
 	int imageSize = zinkPanel.getTileSize()*2 /3;
 	for (int i = 0; i < hearts.length; i++) {
-	    g2.drawImage(hearts[i].image, zinkPanel.getTileSize()*(i+1) + currentScreenX,
-			 imagePoint.y + currentScreenY, imageSize, imageSize, null);
+	    g2.drawImage(hearts[i].image, zinkPanel.getTileSize()*(i+1) + currentScreen.x,
+			 imagePoint.y + currentScreen.y, imageSize, imageSize, null);
 	}
 	if (showingMessage) {
 	    //TODO: Fixa bättre plats för message
-	    g2.drawString(message, currentScreenX + screensizeX/3 + font.getSize(),
-			  currentScreenY + screensizeY/2);
+	    g2.drawString(message, currentScreen.x + screensizeX/3 + font.getSize(),
+			  currentScreen.y + screensizeY/2);
 	}
-    }
-
-    private void showInventory(Graphics2D g2) {
-	drawSubScreen(g2, zinkPanel.getTileSize(), zinkPanel.getTileSize(), screensizeX - zinkPanel.getTileSize()*2, screensizeY/2);
     }
 
     public void showTitleScreen(Graphics2D g2) {
@@ -175,8 +189,8 @@ public class Screen
 	if (arrowCounter <= 5) {
 	    return;
 	}
-	updatePlayeChoice(EntityInput.UP, -1, amountOptions);
-	updatePlayeChoice(EntityInput.DOWN, 1, amountOptions);
+	updatePlayerChoice(EntityInput.UP, -1, amountOptions);
+	updatePlayerChoice(EntityInput.DOWN, 1, amountOptions);
 	arrowCounter = 0;
     }
 
@@ -185,7 +199,9 @@ public class Screen
 	    titleScreenConfirm();
 	    return;
 	}
+	resetSlotPos();
 	boolean gamemode = showingInventory;
+	System.out.println(showingInventory);
 	showingInventory = !gamemode;
 	zinkPanel.setGameRunning(gamemode);
     }
@@ -211,11 +227,147 @@ public class Screen
 	zinkPanel.stopShowingTitleScreen();
     }
 
-    private void updatePlayeChoice(EntityInput entityInput, int step, int amountOptions) {
+    private void updatePlayerChoice(EntityInput entityInput, int step, int amountOptions) {
 	if (zinkPanel.getKeyHandler().getKey(entityInput)) {
 	    playerChoice += step;
 	    if (playerChoice < 0 || playerChoice == amountOptions) playerChoice = 0;
 	}
+    }
+
+    private void showInventory(Graphics2D g2) {
+
+	//frame
+	int frameX = zinkPanel.getTileSize()*9;
+	int frameY = zinkPanel.getTileSize();
+	int framewidth = zinkPanel.getTileSize() * 6;
+	int frameHeigth = zinkPanel.getTileSize() * 5;
+	drawWindow(g2, frameX, frameY, framewidth, frameHeigth);
+
+	//Slot
+	int slotXstart = frameX + 20;
+	int slotYstart = frameY + 20;
+	int slotX = slotXstart;
+	int slotY = slotYstart;
+	int slotSize = zinkPanel.getTileSize()+3;
+
+	//draw items
+	for (int i = 0; i < player.getInventory().size(); i++) {
+	    g2.drawImage(player.getInventory().get(i).image, slotX, slotY, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
+	    slotX += slotSize;
+	    if (i == 4 || i == 9 || i == 14) {
+		slotX = slotXstart;
+		slotY += slotSize;
+	    }
+	}
+
+	//Cursor
+	int cursorX = slotXstart + (slotSize * slotCol);
+	int cursorY = slotYstart + (slotSize * slotRow);
+	int cursorWidth = zinkPanel.getTileSize();
+	int cursorHeight = zinkPanel.getTileSize();
+	//draw
+	g2.setColor(Color.white);
+	g2.drawRect(cursorX, cursorY, cursorWidth, cursorHeight);
+
+	moveSlot();
+
+    }
+
+    private Point middleOfScreen(int width, int height) {
+	return new Point(currentScreen.x + (screensizeX - width)/2,currentScreen.y + (screensizeY - height)/2);
+    }
+
+    private void drawSlots(final Graphics2D g2, final int slotWidth, final int slotHeight, final int size,
+			   final Point start) {
+	List<AbstractObject> playerInventory = player.getInventory();
+	setSlotBorder(g2);
+	moveSlot();
+	g2.drawRect(start.x + scale(slotPos.x) +marginal*slotPos.x, start.y + scale(slotPos.y) +marginal*slotPos.y, size, size);
+
+    }
+
+    private void moveSlot() {
+	slotCounter++;
+	if (slotCounter<slotSpeed) {
+	    return;
+	}
+	slotCounter = 0;
+	KeyHandler keyHandler = zinkPanel.getKeyHandler();
+	if (keyHandler.getKey(EntityInput.UP)) {
+	    if (slotRow != 0) {
+		slotRow--;
+	    }
+	}
+	else if (keyHandler.getKey(EntityInput.DOWN)) {
+	    if (slotRow != inventoryHeight) {
+		slotRow++;
+	    }
+	}
+	else if (keyHandler.getKey(EntityInput.LEFT)) {
+	    if (slotCol != 0) {
+		slotCol--;
+	    }
+	}
+	else if (keyHandler.getKey(EntityInput.RIGHT)) {
+	    if (slotCol != inventoryWidth) {
+		slotCol++;
+	    }
+	}
+    }
+
+    private void moveSlotInDirection(final EntityInput entityInput) {
+	switch (entityInput) {
+	    case UP -> checkCollision(PointXY.Y, -1);
+	    case DOWN -> checkCollision(PointXY.Y, 1);
+	    case LEFT -> checkCollision(PointXY.X, -1);
+	    case RIGHT -> checkCollision(PointXY.X, 1);
+	}
+    }
+
+    private void checkCollision(PointXY pointXY, final int i) {
+	if (pointXY == PointXY.X) {
+	    slotPos.x += i;
+	    if (slotOutside()) {
+		slotPos.x -= i;
+	    }
+	}
+	else if (pointXY == PointXY.Y) {
+	    slotPos.y += i;
+	    if (slotOutside()) {
+		slotPos.y -= i;
+	    }
+	}
+    }
+
+    private boolean slotOutside() {
+	return (0 > slotPos.x || slotPos.x > inventoryWidth ||
+	    0 > slotPos.y || slotPos.y > inventoryHeight);
+    }
+
+
+    private int scale(final int i) {
+	return i * zinkPanel.getTileSize();
+    }
+
+    private void resetSlotPos() {
+	slotPos.x = 0;
+	slotPos.y = 0;
+    }
+
+    private void setSlotBorder(final Graphics2D g2) {
+	changeBackstroke(g2,10.0f);
+	g2.setColor(Color.gray);
+    }
+
+    private Point getCoordinateSlot(Point start, int slotSize, int marginal, int x, int y) {
+	int pointX = start.x + marginal+(slotSize+marginal) * x;
+	int pointY = start.y + marginal+(slotSize+marginal) * y;
+	return new Point(pointX, pointY);
+    }
+
+    private void changeBackstroke(final Graphics2D g2, final float f) {
+	float backStroke = zinkPanel.getTileSize() / f;
+	g2.setStroke(new BasicStroke(backStroke));
     }
 
     private int getStringLength(Graphics2D g2, String text) {
@@ -227,10 +379,20 @@ public class Screen
 	showingMessage = true;
     }
 
-    private void drawSubScreen(Graphics2D g2, int x, int y, int width, int height) {
-	setAlphaComposite(g2, 0.8f);
+    private void drawWindow(Graphics2D g2, int x, int y, int width, int height) {
+
+	float subScreenAlpha = 0.6f;
+	setAlphaComposite(g2, subScreenAlpha);
 	g2.setColor(Color.black);
-	g2.fillRect(x, y, width, height);
+	g2.fillRoundRect(x, y, width, height, ROUND_CORNERS, ROUND_CORNERS);
+	resetAlpha(g2);
+	g2.setColor(Color.darkGray);
+	float backStroke = zinkPanel.getTileSize() / 8.0f;
+	g2.setStroke(new BasicStroke(backStroke));
+	g2.drawRoundRect(x, y, width, height, ROUND_CORNERS, ROUND_CORNERS);
+    }
+
+    private void resetAlpha(Graphics2D g2) {
 	setAlphaComposite(g2, 1.0f);
     }
 

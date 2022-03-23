@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- *s
+ * Enemy
+ * Attacks player
+ * When an Enemy dies it creates a BloodPile and puts it on the enemy's position
  */
 public class Enemy extends AbstractEntity
 {
@@ -83,7 +85,6 @@ public class Enemy extends AbstractEntity
 
     @Override public void draw(Graphics2D g2){
 	if (damaged) {
-	    System.out.println(damaged);
 	    damageAnimation(g2);
 	}
 	g2.drawImage(currentImage, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize() ,null);

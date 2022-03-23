@@ -1,6 +1,8 @@
 package se.liu.hanba478henan555;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Maincharacter of the game
@@ -10,7 +12,6 @@ public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
     private int tileSize;
-    private int ammountOfDoorKeys;
     private static final int PLAYER_HEALTH = 3;
 
     private int attackSpeed = zinkPanel.getFPS()/3;
@@ -18,6 +19,8 @@ public class Player extends AbstractEntity
 
     private boolean walkable = true;
 
+    private List<AbstractObject> inventory = new ArrayList<>();
+    private int invetorySize = 20;
 
     public Player(ZinkPanel zp,CollisionHandler cl, Point pos, KeyHandler keyHandler) {
 	super(zp,cl, pos, EntityType.PLAYER);
@@ -27,19 +30,41 @@ public class Player extends AbstractEntity
 
 	setDefaultValues();
 	setImages();
+	setItems();
     }
 
+    private void setItems(){
+	PlayerSword playerSword = new PlayerSword(zinkPanel, ObjectType.PLAYER_SWORD_BAD);
+	playerSword.setValues(0, 0);
+	addItem(playerSword);
+    }
 
     public void removeAmmountOfDoorkeys(){
-	ammountOfDoorKeys -= 1;
+	for (AbstractObject object: inventory) {
+	    if (object.getGameObject() == ObjectType.KEY) {
+		inventory.remove(object);
+		return;
+	    }
+	}
     }
 
     public void addAmmountOfDoorKeys(){
-	ammountOfDoorKeys += 1;
+	Key key = new Key(zinkPanel);
+	key.readImage();
+	inventory.add(key);
     }
 
     public int getAmmountOfDoorKeys(){
+	int ammountOfDoorKeys = 0;
+	for (AbstractObject abstractObject : inventory) {
+	    if (abstractObject.getGameObject() == ObjectType.KEY)
+		ammountOfDoorKeys += 1;
+	}
 	return ammountOfDoorKeys;
+    }
+
+    public void addItem(AbstractObject object) {
+	inventory.add(object);
     }
 
     @Override public void setDefaultValues() {
@@ -47,7 +72,6 @@ public class Player extends AbstractEntity
 	collisionArea.width = tileSize*2/3;
 	collisionArea.height = tileSize*2/3;
 
-	this.ammountOfDoorKeys = 0;
 	this.collision = true;
 	this.spriteFrames = 10;
 	this.speed = 4; // sets speed of player
@@ -142,5 +166,9 @@ public class Player extends AbstractEntity
 
     public int getAttackSpeed() {
 	return attackSpeed;
+    }
+
+    public List<AbstractObject> getInventory() {
+	return inventory;
     }
 }

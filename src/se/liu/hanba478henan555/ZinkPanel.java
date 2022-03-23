@@ -159,10 +159,6 @@ public class ZinkPanel extends JPanel
             screen.showTitleScreen(g2);
             return;
         }
-        if (!isGameRunning) {
-            screen.draw(g2);
-            return;
-        }
         moveScreen(g2);
         roomManager.draw(g2);
 
