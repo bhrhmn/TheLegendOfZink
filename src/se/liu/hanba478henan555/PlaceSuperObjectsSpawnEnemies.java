@@ -42,6 +42,12 @@ public class PlaceSuperObjectsSpawnEnemies
 	zinkPanel.getGameObjects().add(playerSword);
     }
 
+    private void placeBow(int x, int y){
+	Bow bow = new Bow(zinkPanel);
+	bow.setValues(x,y);
+	zinkPanel.getGameObjects().add(bow);
+    }
+
 
     public void placeObjects(){
 
@@ -59,6 +65,8 @@ public class PlaceSuperObjectsSpawnEnemies
 
 	placeSword(7, 2, ObjectType.PLAYER_SWORD_GOOD);
 	placeSword(2, 2,  ObjectType.PLAYER_SWORD_BAD);
+
+	placeBow(11,10);
     }
 
     public void spawnEnemies(){

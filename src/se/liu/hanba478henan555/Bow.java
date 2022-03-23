@@ -4,18 +4,15 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
-/**
- * Key
- */
-public class Key extends AbstractObject
+public class Bow extends AbstractObject
 {
-    public Key(ZinkPanel zp){
-	super(zp,ObjectType.KEY);
+    public Bow(ZinkPanel zp){
+	super(zp,ObjectType.PLAYER_BOW);
     }
 
     @Override public void readImage() {
 	try {
-	    image = ImageIO.read(getClass().getResourceAsStream("./objects/key.png"));
+	    image = ImageIO.read(getClass().getResourceAsStream("./objects/bow.png"));
 	}catch (IOException e){
 	    e.printStackTrace();
 	}
@@ -29,9 +26,7 @@ public class Key extends AbstractObject
     @Override public void whenCollided(AbstractEntity entity) {
 	if (!entity.getType().equals(EntityType.PLAYER))
 	    return;
-	zinkPanel.getScreen().showKeyMessage();
-	zinkPanel.getPlayer().addAmmountOfDoorKeys();
-	zinkPanel.getSound().playSoundEffect(1);
+	zinkPanel.getPlayer().getInventory().add(this);
 	zinkPanel.getGameObjects().remove(this);
     }
 }

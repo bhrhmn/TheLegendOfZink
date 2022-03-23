@@ -71,10 +71,6 @@ public class Player extends AbstractEntity
 	return ammountOfDoorKeys;
     }
 
-    public void addItem(AbstractObject object) {
-	inventory.add(object);
-    }
-
     @Override public void setDefaultValues() {
 	this.collisionArea = new Rectangle();
 	collisionArea.width = tileSize*2/3;
@@ -82,7 +78,7 @@ public class Player extends AbstractEntity
 
 	this.collision = true;
 	this.spriteFrames = 10;
-	this.speed = 4; // sets speed of player
+	this.speed = 3; // sets speed of player
 
 	this.maxHealth = PLAYER_HEALTH;
 	this.health = maxHealth;
@@ -110,6 +106,7 @@ public class Player extends AbstractEntity
 	}
 	attackCounter++;
 	setCollisionAreaRelativePos();
+
 	if (keyHandler.getKey(EntityInput.ATTACK)){
 	    attack();
 	}
@@ -151,11 +148,16 @@ public class Player extends AbstractEntity
 	if(!canAttack || currentWeapoon == null){
 	    return;
 	}
-
+	attackCounter = 0;
+	if (currentWeapoon.equals(ObjectType.PLAYER_BOW)){
+	    Projectile p = new Projectile(zinkPanel, ObjectType.PLAYER_BOW, getEntityInput());
+	    p.setValues(pos.x, pos.y, getEntityInput());
+	    zinkPanel.getGameObjects().add(p);
+	    return;
+	}
 	PlayerSword pl = new PlayerSword(zinkPanel,currentWeapoon, false);
 	pl.setValues(pos.x,pos.y, getEntityInput());
 	zinkPanel.getGameObjects().add(pl);
-	attackCounter = 0;
     }
 
     protected void death() {
