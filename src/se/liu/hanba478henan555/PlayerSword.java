@@ -9,9 +9,11 @@ import java.io.IOException;
 public class PlayerSword extends AbstractObject
 {
 
-    int lifeSpan = 0;
-    protected PlayerSword(final ZinkPanel zp, final ObjectType gameObject) {
+    private int lifeSpan = 0;
+    private boolean onGround;
+    protected PlayerSword(final ZinkPanel zp, final ObjectType gameObject, boolean onGround) {
         super(zp, gameObject);
+        this.onGround = onGround;
     }
 
     public void setValues(int x, int y, EntityInput ei) {
@@ -39,11 +41,14 @@ public class PlayerSword extends AbstractObject
     }
 
     @Override public void draw(Graphics2D g2){
-        lifeSpan++;
-        if (lifeSpan >= zinkPanel.getPlayer().getAttackSpeed()) {
-            zinkPanel.getGameObjects().remove(this);
-            return;
+        if (!onGround) {
+            lifeSpan++;
+            if (lifeSpan >= zinkPanel.getPlayer().getAttackSpeed()) {
+                zinkPanel.getGameObjects().remove(this);
+                return;
+            }
         }
+
         g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
     }
 
@@ -56,6 +61,13 @@ public class PlayerSword extends AbstractObject
     }
 
     @Override public void whenCollided(AbstractEntity entity) {
+        if (onGround) {
+            if (entity.getType().equals(EntityType.PLAYER)) {
+                zinkPanel.getGameObjects().remove(this);
+                zinkPanel.getPlayer().getInventory().add(this);
+            }
+            return;
+        }
         if (!entity.getType().equals(EntityType.ENEMY)){return;}
         entity.takeDamage(1);
     }

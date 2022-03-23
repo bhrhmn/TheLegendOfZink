@@ -30,13 +30,7 @@ public class Player extends AbstractEntity
 
 	setDefaultValues();
 	setImages();
-	setItems();
-    }
 
-    private void setItems(){
-	PlayerSword playerSword = new PlayerSword(zinkPanel, ObjectType.PLAYER_SWORD_BAD);
-	playerSword.setValues(0, 0);
-	addItem(playerSword);
     }
 
     public void removeAmmountOfDoorkeys(){
@@ -129,7 +123,7 @@ public class Player extends AbstractEntity
     private void attacking() {
 	for ( AbstractObject ob:zinkPanel.getGameObjects() ) {
 	    ObjectType temp = ob.getGameObject();
-	    if(temp == ObjectType.PLAYER_SWORD_BAD ||temp == ObjectType.PLAYER_BOW ||temp == ObjectType.PLAYER_SWORD_GOOD ){
+	    if(inventory.contains(ob) && (temp == ObjectType.PLAYER_SWORD_BAD ||temp == ObjectType.PLAYER_BOW ||temp == ObjectType.PLAYER_SWORD_GOOD )){
 		walkable = false;
 		return;
 	    }
@@ -151,7 +145,7 @@ public class Player extends AbstractEntity
     }
 
     @Override public void attack() {
-	PlayerSword pl = new PlayerSword(zinkPanel,ObjectType.PLAYER_SWORD_BAD);
+	PlayerSword pl = new PlayerSword(zinkPanel,ObjectType.PLAYER_SWORD_BAD, false);
 	pl.setValues(pos.x,pos.y, getEntityInput());
 	zinkPanel.getGameObjects().add(pl);
     }

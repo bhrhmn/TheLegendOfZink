@@ -36,6 +36,12 @@ public class PlaceSuperObjectsSpawnEnemies
 	zinkPanel.getGameObjects().add(bloodPile);
     }
 
+    private void placeBadSword(int x, int y) {
+	PlayerSword playerSword = new PlayerSword(zinkPanel, ObjectType.PLAYER_SWORD_BAD, true);
+	playerSword.setValues(x,y);
+	zinkPanel.getGameObjects().add(playerSword);
+    }
+
     public void placeObjects(){
 
 	placeDoor(6,4);
@@ -50,6 +56,7 @@ public class PlaceSuperObjectsSpawnEnemies
 	placeKey(7,14);
 	placeKey(8,14);
 
+	placeBadSword(7, 2);
 
     }
 
