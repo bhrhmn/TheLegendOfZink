@@ -9,7 +9,7 @@ import java.util.logging.*;
  */
 public class LoggingManager
 {
-    public final static Logger LOGR = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private final static Logger LOGR = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static void setUpLogger() {
         LogManager.getLogManager().reset();
@@ -26,6 +26,10 @@ public class LoggingManager
         } catch (IOException e) {
             LOGR.log(Level.SEVERE, "Kan ej logga", e);
         }
+    }
+
+    public static Logger getLogr(){
+        return LOGR;
     }
 
 

@@ -66,16 +66,14 @@ public abstract class AbstractEntity implements Entity
 
     }
 
-    @SuppressWarnings("ProhibitedExceptionCaught")
-    protected BufferedImage setImage(final String s){
+    protected BufferedImage setImage(final String filePath){
 	BufferedImage result = null, readFile = null;
 	try{
-	    readFile = ImageIO.read(getClass().getResourceAsStream("/"+s));
-	} catch (IllegalArgumentException | IOException e){
-	    LoggingManager.LOGR.log(Level.SEVERE, "AbstractEntity", e);
+	    readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
+	} catch (IOException e){
+	    LoggingManager.getLogr().log(Level.SEVERE, "AbstractEntity", e);
 	    readFile = new BufferedImage(zinkPanel.getOriginalTileSize(),zinkPanel.getOriginalTileSize(),BufferedImage.TYPE_BYTE_GRAY );
 	}finally {
-
 	    result = readFile;
 	}
 	return result;

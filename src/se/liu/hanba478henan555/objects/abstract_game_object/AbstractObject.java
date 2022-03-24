@@ -54,13 +54,13 @@ public abstract class AbstractObject implements GameObject
         readImage();
     }
 
-    @SuppressWarnings("ProhibitedExceptionCaught")
-    protected BufferedImage setImage(final String s){
+
+    protected BufferedImage setImage(final String filePath){
         BufferedImage result = null, readFile = null;
         try{
-            readFile = ImageIO.read(getClass().getResourceAsStream("/"+s));
-        } catch (IllegalArgumentException | IOException e){
-            LoggingManager.LOGR.log(Level.SEVERE, "AbstractObject", e);
+            readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
+        } catch (IOException e){
+            LoggingManager.getLogr().log(Level.SEVERE, "AbstractObject", e);
             readFile = new BufferedImage(zinkPanel.getOriginalTileSize(),zinkPanel.getOriginalTileSize(),BufferedImage.TYPE_BYTE_GRAY );
         }finally {
 

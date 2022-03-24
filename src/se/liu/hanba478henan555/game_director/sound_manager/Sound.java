@@ -29,59 +29,33 @@ public class Sound
 	soundURL[3] = setURL("audio"+fs+"sounds"+fs+"death.wav");
 	soundURL[4] = setURL("audio"+fs+"sounds"+fs+"hit.wav");
 	soundURL[5] = setURL("audio"+fs+"sounds"+fs+"swosh_sword.wav");
-
-
     }
 
-    @SuppressWarnings("ProhibitedExceptionCaught")
-    private URL setURL(String s){
-	try{
-	    return (getClass().getResource("/" + s));
-	} catch (NullPointerException e){
-	    LoggingManager.LOGR.log(Level.SEVERE, "setURL", e);
-	}
-	return null;
+    private URL setURL(String filePath){
+	return ClassLoader.getSystemResource(filePath);
     }
 
-    @SuppressWarnings("ProhibitedExceptionCaught")
     public void setClip(int index){
 	try {
 	    AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[index]);
 	    clip = AudioSystem.getClip();
 	    clip.open(ais);
 
-	} catch (NullPointerException | UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-	    LoggingManager.LOGR.log(Level.SEVERE, "setClip", e);
+	} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+	    LoggingManager.getLogr().log(Level.SEVERE, "setClip", e);
 	}
     }
 
-    @SuppressWarnings("ProhibitedExceptionCaught")
     public void play(){
-	try {
-	    clip.start();
-	}
-	catch (NullPointerException e ) {
-	    LoggingManager.LOGR.log(Level.SEVERE, "play clip", e);
-	}
+	clip.start();
     }
 
-    @SuppressWarnings("ProhibitedExceptionCaught")
     public void loop(){
-
-	try {
-	    clip.loop(Clip.LOOP_CONTINUOUSLY);
-	} catch (NullPointerException e ) {
-	    LoggingManager.LOGR.log(Level.SEVERE, "loop clip", e);
-	}
+	clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    @SuppressWarnings("ProhibitedExceptionCaught")
     public void stop(){
-	try {
-	    clip.stop();
-	} catch (NullPointerException e ) {
-	    LoggingManager.LOGR.log(Level.SEVERE, "stop clip", e);
-	}
+	clip.stop();
     }
 
 

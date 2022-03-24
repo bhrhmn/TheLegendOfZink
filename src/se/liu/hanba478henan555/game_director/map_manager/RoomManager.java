@@ -43,13 +43,13 @@ public class RoomManager
 	loadTile(2,  "images" + fs + "tiles" + fs + "pedestal.png",false);
     }
 
-    @SuppressWarnings("ProhibitedExceptionCaught")
+
     private void loadTile(int index, String filePath, boolean collision){
 	BufferedImage result = null, readFile = null;
 	try{
-	    readFile = ImageIO.read(getClass().getResourceAsStream("/"+filePath));
-	} catch (IllegalArgumentException | IOException e){
-	    LoggingManager.LOGR.log(Level.SEVERE, "loadTile", e);
+	    readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
+	} catch (IOException e){
+	    LoggingManager.getLogr().log(Level.SEVERE, "loadTile", e);
 	    readFile = new BufferedImage(originalTileSize,originalTileSize,BufferedImage.TYPE_BYTE_GRAY );
 	}finally {
 	    result = readFile;
@@ -69,7 +69,7 @@ public class RoomManager
 		}
 	    }
 	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
+	    LoggingManager.getLogr().log(Level.SEVERE, "loadMap", e);
 	}
 
     }
