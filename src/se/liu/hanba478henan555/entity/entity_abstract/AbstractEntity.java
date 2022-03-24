@@ -1,5 +1,6 @@
 package se.liu.hanba478henan555.entity.entity_abstract;
 
+import se.liu.hanba478henan555.LoggingManager;
 import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
 import se.liu.hanba478henan555.entity.entity_enum.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.CollisionHandler;
@@ -13,6 +14,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
 
 /**
  * Abstract class of Entity
@@ -67,13 +69,19 @@ public abstract class AbstractEntity implements Entity
 
     }
 
+    @SuppressWarnings("ProhibitedExceptionCaught")
     protected BufferedImage setImage(final String s){
+	BufferedImage result = null, readFile = null;
 	try{
-	    return ImageIO.read(getClass().getResourceAsStream("/"+s));
-	}catch (IOException e) {
-	    e.printStackTrace();
+	    readFile = ImageIO.read(getClass().getResourceAsStream("/"+s));
+	} catch (IllegalArgumentException | IOException e){
+	    LoggingManager.LOGR.log(Level.SEVERE, "AbstractEntity", e);
+	    readFile = new BufferedImage(zinkPanel.getOriginalTileSize(),zinkPanel.getOriginalTileSize(),BufferedImage.TYPE_BYTE_GRAY );
+	}finally {
+
+	    result = readFile;
 	}
-	return null;
+	return result;
     }
 
     protected void setCollisionArea(){

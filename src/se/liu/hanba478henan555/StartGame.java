@@ -28,6 +28,8 @@ public class StartGame
 	frame.setLocationRelativeTo(null);
 	frame.setVisible(true);
 
+	LoggingManager.setUpLogger();
+
 	zinkPanel.setUpGame();
 	zinkPanel.startTimer();
     }

@@ -1,6 +1,7 @@
 package se.liu.hanba478henan555.objects.abstract_game_object;
 
 
+import se.liu.hanba478henan555.LoggingManager;
 import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
@@ -8,6 +9,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Level;
 
 /**
  * Abstract for the game objects.
@@ -52,13 +54,13 @@ public abstract class AbstractObject implements GameObject
         readImage();
     }
 
-
+    @SuppressWarnings("ProhibitedExceptionCaught")
     protected BufferedImage setImage(final String s){
         BufferedImage result = null, readFile = null;
         try{
             readFile = ImageIO.read(getClass().getResourceAsStream("/"+s));
-        } catch (IOException e){
-            e.printStackTrace();
+        } catch (IllegalArgumentException | IOException e){
+            LoggingManager.LOGR.log(Level.SEVERE, "AbstractObject", e);
             readFile = new BufferedImage(zinkPanel.getOriginalTileSize(),zinkPanel.getOriginalTileSize(),BufferedImage.TYPE_BYTE_GRAY );
         }finally {
 

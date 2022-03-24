@@ -7,7 +7,7 @@ import se.liu.hanba478henan555.objects.abstract_game_object.GameObject;
 import java.awt.*;
 
 /**
- * Handles collision
+ * Handles collision between entity, objects and tiles.
  */
 public class CollisionHandler
 {

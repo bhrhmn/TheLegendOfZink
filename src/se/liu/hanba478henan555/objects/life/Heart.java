@@ -6,11 +6,11 @@ import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
+
 
 /**
  * Gameobject
@@ -26,14 +26,9 @@ public class Heart extends AbstractObject
     }
 
     @Override public void readImage() {
-	//TODO: ta bort "/"
-	try {
-	    String fs = File.separator;
-	    imageFull = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"objectImages"+fs+"heart"+fs+"heart_full.png"));
-	    imageEmpty = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"objectImages"+fs+"heart"+fs+"heart_empty.png"));
-	}catch (IOException e){
-	    e.printStackTrace();
-	}
+	String fs = File.separator;
+	imageFull = setImage("images"+fs+"objectImages"+fs+"heart"+fs+"heart_full.png");
+	imageEmpty = setImage("images"+fs+"objectImages"+fs+"heart"+fs+"heart_empty.png");
 
     }
 

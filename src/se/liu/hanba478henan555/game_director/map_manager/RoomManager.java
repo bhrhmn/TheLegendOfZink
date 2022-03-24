@@ -1,15 +1,18 @@
 package se.liu.hanba478henan555.game_director.map_manager;
 
+import se.liu.hanba478henan555.LoggingManager;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 /**
  * Manages background
@@ -20,11 +23,13 @@ public class RoomManager
     private int[][] roomTileData;
     private int tileSize,worldRows,worldColumns;
     private String fs = File.separator;
+    private int originalTileSize;
 
     public RoomManager(ZinkPanel zp) {
 	this.tileSize = zp.getTileSize();
 	this.worldColumns = zp.getWorldColumns();
 	this.worldRows = zp.getWorldRows();
+	this.originalTileSize = zp.getOriginalTileSize();
 
 	this.tileTypes = new Tile[10];
 	this.roomTileData = new int[worldColumns][worldRows];
@@ -33,20 +38,26 @@ public class RoomManager
     }
 
     private void defineTileTypes() {
-	//TODO ta bort "/"
 	loadTile(0,  "images" + fs + "tiles" + fs + "wall.png",true);
 	loadTile(1,  "images" + fs + "tiles" + fs + "earth.png",false);
 	loadTile(2,  "images" + fs + "tiles" + fs + "pedestal.png",false);
     }
 
+    @SuppressWarnings("ProhibitedExceptionCaught")
     private void loadTile(int index, String filePath, boolean collision){
-	try {
-	    tileTypes[index] = new Tile();
-	    tileTypes[index].setImage(ImageIO.read(getClass().getResourceAsStream("/" + filePath)));
-	    tileTypes[index].setCollision(collision);
-	} catch (IOException e) {
-	    e.printStackTrace();
+	BufferedImage result = null, readFile = null;
+	try{
+	    readFile = ImageIO.read(getClass().getResourceAsStream("/"+filePath));
+	} catch (IllegalArgumentException | IOException e){
+	    LoggingManager.LOGR.log(Level.SEVERE, "loadTile", e);
+	    readFile = new BufferedImage(originalTileSize,originalTileSize,BufferedImage.TYPE_BYTE_GRAY );
+	}finally {
+	    result = readFile;
 	}
+	tileTypes[index] = new Tile();
+	tileTypes[index].setImage(result);
+	tileTypes[index].setCollision(collision);
+
     }
 
     public void loadMap(String roomFile) {

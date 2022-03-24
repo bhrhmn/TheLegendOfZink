@@ -6,10 +6,10 @@ import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
+
 
 /**
  * A weapon that allows a Player to shoot projectiles
@@ -21,13 +21,8 @@ public class Bow extends AbstractObject
     }
 
     @Override public void readImage() {
-	//TODO: ta bort "/"
-	try {
-	    String fs = File.separator;
-	    image = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"objectImages"+fs+"weapon"+fs+"bow_arrow"+fs+"bow.png"));
-	}catch (IOException e){
-	    e.printStackTrace();
-	}
+	String fs = File.separator;
+	image = setImage("images"+fs+"objectImages"+fs+"weapon"+fs+"bow_arrow"+fs+"bow.png");
     }
 
     @Override public void setCollisionArea() {
