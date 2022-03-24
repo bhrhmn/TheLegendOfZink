@@ -88,7 +88,7 @@ public class PlaceSuperObjectsSpawnEnemies
 
 	//spawnBlob(2, 22);
 	//spawnBlob(4, 22);
-	spawnBlob(6, 22);
+	//spawnBlob(6, 22);
 
 	spawnDragon(2, 8);
 

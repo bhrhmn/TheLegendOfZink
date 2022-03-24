@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Projectile extends AbstractObject
 {
     private EntityInput direction = null;
-    private static final int PROJ_SPEED = 10;
+    private static final int PROJ_SPEED = 5;
     private int lifeSpan;
     protected Projectile(final ZinkPanel zp, final ObjectType go, EntityInput ei) {
 	super(zp, go);
@@ -46,15 +46,20 @@ public class Projectile extends AbstractObject
     @Override public void whenCollided(final AbstractEntity entity) {
 	switch (gameObject){
 	    case PLAYER_BOW -> {
-		if ((entity.getType() == EntityType.ENEMY))
+		if ((entity.getType() == EntityType.ENEMY)){
 		    entity.takeDamage(1);
+		    zinkPanel.getGameObjects().remove(this);
+		}
+
 	    }
 	    case ENEMY_BOW -> {
-		if (entity.getType() == EntityType.PLAYER)
+		if (entity.getType() == EntityType.PLAYER) {
 		    entity.takeDamage(2);
+		    zinkPanel.getGameObjects().remove(this);
+		}
 	    }
 	}
-	zinkPanel.getGameObjects().remove(this);
+
 
     }
 

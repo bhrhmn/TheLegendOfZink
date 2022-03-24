@@ -201,6 +201,10 @@ public abstract class AbstractEntity implements Entity
 
     @Override public void takeDamage(int damage) {
 	knockback();
+	damageCalculation(damage);
+    }
+
+    protected void damageCalculation(int damage) {
 	damaged = true;
 	if (damagedCounter >= 0) {
 	    return;
