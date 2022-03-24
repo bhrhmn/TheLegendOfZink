@@ -7,14 +7,14 @@ import java.util.Random;
  * Big boss
  * Can shoot projectiles
  */
-public class Dragon extends AbstractEntity
+public class EnemyDragon extends Enemy
 {
     private static final int DRAGON_HEALTH = 10;
 
     private int size;
 
-    protected Dragon(final ZinkPanel zp, final CollisionHandler cl, final Point pos) {
-	super(zp, cl, pos, EntityType.ENEMY);
+    protected EnemyDragon(final ZinkPanel zp, final Point pos) {
+	super(zp, pos);
 	setDefaultValues();
     }
 
@@ -34,7 +34,7 @@ public class Dragon extends AbstractEntity
     @Override public void setDefaultValues() {
 	setImages();
 
-	this.size = zinkPanel.getTileSize()*2;
+	this.size = tileSize*2;
 
 	this.collisionArea = new Rectangle();
 	collisionArea.width = size;
@@ -48,18 +48,23 @@ public class Dragon extends AbstractEntity
 	this.maxHealth = DRAGON_HEALTH;
 	this.health = maxHealth;
 	this.ammountOfDamage = 2;
+	this.attackBound = 6;
 
 	this.entityInput = EntityInput.DOWN;
     }
 
     @Override public void update() {
-	attackRandom();
+	attackRandom(attackBound);
 	setCollisionAreaRelativePos();
 	collisionHandler.objectCollision(this);
-	currentImage = changeSprite(up1, up2);
+	changeImage();
 	spriteCounter++; moveTick++;
 	moveRandom();
 	moveEntity(entityInput,1,speed);
+    }
+
+    @Override protected void changeImage() {
+	currentImage = changeSprite(up1, up2);
     }
 
     @Override protected void moveRandom(){

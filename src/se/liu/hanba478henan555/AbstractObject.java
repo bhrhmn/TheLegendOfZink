@@ -25,12 +25,8 @@ public abstract class AbstractObject implements GameObject
 
     }
 
-    /**
-     * TODO: fortsätt med den här
-     * Vad skulle göras här?
-     */
     @Override public void update() {
-        setCollisionAreaRelativePos();
+
     }
 
     @Override public void draw(Graphics2D g2){

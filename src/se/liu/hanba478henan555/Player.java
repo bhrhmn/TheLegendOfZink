@@ -6,28 +6,20 @@ import java.util.List;
 
 /**
  * Maincharacter of the game
- * character which user controlls
+ * Entity which user controlls
  */
 public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
-    private int tileSize;
     private static final int PLAYER_HEALTH = 3;
 
-    private int attackSpeed = zinkPanel.getFPS()/3;
-    private int attackCounter = 0;
-    private boolean canAttack = true;
-
     private List<AbstractObject> inventory = new ArrayList<>();
-    private int inventorySize = 20;
 
     private ObjectType currentWeapoon = null;
 
-    public Player(ZinkPanel zp,CollisionHandler cl, Point pos, KeyHandler keyHandler) {
-	super(zp,cl, pos, EntityType.PLAYER);
+    public Player(ZinkPanel zp, Point pos, KeyHandler keyHandler) {
+	super(zp, pos, EntityType.PLAYER);
 	this.keyHandler = keyHandler;
-
-	this.tileSize = zp.getTileSize();
 
 	setDefaultValues();
 	setImages();
@@ -82,6 +74,10 @@ public class Player extends AbstractEntity
 
 	this.maxHealth = PLAYER_HEALTH;
 	this.health = maxHealth;
+
+	this.attackSpeed = zinkPanel.getFPS()/3;
+	this.attackCounter = 0;
+	this.canAttack = true;
     }
 
     @Override public void setImages() {
@@ -99,12 +95,7 @@ public class Player extends AbstractEntity
      * Updates position
      */
     @Override public void update() {
-	if (attackCounter <= attackSpeed){
-	    canAttack = false;
-	}else{
-	    canAttack = true;
-	}
-	attackCounter++;
+	changeCanAttack();
 	setCollisionAreaRelativePos();
 
 	if (keyHandler.getKey(EntityInput.ATTACK)){
@@ -145,7 +136,7 @@ public class Player extends AbstractEntity
     }
 
     @Override public void attack() {
-	if(!canAttack || currentWeapoon == null){
+	if(checkCanAttack()){
 	    return;
 	}
 	attackCounter = 0;
@@ -153,13 +144,17 @@ public class Player extends AbstractEntity
 	    shootProjectile(ObjectType.PLAYER_BOW, entityInput);
 	    return;
 	}
+	addSword();
+    }
+
+    @Override protected boolean checkCanAttack() {
+	return !canAttack || currentWeapoon == null;
+    }
+
+    private void addSword() {
 	PlayerSword pl = new PlayerSword(zinkPanel,currentWeapoon, false);
 	pl.setValues(pos.x,pos.y, getEntityInput());
 	zinkPanel.getGameObjects().add(pl);
-    }
-
-    protected void death() {
-	zinkPanel.setIsGameOver(true);
     }
 
     @Override public void heal() {

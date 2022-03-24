@@ -219,7 +219,7 @@ public class Screen
 	    return;
 	}
 	if (playerChoice == 0) {
-	    startGameChoice();
+	    startGame();
 	}
 	else if (playerChoice == 1) {
 	    startHowToPlay();
@@ -230,7 +230,7 @@ public class Screen
 	howToPlay = true;
     }
 
-    private void startGameChoice() {
+    private void startGame() {
 	zinkPanel.stopShowingTitleScreen();
     }
 

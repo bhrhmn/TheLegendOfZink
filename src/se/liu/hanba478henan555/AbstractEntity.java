@@ -17,6 +17,8 @@ public abstract class AbstractEntity implements Entity
     protected CollisionHandler collisionHandler;
     protected BufferedImage currentImage = null;
 
+    protected int tileSize = -1;
+
     protected Point pos = new Point(0,0);//om något går fel så är den längst upp till vänster
     protected int speed;
     protected int maxHealth, health;
@@ -40,13 +42,17 @@ public abstract class AbstractEntity implements Entity
     protected boolean damaged = false;
     protected int damagedCounter = -1;
     protected int damagedFrameCounter = 0;
+    protected int attackSpeed;
+    protected int attackCounter;
+    protected boolean canAttack;
+    protected int attackBound;
 
-
-    protected AbstractEntity(ZinkPanel zp, CollisionHandler cl, Point pos, EntityType et){
+    protected AbstractEntity(ZinkPanel zp, Point pos, EntityType et){
 	this.zinkPanel = zp;
-	this.collisionHandler = cl;
-	this.pos.x = pos.x * zinkPanel.getTileSize();
-	this.pos.y = pos.y * zinkPanel.getTileSize();
+	this.tileSize = zinkPanel.getTileSize();
+	this.collisionHandler = zinkPanel.getCollisionHandler();
+	this.pos.x = pos.x * tileSize;
+	this.pos.y = pos.y * tileSize;
 	this.type = et;
 
     }
@@ -113,7 +119,7 @@ public abstract class AbstractEntity implements Entity
     }
 
     public void knockback(){
-	moveEntity(getEntityInput() ,-1, zinkPanel.getTileSize()/2);
+	moveEntity(getEntityInput() ,-1, tileSize/2);
     }
 
     public void changePosition(EntityInput input, PointXY xy, int direction, int ammount) {
@@ -191,12 +197,25 @@ public abstract class AbstractEntity implements Entity
 
     public int getammountOfDamage(){return ammountOfDamage;}
 
-    protected void attackRandom() {
+    protected void attackRandom(int procent) {
 	Random random = new Random();
-	int randomInt = random.nextInt(10);
-	if (randomInt == 6) {
+	int randomInt = random.nextInt(100);
+	if (randomInt <= procent) {
 	    attack();
 	}
+    }
+
+    protected void changeCanAttack() {
+	if (attackCounter <= attackSpeed){
+	    canAttack = false;
+	}else{
+	    canAttack = true;
+	}
+	attackCounter++;
+    }
+
+    protected boolean checkCanAttack() {
+	return !canAttack;
     }
 
     @Override public void takeDamage(int damage) {
@@ -219,12 +238,8 @@ public abstract class AbstractEntity implements Entity
     }
 
 
-    protected void death(){
-	zinkPanel.sound.playSoundEffect(3);
-	zinkPanel.getEnemyList().remove(this);
-	BloodPile bloodPile = new BloodPile(zinkPanel);
-	bloodPile.setValues(this.pos.x/ zinkPanel.getTileSize(), this.pos.y/ zinkPanel.getTileSize());
-	zinkPanel.getGameObjects().add(bloodPile);
+    protected void death() {
+	zinkPanel.setIsGameOver(true);
     }
 
     /**

@@ -31,7 +31,7 @@ public class Projectile extends AbstractObject
 	}
     }
 
-    @Override public void update() {
+    public void update() {
 	changePos();
 	setCollisionAreaRelativePos();
 	if (lifeSpan >= zinkPanel.getFPS()) {

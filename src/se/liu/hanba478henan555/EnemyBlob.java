@@ -6,22 +6,18 @@ import java.awt.*;
  * Enemy
  * Can shoot projectiles
  */
-public class Blob extends AbstractEntity
+public class EnemyBlob extends Enemy
 {
 
     private static final int BLOB_HEALTH = 3;
 
-    private int attackCounter;
-    private int attackSpeed;
-    private boolean canAttack;
-
-    protected Blob(final ZinkPanel zp, final CollisionHandler cl, final Point pos) {
-	super(zp, cl, pos, EntityType.ENEMY);
+    protected EnemyBlob(final ZinkPanel zp, final Point pos) {
+	super(zp, pos);
 	setDefaultValues();
     }
 
     @Override public void attack() {
-	if(!canAttack){
+	if(checkCanAttack()){
 	    return;
 	}
 	attackCounter = 0;
@@ -43,8 +39,8 @@ public class Blob extends AbstractEntity
 	setImages();
 
 	this.collisionArea = new Rectangle();
-	collisionArea.width = zinkPanel.getTileSize()*2/3;
-	collisionArea.height = zinkPanel.getTileSize()*2/3;
+	collisionArea.width = tileSize*2/3;
+	collisionArea.height = tileSize*2/3;
 
 	this.collision = true;
 	this.spriteFrames = 10;
@@ -58,31 +54,28 @@ public class Blob extends AbstractEntity
 	this.attackCounter = 0;
 	this.attackSpeed = 5;
 	this.canAttack = true;
+	this.attackBound = 1;
 
 	this.entityInput = EntityInput.DOWN;
     }
 
     @Override public void update() {
-	if (attackCounter <= attackSpeed){
-	    canAttack = false;
-	}else{
-	    canAttack = true;
-	}
-	attackCounter++;
-	attackRandom();
+	changeCanAttack();
+	attackRandom(attackBound);
 	setCollisionAreaRelativePos();
 	collisionHandler.objectCollision(this);
-	currentImage = setImageBasedOnDirection();
+	changeImage();
 	spriteCounter++; moveTick++;
 	moveRandom();
 	moveEntity(entityInput,1,speed);
     }
 
+
     @Override public void draw(final Graphics2D g2) {
 	if (damaged) {
 	    damageAnimation(g2);
 	}
-	g2.drawImage(currentImage, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize() ,null);
+	g2.drawImage(currentImage, pos.x, pos.y, tileSize, tileSize ,null);
 	setAlphaComposite(g2, 1.0f);
     }
 

@@ -26,17 +26,17 @@ public class PlaceSuperObjectsSpawnEnemies
     }
 
     private void spawnEnemy(int x, int y){
-	Enemy en = new Enemy(zinkPanel, zinkPanel.getCollisionHandler(),new Point(x, y));
+	EnemyRed en = new EnemyRed(zinkPanel, new Point(x, y));
 	zinkPanel.getEnemyList().add(en);
     }
 
     private void spawnBlob(int x, int y) {
-	Blob blob = new Blob(zinkPanel, zinkPanel.getCollisionHandler(), new Point(x, y));
+	EnemyBlob blob = new EnemyBlob(zinkPanel, new Point(x, y));
 	zinkPanel.getEnemyList().add(blob);
     }
 
     private void spawnDragon(int x, int y) {
-	Dragon dragon = new Dragon(zinkPanel, zinkPanel.getCollisionHandler(),new Point(x, y));
+	EnemyDragon dragon = new EnemyDragon(zinkPanel, new Point(x, y));
 	zinkPanel.getEnemyList().add(dragon);
     }
 
@@ -88,7 +88,7 @@ public class PlaceSuperObjectsSpawnEnemies
 
 	//spawnBlob(2, 22);
 	//spawnBlob(4, 22);
-	//spawnBlob(6, 22);
+	spawnBlob(6, 22);
 
 	spawnDragon(2, 8);
 

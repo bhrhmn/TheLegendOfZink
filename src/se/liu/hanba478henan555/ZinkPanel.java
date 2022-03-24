@@ -42,7 +42,7 @@ public class ZinkPanel extends JPanel
      */
     public PlaySound music = new PlaySound();
 
-    private Player player = new Player(this,collisionHandler, new Point(7, 8),keyHandler);
+    private Player player = new Player(this, new Point(7, 8),keyHandler);
 
     private List<AbstractEntity> enemyList = new ArrayList<>();
     private List<AbstractObject> gameObjects = new ArrayList<>();
