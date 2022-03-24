@@ -56,7 +56,7 @@ public class ZinkPanel extends JPanel
     private List<AbstractObject> gameObjects = new ArrayList<>();
 
     private PlaceSuperObjectsSpawnEnemies placeSuperObjectsSpawnEnemies = new PlaceSuperObjectsSpawnEnemies(this);
-    private WindowManager screen = new WindowManager(this);
+    private WindowManager windowManager = new WindowManager(this);
     private boolean showingTitleScreen = true;
 
     public ZinkPanel() {
@@ -80,7 +80,7 @@ public class ZinkPanel extends JPanel
 
     public Point getScreenStartPoint() {return screenStartPoint;}
 
-    public WindowManager getScreen() {return screen;}
+    public WindowManager getWindowManager() {return windowManager;}
 
     public List<AbstractEntity> getEnemyList() {return enemyList;}
 
@@ -132,7 +132,7 @@ public class ZinkPanel extends JPanel
      */
     public void tick() {
         if (isGameOver) {
-            screen.showGameOverMessage();
+            windowManager.showGameOverMessage();
             repaint();
             return;
         }
@@ -170,7 +170,7 @@ public class ZinkPanel extends JPanel
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         if (showingTitleScreen) {
-            screen.showTitleScreen(g2);
+            windowManager.showTitleScreen(g2);
             return;
         }
         moveScreen(g2);
@@ -184,7 +184,7 @@ public class ZinkPanel extends JPanel
         }
 
         player.draw(g2);
-        screen.draw(g2);
+        windowManager.draw(g2);
 
     }
 

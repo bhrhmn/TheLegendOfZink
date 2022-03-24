@@ -20,7 +20,7 @@ import java.util.logging.Level;
 public class Sound
 {
     private Clip clip = null;
-    private URL[] soundURL = new URL[6];
+    private URL[] soundURL = new URL[7];
     public Sound(){
 	String fs = File.separator;
 	soundURL[0] = setURL("audio"+fs+"sounds"+fs+"music.wav");
@@ -29,6 +29,7 @@ public class Sound
 	soundURL[3] = setURL("audio"+fs+"sounds"+fs+"death.wav");
 	soundURL[4] = setURL("audio"+fs+"sounds"+fs+"hit.wav");
 	soundURL[5] = setURL("audio"+fs+"sounds"+fs+"swosh_sword.wav");
+	soundURL[6] = setURL("audio"+fs+"sounds"+fs+"heart.wav");
     }
 
     private URL setURL(String filePath){

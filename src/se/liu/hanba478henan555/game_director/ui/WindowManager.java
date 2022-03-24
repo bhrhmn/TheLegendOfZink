@@ -3,14 +3,15 @@ package se.liu.hanba478henan555.game_director.ui;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_player.Player;
 import se.liu.hanba478henan555.game_director.input_manager.KeyHandler;
-import se.liu.hanba478henan555.game_director.input_manager.PointXY;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.life.Heart;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 
 /**
@@ -31,20 +32,26 @@ public class WindowManager
     private int screensizeX, screensizeY;
     private Point currentScreen = new Point(0, 0);
     private int playerChoice = 0;
-    private int arrowCounter = 0; //TODO: bättre lösning än counter
+    private int arrowCounter = 0;
 
     private boolean howToPlay = false;
     private boolean showingInventory = false;
 
     private Point slotPos = new Point(0,0);
-    private int inventoryWidth = 4;
-    private int inventoryHeight = 3;
+    private final static int INVENTORY_WIDTH = 4;
+    private final static int INVENTORY_HEIGHT = 3;
     private int slotCol = 0;
     private int slotRow = 0;
-    private static final int SLOT_SPEED = 3;
+    private static final int SLOT_SPEED = 5;
     private int slotCounter = 0;
 
     private final static int ROUND_CORNERS = 25;
+
+    private final Map<ObjectType, String> objectMessageMap = Map.ofEntries(
+	    Map.entry(ObjectType.KEY, "You got a Key!"),
+	    Map.entry(ObjectType.DOOR, "You opened a Door!"),
+	    Map.entry(ObjectType.HEART, "You got one life!")
+    );
 
 
     public WindowManager(ZinkPanel zp) {
@@ -91,17 +98,8 @@ public class WindowManager
 	currentScreen.y = zinkPanel.getScreenStartPoint().y * zinkPanel.getTileSize() * zinkPanel.getRows();
     }
 
-    public void showKeyMessage() {showObjectMessage(ObjectType.KEY);}
-
-    public void showDoorMessage() {showObjectMessage(ObjectType.DOOR);}
-
-    private void showObjectMessage(ObjectType objectType) {
-	switch (objectType) {
-	    case KEY -> message = "You got a key!";
-	    case DOOR -> message = "You opened a door!";
-	    case CHEST -> message = "You opened a chest!";
-	    case HEART -> message = "You got one life!";
-	}
+    public void showObjectMessage(AbstractObject abstractObject) {
+	message = objectMessageMap.get(abstractObject.getGameObject());
 	showingMessage = true;
 	messageTimer.stop();
 	messageTimer.start();
@@ -114,23 +112,26 @@ public class WindowManager
 	    showTitleScreen(g2);
 	    return;
 	}
-
-	if (showingInventory) {
-	    showInventory(g2);
-	}
-
+	showInventory(g2);
 	updateHearts();
 	g2.setFont(font);
 	g2.setColor(Color.BLACK);
+	drawHearts(g2);
+	showMessage(g2);
+    }
+
+    private void showMessage(Graphics2D g2){
+	if (showingMessage) {
+	    g2.drawString(message, currentScreen.x + screensizeX/3 + font.getSize(),
+			  currentScreen.y + screensizeY/2);
+	}
+    }
+
+    private void drawHearts(Graphics2D g2){
 	int imageSize = zinkPanel.getTileSize()*2 /3;
 	for (int i = 0; i < hearts.length; i++) {
 	    g2.drawImage(hearts[i].getImage(), zinkPanel.getTileSize()*(i+1) + currentScreen.x,
 			 imagePoint.y + currentScreen.y, imageSize, imageSize, null);
-	}
-	if (showingMessage) {
-	    //TODO: Fixa bättre plats för message
-	    g2.drawString(message, currentScreen.x + screensizeX/3 + font.getSize(),
-			  currentScreen.y + screensizeY/2);
 	}
     }
 
@@ -248,54 +249,61 @@ public class WindowManager
     }
 
     private void showInventory(Graphics2D g2) {
-	//frame
+	if (!showingInventory) {
+	    return;
+	}
+	//inventory window
 	int posX = (player.getPos().x  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
 	int posY = (player.getPos().y  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
 
-	int frameX = (posX / zinkPanel.getColumns() *zinkPanel.getColumns()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*9;
-	int frameY = (posY / zinkPanel.getRows() * zinkPanel.getRows()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*2;
+	final int frameX = (posX / zinkPanel.getColumns() *zinkPanel.getColumns()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*9;
+	final int frameY = (posY / zinkPanel.getRows() * zinkPanel.getRows()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*2;
 
 	int framewidth = zinkPanel.getTileSize() * 6;
 	int frameHeigth = zinkPanel.getTileSize() * 5;
 	drawWindow(g2, frameX, frameY, framewidth, frameHeigth);
 
-	//Slot
-	int slotXstart = frameX + 20;
-	int slotYstart = frameY + 20;
+	//slot
+	final int slotXstart = frameX + 20;
+	final int slotYstart = frameY + 20;
 	int slotX = slotXstart;
 	int slotY = slotYstart;
-	int slotSize = zinkPanel.getTileSize()+3;
+	final int slotSize = zinkPanel.getTileSize()+3;
 
-	//draw items
-	for (int i = 0; i < player.getInventory().size(); i++) {
-	    if(player.getInventory().get(i).getGameObject().equals(player.getWeapon())){
-		g2.setColor(Color.ORANGE);
-		g2.fillRoundRect(slotX,slotY,zinkPanel.getTileSize(),zinkPanel.getTileSize(),10,10);
-	    }
-
-	    g2.drawImage(player.getInventory().get(i).getImage(), slotX, slotY, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
-	    slotX += slotSize;
-	    if (i == 4 || i == 9 || i == 14) {
-		slotX = slotXstart;
-		slotY += slotSize;
-	    }
-	}
-
-	//Cursor
-	int cursorX = slotXstart + (slotSize * slotCol);
-	int cursorY = slotYstart + (slotSize * slotRow);
-	int cursorWidth = zinkPanel.getTileSize();
-	int cursorHeight = zinkPanel.getTileSize();
-	//draw
-	g2.setColor(Color.white);
-	g2.drawRect(cursorX, cursorY, cursorWidth, cursorHeight);
+	drawItems(g2, slotXstart, slotX, slotY, slotSize);
+	drawCursor(g2, slotSize, slotXstart, slotYstart);
 
 	moveSlot();
 
     }
 
-    private Point middleOfScreen(int width, int height) {
-	return new Point(currentScreen.x + (screensizeX - width)/2,currentScreen.y + (screensizeY - height)/2);
+    private void drawItems(Graphics2D g2, int startX, int currentX, int currentY, int slotSize){
+
+	for (int i = 0; i < player.getInventory().size(); i++) {
+	    if(player.getInventory().get(i).getGameObject().equals(player.getWeapon())){
+		g2.setColor(Color.ORANGE);
+		g2.fillRoundRect(currentX,currentY,zinkPanel.getTileSize(),zinkPanel.getTileSize(),10,10);
+	    }
+
+	    g2.drawImage(player.getInventory().get(i).getImage(), currentX, currentY, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
+	    currentX += slotSize;
+	    if (i == 4 || i == 9 || i == 14) {
+		currentX = startX;
+		currentY += slotSize;
+	    }
+	}
+    }
+
+    private void drawCursor(Graphics2D g2, int slotSize, int x, int y){
+
+	int cursorX = x + (slotSize * slotCol);
+	int cursorY = y + (slotSize * slotRow);
+	int cursorWidth = zinkPanel.getTileSize();
+	int cursorHeight = zinkPanel.getTileSize();
+
+	g2.setColor(Color.white);
+	g2.drawRect(cursorX, cursorY, cursorWidth, cursorHeight);
+
     }
 
     private void moveSlot() {
@@ -311,7 +319,7 @@ public class WindowManager
 	    }
 	}
 	else if (keyHandler.getKey(EntityInput.DOWN)) {
-	    if (slotRow != inventoryHeight) {
+	    if (slotRow != INVENTORY_HEIGHT) {
 		slotRow++;
 	    }
 	}
@@ -321,12 +329,12 @@ public class WindowManager
 	    }
 	}
 	else if (keyHandler.getKey(EntityInput.RIGHT)) {
-	    if (slotCol != inventoryWidth) {
+	    if (slotCol != INVENTORY_WIDTH) {
 		slotCol++;
 	    }
 	}
 	else if (keyHandler.getKey(EntityInput.ATTACK)){
-	    int index = (slotRow*inventoryWidth+slotCol) + slotRow%inventoryWidth;
+	    int index = (slotRow * INVENTORY_WIDTH + slotCol) + slotRow % INVENTORY_WIDTH;
 	    if (index < player.getInventory().size()){
 		zinkPanel.getPlayer().selectCurrentWeapon(index);
 	    }
@@ -334,59 +342,9 @@ public class WindowManager
 	}
     }
 
-    private void moveSlotInDirection(final EntityInput entityInput) {
-	switch (entityInput) {
-	    case UP -> checkCollision(PointXY.Y, -1);
-	    case DOWN -> checkCollision(PointXY.Y, 1);
-	    case LEFT -> checkCollision(PointXY.X, -1);
-	    case RIGHT -> checkCollision(PointXY.X, 1);
-	}
-    }
-
-    private void checkCollision(PointXY pointXY, final int i) {
-	if (pointXY == PointXY.X) {
-	    slotPos.x += i;
-	    if (slotOutside()) {
-		slotPos.x -= i;
-	    }
-	}
-	else if (pointXY == PointXY.Y) {
-	    slotPos.y += i;
-	    if (slotOutside()) {
-		slotPos.y -= i;
-	    }
-	}
-    }
-
-    private boolean slotOutside() {
-	return (0 > slotPos.x || slotPos.x > inventoryWidth ||
-	    0 > slotPos.y || slotPos.y > inventoryHeight);
-    }
-
-
-    private int scale(final int i) {
-	return i * zinkPanel.getTileSize();
-    }
-
     private void resetSlotPos() {
 	slotPos.x = 0;
 	slotPos.y = 0;
-    }
-
-    private void setSlotBorder(final Graphics2D g2) {
-	changeBackstroke(g2,10.0f);
-	g2.setColor(Color.gray);
-    }
-
-    private Point getCoordinateSlot(Point start, int slotSize, int marginal, int x, int y) {
-	int pointX = start.x + marginal+(slotSize+marginal) * x;
-	int pointY = start.y + marginal+(slotSize+marginal) * y;
-	return new Point(pointX, pointY);
-    }
-
-    private void changeBackstroke(final Graphics2D g2, final float f) {
-	float backStroke = zinkPanel.getTileSize() / f;
-	g2.setStroke(new BasicStroke(backStroke));
     }
 
     private int getStringLength(Graphics2D g2, String text) {

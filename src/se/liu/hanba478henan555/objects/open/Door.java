@@ -43,7 +43,7 @@ public class Door extends AbstractObject
 	if (player.getAmmountOfDoorKeys() > 0){
 	    player.removeAmmountOfDoorkeys();
 	    zinkPanel.getGameObjects().remove(this);
-	    zinkPanel.getScreen().showDoorMessage();
+	    zinkPanel.getWindowManager().showObjectMessage(this);
 	    zinkPanel.getSound().playSoundEffect(2);
 	    return;
 	}

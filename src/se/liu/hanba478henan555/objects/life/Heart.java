@@ -45,6 +45,8 @@ public class Heart extends AbstractObject
 	if (!entity.getEntityType().equals(EntityType.PLAYER))
 	    return;
 	entity.heal();
+	zinkPanel.getSound().playSoundEffect(6);
+	zinkPanel.getWindowManager().showObjectMessage(this);
 	zinkPanel.getGameObjects().remove(this);
     }
 

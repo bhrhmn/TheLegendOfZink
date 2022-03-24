@@ -33,7 +33,7 @@ public class Key extends AbstractObject
     @Override public void whenCollided(AbstractEntity entity) {
 	if (!entity.getEntityType().equals(EntityType.PLAYER))
 	    return;
-	zinkPanel.getScreen().showKeyMessage();
+	zinkPanel.getWindowManager().showObjectMessage(this);
 	zinkPanel.getPlayer().addAmmountOfDoorKeys();
 	zinkPanel.getSound().playSoundEffect(1);
 	zinkPanel.getGameObjects().remove(this);
