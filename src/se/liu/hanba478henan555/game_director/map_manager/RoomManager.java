@@ -45,7 +45,7 @@ public class RoomManager
 
 
     private void loadTile(int index, String filePath, boolean collision){
-	BufferedImage result = null, readFile = null;
+	BufferedImage result, readFile = null;
 	try{
 	    readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
 	} catch (IOException e){

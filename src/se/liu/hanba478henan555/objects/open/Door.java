@@ -3,7 +3,7 @@ package se.liu.hanba478henan555.objects.open;
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
-import se.liu.hanba478henan555.entity.player_entity.Player;
+import se.liu.hanba478henan555.entity.entity_player.Player;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
@@ -34,9 +34,6 @@ public class Door extends AbstractObject
     }
 
 
-    @Override public void update() {
-
-    }
 
     @Override public void whenCollided(AbstractEntity entity) {
 	if (!entity.getEntityType().equals(EntityType.PLAYER))

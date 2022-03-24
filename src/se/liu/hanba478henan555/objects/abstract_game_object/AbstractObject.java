@@ -23,7 +23,7 @@ public abstract class AbstractObject implements GameObject
     protected ZinkPanel zinkPanel;
 
     protected Rectangle collisionArea = null;
-    protected ObjectType gameObject = null;
+    protected ObjectType gameObject;
 
     protected AbstractObject(final ZinkPanel zp,final ObjectType go) {
         this.zinkPanel = zp;
@@ -56,7 +56,7 @@ public abstract class AbstractObject implements GameObject
 
 
     protected BufferedImage setImage(final String filePath){
-        BufferedImage result = null, readFile = null;
+        BufferedImage result, readFile = null;
         try{
             readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
         } catch (IOException e){
@@ -105,7 +105,9 @@ public abstract class AbstractObject implements GameObject
         return collisionArea.intersects(rectangle);
     }
 
+    public void update(){
 
+    }
 
 
 

@@ -1,7 +1,7 @@
 package se.liu.hanba478henan555.objects.weapon;
 
 
-import se.liu.hanba478henan555.entity.enemy.Enemy;
+import se.liu.hanba478henan555.entity.entity_enemy.Enemy;
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
@@ -21,7 +21,7 @@ import java.io.File;
 public class Projectile extends AbstractObject
 {
 
-    private EntityInput direction = null;
+    private EntityInput direction;
 
     private static final int PROJECTILE_SPEED = 5;
     private static final int ARROW_DAMAGE = 1;
@@ -122,7 +122,7 @@ public class Projectile extends AbstractObject
     }
 
     private EntityType getEntityType() {
-	if (entity.getEntityType() == EntityType.ENEMY) {
+	if (entity.getEntityType().equals(EntityType.ENEMY)) {
 	    Enemy enemy = (Enemy) entity;
 	    return enemy.getEnemyType();
 	}

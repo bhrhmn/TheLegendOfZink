@@ -52,10 +52,6 @@ public class PlayerSword extends AbstractObject
         g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
     }
 
-    @Override public void update() {
-
-    }
-
     @Override public void readImage() {
         //TODO: ta bort "/"
         String fs = File.separator;

@@ -43,7 +43,7 @@ public abstract class AbstractEntity implements Entity
     protected Rectangle collisionArea = null;
     protected boolean collision = false;
 
-    protected EntityType entityType = null;
+    protected EntityType entityType;
 
     protected int ammountOfDamage = 0;
     protected boolean damaged = false;
@@ -54,7 +54,7 @@ public abstract class AbstractEntity implements Entity
     protected boolean canAttack;
     protected int attackBound;
 
-    protected Random random = new Random();
+    protected final static Random RANDOM = new Random();
 
     protected AbstractEntity(ZinkPanel zp, Point pos, EntityType et){
 	this.zinkPanel = zp;
@@ -67,7 +67,7 @@ public abstract class AbstractEntity implements Entity
     }
 
     protected BufferedImage setImage(final String filePath){
-	BufferedImage result = null, readFile = null;
+	BufferedImage result,readFile=null;
 	try{
 	    readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
 	} catch (IOException e){
@@ -97,7 +97,6 @@ public abstract class AbstractEntity implements Entity
     }
 
     @Override public void moveEntity(EntityInput pi, int direction, int ammount){
-
 	if (damaged) {
 	    return;
 	}
@@ -123,7 +122,7 @@ public abstract class AbstractEntity implements Entity
 
     protected void moveRandom(){
 	if (moveTick == zinkPanel.getFPS() *2){
-	    int i = random.nextInt(4);
+	    int i = RANDOM.nextInt(4);
 	    if(i == 0){
 		entityInput = EntityInput.UP;
 	    }
@@ -138,6 +137,18 @@ public abstract class AbstractEntity implements Entity
 	    }
 	    moveTick = 0;
 	}
+    }
+
+    protected void updateEntity(){
+	updateCollision();
+	spriteCounter++; moveTick++; //
+	moveRandom(); //
+	moveEntity(entityInput,1,speed); //
+    }
+
+    protected void updateCollision(){
+	setCollisionAreaRelativePos(); //
+	collisionHandler.objectCollision(this); //
     }
 
     public void knockback(){
@@ -224,7 +235,7 @@ public abstract class AbstractEntity implements Entity
     public int getammountOfDamage(){return ammountOfDamage;}
 
     protected void attackRandom(int procent) {
-	int randomInt = random.nextInt(100);
+	int randomInt = RANDOM.nextInt(100);
 	if (randomInt <= procent) {
 	    attack();
 	}
@@ -241,6 +252,10 @@ public abstract class AbstractEntity implements Entity
 
     protected boolean checkCanAttack() {
 	return !canAttack;
+    }
+
+    public void heal() {
+	if (health < maxHealth) health++;
     }
 
     @Override public void takeDamage(int damage) {

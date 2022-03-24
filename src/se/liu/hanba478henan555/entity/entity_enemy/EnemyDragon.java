@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555.entity.enemy;
+package se.liu.hanba478henan555.entity.entity_enemy;
 
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
@@ -62,11 +62,8 @@ public class EnemyDragon extends Enemy
     @Override public void update() {
 	attackRandom(attackBound);
 	setCollisionAreaRelativePos();
-	collisionHandler.objectCollision(this);
+	updateEntity();
 	changeImage();
-	spriteCounter++; moveTick++;
-	moveRandom();
-	moveEntity(entityInput,1,speed);
     }
 
     @Override protected void changeImage() {
@@ -75,7 +72,7 @@ public class EnemyDragon extends Enemy
 
     @Override protected void moveRandom(){
 	if (moveTick == zinkPanel.getFPS() *2){
-	    int i = random.nextInt(3);
+	    int i = RANDOM.nextInt(3);
 	    if(i == 0){
 		entityInput = EntityInput.UP;
 	    }
@@ -94,8 +91,5 @@ public class EnemyDragon extends Enemy
 	setAlphaComposite(g2, 1.0f);
     }
 
-    @Override public void heal() {
-
-    }
 
 }

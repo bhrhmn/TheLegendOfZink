@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555.entity.enemy;
+package se.liu.hanba478henan555.entity.entity_enemy;
 
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
@@ -66,12 +66,8 @@ public class EnemyBlob extends Enemy
     @Override public void update() {
 	changeCanAttack();
 	attackRandom(attackBound);
-	setCollisionAreaRelativePos();
-	collisionHandler.objectCollision(this);
+	updateEntity();
 	changeImage();
-	spriteCounter++; moveTick++;
-	moveRandom();
-	moveEntity(entityInput,1,speed);
     }
 
 
@@ -83,7 +79,4 @@ public class EnemyBlob extends Enemy
 	setAlphaComposite(g2, 1.0f);
     }
 
-    @Override public void heal() {
-
-    }
 }

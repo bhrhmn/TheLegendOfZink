@@ -9,7 +9,6 @@ public interface Entity
 {
     public void attack();
     public void takeDamage(int damage);
-    public void heal();
     public void setImages();
     public void setDefaultValues();
     public void update();

@@ -19,9 +19,7 @@ public class BloodPile extends AbstractObject
 	super(zp, ObjectType.BLOOD_PILE);
     }
 
-    @Override public void update() {
 
-    }
 
     @Override public void whenCollided(final AbstractEntity entity) {
 

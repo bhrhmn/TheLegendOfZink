@@ -15,6 +15,7 @@ import java.io.File;
 /**
  * Gameobject
  * Can show a full heart or an empty heart
+ * When this has a collision with a Player, the Player will heal
  */
 public class Heart extends AbstractObject
 {
@@ -40,10 +41,6 @@ public class Heart extends AbstractObject
 	image = imageEmpty;
     }
 
-    @Override public void update() {
-
-    }
-
     @Override public void whenCollided(AbstractEntity entity) {
 	if (!entity.getEntityType().equals(EntityType.PLAYER))
 	    return;
@@ -53,6 +50,6 @@ public class Heart extends AbstractObject
 
     @Override public void setCollisionArea() {
 	this.collisionArea = new Rectangle(this.pos.x, this.pos.y,
-					   zinkPanel.getTileSize()/2, zinkPanel.getTileSize()/2);
+					   zinkPanel.getTileSize(), zinkPanel.getTileSize());
     }
 }

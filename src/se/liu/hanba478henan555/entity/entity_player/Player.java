@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555.entity.player_entity;
+package se.liu.hanba478henan555.entity.entity_player;
 
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
@@ -130,6 +130,10 @@ public class Player extends AbstractEntity
 		movePlayerBasedOnInput(EntityInput.RIGHT);
 	    }
 	}
+	collision();
+    }
+
+    private void collision(){
 	collisionHandler.objectCollision(this);
 	collisionHandler.abstractEntityCollision(this);
     }
@@ -168,12 +172,6 @@ public class Player extends AbstractEntity
 	pl.setValues(pos.x,pos.y, getEntityInput());
 	zinkPanel.getGameObjects().add(pl);
     }
-
-    @Override public void heal() {
-	if (health < PLAYER_HEALTH) health++;
-    }
-
-
 
     public List<AbstractObject> getInventory() {
 	return inventory;

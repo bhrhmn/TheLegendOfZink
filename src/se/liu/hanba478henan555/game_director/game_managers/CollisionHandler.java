@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class CollisionHandler
 {
-    private ZinkPanel zinkPanel = null;
+    private ZinkPanel zinkPanel;
     private int tileSize;
     public CollisionHandler(ZinkPanel zp){
         this.zinkPanel = zp;
@@ -37,7 +37,6 @@ public class CollisionHandler
    }
 
     public boolean tileCollision(AbstractEntity entity, EntityInput dir){
-
         Point topLeft  = new Point((entity.getCollisionArea().x)/tileSize , (entity.getCollisionArea().y)/tileSize);
         Point topRight = new Point((entity.getCollisionArea().x+entity.getCollisionArea().width)/tileSize , (entity.getCollisionArea().y)/tileSize);
 

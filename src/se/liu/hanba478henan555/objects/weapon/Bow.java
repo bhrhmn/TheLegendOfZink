@@ -30,10 +30,6 @@ public class Bow extends AbstractObject
 					   zinkPanel.getTileSize(), zinkPanel.getTileSize());
     }
 
-    @Override public void update() {
-
-    }
-
     @Override public void whenCollided(AbstractEntity entity) {
 	if (!entity.getEntityType().equals(EntityType.PLAYER))
 	    return;

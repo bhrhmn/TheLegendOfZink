@@ -1,9 +1,10 @@
 package se.liu.hanba478henan555.game_director.game_managers;
 
-import se.liu.hanba478henan555.entity.enemy.EnemyBlob;
-import se.liu.hanba478henan555.entity.enemy.EnemyDragon;
-import se.liu.hanba478henan555.entity.enemy.EnemyRed;
+import se.liu.hanba478henan555.entity.entity_enemy.EnemyBlob;
+import se.liu.hanba478henan555.entity.entity_enemy.EnemyDragon;
+import se.liu.hanba478henan555.entity.entity_enemy.EnemyRed;
 import se.liu.hanba478henan555.objects.life.BloodPile;
+import se.liu.hanba478henan555.objects.life.Heart;
 import se.liu.hanba478henan555.objects.weapon.Bow;
 import se.liu.hanba478henan555.objects.open.Door;
 import se.liu.hanba478henan555.objects.open.Key;
@@ -68,6 +69,13 @@ public class PlaceSuperObjectsSpawnEnemies
 	zinkPanel.getGameObjects().add(bow);
     }
 
+    private void placeHeart(int x, int y) {
+	Heart heart = new Heart(zinkPanel);
+	heart.setValues(x, y);
+	heart.setFullHeart();
+	zinkPanel.getGameObjects().add(heart);
+    }
+
 
     public void placeObjects(){
 
@@ -87,6 +95,10 @@ public class PlaceSuperObjectsSpawnEnemies
 	placeSword(2, 2,  ObjectType.PLAYER_SWORD_BAD);
 
 	placeBow(11,10);
+
+	placeHeart(10, 2);
+	placeHeart(10, 3);
+	placeHeart(10, 4);
     }
 
     public void spawnEnemies(){

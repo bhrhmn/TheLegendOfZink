@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555.entity.enemy;
+package se.liu.hanba478henan555.entity.entity_enemy;
 
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;

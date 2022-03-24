@@ -11,7 +11,6 @@ import java.awt.*;
 public interface GameObject
 {
     public void draw(Graphics2D g2);
-    public void update();
     public boolean hasCollision(Rectangle rectangle);
     public void whenCollided(AbstractEntity entity);
     public void setCollisionArea();

@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555.entity.enemy;
+package se.liu.hanba478henan555.entity.entity_enemy;
 
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
@@ -55,12 +55,8 @@ public class EnemyRed extends Enemy
     }
 
     @Override public void update() {
-	setCollisionAreaRelativePos();
-	collisionHandler.objectCollision(this);
+	updateEntity();
 	changeImage();
-	spriteCounter++; moveTick++;
-	moveRandom();
-	moveEntity(entityInput,1,speed);
     }
 
     @Override public void draw(Graphics2D g2){
@@ -74,12 +70,6 @@ public class EnemyRed extends Enemy
     @Override public void attack() {
 
     }
-
-
-    @Override public void heal() {
-
-    }
-
 
 
 }
