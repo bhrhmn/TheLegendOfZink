@@ -1,6 +1,6 @@
 package se.liu.hanba478henan555;
 
-import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
+import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
 import javax.swing.*;
 
