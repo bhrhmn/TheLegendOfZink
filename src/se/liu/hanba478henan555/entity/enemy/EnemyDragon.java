@@ -1,6 +1,7 @@
 package se.liu.hanba478henan555.entity.enemy;
 
 import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
+import se.liu.hanba478henan555.entity.entity_enum.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
@@ -18,7 +19,7 @@ public class EnemyDragon extends Enemy
     private int size;
 
     public EnemyDragon(final ZinkPanel zp, final Point pos) {
-	super(zp, pos);
+	super(zp, pos, EntityType.DRAGON);
 	setDefaultValues();
     }
 
@@ -51,7 +52,7 @@ public class EnemyDragon extends Enemy
 
 	this.maxHealth = DRAGON_HEALTH;
 	this.health = maxHealth;
-	this.ammountOfDamage = 2;
+	this.ammountOfDamage = zinkPanel.getPlayer().getMaxHealth();
 	this.attackBound = 1;
 
 	this.entityInput = EntityInput.DOWN;

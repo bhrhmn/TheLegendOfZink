@@ -4,8 +4,10 @@ package se.liu.hanba478henan555.objects.abstract_game_object;
 import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * Abstract for the game objects.
@@ -13,6 +15,7 @@ import java.awt.image.BufferedImage;
  */
 public abstract class AbstractObject implements GameObject
 {
+
     protected BufferedImage image = null;
     protected Point pos = null;
     protected ZinkPanel zinkPanel;
@@ -20,12 +23,9 @@ public abstract class AbstractObject implements GameObject
     protected Rectangle collisionArea = null;
     protected ObjectType gameObject = null;
 
-
-
     protected AbstractObject(final ZinkPanel zp,final ObjectType go) {
         this.zinkPanel = zp;
         this.gameObject = go;
-
     }
 
     @Override public void draw(Graphics2D g2){
@@ -50,6 +50,16 @@ public abstract class AbstractObject implements GameObject
         this.pos = new Point(x*zinkPanel.getTileSize(), y*zinkPanel.getTileSize());
         setCollisionArea();
         readImage();
+    }
+
+
+    protected BufferedImage setImage(final String s){
+        try{
+            return ImageIO.read(getClass().getResourceAsStream(s));
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void moreValues(int x, int y, EntityInput ei){

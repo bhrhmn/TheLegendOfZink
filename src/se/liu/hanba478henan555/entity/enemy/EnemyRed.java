@@ -1,5 +1,6 @@
 package se.liu.hanba478henan555.entity.enemy;
 
+import se.liu.hanba478henan555.entity.entity_enum.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
 import java.awt.*;
@@ -17,7 +18,7 @@ public class EnemyRed extends Enemy
     private BufferedImage image = null;
 
     public EnemyRed(ZinkPanel zp, Point pos){
-	super(zp, pos);
+	super(zp, pos, EntityType.RED);
 	setDefaultValues();
 	setImages();
     }

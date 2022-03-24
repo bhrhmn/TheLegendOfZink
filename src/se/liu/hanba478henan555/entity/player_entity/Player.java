@@ -11,6 +11,7 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 import se.liu.hanba478henan555.objects.weapon.PlayerSword;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 

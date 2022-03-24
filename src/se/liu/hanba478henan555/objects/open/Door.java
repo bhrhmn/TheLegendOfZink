@@ -41,7 +41,7 @@ public class Door extends AbstractObject
     }
 
     @Override public void whenCollided(AbstractEntity entity) {
-	if (!entity.getType().equals(EntityType.PLAYER))
+	if (!entity.getEntityType().equals(EntityType.PLAYER))
 	    return;
 	Player player = zinkPanel.getPlayer();
 	int playerSpeed = player.getSpeed();

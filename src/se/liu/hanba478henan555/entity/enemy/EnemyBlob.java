@@ -1,6 +1,7 @@
 package se.liu.hanba478henan555.entity.enemy;
 
 import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
+import se.liu.hanba478henan555.entity.entity_enum.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
@@ -14,9 +15,10 @@ public class EnemyBlob extends Enemy
 {
 
     private static final int BLOB_HEALTH = 3;
+    private EntityType enemyType = null;
 
     public EnemyBlob(final ZinkPanel zp, final Point pos) {
-	super(zp, pos);
+	super(zp, pos, EntityType.BLOB);
 	setDefaultValues();
     }
 

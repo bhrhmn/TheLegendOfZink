@@ -37,7 +37,7 @@ public class Bow extends AbstractObject
     }
 
     @Override public void whenCollided(AbstractEntity entity) {
-	if (!entity.getType().equals(EntityType.PLAYER))
+	if (!entity.getEntityType().equals(EntityType.PLAYER))
 	    return;
 	zinkPanel.getPlayer().getInventory().add(this);
 	zinkPanel.getGameObjects().remove(this);

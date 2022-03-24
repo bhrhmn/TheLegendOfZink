@@ -71,13 +71,13 @@ public class PlayerSword extends AbstractObject
 
     @Override public void whenCollided(AbstractEntity entity) {
         if (onGround) {
-            if (entity.getType().equals(EntityType.PLAYER)) {
+            if (entity.getEntityType().equals(EntityType.PLAYER)) {
                 zinkPanel.getGameObjects().remove(this);
                 zinkPanel.getPlayer().getInventory().add(this);
             }
             return;
         }
-        if (!entity.getType().equals(EntityType.ENEMY)){return;}
+        if (!entity.getEntityType().equals(EntityType.ENEMY)){return;}
         entity.takeDamage(swordDamage.get(gameObject));
     }
 

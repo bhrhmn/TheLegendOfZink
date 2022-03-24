@@ -47,7 +47,7 @@ public class Heart extends AbstractObject
     }
 
     @Override public void whenCollided(AbstractEntity entity) {
-	if (!entity.getType().equals(EntityType.PLAYER))
+	if (!entity.getEntityType().equals(EntityType.PLAYER))
 	    return;
 	entity.heal();
 	zinkPanel.getGameObjects().remove(this);

@@ -44,7 +44,7 @@ public abstract class AbstractEntity implements Entity
     protected Rectangle collisionArea = null;
     protected boolean collision = false;
 
-    protected EntityType type = null;
+    protected EntityType entityType = null;
 
     protected int ammountOfDamage = 0;
     protected boolean damaged = false;
@@ -61,7 +61,7 @@ public abstract class AbstractEntity implements Entity
 	this.collisionHandler = zinkPanel.getCollisionHandler();
 	this.pos.x = pos.x * tileSize;
 	this.pos.y = pos.y * tileSize;
-	this.type = et;
+	this.entityType = et;
 
     }
 
@@ -188,9 +188,13 @@ public abstract class AbstractEntity implements Entity
     }
 
     protected void shootProjectile(ObjectType ob, EntityInput ei) {
-	Projectile p = new Projectile(zinkPanel, ob, ei);
+	Projectile p = new Projectile(zinkPanel, ob, ei, this);
 	p.setValues(pos.x, pos.y, ei);
 	zinkPanel.getGameObjects().add(p);
+    }
+
+    public BufferedImage getCurrentImage(){
+	return currentImage;
     }
 
     @Override public boolean hasCollision(Rectangle rectangle) {
@@ -205,7 +209,7 @@ public abstract class AbstractEntity implements Entity
 	return health;
     }
 
-    public EntityType getType(){return  type;}
+    public EntityType getEntityType(){return entityType;}
 
     public int getammountOfDamage(){return ammountOfDamage;}
 

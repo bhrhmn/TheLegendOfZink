@@ -13,8 +13,11 @@ import java.awt.*;
 public abstract class Enemy extends AbstractEntity
 {
 
-    protected Enemy(final ZinkPanel zp, final Point pos) {
+    protected EntityType enemyType;
+
+    protected Enemy(final ZinkPanel zp, final Point pos, EntityType enemyType) {
 	super(zp, pos, EntityType.ENEMY);
+	this.enemyType = enemyType;
     }
 
     @Override protected void death(){
@@ -27,5 +30,9 @@ public abstract class Enemy extends AbstractEntity
 
     protected void changeImage() {
 	currentImage = setImageBasedOnDirection();
+    }
+
+    public EntityType getEnemyType() {
+	return enemyType;
     }
 }
