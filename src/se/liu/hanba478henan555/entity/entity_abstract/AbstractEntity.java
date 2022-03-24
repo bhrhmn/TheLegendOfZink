@@ -25,7 +25,7 @@ public abstract class AbstractEntity implements Entity
     protected CollisionHandler collisionHandler;
     protected BufferedImage currentImage = null;
 
-    protected int tileSize = -1;
+    protected int tileSize;
 
     protected Point pos = new Point(0,0);//om något går fel så är den längst upp till vänster
     protected int speed;
@@ -193,8 +193,8 @@ public abstract class AbstractEntity implements Entity
 	zinkPanel.getGameObjects().add(p);
     }
 
-    public BufferedImage getCurrentImage(){
-	return currentImage;
+    public int getSpeed() {
+	return speed;
     }
 
     @Override public boolean hasCollision(Rectangle rectangle) {

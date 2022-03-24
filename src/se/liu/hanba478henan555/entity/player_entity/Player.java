@@ -26,7 +26,7 @@ public class Player extends AbstractEntity
 
     private List<AbstractObject> inventory = new ArrayList<>();
 
-    private ObjectType currentWeapoon = null;
+    private ObjectType weapon = null;
 
     public Player(ZinkPanel zp, Point pos, KeyHandler keyHandler) {
 	super(zp, pos, EntityType.PLAYER);
@@ -43,11 +43,11 @@ public class Player extends AbstractEntity
 	    return;
 	}
 	zinkPanel.sound.playSoundEffect(1);
-	currentWeapoon = temp;
+	weapon = temp;
     }
 
-    public ObjectType getCurrentWeapoon() {
-	return currentWeapoon;
+    public ObjectType getWeapon() {
+	return weapon;
     }
 
     public void removeAmmountOfDoorkeys(){
@@ -153,7 +153,7 @@ public class Player extends AbstractEntity
 	    return;
 	}
 	attackCounter = 0;
-	if (currentWeapoon.equals(ObjectType.PLAYER_BOW)){
+	if (weapon.equals(ObjectType.PLAYER_BOW)){
 	    shootProjectile(ObjectType.PLAYER_BOW, entityInput);
 	    return;
 	}
@@ -161,11 +161,11 @@ public class Player extends AbstractEntity
     }
 
     @Override protected boolean checkCanAttack() {
-	return !canAttack || currentWeapoon == null;
+	return !canAttack || weapon == null;
     }
 
     private void addSword() {
-	PlayerSword pl = new PlayerSword(zinkPanel, currentWeapoon, false);
+	PlayerSword pl = new PlayerSword(zinkPanel, weapon, false);
 	pl.setValues(pos.x,pos.y, getEntityInput());
 	zinkPanel.getGameObjects().add(pl);
     }
@@ -180,7 +180,4 @@ public class Player extends AbstractEntity
 	return inventory;
     }
 
-    public int getSpeed() {
-	return speed;
-    }
 }

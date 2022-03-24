@@ -6,6 +6,13 @@ import javax.swing.*;
 
 /**
  * Creates frame and starts game
+ * Creates frame and starts game
+ * Creates frame and starts game
+ * Creates frame and starts game
+ * Creates frame and starts game
+ * Creates frame and starts game
+ * Creates frame and starts game
+ * Creates frame and starts game
  */
 public class StartGame
 {

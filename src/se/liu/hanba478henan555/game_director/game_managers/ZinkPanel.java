@@ -3,7 +3,7 @@ package se.liu.hanba478henan555.game_director.game_managers;
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.player_entity.Player;
 import se.liu.hanba478henan555.game_director.input_manager.KeyHandler;
-import se.liu.hanba478henan555.game_director.UI.WindowManager;
+import se.liu.hanba478henan555.game_director.ui.WindowManager;
 import se.liu.hanba478henan555.game_director.map_manager.RoomManager;
 import se.liu.hanba478henan555.game_director.sound_manager.PlaySound;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;

@@ -34,15 +34,15 @@ public class RoomManager
 
     private void defineTileTypes() {
 	//TODO ta bort "/"
-	loadTile(0,  "/images" + fs + "tiles" + fs + "wall.png",true);
-	loadTile(1,  "/images" + fs + "tiles" + fs + "earth.png",false);
-	loadTile(2,  "/images" + fs + "tiles" + fs + "pedestal.png",false);
+	loadTile(0,  "images" + fs + "tiles" + fs + "wall.png",true);
+	loadTile(1,  "images" + fs + "tiles" + fs + "earth.png",false);
+	loadTile(2,  "images" + fs + "tiles" + fs + "pedestal.png",false);
     }
 
     private void loadTile(int index, String filePath, boolean collision){
 	try {
 	    tileTypes[index] = new Tile();
-	    tileTypes[index].setImage(ImageIO.read(getClass().getResourceAsStream(filePath)));
+	    tileTypes[index].setImage(ImageIO.read(getClass().getResourceAsStream("/" + filePath)));
 	    tileTypes[index].setCollision(collision);
 	} catch (IOException e) {
 	    e.printStackTrace();

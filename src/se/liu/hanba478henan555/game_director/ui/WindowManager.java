@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555.game_director.UI;
+package se.liu.hanba478henan555.game_director.ui;
 
 import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
 import se.liu.hanba478henan555.entity.player_entity.Player;
@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 public class WindowManager
 {
     private boolean showingMessage = false;
-    private String message = "hejsan";
+    private String message = null;
     private Font font;
     private Timer messageTimer = null;
 
@@ -42,7 +42,7 @@ public class WindowManager
     private int inventoryHeight = 3;
     private int slotCol = 0;
     private int slotRow = 0;
-    private static final int SLOT_SPEED = 2;//TODO: FIXA
+    private static final int SLOT_SPEED = 3;
     private int slotCounter = 0;
     private int marginal;
 
@@ -270,7 +270,7 @@ public class WindowManager
 
 	//draw items
 	for (int i = 0; i < player.getInventory().size(); i++) {
-	    if(player.getInventory().get(i).getGameObject().equals(player.getCurrentWeapoon())){
+	    if(player.getInventory().get(i).getGameObject().equals(player.getWeapon())){
 		g2.setColor(Color.ORANGE);
 		g2.fillRoundRect(slotX,slotY,zinkPanel.getTileSize(),zinkPanel.getTileSize(),10,10);
 	    }

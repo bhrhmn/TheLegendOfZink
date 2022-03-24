@@ -73,7 +73,7 @@ public class Projectile extends AbstractObject
 
     private void setDamage() {
 	damage = 1;
-	if (checkEntityType() == EntityType.DRAGON) damage++;
+	if (getEntityType() == EntityType.DRAGON) damage++;
     }
 
     @Override public void whenCollided(final AbstractEntity entity) {
@@ -120,17 +120,17 @@ public class Projectile extends AbstractObject
     }
 
     private void correctImage() {
-	switch (checkEntityType()) {
+	switch (getEntityType()) {
 	    case PLAYER -> image = arrow;
 	    case BLOB -> image = blobBall;
 	    case DRAGON -> image = fireBall;
 	}
     }
 
-    private EntityType checkEntityType() {
+    private EntityType getEntityType() {
 	if (entity.getEntityType() == EntityType.ENEMY) {
-	    Enemy tempEnemy = (Enemy) entity;
-	    return tempEnemy.getEnemyType();
+	    Enemy enemy = (Enemy) entity;
+	    return enemy.getEnemyType();
 	}
 	return EntityType.PLAYER;
     }
