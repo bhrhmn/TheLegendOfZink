@@ -1,8 +1,6 @@
 package se.liu.hanba478henan555.entity.entity_abstract;
 
 import se.liu.hanba478henan555.LoggingManager;
-import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
-import se.liu.hanba478henan555.entity.entity_enum.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.CollisionHandler;
 import se.liu.hanba478henan555.game_director.input_manager.PointXY;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
@@ -22,7 +20,6 @@ import java.util.logging.Level;
  */
 public abstract class AbstractEntity implements Entity
 {
-
     protected ZinkPanel zinkPanel;
     protected CollisionHandler collisionHandler;
     protected BufferedImage currentImage = null;

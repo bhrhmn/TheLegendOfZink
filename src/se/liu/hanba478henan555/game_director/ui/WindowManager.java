@@ -1,6 +1,6 @@
 package se.liu.hanba478henan555.game_director.ui;
 
-import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
+import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.player_entity.Player;
 import se.liu.hanba478henan555.game_director.input_manager.KeyHandler;
 import se.liu.hanba478henan555.game_director.input_manager.PointXY;
@@ -27,7 +27,6 @@ public class WindowManager
     private Player player;
     private Heart[] hearts;
     private Point imagePoint;
-    private int playerHearts;
 
     private int screensizeX, screensizeY;
     private Point currentScreen = new Point(0, 0);
@@ -44,7 +43,6 @@ public class WindowManager
     private int slotRow = 0;
     private static final int SLOT_SPEED = 3;
     private int slotCounter = 0;
-    private int marginal;
 
     private final static int ROUND_CORNERS = 25;
 
@@ -68,7 +66,7 @@ public class WindowManager
     }
 
     private void setValues() {
-	this.marginal = zinkPanel.getTileSize()/2;
+	int marginal = zinkPanel.getTileSize() / 2;
 	this.screensizeX = zinkPanel.getTileSize() * zinkPanel.getColumns();
 	this.screensizeY = zinkPanel.getTileSize() * zinkPanel.getRows();
 	int coordinate = zinkPanel.getTileSize()/3;
@@ -298,13 +296,6 @@ public class WindowManager
 
     private Point middleOfScreen(int width, int height) {
 	return new Point(currentScreen.x + (screensizeX - width)/2,currentScreen.y + (screensizeY - height)/2);
-    }
-
-    private void drawSlots(final Graphics2D g2, final int slotWidth, final int slotHeight, final int size,
-			   final Point start) {
-	setSlotBorder(g2);
-	moveSlot();
-	g2.drawRect(start.x + scale(slotPos.x) +marginal*slotPos.x, start.y + scale(slotPos.y) +marginal*slotPos.y, size, size);
     }
 
     private void moveSlot() {

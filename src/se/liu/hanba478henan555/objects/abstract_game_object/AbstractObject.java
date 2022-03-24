@@ -2,7 +2,7 @@ package se.liu.hanba478henan555.objects.abstract_game_object;
 
 
 import se.liu.hanba478henan555.LoggingManager;
-import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
+import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
 import javax.imageio.ImageIO;

@@ -1,7 +1,5 @@
 package se.liu.hanba478henan555.entity.entity_abstract;
 
-import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
-
 import java.awt.*;
 
 /**

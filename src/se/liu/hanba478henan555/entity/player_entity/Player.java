@@ -1,8 +1,8 @@
 package se.liu.hanba478henan555.entity.player_entity;
 
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
-import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
-import se.liu.hanba478henan555.entity.entity_enum.EntityType;
+import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
+import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.input_manager.KeyHandler;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
@@ -22,7 +22,10 @@ import java.util.List;
 public class Player extends AbstractEntity
 {
     private KeyHandler keyHandler;
+
     private static final int PLAYER_HEALTH = 3;
+    private static final int SPRITE_FRAMES = 10;
+    private static final int SPEED = 3;
 
     private List<AbstractObject> inventory = new ArrayList<>();
 
@@ -78,8 +81,7 @@ public class Player extends AbstractEntity
 	setCollisionArea();
 
 	this.collision = true;
-	this.spriteFrames = 10;
-	this.speed = 3; // sets speed of player
+	this.speed = SPEED;
 
 	this.maxHealth = PLAYER_HEALTH;
 	this.health = maxHealth;

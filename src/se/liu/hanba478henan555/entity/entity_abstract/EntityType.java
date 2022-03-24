@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555.entity.entity_enum;
+package se.liu.hanba478henan555.entity.entity_abstract;
 
 /**
  * type of entity

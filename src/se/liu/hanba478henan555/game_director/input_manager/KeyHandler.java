@@ -1,6 +1,6 @@
 package se.liu.hanba478henan555.game_director.input_manager;
 
-import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
+import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
 import java.awt.event.KeyAdapter;

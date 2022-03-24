@@ -3,8 +3,8 @@ package se.liu.hanba478henan555.objects.weapon;
 
 import se.liu.hanba478henan555.entity.enemy.Enemy;
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
-import se.liu.hanba478henan555.entity.entity_enum.EntityInput;
-import se.liu.hanba478henan555.entity.entity_enum.EntityType;
+import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
+import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;

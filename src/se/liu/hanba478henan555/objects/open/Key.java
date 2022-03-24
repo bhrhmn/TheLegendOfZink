@@ -1,7 +1,7 @@
 package se.liu.hanba478henan555.objects.open;
 
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
-import se.liu.hanba478henan555.entity.entity_enum.EntityType;
+import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;

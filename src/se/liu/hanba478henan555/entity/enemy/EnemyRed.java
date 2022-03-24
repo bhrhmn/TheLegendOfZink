@@ -1,6 +1,6 @@
 package se.liu.hanba478henan555.entity.enemy;
 
-import se.liu.hanba478henan555.entity.entity_enum.EntityType;
+import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
 import java.awt.*;
