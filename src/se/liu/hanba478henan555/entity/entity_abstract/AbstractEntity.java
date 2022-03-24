@@ -67,7 +67,7 @@ public abstract class AbstractEntity implements Entity
 
     protected BufferedImage setImage(final String s){
 	try{
-	    return ImageIO.read(getClass().getResourceAsStream(s));
+	    return ImageIO.read(getClass().getResourceAsStream("/"+s));
 	}catch (IOException e) {
 	    e.printStackTrace();
 	}

@@ -23,12 +23,16 @@ public class Projectile extends AbstractObject
 {
 
     private EntityInput direction = null;
-    private static final int PROJ_SPEED = 5;
-    private int soundDistance = -1;
+
+    private static final int PROJECTILE_SPEED = 5;
+    private static final int ARROW_DAMAGE = 1;
+
+    private int soundDistance;
     private int lifeSpan;
-    private AbstractEntity entity = null;
+    private AbstractEntity entity;
     private BufferedImage arrow = null, blobBall = null, fireBall = null;
     private int damage;
+
 
 
     public Projectile(final ZinkPanel zp, final ObjectType go, EntityInput ei, AbstractEntity entity) {
@@ -50,10 +54,10 @@ public class Projectile extends AbstractObject
     private void changePos(){
 	lifeSpan++;
 	switch (direction){
-	    case UP -> {pos.y-=PROJ_SPEED;}
-	    case DOWN -> {pos.y+=PROJ_SPEED;}
-	    case RIGHT -> {pos.x+=PROJ_SPEED;}
-	    case LEFT -> {pos.x-=PROJ_SPEED;}
+	    case UP -> {pos.y-= PROJECTILE_SPEED;}
+	    case DOWN -> {pos.y+= PROJECTILE_SPEED;}
+	    case RIGHT -> {pos.x+= PROJECTILE_SPEED;}
+	    case LEFT -> {pos.x-= PROJECTILE_SPEED;}
 	}
     }
 
@@ -72,21 +76,21 @@ public class Projectile extends AbstractObject
     }
 
     private void setDamage() {
-	damage = 1;
-	if (getEntityType() == EntityType.DRAGON) damage++;
+	damage = ARROW_DAMAGE;
+	if (getEntityType().equals(EntityType.DRAGON)) damage++;
     }
 
     @Override public void whenCollided(final AbstractEntity entity) {
 	switch (gameObject){
 	    case PLAYER_BOW -> {
-		if ((entity.getEntityType() == EntityType.ENEMY)){
-		    entity.takeDamage(1);
+		if (entity.getEntityType().equals(EntityType.ENEMY)){
+		    entity.takeDamage(ARROW_DAMAGE);
 		    zinkPanel.getGameObjects().remove(this);
 		}
 
 	    }
 	    case ENEMY_BOW -> {
-		if (entity.getEntityType() == EntityType.PLAYER) {
+		if (entity.getEntityType().equals(EntityType.PLAYER)) {
 		    entity.takeDamage(damage);
 		    zinkPanel.getGameObjects().remove(this);
 		}
@@ -101,21 +105,12 @@ public class Projectile extends AbstractObject
 					   zinkPanel.getTileSize()/3, zinkPanel.getTileSize()/3);
     }
 
-    private void set(){
-
-    }
 
     @Override public void readImage() {
-	//TODO: ta bort "/"
-	try {
-	    String fs = File.separator;
-	    arrow = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"objectImages"+fs+"weapon"+fs+"bow_arrow"+fs+"arrow.png"));
-	    blobBall = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"enemyImages"+fs+"enemy_projectiles"+fs+"blob_projectile.png"));
-	    fireBall = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"enemyImages"+fs+"enemy_projectiles"+fs+"dragon_projectile.png"));
-	}catch (IOException e){
-	    e.printStackTrace();
-	}
-	set();
+	String fs = File.separator;
+	arrow = setImage("images"+fs+"objectImages"+fs+"weapon"+fs+"bow_arrow"+fs+"arrow.png");
+	blobBall = setImage("images"+fs+"enemyImages"+fs+"enemy_projectiles"+fs+"blob_projectile.png");
+	fireBall = setImage("images"+fs+"enemyImages"+fs+"enemy_projectiles"+fs+"dragon_projectile.png");
 	correctImage();
     }
 

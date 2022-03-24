@@ -33,10 +33,9 @@ public class EnemyDragon extends Enemy
     }
 
     @Override public void setImages() {
-	//TODO: ta bort "/"
 	String fs = File.separator;
-	up1 = setImage("/images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_1.png");
-	up2 = setImage("/images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_2.png");
+	up1 = setImage("images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_1.png");
+	up2 = setImage("images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_2.png");
     }
 
     @Override public void setDefaultValues() {
