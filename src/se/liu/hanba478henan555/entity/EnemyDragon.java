@@ -1,4 +1,7 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.entity;
+
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
+import se.liu.hanba478henan555.objects.ObjectType;
 
 import java.awt.*;
 import java.util.Random;
@@ -13,7 +16,7 @@ public class EnemyDragon extends Enemy
 
     private int size;
 
-    protected EnemyDragon(final ZinkPanel zp, final Point pos) {
+    public EnemyDragon(final ZinkPanel zp, final Point pos) {
 	super(zp, pos);
 	setDefaultValues();
     }
@@ -27,8 +30,8 @@ public class EnemyDragon extends Enemy
     }
 
     @Override public void setImages() {
-	up1 = setImage("./enemy/dragon_1.png");
-	up2 = setImage("./enemy/dragon_2.png");
+	up1 = setImage("/images/enemyImages/dragon_1.png");
+	up2 = setImage("/images/enemyImages/dragon_2.png");
     }
 
     @Override public void setDefaultValues() {

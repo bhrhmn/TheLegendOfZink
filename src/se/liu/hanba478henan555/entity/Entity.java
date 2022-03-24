@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.entity;
 
 import java.awt.*;
 

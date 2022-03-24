@@ -1,4 +1,8 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.game_mechanics;
+
+import se.liu.hanba478henan555.entity.AbstractEntity;
+import se.liu.hanba478henan555.entity.EntityInput;
+import se.liu.hanba478henan555.objects.GameObject;
 
 import java.awt.*;
 
@@ -17,7 +21,7 @@ public class CollisionHandler
     public void objectCollision(AbstractEntity entity) {
         for (int i = 0; i < zinkPanel.getGameObjects().size(); i++){
             GameObject gameObject = zinkPanel.getGameObjects().get(i);
-            if (gameObject != null && gameObject.hasCollision(entity.collisionArea)) {
+            if (gameObject != null && gameObject.hasCollision(entity.getCollisionArea())) {
                 gameObject.whenCollided(entity);
             }
         }
@@ -26,7 +30,7 @@ public class CollisionHandler
    public void abstractEntityCollision(AbstractEntity entity){
        for (int i = 0; i < zinkPanel.getEnemyList().size(); i++){
            AbstractEntity enemy = zinkPanel.getEnemyList().get(i);
-           if (enemy != null && enemy.hasCollision(entity.collisionArea) && !enemy.getType().equals(entity.getType()) && enemy.collision) {
+           if (enemy != null && enemy.hasCollision(entity.getCollisionArea()) && !enemy.getType().equals(entity.getType()) && enemy.getCollision()) {
                entity.takeDamage(enemy.getammountOfDamage());
            }
        }
@@ -34,11 +38,11 @@ public class CollisionHandler
 
     public boolean tileCollision(AbstractEntity entity, EntityInput dir){
 
-        Point topLeft  = new Point((entity.collisionArea.x)/tileSize , (entity.collisionArea.y)/tileSize);
-        Point topRight = new Point((entity.collisionArea.x+entity.collisionArea.width)/tileSize , (entity.collisionArea.y)/tileSize);
+        Point topLeft  = new Point((entity.getCollisionArea().x)/tileSize , (entity.getCollisionArea().y)/tileSize);
+        Point topRight = new Point((entity.getCollisionArea().x+entity.getCollisionArea().width)/tileSize , (entity.getCollisionArea().y)/tileSize);
 
-        Point bottomLeft  = new Point((entity.collisionArea.x)/tileSize , (entity.collisionArea.height+entity.collisionArea.y)/tileSize);
-        Point bottomRight = new Point((entity.collisionArea.width+entity.collisionArea.x)/tileSize , (entity.collisionArea.height+entity.collisionArea.y)/tileSize);
+        Point bottomLeft  = new Point((entity.getCollisionArea().x)/tileSize , (entity.getCollisionArea().height+entity.getCollisionArea().y)/tileSize);
+        Point bottomRight = new Point((entity.getCollisionArea().width+entity.getCollisionArea().x)/tileSize , (entity.getCollisionArea().height+entity.getCollisionArea().y)/tileSize);
 
         switch (dir){
             case UP:{

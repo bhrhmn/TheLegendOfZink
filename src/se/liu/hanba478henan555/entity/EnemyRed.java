@@ -1,4 +1,6 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.entity;
+
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -1,5 +1,7 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.objects;
 
+
+import se.liu.hanba478henan555.entity.AbstractEntity;
 
 import java.awt.*;
 

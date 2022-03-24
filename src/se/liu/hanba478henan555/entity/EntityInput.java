@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.entity;
 
 /**
  * Different types of input from user and non playable entities

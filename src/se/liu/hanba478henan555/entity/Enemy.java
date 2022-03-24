@@ -1,4 +1,7 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.entity;
+
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
+import se.liu.hanba478henan555.objects.BloodPile;
 
 import java.awt.*;
 

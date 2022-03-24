@@ -1,4 +1,7 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.entity;
+
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
+import se.liu.hanba478henan555.objects.ObjectType;
 
 import java.awt.*;
 
@@ -11,7 +14,7 @@ public class EnemyBlob extends Enemy
 
     private static final int BLOB_HEALTH = 3;
 
-    protected EnemyBlob(final ZinkPanel zp, final Point pos) {
+    public EnemyBlob(final ZinkPanel zp, final Point pos) {
 	super(zp, pos);
 	setDefaultValues();
     }
@@ -25,14 +28,14 @@ public class EnemyBlob extends Enemy
     }
 
     @Override public void setImages() {
-	up1    = setImage("./enemy/blob_up_1.png");
-	up2    = setImage("./enemy/blob_up_2.png");
-	down1  = setImage("./enemy/blob_down_1.png");
-	down2  = setImage("./enemy/blob_down_2.png");
-	right1 = setImage("./enemy/blob_right_1.png");
-	right2 = setImage("./enemy/blob_right_2.png");
-	left1  = setImage("./enemy/blob_left_1.png");
-	left2  = setImage("./enemy/blob_left_2.png");
+	up1    = setImage("/images/enemyImages/blob_up_1.png");
+	up2    = setImage("/images/enemyImages/blob_up_2.png");
+	down1  = setImage("/images/enemyImages/blob_down_1.png");
+	down2  = setImage("/images/enemyImages/blob_down_2.png");
+	right1 = setImage("/images/enemyImages/blob_right_1.png");
+	right2 = setImage("/images/enemyImages/blob_right_2.png");
+	left1  = setImage("/images/enemyImages/blob_left_1.png");
+	left2  = setImage("/images/enemyImages/blob_left_2.png");
     }
 
     @Override public void setDefaultValues() {

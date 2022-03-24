@@ -1,4 +1,14 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.game_mechanics;
+
+import se.liu.hanba478henan555.entity.EnemyBlob;
+import se.liu.hanba478henan555.entity.EnemyDragon;
+import se.liu.hanba478henan555.entity.EnemyRed;
+import se.liu.hanba478henan555.objects.BloodPile;
+import se.liu.hanba478henan555.objects.Bow;
+import se.liu.hanba478henan555.objects.Door;
+import se.liu.hanba478henan555.objects.Key;
+import se.liu.hanba478henan555.objects.ObjectType;
+import se.liu.hanba478henan555.objects.PlayerSword;
 
 import java.awt.*;
 

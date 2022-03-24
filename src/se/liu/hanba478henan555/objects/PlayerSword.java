@@ -1,4 +1,9 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.objects;
+
+import se.liu.hanba478henan555.entity.AbstractEntity;
+import se.liu.hanba478henan555.entity.EntityInput;
+import se.liu.hanba478henan555.entity.EntityType;
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -21,7 +26,7 @@ public class PlayerSword extends AbstractObject
             Map.entry(ObjectType.PLAYER_SWORD_GOOD, 2)));
 
 
-    protected PlayerSword(final ZinkPanel zp, final ObjectType gameObject, boolean onGround) {
+    public PlayerSword(final ZinkPanel zp, final ObjectType gameObject, boolean onGround) {
         super(zp, gameObject);
         this.onGround = onGround;
 
@@ -44,11 +49,15 @@ public class PlayerSword extends AbstractObject
         g2.drawImage(image, pos.x, pos.y, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
     }
 
+    @Override public void update() {
+
+    }
+
     @Override public void readImage() {
         try {
             switch (gameObject){
-                case PLAYER_SWORD_BAD -> {image = ImageIO.read(getClass().getResourceAsStream("./player/sword_weak.png"));}
-                case PLAYER_SWORD_GOOD -> {image = ImageIO.read(getClass().getResourceAsStream("./player/sword_strong.png"));}
+                case PLAYER_SWORD_BAD -> {image = ImageIO.read(getClass().getResourceAsStream("/images/objectImages/sword_weak.png"));}
+                case PLAYER_SWORD_GOOD -> {image = ImageIO.read(getClass().getResourceAsStream("/images/objectImages/sword_strong.png"));}
             }
 
         }catch (IOException e){

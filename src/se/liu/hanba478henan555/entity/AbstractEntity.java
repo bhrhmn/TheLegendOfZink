@@ -1,4 +1,10 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.entity;
+
+import se.liu.hanba478henan555.game_mechanics.CollisionHandler;
+import se.liu.hanba478henan555.game_mechanics.PointXY;
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
+import se.liu.hanba478henan555.objects.ObjectType;
+import se.liu.hanba478henan555.objects.Projectile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -266,5 +272,17 @@ public abstract class AbstractEntity implements Entity
 
     protected void setAlphaComposite(final Graphics2D g2, final float alpha) {
 	g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+    }
+
+    public Point getPos() {
+	return pos;
+    }
+
+    public Rectangle getCollisionArea() {
+	return collisionArea;
+    }
+
+    public boolean getCollision() {
+	return collision;
     }
 }

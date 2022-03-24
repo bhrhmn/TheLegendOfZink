@@ -1,5 +1,8 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.objects;
 
+
+import se.liu.hanba478henan555.entity.EntityInput;
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,10 +25,6 @@ public abstract class AbstractObject implements GameObject
     protected AbstractObject(final ZinkPanel zp,final ObjectType go) {
         this.zinkPanel = zp;
         this.gameObject = go;
-
-    }
-
-    @Override public void update() {
 
     }
 
@@ -74,6 +73,10 @@ public abstract class AbstractObject implements GameObject
 
         }
         setCollisionArea();
+    }
+
+    public BufferedImage getImage() {
+        return image;
     }
 
     /**

@@ -1,4 +1,9 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.game_mechanics;
+
+import se.liu.hanba478henan555.entity.EntityInput;
+import se.liu.hanba478henan555.entity.Player;
+import se.liu.hanba478henan555.objects.Heart;
+import se.liu.hanba478henan555.objects.ObjectType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -118,7 +123,7 @@ public class Screen
 	g2.setColor(Color.BLACK);
 	int imageSize = zinkPanel.getTileSize()*2 /3;
 	for (int i = 0; i < hearts.length; i++) {
-	    g2.drawImage(hearts[i].image, zinkPanel.getTileSize()*(i+1) + currentScreen.x,
+	    g2.drawImage(hearts[i].getImage(), zinkPanel.getTileSize()*(i+1) + currentScreen.x,
 			 imagePoint.y + currentScreen.y, imageSize, imageSize, null);
 	}
 	if (showingMessage) {
@@ -243,8 +248,8 @@ public class Screen
 
     private void showInventory(Graphics2D g2) {
 	//frame
-	int posX = (player.pos.x  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
-	int posY = (player.pos.y  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
+	int posX = (player.getPos().x  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
+	int posY = (player.getPos().y  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
 
 	int frameX = (posX / zinkPanel.getColumns() *zinkPanel.getColumns()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*9;
 	int frameY = (posY / zinkPanel.getRows() * zinkPanel.getRows()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*2;
@@ -267,7 +272,7 @@ public class Screen
 		g2.fillRoundRect(slotX,slotY,zinkPanel.getTileSize(),zinkPanel.getTileSize(),10,10);
 	    }
 
-	    g2.drawImage(player.getInventory().get(i).image, slotX, slotY, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
+	    g2.drawImage(player.getInventory().get(i).getImage(), slotX, slotY, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
 	    slotX += slotSize;
 	    if (i == 4 || i == 9 || i == 14) {
 		slotX = slotXstart;

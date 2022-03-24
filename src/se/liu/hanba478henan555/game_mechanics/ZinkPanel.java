@@ -1,4 +1,8 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.game_mechanics;
+
+import se.liu.hanba478henan555.entity.AbstractEntity;
+import se.liu.hanba478henan555.entity.Player;
+import se.liu.hanba478henan555.objects.AbstractObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +46,7 @@ public class ZinkPanel extends JPanel
      */
     public PlaySound music = new PlaySound();
 
-    private Player player = new Player(this, new Point(7, 8),keyHandler);
+    private Player player = new Player(this, new Point(7, 8), keyHandler);
 
     private List<AbstractEntity> enemyList = new ArrayList<>();
     private List<AbstractObject> gameObjects = new ArrayList<>();
@@ -148,8 +152,8 @@ public class ZinkPanel extends JPanel
     }
 
     private void moveScreen(Graphics g){
-        int posX = (player.pos.x  + getTileSize() / 2)/ getTileSize();
-        int posY = (player.pos.y  + getTileSize() / 2)/ getTileSize();
+        int posX = (player.getPos().x  + getTileSize() / 2)/ getTileSize();
+        int posY = (player.getPos().y  + getTileSize() / 2)/ getTileSize();
         g.translate((posX / getColumns()) *-getColumns()*getTileSize(),
                     (posY / getRows()) *-getRows()*getTileSize());
         screenStartPoint.x = posX / getColumns();

@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.game_mechanics;
 import java.awt.image.BufferedImage;
 
 /**

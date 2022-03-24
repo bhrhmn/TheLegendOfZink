@@ -1,5 +1,10 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.objects;
 
+
+import se.liu.hanba478henan555.entity.AbstractEntity;
+import se.liu.hanba478henan555.entity.EntityInput;
+import se.liu.hanba478henan555.entity.EntityType;
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,7 +19,7 @@ public class Projectile extends AbstractObject
     private EntityInput direction = null;
     private static final int PROJ_SPEED = 5;
     private int lifeSpan;
-    protected Projectile(final ZinkPanel zp, final ObjectType go, EntityInput ei) {
+    public Projectile(final ZinkPanel zp, final ObjectType go, EntityInput ei) {
 	super(zp, go);
 	this.direction = ei;
 	zinkPanel.sound.playSoundEffect(2);
@@ -70,7 +75,7 @@ public class Projectile extends AbstractObject
 
     @Override public void readImage() {
 	try {
-	    image = ImageIO.read(getClass().getResourceAsStream("./objects/arrow.png"));
+	    image = ImageIO.read(getClass().getResourceAsStream("/images/objectImages/arrow.png"));
 	}catch (IOException e){
 	    e.printStackTrace();
 	}

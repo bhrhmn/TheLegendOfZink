@@ -1,9 +1,8 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.game_mechanics;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,27 +25,26 @@ public class RoomManager
 	this.tileTypes = new Tile[10];
 	this.roomTileData = new int[worldColumns][worldRows];
 	defineTileTypes();
-	loadMap("src/se/liu/hanba478henan555/world/world.txt");
+	loadMap("resources/world/world.txt");
     }
 
     private void defineTileTypes() {
+	loadTile(0,"/images/tiles/wall.png",true);
+	loadTile(1,"/images/tiles/earth.png",false);
+    }
+
+    private void loadTile(int index, String filePath, boolean collision){
 	try {
-	    tileTypes[0] = new Tile();
-	    tileTypes[0].setImage(ImageIO.read(new File("src/se/liu/hanba478henan555/tiles/wall.png")));
-	    tileTypes[0].setCollision(true);
-
-
-	    tileTypes[1] = new Tile();
-	    tileTypes[1].setImage(ImageIO.read(new File("src/se/liu/hanba478henan555/tiles/earth.png")));
-
-	}catch (IOException e) {
+	    tileTypes[index] = new Tile();
+	    tileTypes[index].setImage(ImageIO.read(getClass().getResourceAsStream(filePath)));
+	    tileTypes[index].setCollision(collision);
+	} catch (IOException e) {
 	    e.printStackTrace();
 	}
     }
 
     public void loadMap(String roomFile) {
 	Scanner scanner = null;
-
 	try{scanner = new Scanner(new BufferedReader(new FileReader(roomFile)));
 	} catch (FileNotFoundException e){ e.printStackTrace();}
 

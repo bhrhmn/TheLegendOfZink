@@ -1,4 +1,8 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.objects;
+
+import se.liu.hanba478henan555.entity.AbstractEntity;
+import se.liu.hanba478henan555.entity.EntityType;
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,8 +24,8 @@ public class Heart extends AbstractObject
 
     @Override public void readImage() {
 	try {
-	    imageFull = ImageIO.read(getClass().getResourceAsStream("./objects/heart_full.png"));
-	    imageEmpty = ImageIO.read(getClass().getResourceAsStream("./objects/heart_empty.png"));
+	    imageFull = ImageIO.read(getClass().getResourceAsStream("/images/objectImages/heart_full.png"));
+	    imageEmpty = ImageIO.read(getClass().getResourceAsStream("/images/objectImages/heart_empty.png"));
 	}catch (IOException e){
 	    e.printStackTrace();
 	}
@@ -34,6 +38,10 @@ public class Heart extends AbstractObject
 
     public void setEmptyHeart() {
 	image = imageEmpty;
+    }
+
+    @Override public void update() {
+
     }
 
     @Override public void whenCollided(AbstractEntity entity) {

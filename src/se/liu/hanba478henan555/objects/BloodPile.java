@@ -1,4 +1,7 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.objects;
+
+import se.liu.hanba478henan555.entity.AbstractEntity;
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,6 +17,10 @@ public class BloodPile extends AbstractObject
 	super(zp, ObjectType.BLOOD_PILE);
     }
 
+    @Override public void update() {
+
+    }
+
     @Override public void whenCollided(final AbstractEntity entity) {
 
     }
@@ -26,7 +33,7 @@ public class BloodPile extends AbstractObject
 
     @Override public void readImage() {
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("./enemy/dead.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/images/enemyImages/dead.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,4 +1,11 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.entity;
+
+import se.liu.hanba478henan555.game_mechanics.KeyHandler;
+import se.liu.hanba478henan555.game_mechanics.ZinkPanel;
+import se.liu.hanba478henan555.objects.AbstractObject;
+import se.liu.hanba478henan555.objects.Key;
+import se.liu.hanba478henan555.objects.ObjectType;
+import se.liu.hanba478henan555.objects.PlayerSword;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -81,14 +88,14 @@ public class Player extends AbstractEntity
     }
 
     @Override public void setImages() {
-	up1    = setImage("./player/player_up_1.png");
-	up2    = setImage("./player/player_up_2.png");
-	left1  = setImage("./player/player_left_1.png");
-	left2  = setImage("./player/player_left_2.png");
-	right1 = setImage("./player/player_right_1.png");
-	right2 = setImage("./player/player_right_2.png");
-	down1  = setImage("./player/player_down_1.png");
-	down2  = setImage("./player/player_down_2.png");
+	up1    = setImage("/images/playerImages/player_up_1.png");
+	up2    = setImage("/images/playerImages/player_up_2.png");
+	left1  = setImage("/images/playerImages/player_left_1.png");
+	left2  = setImage("/images/playerImages/player_left_2.png");
+	right1 = setImage("/images/playerImages/player_right_1.png");
+	right2 = setImage("/images/playerImages/player_right_2.png");
+	down1  = setImage("/images/playerImages/player_down_1.png");
+	down2  = setImage("/images/playerImages/player_down_2.png");
     }
 
     /**
@@ -102,7 +109,7 @@ public class Player extends AbstractEntity
 	    attack();
 	}
 	if ((keyHandler.getKey(EntityInput.UP) || keyHandler.getKey(EntityInput.DOWN) ||
-	    keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) && canAttack) {
+	     keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) && canAttack) {
 
 	    spriteCounter++;
 	    if (keyHandler.getKey(EntityInput.UP)) {
@@ -152,7 +159,7 @@ public class Player extends AbstractEntity
     }
 
     private void addSword() {
-	PlayerSword pl = new PlayerSword(zinkPanel,currentWeapoon, false);
+	PlayerSword pl = new PlayerSword(zinkPanel, currentWeapoon, false);
 	pl.setValues(pos.x,pos.y, getEntityInput());
 	zinkPanel.getGameObjects().add(pl);
     }
@@ -167,5 +174,9 @@ public class Player extends AbstractEntity
 
     public List<AbstractObject> getInventory() {
 	return inventory;
+    }
+
+    public int getSpeed() {
+	return speed;
     }
 }

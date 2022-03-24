@@ -1,4 +1,6 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.game_mechanics;
+
+import se.liu.hanba478henan555.entity.EntityInput;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

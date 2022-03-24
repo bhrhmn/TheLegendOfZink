@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555;
+package se.liu.hanba478henan555.game_mechanics;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -17,12 +17,12 @@ public class Sound
     private URL[] soundURL = new URL[6];
 
     public Sound(){
-	soundURL[0] = getClass().getResource("sounds/music.wav");
-	soundURL[1] = getClass().getResource("sounds/key.wav");
-	soundURL[2] = getClass().getResource("sounds/door.wav");
-	soundURL[3] = getClass().getResource("sounds/death.wav");
-	soundURL[4] = getClass().getResource("sounds/hit.wav");
-	soundURL[5] = getClass().getResource("sounds/swosh_sword.wav");
+	soundURL[0] = getClass().getResource("/audio/sounds/music.wav");
+	soundURL[1] = getClass().getResource("/audio/sounds/key.wav");
+	soundURL[2] = getClass().getResource("/audio/sounds/door.wav");
+	soundURL[3] = getClass().getResource("/audio/sounds/death.wav");
+	soundURL[4] = getClass().getResource("/audio/sounds/hit.wav");
+	soundURL[5] = getClass().getResource("/audio/sounds/swosh_sword.wav");
 
 
     }
