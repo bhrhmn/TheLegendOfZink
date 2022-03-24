@@ -55,6 +55,8 @@ public abstract class AbstractEntity implements Entity
     protected boolean canAttack;
     protected int attackBound;
 
+    protected Random random = new Random();
+
     protected AbstractEntity(ZinkPanel zp, Point pos, EntityType et){
 	this.zinkPanel = zp;
 	this.tileSize = zinkPanel.getTileSize();
@@ -72,6 +74,12 @@ public abstract class AbstractEntity implements Entity
 	    e.printStackTrace();
 	}
 	return null;
+    }
+
+    protected void setCollisionArea(){
+	this.collisionArea = new Rectangle();
+	collisionArea.width = tileSize*2/3;
+	collisionArea.height = tileSize*2/3;
     }
 
     public EntityInput getEntityInput(){return entityInput;}
@@ -112,7 +120,6 @@ public abstract class AbstractEntity implements Entity
 
     protected void moveRandom(){
 	if (moveTick == zinkPanel.getFPS() *2){
-	    Random random = new Random();
 	    int i = random.nextInt(4);
 	    if(i == 0){
 		entityInput = EntityInput.UP;
@@ -214,7 +221,6 @@ public abstract class AbstractEntity implements Entity
     public int getammountOfDamage(){return ammountOfDamage;}
 
     protected void attackRandom(int procent) {
-	Random random = new Random();
 	int randomInt = random.nextInt(100);
 	if (randomInt <= procent) {
 	    attack();

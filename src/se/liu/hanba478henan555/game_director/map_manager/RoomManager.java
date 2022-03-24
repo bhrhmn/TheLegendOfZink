@@ -50,19 +50,15 @@ public class RoomManager
     }
 
     public void loadMap(String roomFile) {
-	Scanner scanner = null;
-	try{
-	    scanner = new Scanner(new BufferedReader(new FileReader(roomFile)));
-	    for(int y = 0; y < worldRows; y++){
+	try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(roomFile)))) {
+	    for (int y = 0; y < worldRows; y++) {
 		String[] line = scanner.nextLine().trim().split(" ");
-		for (int x = 0; x < worldColumns; x++){
+		for (int x = 0; x < worldColumns; x++) {
 		    roomTileData[x][y] = Integer.parseInt(line[x]);
 		}
 	    }
-	}
-	catch (FileNotFoundException e){ e.printStackTrace();}
-	finally {
-	    scanner.close();
+	} catch (FileNotFoundException e) {
+	    e.printStackTrace();
 	}
 
     }

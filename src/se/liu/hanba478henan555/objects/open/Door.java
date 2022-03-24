@@ -8,10 +8,10 @@ import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
+
 
 /**
  * Game-object Door
@@ -24,13 +24,8 @@ public class Door extends AbstractObject
     }
 
     @Override public void readImage() {
-	//TODO: ta bort "/"
-	try {
-	    String fs = File.separator;
-	    image = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"objectImages"+fs+"door_key"+fs+"door.png"));
-	}catch (IOException e){
-	    e.printStackTrace();
-	}
+	String fs = File.separator;
+	image = setImage("images"+fs+"objectImages"+fs+"door_key"+fs+"door.png");
     }
 
     @Override public void setCollisionArea() {

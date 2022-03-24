@@ -54,12 +54,17 @@ public abstract class AbstractObject implements GameObject
 
 
     protected BufferedImage setImage(final String s){
+        BufferedImage result = null, readFile = null;
         try{
-            return ImageIO.read(getClass().getResourceAsStream("/"+s));
-        }catch (IOException e) {
+            readFile = ImageIO.read(getClass().getResourceAsStream("/"+s));
+        } catch (IOException e){
             e.printStackTrace();
+            readFile = new BufferedImage(zinkPanel.getOriginalTileSize(),zinkPanel.getOriginalTileSize(),BufferedImage.TYPE_BYTE_GRAY );
+        }finally {
+
+            result = readFile;
         }
-        return null;
+        return result;
     }
 
     public void moreValues(int x, int y, EntityInput ei){

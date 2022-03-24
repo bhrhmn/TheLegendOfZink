@@ -44,10 +44,7 @@ public class EnemyBlob extends Enemy
 
     @Override public void setDefaultValues() {
 	setImages();
-
-	this.collisionArea = new Rectangle();
-	collisionArea.width = tileSize*2/3;
-	collisionArea.height = tileSize*2/3;
+	setCollisionArea();
 
 	this.collision = true;
 	this.spriteFrames = 10;

@@ -7,7 +7,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import java.awt.*;
 import java.io.File;
-import java.util.Random;
 
 /**
  * Big boss
@@ -76,7 +75,6 @@ public class EnemyDragon extends Enemy
 
     @Override protected void moveRandom(){
 	if (moveTick == zinkPanel.getFPS() *2){
-	    Random random = new Random();
 	    int i = random.nextInt(3);
 	    if(i == 0){
 		entityInput = EntityInput.UP;
