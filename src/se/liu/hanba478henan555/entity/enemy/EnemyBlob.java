@@ -6,6 +6,7 @@ import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import java.awt.*;
+import java.io.File;
 
 /**
  * Enemy
@@ -15,7 +16,6 @@ public class EnemyBlob extends Enemy
 {
 
     private static final int BLOB_HEALTH = 3;
-    private EntityType enemyType = null;
 
     public EnemyBlob(final ZinkPanel zp, final Point pos) {
 	super(zp, pos, EntityType.BLOB);
@@ -31,14 +31,16 @@ public class EnemyBlob extends Enemy
     }
 
     @Override public void setImages() {
-	up1    = setImage("/images/enemyImages/blob/up/blob_up_1.png");
-	up2    = setImage("/images/enemyImages/blob/up/blob_up_2.png");
-	down1  = setImage("/images/enemyImages/blob/down/blob_down_1.png");
-	down2  = setImage("/images/enemyImages/blob/down/blob_down_2.png");
-	right1 = setImage("/images/enemyImages/blob/right/blob_right_1.png");
-	right2 = setImage("/images/enemyImages/blob/right/blob_right_2.png");
-	left1  = setImage("/images/enemyImages/blob/left/blob_left_1.png");
-	left2  = setImage("/images/enemyImages/blob/left/blob_left_2.png");
+	//TODO: ta bort "/"
+	String fs = File.separator;
+	up1    = setImage("/images"+fs+"enemyImages"+fs+"blob"+fs+"up"+fs+"blob_up_1.png");
+	up2    = setImage("/images"+fs+"enemyImages"+fs+"blob"+fs+"up"+fs+"blob_up_2.png");
+	down1  = setImage("/images"+fs+"enemyImages"+fs+"blob"+fs+"down"+fs+"blob_down_1.png");
+	down2  = setImage("/images"+fs+"enemyImages"+fs+"blob"+fs+"down"+fs+"blob_down_2.png");
+	right1 = setImage("/images"+fs+"enemyImages"+fs+"blob"+fs+"right"+fs+"blob_right_1.png");
+	right2 = setImage("/images"+fs+"enemyImages"+fs+"blob"+fs+"right"+fs+"blob_right_2.png");
+	left1  = setImage("/images"+fs+"enemyImages"+fs+"blob"+fs+"left"+fs+"blob_left_1.png");
+	left2  = setImage("/images"+fs+"enemyImages"+fs+"blob"+fs+"left"+fs+"blob_left_2.png");
     }
 
     @Override public void setDefaultValues() {

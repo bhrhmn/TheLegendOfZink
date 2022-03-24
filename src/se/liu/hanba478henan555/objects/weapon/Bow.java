@@ -8,6 +8,7 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -20,8 +21,10 @@ public class Bow extends AbstractObject
     }
 
     @Override public void readImage() {
+	//TODO: ta bort "/"
 	try {
-	    image = ImageIO.read(getClass().getResourceAsStream("/images/objectImages/weapon/bow_arrow/bow.png"));
+	    String fs = File.separator;
+	    image = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"objectImages"+fs+"weapon"+fs+"bow_arrow"+fs+"bow.png"));
 	}catch (IOException e){
 	    e.printStackTrace();
 	}

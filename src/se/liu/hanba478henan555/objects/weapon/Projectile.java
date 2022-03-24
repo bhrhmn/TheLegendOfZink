@@ -12,6 +12,7 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -105,10 +106,12 @@ public class Projectile extends AbstractObject
     }
 
     @Override public void readImage() {
+	//TODO: ta bort "/"
 	try {
-	    arrow = ImageIO.read(getClass().getResourceAsStream("/images/objectImages/weapon/bow_arrow/arrow.png"));
-	    blobBall = ImageIO.read(getClass().getResourceAsStream("/images/enemyImages/enemy_projectiles/blob_projectile.png"));
-	    fireBall = ImageIO.read(getClass().getResourceAsStream("/images/enemyImages/enemy_projectiles/dragon_projectile.png"));
+	    String fs = File.separator;
+	    arrow = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"objectImages"+fs+"weapon"+fs+"bow_arrow"+fs+"arrow.png"));
+	    blobBall = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"enemyImages"+fs+"enemy_projectiles"+fs+"blob_projectile.png"));
+	    fireBall = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"enemyImages"+fs+"enemy_projectiles"+fs+"dragon_projectile.png"));
 	}catch (IOException e){
 	    e.printStackTrace();
 	}

@@ -10,6 +10,7 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -23,8 +24,10 @@ public class Door extends AbstractObject
     }
 
     @Override public void readImage() {
+	//TODO: ta bort "/"
 	try {
-	    image = ImageIO.read(getClass().getResourceAsStream("/images/objectImages/door_key/door.png"));
+	    String fs = File.separator;
+	    image = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"objectImages"+fs+"door_key"+fs+"door.png"));
 	}catch (IOException e){
 	    e.printStackTrace();
 	}

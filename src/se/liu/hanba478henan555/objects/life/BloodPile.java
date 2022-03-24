@@ -7,6 +7,7 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -34,8 +35,10 @@ public class BloodPile extends AbstractObject
     }
 
     @Override public void readImage() {
+        //TODO: ta bort "/"
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/images/enemyImages/death/dead.png"));
+            String fs = File.separator;
+            image = ImageIO.read(getClass().getResourceAsStream("/images"+fs+"enemyImages"+fs+"death"+fs+"dead.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

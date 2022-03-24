@@ -6,6 +6,7 @@ import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import java.awt.*;
+import java.io.File;
 import java.util.Random;
 
 /**
@@ -32,8 +33,10 @@ public class EnemyDragon extends Enemy
     }
 
     @Override public void setImages() {
-	up1 = setImage("/images/enemyImages/dragon/dragon_1.png");
-	up2 = setImage("/images/enemyImages/dragon/dragon_2.png");
+	//TODO: ta bort "/"
+	String fs = File.separator;
+	up1 = setImage("/images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_1.png");
+	up2 = setImage("/images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_2.png");
     }
 
     @Override public void setDefaultValues() {

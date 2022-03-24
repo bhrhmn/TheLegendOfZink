@@ -9,6 +9,7 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Map;
@@ -56,12 +57,14 @@ public class PlayerSword extends AbstractObject
     }
 
     @Override public void readImage() {
+        //TODO: ta bort "/"
         try {
+            String fs = File.separator;
             switch (gameObject){
                 case PLAYER_SWORD_BAD -> {image = ImageIO.read(getClass().getResourceAsStream(
-                        "/images/objectImages/weapon/sword/sword_weak.png"));}
+                        "/images"+fs+"objectImages"+fs+"weapon"+fs+"sword"+fs+"sword_weak.png"));}
                 case PLAYER_SWORD_GOOD -> {image = ImageIO.read(getClass().getResourceAsStream(
-                        "/images/objectImages/weapon/sword/sword_strong.png"));}
+                        "/images"+fs+"objectImages"+fs+"weapon"+fs+"sword"+fs+"sword_strong.png"));}
             }
 
         }catch (IOException e){

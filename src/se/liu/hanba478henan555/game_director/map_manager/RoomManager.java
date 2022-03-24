@@ -5,6 +5,7 @@ import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class RoomManager
     private Tile[] tileTypes;
     private int[][] roomTileData;
     private int tileSize,worldRows,worldColumns;
+    private String fs = File.separator;
 
     public RoomManager(ZinkPanel zp) {
 	this.tileSize = zp.getTileSize();
@@ -27,13 +29,14 @@ public class RoomManager
 	this.tileTypes = new Tile[10];
 	this.roomTileData = new int[worldColumns][worldRows];
 	defineTileTypes();
-	loadMap("resources/world/world.txt");
+	loadMap("resources" + fs + "world" + fs + "world.txt");
     }
 
     private void defineTileTypes() {
-	loadTile(0,"/images/tiles/wall.png",true);
-	loadTile(1,"/images/tiles/earth.png",false);
-	loadTile(2,"/images/tiles/pedestal.png",false);
+	//TODO ta bort "/"
+	loadTile(0,  "/images" + fs + "tiles" + fs + "wall.png",true);
+	loadTile(1,  "/images" + fs + "tiles" + fs + "earth.png",false);
+	loadTile(2,  "/images" + fs + "tiles" + fs + "pedestal.png",false);
     }
 
     private void loadTile(int index, String filePath, boolean collision){
