@@ -52,7 +52,7 @@ public class EnemyDragon extends Enemy
 	this.maxHealth = DRAGON_HEALTH;
 	this.health = maxHealth;
 	this.ammountOfDamage = 2;
-	this.attackBound = 6;
+	this.attackBound = 1;
 
 	this.entityInput = EntityInput.DOWN;
     }

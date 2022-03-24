@@ -15,7 +15,6 @@ public class Sound
 {
     private Clip clip = null;
     private URL[] soundURL = new URL[6];
-
     public Sound(){
 	soundURL[0] = getClass().getResource("/audio/sounds/music.wav");
 	soundURL[1] = getClass().getResource("/audio/sounds/key.wav");

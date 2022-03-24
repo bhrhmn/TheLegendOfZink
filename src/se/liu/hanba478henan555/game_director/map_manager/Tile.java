@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555.game_director.map;
+package se.liu.hanba478henan555.game_director.map_manager;
 import java.awt.image.BufferedImage;
 
 /**

@@ -1,4 +1,4 @@
-package se.liu.hanba478henan555.game_director.map;
+package se.liu.hanba478henan555.game_director.map_manager;
 
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
@@ -33,6 +33,7 @@ public class RoomManager
     private void defineTileTypes() {
 	loadTile(0,"/images/tiles/wall.png",true);
 	loadTile(1,"/images/tiles/earth.png",false);
+	loadTile(2,"/images/tiles/pedestal.png",false);
     }
 
     private void loadTile(int index, String filePath, boolean collision){

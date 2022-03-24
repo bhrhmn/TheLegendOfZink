@@ -20,12 +20,21 @@ public class Projectile extends AbstractObject
 {
     private EntityInput direction = null;
     private static final int PROJ_SPEED = 5;
+    private int soundDistance = -1;
     private int lifeSpan;
     public Projectile(final ZinkPanel zp, final ObjectType go, EntityInput ei) {
 	super(zp, go);
+	this.soundDistance = zp.getTileSize() * zp.getRows();
 	this.direction = ei;
-	zinkPanel.sound.playSoundEffect(2);
 	this.lifeSpan = 0;
+    }
+
+    private void playSound(){
+	int x = zinkPanel.getPlayer().getPos().x - pos.x;
+	int y = zinkPanel.getPlayer().getPos().y - pos.y;
+	if(Math.sqrt(x*x + y*y) <= soundDistance){
+	    zinkPanel.sound.playSoundEffect(2);
+	}
     }
 
     private void changePos(){
@@ -48,6 +57,7 @@ public class Projectile extends AbstractObject
 
     public void setValues(int x, int y, EntityInput ei) {
 	moreValues(x,y,ei);
+	playSound();
     }
 
     @Override public void whenCollided(final AbstractEntity entity) {

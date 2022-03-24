@@ -56,7 +56,7 @@ public class EnemyBlob extends Enemy
 	this.ammountOfDamage = 1;
 
 	this.attackCounter = 0;
-	this.attackSpeed = 5;
+	this.attackSpeed = 2;
 	this.canAttack = true;
 	this.attackBound = 1;
 
