@@ -16,4 +16,5 @@ public interface GameObject
     public void setCollisionArea();
     public void setValues(int x, int y);
     public void readImage();
+    public default void update(){}
 }

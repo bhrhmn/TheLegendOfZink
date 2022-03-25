@@ -16,6 +16,7 @@ import java.util.logging.Level;
 
 /**
  * Manages background
+ * Reads
  */
 public class RoomManager
 {

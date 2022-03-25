@@ -15,6 +15,7 @@ import java.util.logging.Level;
 
 /**
  * Handles audio
+ * Reads audiofiles into an URL-array
  */
 
 public class Sound

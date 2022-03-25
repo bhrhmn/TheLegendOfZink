@@ -105,9 +105,7 @@ public abstract class AbstractObject implements GameObject
         return collisionArea.intersects(rectangle);
     }
 
-    public void update(){
 
-    }
 
 
 

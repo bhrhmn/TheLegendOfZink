@@ -1,7 +1,7 @@
 package se.liu.hanba478henan555.game_director.input_manager;
 
 /**
- * docstring
+ * Enum for coordinates
  */
 public enum PointXY
 {

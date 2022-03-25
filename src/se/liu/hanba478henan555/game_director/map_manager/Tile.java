@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * Tile
+ * Has fields BufferedIMage and a boolean collision
  */
 public class Tile
 {

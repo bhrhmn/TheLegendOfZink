@@ -9,6 +9,10 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * GameObject Princess
+ * PLayer will win if colliding with Princess
+ */
 public class Princess extends AbstractObject
 {
     public Princess(final ZinkPanel zp)

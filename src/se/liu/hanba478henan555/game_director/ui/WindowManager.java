@@ -15,7 +15,9 @@ import java.util.Map;
 
 
 /**
- * Inventory-class handles showing the Player's inventory on screen
+ * Handles showing windows
+ * Handles Titlescreen
+ * Shows inventory, Player health and messages for different events
  */
 public class WindowManager
 {
