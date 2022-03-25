@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.logging.Level;
 
+import static se.liu.hanba478henan555.game_director.Math.doubleInt;
+import static se.liu.hanba478henan555.game_director.Math.halfInt;
+
 /**
  * Abstract class of Entity
  * Some fields
@@ -55,6 +58,7 @@ public abstract class AbstractEntity implements Entity
     protected int attackBound;
 
     protected final static Random RANDOM = new Random();
+    protected final int collisionAreaSize;
 
     protected AbstractEntity(ZinkPanel zp, Point pos, EntityType et){
 	this.zinkPanel = zp;
@@ -63,6 +67,7 @@ public abstract class AbstractEntity implements Entity
 	this.pos.x = pos.x * tileSize;
 	this.pos.y = pos.y * tileSize;
 	this.entityType = et;
+	this.collisionAreaSize = (doubleInt(tileSize)) / 3;
 
     }
 
@@ -80,9 +85,7 @@ public abstract class AbstractEntity implements Entity
     }
 
     protected void setCollisionArea(){
-	this.collisionArea = new Rectangle();
-	collisionArea.width = tileSize*2/3;
-	collisionArea.height = tileSize*2/3;
+	this.collisionArea = new Rectangle(collisionAreaSize, collisionAreaSize);
     }
 
     public EntityInput getEntityInput(){return entityInput;}
@@ -92,8 +95,8 @@ public abstract class AbstractEntity implements Entity
     }
 
     protected void setCollisionAreaRelativePos() {
-	this.collisionArea.x = this.pos.x + zinkPanel.getOriginalTileSize() / 2;
-	this.collisionArea.y = this.pos.y + zinkPanel.getOriginalTileSize() / 2;
+	this.collisionArea.x = this.pos.x + halfInt(zinkPanel.getOriginalTileSize());
+	this.collisionArea.y = this.pos.y + halfInt(zinkPanel.getOriginalTileSize());
     }
 
     @Override public void moveEntity(EntityInput pi, int direction, int ammount){
@@ -121,7 +124,7 @@ public abstract class AbstractEntity implements Entity
     }
 
     protected void moveRandom(){
-	if (moveTick == zinkPanel.getFPS() *2){
+	if (moveTick == doubleInt(zinkPanel.getFPS())){
 	    int i = RANDOM.nextInt(4);
 	    if(i == 0){
 		entityInput = EntityInput.UP;
@@ -141,18 +144,18 @@ public abstract class AbstractEntity implements Entity
 
     protected void updateEntity(){
 	updateCollision();
-	spriteCounter++; moveTick++; //
-	moveRandom(); //
-	moveEntity(entityInput,1,speed); //
+	spriteCounter++; moveTick++;
+	moveRandom();
+	moveEntity(entityInput,1,speed);
     }
 
     protected void updateCollision(){
-	setCollisionAreaRelativePos(); //
-	collisionHandler.objectCollision(this); //
+	setCollisionAreaRelativePos();
+	collisionHandler.objectCollision(this);
     }
 
     public void knockback(){
-	moveEntity(getEntityInput() ,-1, tileSize/2);
+	moveEntity(getEntityInput() ,-1, halfInt(zinkPanel.getTileSize()));
     }
 
     public void changePosition(EntityInput input, PointXY xy, int direction, int ammount) {
@@ -202,7 +205,7 @@ public abstract class AbstractEntity implements Entity
 	if (spriteCounter <= spriteFrames)
 	    return b2;
 
-	if(spriteCounter >= spriteFrames*2)
+	if(spriteCounter >= doubleInt(spriteFrames))
 	    spriteCounter = 0;
 
 	return b1;
@@ -297,7 +300,7 @@ public abstract class AbstractEntity implements Entity
 	if (damagedFrameCounter < freezeTime) {
 	    setAlphaComposite(g2, 0.2f);
 	}
-	else if (damagedFrameCounter >= freezeTime*2) {
+	else if (damagedFrameCounter >= doubleInt(freezeTime)) {
 	    setAlphaComposite(g2, 1.0f);
 	    damagedCounter++;
 	    damagedFrameCounter = 0;

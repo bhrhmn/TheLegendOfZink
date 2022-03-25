@@ -8,6 +8,8 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 import java.awt.*;
 import java.io.File;
 
+import static se.liu.hanba478henan555.game_director.Math.doubleInt;
+
 /**
  * Big boss
  * Can shoot projectiles
@@ -40,7 +42,7 @@ public class EnemyDragon extends Enemy
     @Override public void setDefaultValues() {
 	setImages();
 
-	this.size = tileSize*2;
+	this.size = doubleInt(tileSize);
 
 	this.collisionArea = new Rectangle();
 	collisionArea.width = size;
@@ -71,7 +73,7 @@ public class EnemyDragon extends Enemy
     }
 
     @Override protected void moveRandom(){
-	if (moveTick == zinkPanel.getFPS() *2){
+	if (moveTick == doubleInt(zinkPanel.getFPS())){
 	    int i = RANDOM.nextInt(3);
 	    if(i == 0){
 		entityInput = EntityInput.UP;

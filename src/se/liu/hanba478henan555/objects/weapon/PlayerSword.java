@@ -26,7 +26,8 @@ public class PlayerSword extends AbstractObject
 
     private Map<ObjectType, Integer> swordDamage = new EnumMap<>(Map.ofEntries(
             Map.entry(ObjectType.PLAYER_SWORD_BAD, 1),
-            Map.entry(ObjectType.PLAYER_SWORD_GOOD, 2)));
+            Map.entry(ObjectType.PLAYER_SWORD_GOOD, 2)
+    ));
 
 
     public PlayerSword(final ZinkPanel zp, final ObjectType gameObject, boolean onGround) {
@@ -53,7 +54,6 @@ public class PlayerSword extends AbstractObject
     }
 
     @Override public void readImage() {
-        //TODO: ta bort "/"
         String fs = File.separator;
         switch (gameObject){
             case PLAYER_SWORD_BAD -> {image = setImage(

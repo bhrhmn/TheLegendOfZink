@@ -14,15 +14,19 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import static se.liu.hanba478henan555.game_director.Math.halfInt;
+
 /**
  * Handles the appearence of the frame
  */
 public class ZinkPanel extends JPanel
 {
     private static final int ORIGINAL_TILE_SIZE = 16;
+    private static final int HALF_ORIGINAL_TILE_SIZE = ORIGINAL_TILE_SIZE / 2;
     private static final int FACTOR = 3;
 
     private static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;
+    private static final int HALF_TILE_SIZE = TILE_SIZE /2;
 
     private static final int COLUMNS = 16;
     private static final int ROWS = 12;
@@ -72,7 +76,11 @@ public class ZinkPanel extends JPanel
 
     public int getTileSize(){return TILE_SIZE;}
 
+    public int getHalfTileSize(){return HALF_TILE_SIZE;}
+
     public int getOriginalTileSize(){return ORIGINAL_TILE_SIZE;}
+
+    public int getHalfOriginalTileSize(){return HALF_ORIGINAL_TILE_SIZE;}
 
     public int getWorldRows(){return WORLD_ROWS;}
 
@@ -156,8 +164,8 @@ public class ZinkPanel extends JPanel
     }
 
     private void moveScreen(Graphics g){
-        int posX = (player.getPos().x  + getTileSize() / 2)/ getTileSize();
-        int posY = (player.getPos().y  + getTileSize() / 2)/ getTileSize();
+        int posX = (player.getPos().x  + halfInt(getTileSize()))/ getTileSize();
+        int posY = (player.getPos().y  + halfInt(getTileSize()))/ getTileSize();
         g.translate((posX / getColumns()) *-getColumns()*getTileSize(),
                     (posY / getRows()) *-getRows()*getTileSize());
         screenStartPoint.x = posX / getColumns();
