@@ -28,7 +28,7 @@ public class ZinkPanel extends JPanel
     private static final int ROWS = 12;
 
     private static final int WORLD_COLUMNS = 48;
-    private static final int WORLD_ROWS = 24;
+    private static final int WORLD_ROWS = 48;
 
     private static final int FPS = 60;
 

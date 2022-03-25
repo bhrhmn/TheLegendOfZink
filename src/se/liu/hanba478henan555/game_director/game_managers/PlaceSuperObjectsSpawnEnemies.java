@@ -88,35 +88,56 @@ public class PlaceSuperObjectsSpawnEnemies
 
 	placeDoor(6,4);
 	placeKey(1,1);
-	placeKey(10,10);
-	placeKey(10,21);
-	placeKey(46,1);
+	placeSword(7, 2,  ObjectType.PLAYER_SWORD_BAD);
 
-	placeDoor(42,1);
+	placeDoor(43,2);
+	placeKey(26,6);
 
-	placeKey(6,14);
-	placeKey(7,14);
-	placeKey(8,14);
+	placeBow(45,22);
+	placeDoor(45,20);
+	placeKey(19,22);
 
-	placeSword(7, 2, ObjectType.PLAYER_SWORD_GOOD);
-	placeSword(2, 2,  ObjectType.PLAYER_SWORD_BAD);
+	placeKey(1,14);
+	placeKey(2,34);
+	placeDoor(20,31);
 
-	placeBow(11,10);
+	placeSword(33,33, ObjectType.PLAYER_SWORD_GOOD);
+	placeDoor(33,31);
 
-	placeHeart(10, 2);
-	placeHeart(10, 3);
-	placeHeart(10, 4);
+	placeHeart(41,42);
+	placeHeart(41,43);
+	placeHeart(41,44);
 
-	placePrincess(11, 3);
+	placePrincess(4,43);
     }
 
     public void spawnEnemies(){
+	spawnRedEnemy(20, 6);
+	spawnRedEnemy(24, 7);
+	spawnBlob(20, 6);
 
-	spawnRedEnemy(9, 20);
+	spawnBlob(35, 8);
+	spawnBlob(34, 7);
 
-	spawnBlob(6, 22);
+	spawnRedEnemy(35, 17);
+	spawnRedEnemy(32, 17);
+	spawnBlob(34, 18);
 
-	spawnDragon(2, 8);
+
+	spawnBlob(3, 15);
+
+	spawnRedEnemy(3, 15);
+	spawnRedEnemy(3, 15);
+	spawnRedEnemy(3, 15);
+	spawnRedEnemy(3, 15);
+
+	spawnRedEnemy(4, 34);
+	spawnRedEnemy(8, 33);
+	spawnRedEnemy(12, 30);
+	spawnRedEnemy(14, 31);
+
+	spawnDragon(16, 41);
+	spawnDragon(19, 45);
 
     }
 

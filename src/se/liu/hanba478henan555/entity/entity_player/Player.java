@@ -89,6 +89,8 @@ public class Player extends AbstractEntity
 	this.attackSpeed = zinkPanel.getFPS()/3;
 	this.attackCounter = 0;
 	this.canAttack = true;
+
+	this.spriteFrames = SPRITE_FRAMES;
     }
 
     @Override public void setImages() {
@@ -117,6 +119,7 @@ public class Player extends AbstractEntity
 	     keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) && canAttack) {
 
 	    spriteCounter++;
+
 	    if (keyHandler.getKey(EntityInput.UP)) {
 		movePlayerBasedOnInput(EntityInput.UP);
 	    }
