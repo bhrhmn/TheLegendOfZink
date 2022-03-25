@@ -3,7 +3,13 @@ package se.liu.hanba478henan555.entity.entity_abstract;
 import java.awt.*;
 
 /**
- * Interface for every moving character
+ * Interface for every entity character
+ * Functions related to make an entity work
+ * every entity has to do one or the other at one point
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * hanba478@student.liu.se
+ * henan555@student.liu.se
  */
 public interface Entity
 {

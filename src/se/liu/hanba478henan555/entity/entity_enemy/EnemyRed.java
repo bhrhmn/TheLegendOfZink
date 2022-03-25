@@ -9,8 +9,11 @@ import java.io.File;
 
 /**
  * Enemy
- * Attacks player
- * When an RedEnemy dies it creates a BloodPile and puts it on the redenemy's position
+ * Does not attack
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class EnemyRed extends Enemy
 {
@@ -61,7 +64,7 @@ public class EnemyRed extends Enemy
 
     @Override public void draw(Graphics2D g2){
 	if (damaged) {
-	    damageAnimation(g2);
+	    animateDamage(g2);
 	}
 	g2.drawImage(currentImage, pos.x, pos.y, tileSize, tileSize ,null);
 	setAlphaComposite(g2, 1.0f);

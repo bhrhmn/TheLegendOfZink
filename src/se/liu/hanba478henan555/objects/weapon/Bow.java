@@ -12,7 +12,11 @@ import java.io.File;
 
 
 /**
- * A weapon that allows a Player to shoot projectiles
+ * A weapon that allows an Entity to shoot projectiles
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class Bow extends AbstractObject
 {

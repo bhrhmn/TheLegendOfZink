@@ -16,14 +16,20 @@ import java.util.logging.Level;
 
 /**
  * Manages background
- * Reads
+ * Reads and saves images in Tiles
+ * Reads a text file for the map and saves corresponding Tile for every number in textfile
+ * in a two-dimensional int-array
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class RoomManager
 {
     private Tile[] tileTypes;
     private int[][] roomTileData;
     private int tileSize,worldRows,worldColumns;
-    private String fs = File.separator;
+    private String separator = File.separator;
     private int originalTileSize;
 
     public RoomManager(ZinkPanel zp) {
@@ -35,13 +41,13 @@ public class RoomManager
 	this.tileTypes = new Tile[10];
 	this.roomTileData = new int[worldColumns][worldRows];
 	defineTileTypes();
-	loadMap("resources" + fs + "world" + fs + "world.txt");
+	loadMap("resources" + separator + "world" + separator + "world.txt");
     }
 
     private void defineTileTypes() {
-	loadTile(0,  "images" + fs + "tiles" + fs + "wall.png",true);
-	loadTile(1,  "images" + fs + "tiles" + fs + "earth.png",false);
-	loadTile(2,  "images" + fs + "tiles" + fs + "pedestal.png",false);
+	loadTile(0, "images" + separator + "tiles" + separator + "wall.png", true);
+	loadTile(1, "images" + separator + "tiles" + separator + "earth.png", false);
+	loadTile(2, "images" + separator + "tiles" + separator + "pedestal.png", false);
     }
 
 
@@ -87,7 +93,7 @@ public class RoomManager
 	}
     }
 
-    public boolean tileHasCollision(Point pos){
+    public boolean hasCollision(Point pos){
 	return tileTypes[roomTileData[pos.x][pos.y]].isCollision();
     }
 }

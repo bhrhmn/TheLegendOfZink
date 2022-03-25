@@ -5,14 +5,12 @@ import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import javax.swing.*;
 
 /**
- * Creates frame and starts game
- * Creates frame and starts game
- * Creates frame and starts game
- * Creates frame and starts game
- * Creates frame and starts game
- * Creates frame and starts game
- * Creates frame and starts game
- * Creates frame and starts game
+ * Creates a JFrame and ZinkPanel, then adds ZinkPanel to the frame
+ * Starts game
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class StartGame
 {

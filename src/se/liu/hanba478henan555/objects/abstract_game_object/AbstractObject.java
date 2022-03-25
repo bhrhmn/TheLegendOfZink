@@ -16,6 +16,10 @@ import static se.liu.hanba478henan555.game_director.Math.halfInt;
 /**
  * Abstract for the game objects.
  * Defines the functions draw, setValues, hasCollided and getters.
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public abstract class AbstractObject implements GameObject
 {

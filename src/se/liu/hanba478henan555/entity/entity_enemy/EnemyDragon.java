@@ -12,7 +12,11 @@ import static se.liu.hanba478henan555.game_director.Math.doubleInt;
 
 /**
  * Big boss
- * Can shoot projectiles
+ * Will shoot projectiles at a random interval
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class EnemyDragon extends Enemy
 {
@@ -30,7 +34,7 @@ public class EnemyDragon extends Enemy
     }
 
     @Override public void takeDamage(int damage) {
-	damageCalculation(damage);
+	calculateDamage(damage);
     }
 
     @Override public void setImages() {
@@ -87,7 +91,7 @@ public class EnemyDragon extends Enemy
 
     @Override public void draw(final Graphics2D g2) {
 	if (damaged) {
-	    damageAnimation(g2);
+	    animateDamage(g2);
 	}
 	g2.drawImage(currentImage, pos.x, pos.y, size, size ,null);
 	setAlphaComposite(g2, 1.0f);

@@ -16,6 +16,10 @@ import java.awt.*;
 
 /**
  * Places objects and enemies on frame
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class PlaceSuperObjectsSpawnEnemies
 {

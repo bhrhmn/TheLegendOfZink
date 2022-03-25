@@ -18,6 +18,10 @@ import java.util.List;
 /**
  * Maincharacter of the game
  * Entity which user controlls
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class Player extends AbstractEntity
 {
@@ -133,10 +137,10 @@ public class Player extends AbstractEntity
 		movePlayerBasedOnInput(EntityInput.RIGHT);
 	    }
 	}
-	collision();
+	checkCollision();
     }
 
-    private void collision(){
+    private void checkCollision(){
 	collisionHandler.objectCollision(this);
 	collisionHandler.abstractEntityCollision(this);
     }
@@ -148,7 +152,7 @@ public class Player extends AbstractEntity
 
     @Override public void draw(Graphics2D g2) {
 	if (damaged) {
-	    damageAnimation(g2);
+	    animateDamage(g2);
 	}
 	g2.drawImage(setImageBasedOnDirection(), pos.x, pos.y, tileSize, tileSize ,null);
 	setAlphaComposite(g2, 1.0f);

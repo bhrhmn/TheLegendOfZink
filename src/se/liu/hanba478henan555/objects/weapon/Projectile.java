@@ -17,6 +17,10 @@ import java.io.File;
 /**
  * An object that can cause damage
  * will disappear after a fixed time
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class Projectile extends AbstractObject
 {

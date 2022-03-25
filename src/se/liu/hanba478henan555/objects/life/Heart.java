@@ -16,6 +16,10 @@ import java.io.File;
  * Gameobject
  * Can show a full heart or an empty heart
  * When this has a collision with a Player, the Player will heal
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class Heart extends AbstractObject
 {

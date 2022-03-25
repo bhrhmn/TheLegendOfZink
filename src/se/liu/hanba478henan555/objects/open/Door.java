@@ -16,6 +16,10 @@ import java.io.File;
 /**
  * Game-object Door
  * Acts as a Wall-tile unless player has a Key-object
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class Door extends AbstractObject
 {

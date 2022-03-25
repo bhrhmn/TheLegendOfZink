@@ -19,7 +19,12 @@ import static se.liu.hanba478henan555.game_director.Math.halfInt;
 
 /**
  * Abstract class of Entity
- * Some fields
+ * Most of entityfunctions is in this abstract class
+ * Handles reading the images for entity
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * hanba478@student.liu.se
+ * henan555@student.liu.se
  */
 public abstract class AbstractEntity implements Entity
 {
@@ -263,10 +268,10 @@ public abstract class AbstractEntity implements Entity
 
     @Override public void takeDamage(int damage) {
 	knockback();
-	damageCalculation(damage);
+	calculateDamage(damage);
     }
 
-    protected void damageCalculation(int damage) {
+    protected void calculateDamage(int damage) {
 	damaged = true;
 	if (damagedCounter >= 0) {
 	    return;
@@ -276,12 +281,12 @@ public abstract class AbstractEntity implements Entity
 	health-= damage;
 	zinkPanel.sound.playSoundEffect(4);
 	if (health <= 0){
-	    death();
+	    die();
 	}
     }
 
 
-    protected void death() {
+    protected void die() {
 	zinkPanel.setIsGameOver(true);
     }
 
@@ -289,7 +294,7 @@ public abstract class AbstractEntity implements Entity
      * player switches between fully visible to partially visible 3 times
      * @param g2
      */
-    protected void damageAnimation(final Graphics2D g2) {
+    protected void animateDamage(final Graphics2D g2) {
 	damagedFrameCounter++;
 	int freezeTime = 10;
 	if (damagedCounter == 3) {

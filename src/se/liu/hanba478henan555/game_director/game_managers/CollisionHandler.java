@@ -8,6 +8,10 @@ import java.awt.*;
 
 /**
  * Handles collision between entity, objects and tiles.
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class CollisionHandler
 {
@@ -45,16 +49,16 @@ public class CollisionHandler
 
         switch (dir){
             case UP:{
-                return zinkPanel.getRoomManager().tileHasCollision(topRight) || zinkPanel.getRoomManager().tileHasCollision(topLeft);
+                return zinkPanel.getRoomManager().hasCollision(topRight) || zinkPanel.getRoomManager().hasCollision(topLeft);
             }
             case DOWN:{
-                return zinkPanel.getRoomManager().tileHasCollision(bottomLeft) || zinkPanel.getRoomManager().tileHasCollision(bottomRight);
+                return zinkPanel.getRoomManager().hasCollision(bottomLeft) || zinkPanel.getRoomManager().hasCollision(bottomRight);
             }
             case LEFT:{
-                return zinkPanel.getRoomManager().tileHasCollision(bottomLeft) || zinkPanel.getRoomManager().tileHasCollision(topLeft);
+                return zinkPanel.getRoomManager().hasCollision(bottomLeft) || zinkPanel.getRoomManager().hasCollision(topLeft);
             }
             case RIGHT:{
-                return zinkPanel.getRoomManager().tileHasCollision(topRight) || zinkPanel.getRoomManager().tileHasCollision(bottomRight);
+                return zinkPanel.getRoomManager().hasCollision(topRight) || zinkPanel.getRoomManager().hasCollision(bottomRight);
             }
             default:{return false;}
         }

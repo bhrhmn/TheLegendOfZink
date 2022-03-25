@@ -5,7 +5,11 @@ import java.util.logging.*;
 
 /**
  * Logging manager
- * Used to log errors
+ * With every try-catch statement the logger LOGR can be used to log the error
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class LoggingManager
 {

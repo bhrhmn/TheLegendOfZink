@@ -17,7 +17,11 @@ import java.util.Map;
 /**
  * Handles showing windows
  * Handles Titlescreen
- * Shows inventory, Player health and messages for different events
+ * Draws inventory, Player health and messages for different events on given ZinkPanel
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class WindowManager
 {

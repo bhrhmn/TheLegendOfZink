@@ -6,7 +6,11 @@ import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import java.awt.*;
 
 /**
- * interface for every object in game
+ * interface for every gameobject in game
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public interface GameObject
 {

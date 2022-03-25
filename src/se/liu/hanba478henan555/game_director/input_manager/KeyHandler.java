@@ -10,6 +10,11 @@ import java.util.Map;
 
 /**
  * Handles input from keyboard
+ * Saves the pressed state of relevant keys to "keyMap"
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class KeyHandler extends KeyAdapter
 {

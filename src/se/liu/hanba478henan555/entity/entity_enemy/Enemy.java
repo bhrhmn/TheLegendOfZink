@@ -9,6 +9,10 @@ import java.awt.*;
 
 /**
  * Adds functions for entities with EntityType Enemy
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public abstract class Enemy extends AbstractEntity
 {
@@ -20,7 +24,7 @@ public abstract class Enemy extends AbstractEntity
 	this.enemyType = enemyType;
     }
 
-    @Override protected void death(){
+    @Override protected void die(){
 	zinkPanel.sound.playSoundEffect(3);
 	zinkPanel.getEnemyList().remove(this);
 	BloodPile bloodPile = new BloodPile(zinkPanel);

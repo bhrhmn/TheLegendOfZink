@@ -10,7 +10,11 @@ import java.io.File;
 
 /**
  * Enemy
- * Can shoot projectiles
+ * Will shoot projectile at a random interval
+ *
+ * for TDDD78 at LIU 2022-03-25
+ * 	hanba478@student.liu.se
+ * 	henan555@student.liu.se
  */
 public class EnemyBlob extends Enemy
 {
@@ -73,7 +77,7 @@ public class EnemyBlob extends Enemy
 
     @Override public void draw(final Graphics2D g2) {
 	if (damaged) {
-	    damageAnimation(g2);
+	    animateDamage(g2);
 	}
 	g2.drawImage(currentImage, pos.x, pos.y, tileSize, tileSize ,null);
 	setAlphaComposite(g2, 1.0f);
