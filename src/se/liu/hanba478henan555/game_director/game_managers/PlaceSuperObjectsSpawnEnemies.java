@@ -10,6 +10,7 @@ import se.liu.hanba478henan555.objects.open.Door;
 import se.liu.hanba478henan555.objects.open.Key;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 import se.liu.hanba478henan555.objects.weapon.PlayerSword;
+import se.liu.hanba478henan555.objects.win_objects.Princess;
 
 import java.awt.*;
 
@@ -76,6 +77,12 @@ public class PlaceSuperObjectsSpawnEnemies
 	zinkPanel.getGameObjects().add(heart);
     }
 
+    private void placePrincess(int x, int y) {
+	Princess princess = new Princess(zinkPanel);
+	princess.setValues(x, y);
+	zinkPanel.getGameObjects().add(princess);
+    }
+
 
     public void placeObjects(){
 
@@ -99,6 +106,8 @@ public class PlaceSuperObjectsSpawnEnemies
 	placeHeart(10, 2);
 	placeHeart(10, 3);
 	placeHeart(10, 4);
+
+	placePrincess(11, 3);
     }
 
     public void spawnEnemies(){

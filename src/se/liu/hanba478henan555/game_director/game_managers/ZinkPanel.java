@@ -195,4 +195,9 @@ public class ZinkPanel extends JPanel
     public void stopShowingTitleScreen() {
         showingTitleScreen = false;
     }
+
+    public void showWinScreen(){
+        gameRunning = false;
+        windowManager.showWinScreen();
+    }
 }

@@ -105,8 +105,13 @@ public class WindowManager
 	messageTimer.start();
     }
 
+    public void showWinScreen(){
+	messageTimer.stop();
+	message = "You saved the princess!";
+	showingMessage = true;
+    }
+
     public void draw(Graphics2D g2) {
-	//TODO: Fixa alla magiska konstanter
 	updateCurrentScreen();
 	if (zinkPanel.isShowingTitleScreen()) {
 	    showTitleScreen(g2);
@@ -122,7 +127,7 @@ public class WindowManager
 
     private void showMessage(Graphics2D g2){
 	if (showingMessage) {
-	    g2.drawString(message, currentScreen.x + screensizeX/3 + font.getSize(),
+	    g2.drawString(message, currentScreen.x + screensizeX/2 - getStringLength(g2, message)/2,
 			  currentScreen.y + screensizeY/2);
 	}
     }
