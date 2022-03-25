@@ -116,7 +116,6 @@ public class PlaceSuperObjectsSpawnEnemies
 	spawnRedEnemy(24, 7);
 	spawnBlob(20, 6);
 
-	spawnBlob(35, 8);
 	spawnBlob(34, 7);
 
 	spawnRedEnemy(35, 17);

@@ -25,6 +25,7 @@ public class Projectile extends AbstractObject
 
     private static final int PROJECTILE_SPEED = 5;
     private static final int ARROW_DAMAGE = 1;
+    private static final int SOUND_DISTANCE = 50;
 
     private int soundDistance;
     private int lifeSpan;
@@ -36,7 +37,9 @@ public class Projectile extends AbstractObject
 
     public Projectile(final ZinkPanel zp, final ObjectType go, EntityInput ei, AbstractEntity entity) {
 	super(zp, go);
-	this.soundDistance = zp.getTileSize() * zp.getRows();
+	this.soundDistance = SOUND_DISTANCE
+
+	;
 	this.direction = ei;
 	this.lifeSpan = 0;
 	this.entity = entity;
