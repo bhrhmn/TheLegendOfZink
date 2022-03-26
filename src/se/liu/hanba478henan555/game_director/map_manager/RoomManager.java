@@ -30,13 +30,11 @@ public class RoomManager
     private int[][] roomTileData;
     private int tileSize,worldRows,worldColumns;
     private String separator = File.separator;
-    private int originalTileSize;
 
     public RoomManager(ZinkPanel zp) {
 	this.tileSize = zp.getTileSize();
 	this.worldColumns = zp.getWorldColumns();
 	this.worldRows = zp.getWorldRows();
-	this.originalTileSize = zp.getOriginalTileSize();
 
 	this.tileTypes = new Tile[10];
 	this.roomTileData = new int[worldColumns][worldRows];
@@ -57,7 +55,7 @@ public class RoomManager
 	    readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
 	} catch (IOException e){
 	    LoggingManager.getLogr().log(Level.SEVERE, "loadTile", e);
-	    readFile = new BufferedImage(originalTileSize,originalTileSize,BufferedImage.TYPE_BYTE_GRAY );
+	    System.exit(1);
 	}finally {
 	    result = readFile;
 	}
@@ -77,6 +75,7 @@ public class RoomManager
 	    }
 	} catch (FileNotFoundException e) {
 	    LoggingManager.getLogr().log(Level.SEVERE, "loadMap", e);
+	    System.exit(1);
 	}
 
     }

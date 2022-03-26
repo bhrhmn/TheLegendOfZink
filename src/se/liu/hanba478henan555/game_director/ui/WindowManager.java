@@ -43,15 +43,16 @@ public class WindowManager
     private boolean howToPlay = false;
     private boolean showingInventory = false;
 
-    private Point slotPos = new Point(0,0);
-    private final static int INVENTORY_WIDTH = 4;
     private final static int INVENTORY_HEIGHT = 3;
+    private final static int INVENTORY_WIDTH = 4;
+    private static final int SLOT_SPEED = 5;
+    private final static int ROUND_CORNERS = 25;
+
+    private Point slotPos = new Point(0,0);
     private int slotCol = 0;
     private int slotRow = 0;
-    private static final int SLOT_SPEED = 5;
     private int slotCounter = 0;
 
-    private final static int ROUND_CORNERS = 25;
 
     private final Map<ObjectType, String> objectMessageMap = Map.ofEntries(
 	    Map.entry(ObjectType.KEY, "You got a Key!"),

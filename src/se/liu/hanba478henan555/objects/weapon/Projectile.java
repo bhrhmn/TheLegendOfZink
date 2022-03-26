@@ -121,7 +121,8 @@ public class Projectile extends AbstractObject
     }
 
     private void correctImage() {
-	switch (getEntityType()) {
+	EntityType currentEntity = getEntityType();
+	switch (currentEntity) {
 	    case PLAYER -> image = arrow;
 	    case BLOB -> image = blobBall;
 	    case DRAGON -> image = fireBall;

@@ -77,16 +77,13 @@ public abstract class AbstractEntity implements Entity
     }
 
     protected BufferedImage setImage(final String filePath){
-	BufferedImage result,readFile=null;
 	try{
-	    readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
+	    return ImageIO.read(ClassLoader.getSystemResource(filePath));
 	} catch (IOException e){
 	    LoggingManager.getLogr().log(Level.SEVERE, "AbstractEntity", e);
-	    readFile = new BufferedImage(zinkPanel.getOriginalTileSize(),zinkPanel.getOriginalTileSize(),BufferedImage.TYPE_BYTE_GRAY );
-	}finally {
-	    result = readFile;
+	    System.exit(1);
 	}
-	return result;
+	return null;
     }
 
     protected void setCollisionArea(){
