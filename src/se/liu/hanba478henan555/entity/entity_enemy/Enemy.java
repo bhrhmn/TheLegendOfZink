@@ -43,16 +43,11 @@ public abstract class Enemy extends AbstractEntity
     }
 
     @Override public void attack() {
-	if (!canAttack) return;
-	if(!isCanDelayAttack()){
+	if(!canDelayAttack || !canAttack){
 	    return;
 	}
 	attackCounter = 0;
 	shootProjectile(ObjectType.ENEMY_BOW, entityInput);
-    }
-
-    protected boolean isCanDelayAttack() {
-	return canDelayAttack;
     }
 
     protected void moveRandom(){
