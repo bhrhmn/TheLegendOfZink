@@ -49,7 +49,7 @@ public class Sound
 
 	} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 	    LoggingManager.getLogr().log(Level.SEVERE, "setClip", e);
-	    System.exit(1);
+
 	}
     }
 

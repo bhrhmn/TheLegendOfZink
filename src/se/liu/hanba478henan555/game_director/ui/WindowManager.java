@@ -37,21 +37,14 @@ public class WindowManager
 
     private int screensizeX, screensizeY;
     private Point currentScreen = new Point(0, 0);
-    private int playerChoice = 0;
-    private int arrowCounter = 0;
+    private int playerChoice = 0, arrowCounter = 0;
 
-    private boolean howToPlay = false;
-    private boolean showingInventory = false;
+    private boolean howToPlay = false, showingInventory = false;
 
-    private final static int INVENTORY_HEIGHT = 3;
-    private final static int INVENTORY_WIDTH = 4;
-    private static final int SLOT_SPEED = 5;
-    private final static int ROUND_CORNERS = 25;
+    private final static int INVENTORY_HEIGHT = 3, INVENTORY_WIDTH = 4, SLOT_SPEED = 5, ROUND_CORNERS = 25;
 
     private Point slotPos = new Point(0,0);
-    private int slotCol = 0;
-    private int slotRow = 0;
-    private int slotCounter = 0;
+    private int slotCol = 0, slotRow = 0, slotCounter = 0;
 
 
     private final Map<ObjectType, String> objectMessageMap = Map.ofEntries(
@@ -80,7 +73,6 @@ public class WindowManager
     }
 
     private void setValues() {
-	int marginal = zinkPanel.getTileSize() / 2;
 	this.screensizeX = zinkPanel.getTileSize() * zinkPanel.getColumns();
 	this.screensizeY = zinkPanel.getTileSize() * zinkPanel.getRows();
 	int coordinate = zinkPanel.getTileSize()/3;

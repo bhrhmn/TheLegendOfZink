@@ -29,7 +29,6 @@ public class LoggingManager
             LOGR.addHandler(fh);
         } catch (IOException e) {
             LOGR.log(Level.SEVERE, "Kan ej logga", e);
-            System.exit(1);
         }
     }
 
