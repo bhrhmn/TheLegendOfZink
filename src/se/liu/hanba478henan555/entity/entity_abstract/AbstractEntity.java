@@ -14,8 +14,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.logging.Level;
 
-import static se.liu.hanba478henan555.game_director.Math.doubleInt;
-import static se.liu.hanba478henan555.game_director.Math.halfInt;
+
 
 /**
  * Abstract class of Entity
@@ -72,7 +71,7 @@ public abstract class AbstractEntity implements Entity
 	this.pos.x = pos.x * tileSize;
 	this.pos.y = pos.y * tileSize;
 	this.entityType = et;
-	this.collisionAreaSize = (doubleInt(tileSize)) / 3;
+	this.collisionAreaSize = tileSize * 2 / 3;
 
     }
 
@@ -82,7 +81,6 @@ public abstract class AbstractEntity implements Entity
 	    readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
 	} catch (IOException e){
 	    LoggingManager.getLogr().log(Level.SEVERE, "AbstractEntity", e);
-	    System.exit(1);
 	}finally {
 	    result = readFile;
 	}
@@ -100,8 +98,8 @@ public abstract class AbstractEntity implements Entity
     }
 
     protected void setCollisionAreaRelativePos() {
-	this.collisionArea.x = this.pos.x + halfInt(zinkPanel.getOriginalTileSize());
-	this.collisionArea.y = this.pos.y + halfInt(zinkPanel.getOriginalTileSize());
+	this.collisionArea.x = this.pos.x + zinkPanel.getOriginalTileSize() / 2;
+	this.collisionArea.y = this.pos.y + zinkPanel.getOriginalTileSize() / 2;
     }
 
     @Override public void moveEntity(EntityInput pi, int direction, int ammount){
@@ -129,7 +127,7 @@ public abstract class AbstractEntity implements Entity
     }
 
     protected void moveRandom(){
-	if (moveTick == doubleInt(zinkPanel.getFPS())){
+	if (moveTick == zinkPanel.getFPS() * 2){
 	    int i = RANDOM.nextInt(4);
 	    if(i == 0){
 		entityInput = EntityInput.UP;
@@ -160,7 +158,7 @@ public abstract class AbstractEntity implements Entity
     }
 
     public void knockback(){
-	moveEntity(getEntityInput() ,-1, halfInt(zinkPanel.getTileSize()));
+	moveEntity(getEntityInput() ,-1, zinkPanel.getTileSize() / 2);
     }
 
     public void changePosition(EntityInput input, PointXY xy, int direction, int ammount) {
@@ -210,7 +208,7 @@ public abstract class AbstractEntity implements Entity
 	if (spriteCounter <= spriteFrames)
 	    return b2;
 
-	if(spriteCounter >= doubleInt(spriteFrames))
+	if(spriteCounter >= spriteFrames * 2)
 	    spriteCounter = 0;
 
 	return b1;
@@ -305,7 +303,7 @@ public abstract class AbstractEntity implements Entity
 	if (damagedFrameCounter < freezeTime) {
 	    setAlphaComposite(g2, 0.2f);
 	}
-	else if (damagedFrameCounter >= doubleInt(freezeTime)) {
+	else if (damagedFrameCounter >= freezeTime * 2) {
 	    setAlphaComposite(g2, 1.0f);
 	    damagedCounter++;
 	    damagedFrameCounter = 0;
