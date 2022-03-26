@@ -11,8 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import static se.liu.hanba478henan555.game_director.Math.halfInt;
-
 /**
  * Abstract for the game objects.
  * Defines the functions draw, setValues, hasCollided and getters.
@@ -45,8 +43,8 @@ public abstract class AbstractObject implements GameObject
     }
 
     public void setCollisionAreaRelativePos(){
-        this.collisionArea.x = this.pos.x + halfInt(zinkPanel.getOriginalTileSize());
-        this.collisionArea.y = this.pos.y + halfInt(zinkPanel.getOriginalTileSize());
+        this.collisionArea.x = this.pos.x + zinkPanel.getOriginalTileSize()/2;
+        this.collisionArea.y = this.pos.y + zinkPanel.getOriginalTileSize()/2;
     }
 
     /**

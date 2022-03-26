@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import static se.liu.hanba478henan555.game_director.Math.halfInt;
 
 /**
  * Handles the appearence of the frame
@@ -168,8 +167,8 @@ public class ZinkPanel extends JPanel
     }
 
     private void moveScreen(Graphics g){
-        int posX = (player.getPos().x  + halfInt(getTileSize()))/ getTileSize();
-        int posY = (player.getPos().y  + halfInt(getTileSize()))/ getTileSize();
+        int posX = (player.getPos().x  + getTileSize()/2 )/ getTileSize();
+        int posY = (player.getPos().y  + getTileSize()/2 )/ getTileSize();
         g.translate((posX / getColumns()) *-getColumns()*getTileSize(),
                     (posY / getRows()) *-getRows()*getTileSize());
         screenStartPoint.x = posX / getColumns();
