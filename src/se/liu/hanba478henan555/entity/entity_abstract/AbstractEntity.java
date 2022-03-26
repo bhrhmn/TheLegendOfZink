@@ -58,7 +58,7 @@ public abstract class AbstractEntity implements Entity
     protected int damagedFrameCounter = 0;
     protected int attackSpeed;
     protected int attackCounter;
-    protected boolean canAttack;
+    protected boolean canDelayAttack;
     protected int attackBound;
 
     protected final static Random RANDOM = new Random();
@@ -126,32 +126,6 @@ public abstract class AbstractEntity implements Entity
 	}
     }
 
-    protected void moveRandom(){
-	if (moveTick == zinkPanel.getFPS() * 2){
-	    int i = RANDOM.nextInt(4);
-	    if(i == 0){
-		entityInput = EntityInput.UP;
-	    }
-	    else if(i == 1){
-		entityInput = EntityInput.LEFT;
-	    }
-	    else if(i == 2){
-		entityInput = EntityInput.RIGHT;
-	    }
-	    else {
-		entityInput = EntityInput.DOWN;
-	    }
-	    moveTick = 0;
-	}
-    }
-
-    protected void updateEntity(){
-	updateCollision();
-	spriteCounter++; moveTick++;
-	moveRandom();
-	moveEntity(entityInput,1,speed);
-    }
-
     protected void updateCollision(){
 	setCollisionAreaRelativePos();
 	collisionHandler.checkObjectCollision(this);
@@ -204,6 +178,10 @@ public abstract class AbstractEntity implements Entity
 	return image;
     }
 
+    protected void changeImage() {
+	currentImage = setImageBasedOnDirection();
+    }
+
     protected BufferedImage changeSprite(BufferedImage b1, BufferedImage b2){
 	if (spriteCounter <= spriteFrames)
 	    return b2;
@@ -212,6 +190,14 @@ public abstract class AbstractEntity implements Entity
 	    spriteCounter = 0;
 
 	return b1;
+    }
+
+    @Override public void draw(final Graphics2D g2) {
+	if (damaged) {
+	    animateDamage(g2);
+	}
+	g2.drawImage(currentImage, pos.x, pos.y, tileSize, tileSize ,null);
+	setAlphaComposite(g2, 1.0f);
     }
 
     protected void shootProjectile(ObjectType ob, EntityInput ei) {
@@ -248,16 +234,8 @@ public abstract class AbstractEntity implements Entity
     }
 
     protected void changeCanAttack() {
-	if (attackCounter <= attackSpeed){
-	    canAttack = false;
-	}else{
-	    canAttack = true;
-	}
+	canDelayAttack = (attackCounter >= attackSpeed);
 	attackCounter++;
-    }
-
-    protected boolean checkCanAttack() {
-	return !canAttack;
     }
 
     public void heal() {

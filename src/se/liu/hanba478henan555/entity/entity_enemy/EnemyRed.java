@@ -40,11 +40,11 @@ public class EnemyRed extends Enemy
 	this.moveTick = 0;
 
 	this.ammountOfDamage = 1;
+	this.canAttack = false;
     }
 
 
     @Override public void setImages() {
-	//TODO: ta bort "/"
 	String fs = File.separator;
 	up1    = setImage("images"+fs+"enemyImages"+fs+"red_enemy"+fs+"en_up_1.png");
 	up2    = setImage("images"+fs+"enemyImages"+fs+"red_enemy"+fs+"en_up_2.png");
@@ -56,23 +56,5 @@ public class EnemyRed extends Enemy
 	left2  = setImage("images"+fs+"enemyImages"+fs+"red_enemy"+fs+"en_left_2.png");
 
     }
-
-    @Override public void update() {
-	updateEntity();
-	changeImage();
-    }
-
-    @Override public void draw(Graphics2D g2){
-	if (damaged) {
-	    animateDamage(g2);
-	}
-	g2.drawImage(currentImage, pos.x, pos.y, tileSize, tileSize ,null);
-	setAlphaComposite(g2, 1.0f);
-    }
-
-    @Override public void attack() {
-
-    }
-
 
 }

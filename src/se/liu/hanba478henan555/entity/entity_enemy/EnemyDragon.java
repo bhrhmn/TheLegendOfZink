@@ -4,6 +4,7 @@ import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
+import se.liu.hanba478henan555.objects.weapon.Projectile;
 
 import java.awt.*;
 import java.io.File;
@@ -20,31 +21,21 @@ public class EnemyDragon extends Enemy
 {
     private static final int DRAGON_HEALTH = 10;
 
-    private int size;
-
     public EnemyDragon(final ZinkPanel zp, final Point pos) {
 	super(zp, pos, EntityType.DRAGON);
 	setDefaultValues();
     }
 
-    @Override public void attack() {
-	shootProjectile(ObjectType.ENEMY_BOW, EntityInput.RIGHT);
-    }
-
-    @Override public void takeDamage(int damage) {
-	calculateDamage(damage);
-    }
-
     @Override public void setImages() {
 	String fs = File.separator;
-	up1 = setImage("images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_1.png");
-	up2 = setImage("images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_2.png");
+	up1 = down1 = setImage("images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_1.png");
+	up2 = down2 = setImage("images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_2.png");
     }
 
     @Override public void setDefaultValues() {
 	setImages();
 
-	this.size = tileSize *2;
+	int size = tileSize * 2;
 
 	this.collisionArea = new Rectangle();
 	collisionArea.width = size;
@@ -59,41 +50,31 @@ public class EnemyDragon extends Enemy
 	this.health = maxHealth;
 	this.ammountOfDamage = zinkPanel.getPlayer().getMaxHealth();
 	this.attackBound = 1;
+	this.canDelayAttack = true;
+	this.attackSpeed = 0;
+	this.canAttack = true;
 
 	this.entityInput = EntityInput.DOWN;
     }
 
-    @Override public void update() {
-	attackRandom(attackBound);
-	setCollisionAreaRelativePos();
-	updateEntity();
-	changeImage();
-    }
-
-    @Override protected void changeImage() {
-	currentImage = changeSprite(up1, up2);
-    }
-
     @Override protected void moveRandom(){
-	if (moveTick == zinkPanel.getFPS() *2){
-	    int i = RANDOM.nextInt(3);
+	if (moveTick == zinkPanel.getFPS() * 2){
+	    int i = RANDOM.nextInt(2);
 	    if(i == 0){
 		entityInput = EntityInput.UP;
 	    }
-	    else if(i == 1){
+	    else {
 		entityInput = EntityInput.DOWN;
 	    }
+
 	    moveTick = 0;
 	}
     }
 
-    @Override public void draw(final Graphics2D g2) {
-	if (damaged) {
-	    animateDamage(g2);
-	}
-	g2.drawImage(currentImage, pos.x, pos.y, size, size ,null);
-	setAlphaComposite(g2, 1.0f);
+    @Override protected void shootProjectile(ObjectType ob, EntityInput ei) {
+	Projectile p = new Projectile(zinkPanel, ob, EntityInput.RIGHT, this);
+	p.setValues(pos.x, pos.y, EntityInput.RIGHT);
+	zinkPanel.getGameObjects().add(p);
     }
-
 
 }

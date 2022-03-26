@@ -188,8 +188,8 @@ public class WindowManager
 	Font font = new Font("Times New Roman", Font.PLAIN, 30);
 	g2.setFont(font);
 	String instructions1 = "Move with wasd-keys ";
-	String instructions2 = "Attack enemies with ...";
-	String instructions3 = "Open inventory with ...";
+	String instructions2 = "Attack enemies with SPACE";
+	String instructions3 = "Open inventory with ENTER";
 	g2.drawString(instructions1, zinkPanel.getTileSize(), zinkPanel.getTileSize());
 	g2.drawString(instructions2, zinkPanel.getTileSize(), zinkPanel.getTileSize() + font.getSize());
 	g2.drawString(instructions3, zinkPanel.getTileSize(), zinkPanel.getTileSize() + font.getSize()*2);

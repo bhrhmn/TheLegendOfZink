@@ -41,9 +41,7 @@ public class Projectile extends AbstractObject
 
     public Projectile(final ZinkPanel zp, final ObjectType go, EntityInput ei, AbstractEntity entity) {
 	super(zp, go);
-	this.soundDistance = SOUND_DISTANCE
-
-	;
+	this.soundDistance = SOUND_DISTANCE;
 	this.direction = ei;
 	this.lifeSpan = 0;
 	this.entity = entity;

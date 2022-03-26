@@ -92,7 +92,7 @@ public class Player extends AbstractEntity
 
 	this.attackSpeed = zinkPanel.getFPS()/3;
 	this.attackCounter = 0;
-	this.canAttack = true;
+	this.canDelayAttack = true;
 
 	this.spriteFrames = SPRITE_FRAMES;
     }
@@ -120,7 +120,7 @@ public class Player extends AbstractEntity
 	    attack();
 	}
 	if ((keyHandler.getKey(EntityInput.UP) || keyHandler.getKey(EntityInput.DOWN) ||
-	     keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) && canAttack) {
+	     keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) && canDelayAttack) {
 
 	    spriteCounter++;
 
@@ -138,6 +138,7 @@ public class Player extends AbstractEntity
 	    }
 	}
 	checkCollision();
+	changeImage();
     }
 
     private void checkCollision(){
@@ -150,16 +151,8 @@ public class Player extends AbstractEntity
 	moveEntity(entityInput,1, speed);
     }
 
-    @Override public void draw(Graphics2D g2) {
-	if (damaged) {
-	    animateDamage(g2);
-	}
-	g2.drawImage(setImageBasedOnDirection(), pos.x, pos.y, tileSize, tileSize ,null);
-	setAlphaComposite(g2, 1.0f);
-    }
-
     @Override public void attack() {
-	if(checkCanAttack()){
+	if(!isCanAttack()){
 	    return;
 	}
 	attackCounter = 0;
@@ -170,8 +163,8 @@ public class Player extends AbstractEntity
 	addSword();
     }
 
-    @Override protected boolean checkCanAttack() {
-	return !canAttack || weapon == null;
+    protected boolean isCanAttack() {
+	return canDelayAttack && weapon != null;
     }
 
     private void addSword() {

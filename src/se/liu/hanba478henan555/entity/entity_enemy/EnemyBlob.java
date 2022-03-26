@@ -3,7 +3,6 @@ package se.liu.hanba478henan555.entity.entity_enemy;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
-import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import java.awt.*;
 import java.io.File;
@@ -26,13 +25,6 @@ public class EnemyBlob extends Enemy
 	setDefaultValues();
     }
 
-    @Override public void attack() {
-	if(checkCanAttack()){
-	    return;
-	}
-	attackCounter = 0;
-	shootProjectile(ObjectType.ENEMY_BOW, entityInput);
-    }
 
     @Override public void setImages() {
 	String fs = File.separator;
@@ -61,26 +53,11 @@ public class EnemyBlob extends Enemy
 
 	this.attackCounter = 0;
 	this.attackSpeed = 2;
-	this.canAttack = true;
+	this.canDelayAttack = true;
 	this.attackBound = 1;
+	this.canAttack = true;
 
 	this.entityInput = EntityInput.DOWN;
-    }
-
-    @Override public void update() {
-	changeCanAttack();
-	attackRandom(attackBound);
-	updateEntity();
-	changeImage();
-    }
-
-
-    @Override public void draw(final Graphics2D g2) {
-	if (damaged) {
-	    animateDamage(g2);
-	}
-	g2.drawImage(currentImage, pos.x, pos.y, tileSize, tileSize ,null);
-	setAlphaComposite(g2, 1.0f);
     }
 
 }
