@@ -22,7 +22,7 @@ public class CollisionHandler
         this.tileSize = zinkPanel.getTileSize();
     }
 
-    public void objectCollision(AbstractEntity entity) {
+    public void checkObjectCollision(AbstractEntity entity) {
         for (int i = 0; i < zinkPanel.getGameObjects().size(); i++){
             GameObject gameObject = zinkPanel.getGameObjects().get(i);
             if (gameObject != null && gameObject.hasCollision(entity.getCollisionArea())) {
@@ -40,7 +40,7 @@ public class CollisionHandler
        }
    }
 
-    public boolean tileCollision(AbstractEntity entity, EntityInput dir){
+    public boolean istileColliding(AbstractEntity entity, EntityInput dir){
         Point topLeft  = new Point((entity.getCollisionArea().x)/tileSize , (entity.getCollisionArea().y)/tileSize);
         Point topRight = new Point((entity.getCollisionArea().x+entity.getCollisionArea().width)/tileSize , (entity.getCollisionArea().y)/tileSize);
 

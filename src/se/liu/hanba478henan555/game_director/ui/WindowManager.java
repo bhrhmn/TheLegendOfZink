@@ -214,7 +214,7 @@ public class WindowManager
 	arrowCounter = 0;
     }
 
-    public void playerConfirm() {
+    public void confrimFromPlayer() {
 	if (zinkPanel.isShowingTitleScreen()) {
 	    titleScreenConfirm();
 	    return;

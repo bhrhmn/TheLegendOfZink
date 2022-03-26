@@ -85,7 +85,6 @@ public class RoomManager
 	for (int y =0; y < worldRows; y++) {
 	    for(int x = 0; x < worldColumns; x++){
 		int tileType = roomTileData[x][y];
-
 		g2.drawImage(tileTypes[tileType].getImage(),
 			     x*tileSize ,y*tileSize,
 			     	tileSize, tileSize, null );

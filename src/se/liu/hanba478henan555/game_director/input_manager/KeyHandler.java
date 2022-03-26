@@ -60,7 +60,7 @@ public class KeyHandler extends KeyAdapter
 
     @Override public void keyPressed(final KeyEvent e) {
 	if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-	    zinkPanel.getWindowManager().playerConfirm();
+	    zinkPanel.getWindowManager().confrimFromPlayer();
 	}
 	changeMapValue(e,true);
     }

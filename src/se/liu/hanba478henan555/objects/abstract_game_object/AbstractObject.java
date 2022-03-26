@@ -77,21 +77,21 @@ public abstract class AbstractObject implements GameObject
 
     public void moreValues(int x, int y, EntityInput ei){
         readImage();
-        BufferedImage temp = image;
+        BufferedImage rotatedImage = image;
         switch (ei) {
             case UP -> {
                 this.pos = new Point(x, y-zinkPanel.getTileSize());
-                image = rotate(temp, 0);
+                image = rotate(rotatedImage, 0);
             }
             case DOWN -> {this.pos = new Point(x, y+zinkPanel.getTileSize());
-                image = rotate(temp, Math.PI);
+                image = rotate(rotatedImage, Math.PI);
             }
             case LEFT -> {
                 this.pos = new Point(x-zinkPanel.getTileSize(), y);
-                image = rotate(temp, -Math.PI);
+                image = rotate(rotatedImage, -Math.PI/2);
             }
             case RIGHT -> {this.pos = new Point(x+zinkPanel.getTileSize(), y);
-                image = rotate(temp, Math.PI / 2);
+                image = rotate(rotatedImage, Math.PI / 2);
             }
 
         }

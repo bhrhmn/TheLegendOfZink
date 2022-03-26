@@ -45,12 +45,12 @@ public class Player extends AbstractEntity
     }
 
     public void selectCurrentWeapon(int i){
-	ObjectType temp = inventory.get(i).getGameObject();
-	if(!(temp == ObjectType.PLAYER_SWORD_BAD || temp == ObjectType.PLAYER_SWORD_GOOD|| temp == ObjectType.PLAYER_BOW)){
+	ObjectType chooseWeapon = inventory.get(i).getGameObject();
+	if(!(chooseWeapon == ObjectType.PLAYER_SWORD_BAD || chooseWeapon == ObjectType.PLAYER_SWORD_GOOD|| chooseWeapon == ObjectType.PLAYER_BOW)){
 	    return;
 	}
 	zinkPanel.sound.playSoundEffect(1);
-	weapon = temp;
+	weapon = chooseWeapon;
     }
 
     public ObjectType getWeapon() {
@@ -141,7 +141,7 @@ public class Player extends AbstractEntity
     }
 
     private void checkCollision(){
-	collisionHandler.objectCollision(this);
+	collisionHandler.checkObjectCollision(this);
 	collisionHandler.abstractEntityCollision(this);
     }
 

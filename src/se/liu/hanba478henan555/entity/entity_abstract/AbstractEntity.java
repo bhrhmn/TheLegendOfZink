@@ -156,7 +156,7 @@ public abstract class AbstractEntity implements Entity
 
     protected void updateCollision(){
 	setCollisionAreaRelativePos();
-	collisionHandler.objectCollision(this);
+	collisionHandler.checkObjectCollision(this);
     }
 
     public void knockback(){
@@ -168,7 +168,7 @@ public abstract class AbstractEntity implements Entity
 	if (xy == PointXY.X) {
 	    pos.x += add;
 	    collisionArea.x += add;
-	    if (collisionHandler.tileCollision(this, input)){
+	    if (collisionHandler.istileColliding(this, input)){
 		pos.x -= add;
 		collisionArea.x -= add;
 	    }
@@ -176,7 +176,7 @@ public abstract class AbstractEntity implements Entity
 	else if (xy == PointXY.Y) {
 	    pos.y += add;
 	    collisionArea.y += add;
-	    if (collisionHandler.tileCollision(this, input)){
+	    if (collisionHandler.istileColliding(this, input)){
 		pos.y -= add;
 		collisionArea.y -= add;
 	    }
