@@ -32,6 +32,14 @@ public class EnemyDragon extends Enemy
 	up2 = down2 = setImage("images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_2.png");
     }
 
+    @Override public void draw(final Graphics2D g2) {
+	if (damaged) {
+	    animateDamage(g2);
+	}
+	g2.drawImage(currentImage, pos.x, pos.y, tileSize*2, tileSize*2 ,null);
+	setAlphaComposite(g2, 1.0f);
+    }
+
     @Override public void setDefaultValues() {
 	setImages();
 
