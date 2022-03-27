@@ -139,6 +139,10 @@ public class PlaceSuperObjectsSpawnEnemies
 	spawnRedEnemy(12, 30);
 	spawnRedEnemy(14, 31);
 
+	spawnBloodPile(15, 42);
+	spawnBloodPile(18, 42);
+	spawnBloodPile(19, 41);
+	spawnBloodPile(19, 45);
 	spawnDragon(16, 41);
 	spawnDragon(19, 45);
 
