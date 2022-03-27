@@ -28,12 +28,19 @@ public class Sound
     private URL[] soundURL = new URL[7];
     public Sound(){
 	String fs = File.separator;
+	//Backgroundmusic
 	soundURL[0] = setURL("audio"+fs+"sounds"+fs+"music.wav");
+	//Key sound
 	soundURL[1] = setURL("audio"+fs+"sounds"+fs+"key.wav");
+	//Door sound
 	soundURL[2] = setURL("audio"+fs+"sounds"+fs+"door.wav");
+	//Enemy dying sound
 	soundURL[3] = setURL("audio"+fs+"sounds"+fs+"death.wav");
+	//Entity taking damage sound
 	soundURL[4] = setURL("audio"+fs+"sounds"+fs+"hit.wav");
+	//PlayerSword sound
 	soundURL[5] = setURL("audio"+fs+"sounds"+fs+"swosh_sword.wav");
+	//Heart sound
 	soundURL[6] = setURL("audio"+fs+"sounds"+fs+"heart.wav");
     }
 
