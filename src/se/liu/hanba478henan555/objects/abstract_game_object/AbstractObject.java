@@ -72,7 +72,13 @@ public abstract class AbstractObject implements GameObject
         return result;
     }
 
-    public void moreValues(int x, int y, EntityInput ei){
+    /**
+     * Depending on ei the image will call on the rotate-function with the corresponding angle
+     * @param x
+     * @param y
+     * @param ei
+     */
+    protected void moreValues(int x, int y, EntityInput ei){
         readImage();
         BufferedImage rotatedImage = image;
         switch (ei) {
