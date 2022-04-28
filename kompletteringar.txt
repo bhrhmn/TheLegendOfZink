@@ -1,0 +1,42 @@
+Ett trevligt projekt! Ni är nära en femma men har lite mer att polera innan ni når riktigt ända fram.
+
+I t.ex. setImages() använder ni File.separator, men det är fel i det här sammanhanget eftersom ni kommer att använda strängarna som del av
+URL:er, som alltid använder "/" som separator.
+
+I loadMap() använder ni istället FileReader för att läsa direkt från fil, istället för att använda en resurs och be den resursen om en
+inputström.  Där behövs så klart File.separator användas, men samtidigt bryter det egentligen mot kravet för betyg 4.
+Nu använder ni resurser på andra ställen så jag tycker ändå en 4 är OK, men för femma behöver ni fixa detta.
+
+Metoden setImage() sätter inget, utan returnerar något.  Därmed kunde namngivningen förbättras.
+Gå gärna också genom det som sägs under "Analys av namngivning".  Exempel:
+
+  moreValues -- Hey you, please more Values [void]
+  titleScreenConfirm -- Hey you, please title Screen Confirm [void]
+  istileColliding -- Let's ask the object if (the object) istile Colliding
+
+Koden för setImages() är också rätt så repetitiv.  Det ser ut som att man skulle kunna förenkla genom att skapa ett namngivningsmönster
+för resurserna så att det t.ex. räcker att ange "blob" till AbstractEntity-konstruktorn, så kan den själv konstruera namnen och läsa in alla filer.
+
+Det vore bra att använda något annat än heltalsindex för att ange vilket ljud man ska spela.
+Exempelvis kunde man använda en enum-konstant eller kanske till och med ange namnet på wav-filen som argument till setClip().
+Det blir mer läsbart och mindre risk för problem när man inte vet vad "ljud 5" egentligen är.
+
+Vissa uttryck kunde gärna ha extraherats till variabler, t.ex. (i istileColliding()) entity.getCollisionArea() som används 12 gånger
+och zinkPanel.getRoomManager() som används 8 gånger.  Det kan göra koden lite mer kortfattad och lättläst.
+
+Titta även lite mer på övriga varningar.
+
+====
+
+Ni använder väldigt väldigt många paket. Här hade det nog varit tillräckligt att endast använda entity,
+game_director och objects eller något i den stilen i paketväg, all kod ska däremot ligga i paket och därmed bör även
+LoggingManager och StartGame göra det.
+
+Namngivningen på klasserna ser bra ut.
+
+Ni har noggrant använt er av OOP vilket gör koden väldigt läsbar. Ni skyddar även de metoder som endast rör de specifika
+objektet på ett bra sätt genomgående. Även inne i subklasserna har ni strukturerat det väldigt snyggt istället för att bara
+sköta allt i konstruktorn (vilket man lätt gör när default-värden skall sättas).
+
+För att öka läsbarheten där ni kallar på vilken ljud som skall spelas hade ni kunnat lägga till ett förklarande namn
+(exempelvis i en enum) som argument istället för att hårdkoda in vilket index som gäller. Men detta nämner ni i rapporten.
