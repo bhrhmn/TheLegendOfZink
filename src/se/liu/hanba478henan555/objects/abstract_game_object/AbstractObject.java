@@ -59,7 +59,7 @@ public abstract class AbstractObject implements GameObject
     }
 
 
-    protected BufferedImage setImage(final String filePath){
+    protected BufferedImage getImage(final String filePath){
         BufferedImage result, readFile = null;
         try{
             readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
@@ -78,7 +78,7 @@ public abstract class AbstractObject implements GameObject
      * @param y
      * @param ei
      */
-    protected void moreValues(int x, int y, EntityInput ei){
+    protected void setMoreValues(int x, int y, EntityInput ei){
         readImage();
         BufferedImage rotatedImage = image;
         switch (ei) {

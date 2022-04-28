@@ -28,8 +28,8 @@ public class EnemyDragon extends Enemy
 
     @Override public void setImages() {
 	String fs = File.separator;
-	up1 = down1 = setImage("images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_1.png");
-	up2 = down2 = setImage("images"+fs+"enemyImages"+fs+"dragon"+fs+"dragon_2.png");
+	up1 = down1 = getImage("images" + fs + "enemyImages" + fs + "dragon" + fs + "dragon_1.png");
+	up2 = down2 = getImage("images" + fs + "enemyImages" + fs + "dragon" + fs + "dragon_2.png");
     }
 
     @Override public void draw(final Graphics2D g2) {

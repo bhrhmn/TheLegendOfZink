@@ -28,14 +28,14 @@ public class EnemyBlob extends Enemy
 
     @Override public void setImages() {
 	String fs = File.separator;
-	up1    = setImage("images"+fs+"enemyImages"+fs+"blob"+fs+"up"+fs+"blob_up_1.png");
-	up2    = setImage("images"+fs+"enemyImages"+fs+"blob"+fs+"up"+fs+"blob_up_2.png");
-	down1  = setImage("images"+fs+"enemyImages"+fs+"blob"+fs+"down"+fs+"blob_down_1.png");
-	down2  = setImage("images"+fs+"enemyImages"+fs+"blob"+fs+"down"+fs+"blob_down_2.png");
-	right1 = setImage("images"+fs+"enemyImages"+fs+"blob"+fs+"right"+fs+"blob_right_1.png");
-	right2 = setImage("images"+fs+"enemyImages"+fs+"blob"+fs+"right"+fs+"blob_right_2.png");
-	left1  = setImage("images"+fs+"enemyImages"+fs+"blob"+fs+"left"+fs+"blob_left_1.png");
-	left2  = setImage("images"+fs+"enemyImages"+fs+"blob"+fs+"left"+fs+"blob_left_2.png");
+	up1    = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "up" + fs + "blob_up_1.png");
+	up2    = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "up" + fs + "blob_up_2.png");
+	down1  = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "down" + fs + "blob_down_1.png");
+	down2  = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "down" + fs + "blob_down_2.png");
+	right1 = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "right" + fs + "blob_right_1.png");
+	right2 = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "right" + fs + "blob_right_2.png");
+	left1  = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "left" + fs + "blob_left_1.png");
+	left2  = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "left" + fs + "blob_left_2.png");
     }
 
     @Override public void setDefaultValues() {

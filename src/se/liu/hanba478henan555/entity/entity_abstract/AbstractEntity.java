@@ -75,7 +75,7 @@ public abstract class AbstractEntity implements Entity
 
     }
 
-    protected BufferedImage setImage(final String filePath){
+    protected BufferedImage getImage(final String filePath){
 	BufferedImage result,readFile=null;
 	try{
 	    readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
@@ -140,7 +140,7 @@ public abstract class AbstractEntity implements Entity
 	if (xy == PointXY.X) {
 	    pos.x += add;
 	    collisionArea.x += add;
-	    if (collisionHandler.istileColliding(this, input)){
+	    if (collisionHandler.tileIsColliding(this, input)){
 		pos.x -= add;
 		collisionArea.x -= add;
 	    }
@@ -148,7 +148,7 @@ public abstract class AbstractEntity implements Entity
 	else if (xy == PointXY.Y) {
 	    pos.y += add;
 	    collisionArea.y += add;
-	    if (collisionHandler.istileColliding(this, input)){
+	    if (collisionHandler.tileIsColliding(this, input)){
 		pos.y -= add;
 		collisionArea.y -= add;
 	    }

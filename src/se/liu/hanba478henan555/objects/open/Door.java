@@ -29,7 +29,7 @@ public class Door extends AbstractObject
 
     @Override public void readImage() {
 	String fs = File.separator;
-	image = setImage("images"+fs+"objectImages"+fs+"door_key"+fs+"door.png");
+	image = getImage("images" + fs + "objectImages" + fs + "door_key" + fs + "door.png");
     }
 
     @Override public void setCollisionArea() {

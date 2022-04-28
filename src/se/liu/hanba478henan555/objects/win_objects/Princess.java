@@ -33,6 +33,6 @@ public class Princess extends AbstractObject
 
     @Override public void readImage() {
 	String fs = File.separator;
-	image = setImage("images"+fs+"princess"+fs+"princess.png");
+	image = getImage("images" + fs + "princess" + fs + "princess.png");
     }
 }

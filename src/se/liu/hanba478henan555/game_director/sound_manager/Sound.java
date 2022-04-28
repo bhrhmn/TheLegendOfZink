@@ -11,6 +11,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -26,26 +27,36 @@ public class Sound
 {
     private Clip clip = null;
     private URL[] soundURL = new URL[7];
+    private Map<SoundType, Integer> soundMap = Map.ofEntries(
+	    Map.entry(SoundType.MUSIC, 0),
+	    Map.entry(SoundType.KEY, 1),
+	    Map.entry(SoundType.DOOR, 2),
+	    Map.entry(SoundType.DEATH, 3),
+	    Map.entry(SoundType.HIT, 4),
+	    Map.entry(SoundType.SWORD, 5),
+	    Map.entry(SoundType.HEART, 6)
+    );
+
     public Sound(){
 	String fs = File.separator;
 	//Backgroundmusic
-	soundURL[0] = setURL("audio"+fs+"sounds"+fs+"music.wav");
+	soundURL[SoundType.MUSIC.ordinal()] = setURL("music.wav");
 	//Key sound
-	soundURL[1] = setURL("audio"+fs+"sounds"+fs+"key.wav");
+	soundURL[SoundType.KEY.ordinal()] = setURL("key.wav");
 	//Door sound
-	soundURL[2] = setURL("audio"+fs+"sounds"+fs+"door.wav");
+	soundURL[SoundType.DOOR.ordinal()] = setURL("door.wav");
 	//Enemy dying sound
-	soundURL[3] = setURL("audio"+fs+"sounds"+fs+"death.wav");
+	soundURL[SoundType.DEATH.ordinal()] = setURL("death.wav");
 	//Entity taking damage sound
-	soundURL[4] = setURL("audio"+fs+"sounds"+fs+"hit.wav");
+	soundURL[SoundType.HIT.ordinal()] = setURL("hit.wav");
 	//PlayerSword sound
-	soundURL[5] = setURL("audio"+fs+"sounds"+fs+"swosh_sword.wav");
+	soundURL[SoundType.SWORD.ordinal()] = setURL("swosh_sword.wav");
 	//Heart sound
-	soundURL[6] = setURL("audio"+fs+"sounds"+fs+"heart.wav");
+	soundURL[SoundType.HEART.ordinal()] = setURL("heart.wav");
     }
 
     private URL setURL(String filePath){
-	return ClassLoader.getSystemResource(filePath);
+	return ClassLoader.getSystemResource("audio/sounds/"+filePath);
     }
 
     public void setClip(int index){

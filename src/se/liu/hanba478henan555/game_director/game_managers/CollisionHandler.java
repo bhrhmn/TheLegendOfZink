@@ -40,7 +40,7 @@ public class CollisionHandler
        }
    }
 
-    public boolean istileColliding(AbstractEntity entity, EntityInput dir){
+    public boolean tileIsColliding(AbstractEntity entity, EntityInput dir){
         Point topLeft  = new Point((entity.getCollisionArea().x)/tileSize , (entity.getCollisionArea().y)/tileSize);
         Point topRight = new Point((entity.getCollisionArea().x+entity.getCollisionArea().width)/tileSize , (entity.getCollisionArea().y)/tileSize);
 

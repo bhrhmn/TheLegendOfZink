@@ -42,7 +42,7 @@ public class PlayerSword extends AbstractObject
     }
 
     public void setValues(int x, int y,  EntityInput ei) {
-        moreValues(x,y,ei);
+        setMoreValues(x, y, ei);
     }
 
     @Override public void draw(Graphics2D g2){
@@ -60,9 +60,9 @@ public class PlayerSword extends AbstractObject
     @Override public void readImage() {
         String fs = File.separator;
         switch (gameObject){
-            case PLAYER_SWORD_BAD -> {image = setImage(
+            case PLAYER_SWORD_BAD -> {image = getImage(
                     "images"+fs+"objectImages"+fs+"weapon"+fs+"sword"+fs+"sword_weak.png");}
-            case PLAYER_SWORD_GOOD -> {image = setImage(
+            case PLAYER_SWORD_GOOD -> {image = getImage(
                     "images"+fs+"objectImages"+fs+"weapon"+fs+"sword"+fs+"sword_strong.png");}
         }
 

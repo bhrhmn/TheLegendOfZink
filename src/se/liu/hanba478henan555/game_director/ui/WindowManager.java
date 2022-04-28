@@ -209,7 +209,7 @@ public class WindowManager
 
     public void confrimFromPlayer() {
 	if (zinkPanel.isShowingTitleScreen()) {
-	    titleScreenConfirm();
+	    showPlayerChoice();
 	    return;
 	}
 	resetSlotPos();
@@ -224,7 +224,7 @@ public class WindowManager
 	}
     }
 
-    private void titleScreenConfirm() {
+    private void showPlayerChoice() {
 	if (howToPlay) {
 	    howToPlay = false;
 	    return;

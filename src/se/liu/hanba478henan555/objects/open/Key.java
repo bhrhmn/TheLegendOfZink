@@ -25,7 +25,7 @@ public class Key extends AbstractObject
 
     @Override public void readImage() {
 	String fs = File.separator;
-	image = setImage("images"+fs+"objectImages"+fs+"door_key"+fs+"key.png");
+	image = getImage("images" + fs + "objectImages" + fs + "door_key" + fs + "key.png");
     }
 
     @Override public void setCollisionArea() {

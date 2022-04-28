@@ -32,8 +32,8 @@ public class Heart extends AbstractObject
 
     @Override public void readImage() {
 	String fs = File.separator;
-	imageFull = setImage("images"+fs+"objectImages"+fs+"heart"+fs+"heart_full.png");
-	imageEmpty = setImage("images"+fs+"objectImages"+fs+"heart"+fs+"heart_empty.png");
+	imageFull = getImage("images" + fs + "objectImages" + fs + "heart" + fs + "heart_full.png");
+	imageEmpty = getImage("images" + fs + "objectImages" + fs + "heart" + fs + "heart_empty.png");
 
     }
 

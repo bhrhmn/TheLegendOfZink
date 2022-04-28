@@ -37,6 +37,6 @@ public class BloodPile extends AbstractObject
 
     @Override public void readImage() {
         String fs = File.separator;
-        image = setImage("images"+fs+"enemyImages"+fs+"death"+fs+"dead.png");
+        image = getImage("images" + fs + "enemyImages" + fs + "death" + fs + "dead.png");
     }
 }

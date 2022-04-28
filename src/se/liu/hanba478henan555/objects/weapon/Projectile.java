@@ -74,7 +74,7 @@ public class Projectile extends AbstractObject
     }
 
     public void setValues(int x, int y, EntityInput ei) {
-	moreValues(x,y,ei);
+	setMoreValues(x, y, ei);
 	setDamage();
 	playSound();
     }
@@ -112,9 +112,9 @@ public class Projectile extends AbstractObject
 
     @Override public void readImage() {
 	String fs = File.separator;
-	arrow = setImage("images"+fs+"objectImages"+fs+"weapon"+fs+"bow_arrow"+fs+"arrow.png");
-	blobBall = setImage("images"+fs+"enemyImages"+fs+"enemy_projectiles"+fs+"blob_projectile.png");
-	fireBall = setImage("images"+fs+"enemyImages"+fs+"enemy_projectiles"+fs+"dragon_projectile.png");
+	arrow = getImage("images" + fs + "objectImages" + fs + "weapon" + fs + "bow_arrow" + fs + "arrow.png");
+	blobBall = getImage("images" + fs + "enemyImages" + fs + "enemy_projectiles" + fs + "blob_projectile.png");
+	fireBall = getImage("images" + fs + "enemyImages" + fs + "enemy_projectiles" + fs + "dragon_projectile.png");
 	correctImage();
     }
 
