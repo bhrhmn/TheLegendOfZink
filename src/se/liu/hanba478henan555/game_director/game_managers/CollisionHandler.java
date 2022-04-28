@@ -2,6 +2,7 @@ package se.liu.hanba478henan555.game_director.game_managers;
 
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
+import se.liu.hanba478henan555.game_director.map_manager.RoomManager;
 import se.liu.hanba478henan555.objects.abstract_game_object.GameObject;
 
 import java.awt.*;
@@ -41,24 +42,27 @@ public class CollisionHandler
    }
 
     public boolean tileIsColliding(AbstractEntity entity, EntityInput dir){
-        Point topLeft  = new Point((entity.getCollisionArea().x)/tileSize , (entity.getCollisionArea().y)/tileSize);
-        Point topRight = new Point((entity.getCollisionArea().x+entity.getCollisionArea().width)/tileSize , (entity.getCollisionArea().y)/tileSize);
+        RoomManager roomManager = zinkPanel.getRoomManager();
+        Rectangle collisionArea = entity.getCollisionArea();
 
-        Point bottomLeft  = new Point((entity.getCollisionArea().x)/tileSize , (entity.getCollisionArea().height+entity.getCollisionArea().y)/tileSize);
-        Point bottomRight = new Point((entity.getCollisionArea().width+entity.getCollisionArea().x)/tileSize , (entity.getCollisionArea().height+entity.getCollisionArea().y)/tileSize);
+        Point topLeft  = new Point((collisionArea.x)/tileSize , (collisionArea.y)/tileSize);
+        Point topRight = new Point((collisionArea.x+collisionArea.width)/tileSize , (collisionArea.y)/tileSize);
+
+        Point bottomLeft  = new Point((collisionArea.x)/tileSize , (collisionArea.height+collisionArea.y)/tileSize);
+        Point bottomRight = new Point((collisionArea.width+collisionArea.x)/tileSize , (collisionArea.height+collisionArea.y)/tileSize);
 
         switch (dir){
             case UP:{
-                return zinkPanel.getRoomManager().hasCollision(topRight) || zinkPanel.getRoomManager().hasCollision(topLeft);
+                return roomManager.hasCollision(topRight) || roomManager.hasCollision(topLeft);
             }
             case DOWN:{
-                return zinkPanel.getRoomManager().hasCollision(bottomLeft) || zinkPanel.getRoomManager().hasCollision(bottomRight);
+                return roomManager.hasCollision(bottomLeft) || roomManager.hasCollision(bottomRight);
             }
             case LEFT:{
-                return zinkPanel.getRoomManager().hasCollision(bottomLeft) || zinkPanel.getRoomManager().hasCollision(topLeft);
+                return roomManager.hasCollision(bottomLeft) || roomManager.hasCollision(topLeft);
             }
             case RIGHT:{
-                return zinkPanel.getRoomManager().hasCollision(topRight) || zinkPanel.getRoomManager().hasCollision(bottomRight);
+                return roomManager.hasCollision(topRight) || roomManager.hasCollision(bottomRight);
             }
             default:{return false;}
         }
