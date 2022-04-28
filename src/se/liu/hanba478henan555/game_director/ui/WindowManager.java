@@ -4,6 +4,7 @@ import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_player.Player;
 import se.liu.hanba478henan555.game_director.input_manager.KeyHandler;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.game_director.sound_manager.SoundType;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.life.Heart;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
@@ -217,9 +218,9 @@ public class WindowManager
 	showingInventory = !showingInventory;
 	if(showingInventory){
 	    zinkPanel.music.stopMusic();
-	    zinkPanel.sound.playSoundEffect(1);
+	    zinkPanel.sound.playSoundEffect(SoundType.PLING);
 	}else {
-	    zinkPanel.sound.playSoundEffect(1);
+	    zinkPanel.sound.playSoundEffect(SoundType.PLING);
 	    zinkPanel.music.playMusic();
 	}
     }

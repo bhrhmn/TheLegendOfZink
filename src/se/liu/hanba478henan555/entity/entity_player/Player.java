@@ -5,6 +5,7 @@ import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.input_manager.KeyHandler;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.game_director.sound_manager.SoundType;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.open.Key;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
@@ -49,7 +50,7 @@ public class Player extends AbstractEntity
 	if(!(chooseWeapon == ObjectType.PLAYER_SWORD_BAD || chooseWeapon == ObjectType.PLAYER_SWORD_GOOD|| chooseWeapon == ObjectType.PLAYER_BOW)){
 	    return;
 	}
-	zinkPanel.sound.playSoundEffect(1);
+	zinkPanel.sound.playSoundEffect(SoundType.PLING);
 	weapon = chooseWeapon;
     }
 

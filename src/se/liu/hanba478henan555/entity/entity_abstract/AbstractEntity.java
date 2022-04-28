@@ -4,6 +4,7 @@ import se.liu.hanba478henan555.LoggingManager;
 import se.liu.hanba478henan555.game_director.game_managers.CollisionHandler;
 import se.liu.hanba478henan555.game_director.input_manager.PointXY;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.game_director.sound_manager.SoundType;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 import se.liu.hanba478henan555.objects.weapon.Projectile;
 
@@ -255,7 +256,7 @@ public abstract class AbstractEntity implements Entity
 
 	damagedCounter = 0;
 	health-= damage;
-	zinkPanel.sound.playSoundEffect(4);
+	zinkPanel.sound.playSoundEffect(SoundType.HIT);
 	if (health <= 0){
 	    die();
 	}

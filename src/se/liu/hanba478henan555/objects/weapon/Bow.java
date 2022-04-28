@@ -21,7 +21,7 @@ import java.io.File;
 public class Bow extends AbstractObject
 {
     public Bow(ZinkPanel zp){
-	super(zp, ObjectType.PLAYER_BOW);
+	super(zp, ObjectType.PLAYER_BOW, null);
     }
 
     @Override public void readImage() {

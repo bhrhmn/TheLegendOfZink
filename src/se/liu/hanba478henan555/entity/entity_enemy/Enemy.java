@@ -4,6 +4,7 @@ import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.game_director.sound_manager.SoundType;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 import se.liu.hanba478henan555.objects.life.BloodPile;
 
@@ -28,7 +29,7 @@ public abstract class Enemy extends AbstractEntity
     }
 
     @Override protected void die(){
-	zinkPanel.sound.playSoundEffect(3);
+	zinkPanel.sound.playSoundEffect(SoundType.DEATH);
 	zinkPanel.getEnemyList().remove(this);
 	BloodPile bloodPile = new BloodPile(zinkPanel);
 	bloodPile.setValues(this.pos.x/ zinkPanel.getTileSize(), this.pos.y/ zinkPanel.getTileSize());

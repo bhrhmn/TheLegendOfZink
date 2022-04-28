@@ -20,10 +20,8 @@ public class BloodPile extends AbstractObject
 {
 
     public BloodPile(final ZinkPanel zp) {
-	super(zp, ObjectType.BLOOD_PILE);
+	super(zp, ObjectType.BLOOD_PILE, null);
     }
-
-
 
     @Override public void whenCollided(final AbstractEntity entity) {
 

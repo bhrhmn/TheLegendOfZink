@@ -4,6 +4,7 @@ import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.game_director.sound_manager.SoundType;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
@@ -35,10 +36,10 @@ public class PlayerSword extends AbstractObject
 
 
     public PlayerSword(final ZinkPanel zp, final ObjectType gameObject, boolean onGround) {
-        super(zp, gameObject);
+        super(zp, gameObject, SoundType.SWORD);
         this.onGround = onGround;
 
-        if (!onGround){zinkPanel.sound.playSoundEffect(5);}
+        if (!onGround){zinkPanel.sound.playSoundEffect(soundEffect);}
     }
 
     public void setValues(int x, int y,  EntityInput ei) {

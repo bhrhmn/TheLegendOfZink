@@ -17,7 +17,7 @@ public class Princess extends AbstractObject
 {
     public Princess(final ZinkPanel zp)
     {
-	super(zp, ObjectType.PRINCESS);
+	super(zp, ObjectType.PRINCESS, null);
     }
 
     @Override public void whenCollided(final AbstractEntity entity) {

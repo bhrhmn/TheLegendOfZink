@@ -4,6 +4,7 @@ package se.liu.hanba478henan555.objects.abstract_game_object;
 import se.liu.hanba478henan555.LoggingManager;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.game_director.sound_manager.SoundType;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -28,10 +29,12 @@ public abstract class AbstractObject implements GameObject
 
     protected Rectangle collisionArea = null;
     protected ObjectType gameObject;
+    protected SoundType soundEffect;
 
-    protected AbstractObject(final ZinkPanel zp,final ObjectType go) {
+    protected AbstractObject(final ZinkPanel zp,final ObjectType go, SoundType soundEffect) {
         this.zinkPanel = zp;
         this.gameObject = go;
+        this.soundEffect = soundEffect;
     }
 
     @Override public void draw(Graphics2D g2){

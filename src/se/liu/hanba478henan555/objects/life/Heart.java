@@ -3,6 +3,7 @@ package se.liu.hanba478henan555.objects.life;
 import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.game_director.sound_manager.SoundType;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
@@ -26,7 +27,7 @@ public class Heart extends AbstractObject
     private BufferedImage imageFull = null, imageEmpty = null;
 
     public Heart(final ZinkPanel zinkPanel) {
-	super(zinkPanel, ObjectType.HEART);
+	super(zinkPanel, ObjectType.HEART, SoundType.HEART);
 	readImage();
     }
 
@@ -49,7 +50,7 @@ public class Heart extends AbstractObject
 	if (!entity.getEntityType().equals(EntityType.PLAYER))
 	    return;
 	entity.heal();
-	zinkPanel.getSound().playSoundEffect(6);
+	zinkPanel.getSound().playSoundEffect(soundEffect);
 	zinkPanel.getWindowManager().showObjectMessage(this);
 	zinkPanel.getGameObjects().remove(this);
     }

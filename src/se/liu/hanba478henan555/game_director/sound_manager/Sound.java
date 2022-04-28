@@ -11,7 +11,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
 import java.util.logging.Level;
 
 /**
@@ -27,22 +26,13 @@ public class Sound
 {
     private Clip clip = null;
     private URL[] soundURL = new URL[7];
-    private Map<SoundType, Integer> soundMap = Map.ofEntries(
-	    Map.entry(SoundType.MUSIC, 0),
-	    Map.entry(SoundType.KEY, 1),
-	    Map.entry(SoundType.DOOR, 2),
-	    Map.entry(SoundType.DEATH, 3),
-	    Map.entry(SoundType.HIT, 4),
-	    Map.entry(SoundType.SWORD, 5),
-	    Map.entry(SoundType.HEART, 6)
-    );
 
     public Sound(){
 	String fs = File.separator;
 	//Backgroundmusic
 	soundURL[SoundType.MUSIC.ordinal()] = setURL("music.wav");
-	//Key sound
-	soundURL[SoundType.KEY.ordinal()] = setURL("key.wav");
+	//pling sound
+	soundURL[SoundType.PLING.ordinal()] = setURL("key.wav");
 	//Door sound
 	soundURL[SoundType.DOOR.ordinal()] = setURL("door.wav");
 	//Enemy dying sound
@@ -59,9 +49,9 @@ public class Sound
 	return ClassLoader.getSystemResource("audio/sounds/"+filePath);
     }
 
-    public void setClip(int index){
+    public void setClip(SoundType soundType){
 	try {
-	    AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[index]);
+	    AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[soundType.ordinal()]);
 	    clip = AudioSystem.getClip();
 	    clip.open(ais);
 

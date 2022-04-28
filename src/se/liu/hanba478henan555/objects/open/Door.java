@@ -5,6 +5,7 @@ import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.entity.entity_player.Player;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.game_director.sound_manager.SoundType;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
@@ -24,7 +25,7 @@ import java.io.File;
 public class Door extends AbstractObject
 {
     public Door(ZinkPanel zp){
-	super(zp, ObjectType.DOOR);
+	super(zp, ObjectType.DOOR, SoundType.DOOR);
     }
 
     @Override public void readImage() {
@@ -48,7 +49,7 @@ public class Door extends AbstractObject
 	    player.removeAmmountOfDoorkeys();
 	    zinkPanel.getGameObjects().remove(this);
 	    zinkPanel.getWindowManager().showObjectMessage(this);
-	    zinkPanel.getSound().playSoundEffect(2);
+	    zinkPanel.getSound().playSoundEffect(soundEffect);
 	    return;
 	}
 	EntityInput lastKey = player.getEntityInput();

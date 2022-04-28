@@ -10,7 +10,7 @@ package se.liu.hanba478henan555.game_director.sound_manager;
 public class PlaySound extends Sound
 {
     public void playMusic(){
-	this.setClip(0);
+	this.setClip(SoundType.MUSIC);
 	this.play();
 	this.loop();
     }
@@ -19,8 +19,8 @@ public class PlaySound extends Sound
 	this.stop();
     }
 
-    public void playSoundEffect(int index){
-	this.setClip(index);
+    public void playSoundEffect(SoundType soundType){
+	this.setClip(soundType);
 	this.play();
     }
 

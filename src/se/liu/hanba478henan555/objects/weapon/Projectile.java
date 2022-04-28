@@ -6,6 +6,7 @@ import se.liu.hanba478henan555.entity.entity_abstract.AbstractEntity;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityInput;
 import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
+import se.liu.hanba478henan555.game_director.sound_manager.SoundType;
 import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
@@ -40,7 +41,7 @@ public class Projectile extends AbstractObject
 
 
     public Projectile(final ZinkPanel zp, final ObjectType go, EntityInput ei, AbstractEntity entity) {
-	super(zp, go);
+	super(zp, go, SoundType.DOOR);
 	this.soundDistance = SOUND_DISTANCE;
 	this.direction = ei;
 	this.lifeSpan = 0;
@@ -51,7 +52,7 @@ public class Projectile extends AbstractObject
 	int x = zinkPanel.getPlayer().getPos().x - pos.x;
 	int y = zinkPanel.getPlayer().getPos().y - pos.y;
 	if(Math.sqrt(x*x + y*y) <= soundDistance){
-	    zinkPanel.sound.playSoundEffect(2);
+	    zinkPanel.sound.playSoundEffect(soundEffect);
 	}
     }
 
