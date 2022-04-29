@@ -44,7 +44,7 @@ public class EnemyRed extends Enemy
 
 
     @Override public void setImages() {
-	String path = "images/enemyImages/red_enemy";
+	String path = "images/enemyImages/red_enemy/";
 	up1    = getImage(path + "en_up_1.png");
 	up2    = getImage(path + "en_up_2.png");
 	down1  = getImage(path + "en_down_1.png");

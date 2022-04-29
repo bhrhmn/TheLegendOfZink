@@ -10,7 +10,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 
 import java.awt.*;
-import java.io.File;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -59,12 +58,11 @@ public class PlayerSword extends AbstractObject
     }
 
     @Override public void readImage() {
-        String fs = File.separator;
         switch (gameObject){
             case PLAYER_SWORD_BAD -> {image = getImage(
-                    "images"+fs+"objectImages"+fs+"weapon"+fs+"sword"+fs+"sword_weak.png");}
+                    PATH+"weapon/sword/sword_weak.png");}
             case PLAYER_SWORD_GOOD -> {image = getImage(
-                    "images"+fs+"objectImages"+fs+"weapon"+fs+"sword"+fs+"sword_strong.png");}
+                    PATH+"weapon/sword/sword_strong.png");}
         }
 
     }

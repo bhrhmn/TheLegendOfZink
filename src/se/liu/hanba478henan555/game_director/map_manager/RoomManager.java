@@ -79,12 +79,12 @@ public class RoomManager
 	}
     }
 
-    private String getResourceFileAsString(String roomFile) {
+    private String getResourceFileAsString(String fileName) {
 	ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-	try (InputStream is = classLoader.getResourceAsStream(roomFile)) {
+	try (InputStream is = classLoader.getResourceAsStream(fileName)) {
 	    try (InputStreamReader isr = new InputStreamReader(is);
 		 BufferedReader reader = new BufferedReader(isr)) {
-		return reader.lines().collect(Collectors.joining(File.separator));
+		return reader.lines().collect(Collectors.joining(System.lineSeparator()));
 	    }
 	} catch (IOException e) {
 	    LoggingManager.getLogr().log(Level.SEVERE, "loadMap", e);

@@ -12,7 +12,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 import se.liu.hanba478henan555.objects.weapon.PlayerSword;
 
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,8 +98,7 @@ public class Player extends AbstractEntity
     }
 
     @Override public void setImages() {
-	String fs = File.separator;
-	String path = "images/playerImages";
+	String path = "images/playerImages/";
 	up1    = getImage(path + "player_up_1.png");
 	up2    = getImage(path + "player_up_2.png");
 	left1  = getImage(path + "player_left_1.png");

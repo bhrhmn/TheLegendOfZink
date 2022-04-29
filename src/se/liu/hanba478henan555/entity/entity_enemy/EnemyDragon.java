@@ -26,7 +26,7 @@ public class EnemyDragon extends Enemy
     }
 
     @Override public void setImages() {
-	String path = "images/enemyImages/dragon";
+	String path = "images/enemyImages/dragon/";
 	up1 = down1 = getImage(path + "dragon_1.png");
 	up2 = down2 = getImage(path + "dragon_2.png");
     }

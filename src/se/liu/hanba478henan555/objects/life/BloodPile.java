@@ -6,7 +6,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import java.awt.*;
-import java.io.File;
 
 
 /**
@@ -34,7 +33,6 @@ public class BloodPile extends AbstractObject
     }
 
     @Override public void readImage() {
-        String fs = File.separator;
-        image = getImage("images" + fs + "enemyImages" + fs + "death" + fs + "dead.png");
+        image = getImage("images/enemyImages/death/dead.png");
     }
 }

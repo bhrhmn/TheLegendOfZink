@@ -12,7 +12,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 
 /**
@@ -112,10 +111,9 @@ public class Projectile extends AbstractObject
 
 
     @Override public void readImage() {
-	String fs = File.separator;
-	arrow = getImage("images" + fs + "objectImages" + fs + "weapon" + fs + "bow_arrow" + fs + "arrow.png");
-	blobBall = getImage("images" + fs + "enemyImages" + fs + "enemy_projectiles" + fs + "blob_projectile.png");
-	fireBall = getImage("images" + fs + "enemyImages" + fs + "enemy_projectiles" + fs + "dragon_projectile.png");
+	arrow = getImage(PATH + "weapon/bow_arrow/arrow.png");
+	blobBall = getImage("images/enemyImages/enemy_projectiles/blob_projectile.png");
+	fireBall = getImage("images/enemyImages/enemy_projectiles/dragon_projectile.png");
 	correctImage();
     }
 

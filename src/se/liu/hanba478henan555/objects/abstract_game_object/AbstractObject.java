@@ -31,6 +31,8 @@ public abstract class AbstractObject implements GameObject
     protected ObjectType gameObject;
     protected SoundType soundEffect;
 
+    protected static final String PATH = "images/objectImages/";
+
     protected AbstractObject(final ZinkPanel zp,final ObjectType go, SoundType soundEffect) {
         this.zinkPanel = zp;
         this.gameObject = go;

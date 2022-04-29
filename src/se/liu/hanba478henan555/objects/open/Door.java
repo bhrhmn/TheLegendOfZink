@@ -11,7 +11,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 
 import java.awt.*;
-import java.io.File;
 
 
 /**
@@ -29,8 +28,7 @@ public class Door extends AbstractObject
     }
 
     @Override public void readImage() {
-	String fs = File.separator;
-	image = getImage("images" + fs + "objectImages" + fs + "door_key" + fs + "door.png");
+	image = getImage(PATH + "door_key/door.png");
     }
 
     @Override public void setCollisionArea() {

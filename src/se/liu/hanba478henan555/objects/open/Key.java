@@ -8,7 +8,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import java.awt.*;
-import java.io.File;
 
 /**
  * GameObject Key
@@ -25,8 +24,7 @@ public class Key extends AbstractObject
     }
 
     @Override public void readImage() {
-	String fs = File.separator;
-	image = getImage("images" + fs + "objectImages" + fs + "door_key" + fs + "key.png");
+	image = getImage(PATH + "door_key/key.png");
     }
 
     @Override public void setCollisionArea() {

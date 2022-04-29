@@ -10,7 +10,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 
 /**
@@ -32,9 +31,8 @@ public class Heart extends AbstractObject
     }
 
     @Override public void readImage() {
-	String fs = File.separator;
-	imageFull = getImage("images" + fs + "objectImages" + fs + "heart" + fs + "heart_full.png");
-	imageEmpty = getImage("images" + fs + "objectImages" + fs + "heart" + fs + "heart_empty.png");
+	imageFull = getImage(PATH + "heart/heart_full.png");
+	imageEmpty = getImage(PATH + "heart/heart_empty.png");
 
     }
 

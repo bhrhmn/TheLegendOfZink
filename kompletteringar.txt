@@ -4,6 +4,7 @@ I t.ex. setImages() använder ni File.separator, men det är fel i det här samm
 URL:er, som alltid använder "/" som separator.
 ----------------Lösning-------------
 Fixat i Sound.
+Tog bort File.separator i alla entitys och objects.
 --------------------------------
 I loadMap() använder ni istället FileReader för att läsa direkt från fil, istället för att använda en resurs och be den resursen om en
 inputström.  Där behövs så klart File.separator användas, men samtidigt bryter det egentligen mot kravet för betyg 4.

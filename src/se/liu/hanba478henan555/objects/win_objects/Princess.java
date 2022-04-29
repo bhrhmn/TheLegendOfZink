@@ -7,7 +7,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.AbstractObject;
 import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 import java.awt.*;
-import java.io.File;
 
 /**
  * GameObject Princess
@@ -32,7 +31,6 @@ public class Princess extends AbstractObject
     }
 
     @Override public void readImage() {
-	String fs = File.separator;
-	image = getImage("images" + fs + "princess" + fs + "princess.png");
+	image = getImage(PATH + "princess.png");
     }
 }

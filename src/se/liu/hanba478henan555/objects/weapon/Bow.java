@@ -8,7 +8,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 
 
 import java.awt.*;
-import java.io.File;
 
 
 /**
@@ -25,8 +24,7 @@ public class Bow extends AbstractObject
     }
 
     @Override public void readImage() {
-	String fs = File.separator;
-	image = getImage("images" + fs + "objectImages" + fs + "weapon" + fs + "bow_arrow" + fs + "bow.png");
+	image = getImage(PATH + "weapon/bow_arrow/bow.png");
     }
 
     @Override public void setCollisionArea() {
