@@ -8,11 +8,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 /**
  * Manages background
@@ -41,7 +42,7 @@ public class RoomManager
 	this.tileTypes = new Tile[10];
 	this.roomTileData = new int[worldColumns][worldRows];
 	defineTileTypes();
-	loadMap("resources" + separator + "world" + separator + "world.txt");
+	loadMap("world" + separator + "world.txt");
     }
 
     private void defineTileTypes() {
@@ -68,17 +69,27 @@ public class RoomManager
     }
 
     public void loadMap(String roomFile) {
-	try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(roomFile)))) {
+	try (Scanner scanner = new Scanner(getResourceFileAsString(roomFile))) {
 	    for (int y = 0; y < worldRows; y++) {
 		String[] line = scanner.nextLine().trim().split(" ");
 		for (int x = 0; x < worldColumns; x++) {
 		    roomTileData[x][y] = Integer.parseInt(line[x]);
 		}
 	    }
-	} catch (FileNotFoundException e) {
+	}
+    }
+
+    private String getResourceFileAsString(String roomFile) {
+	ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+	try (InputStream is = classLoader.getResourceAsStream(roomFile)) {
+	    try (InputStreamReader isr = new InputStreamReader(is);
+		 BufferedReader reader = new BufferedReader(isr)) {
+		return reader.lines().collect(Collectors.joining(File.separator));
+	    }
+	} catch (IOException e) {
 	    LoggingManager.getLogr().log(Level.SEVERE, "loadMap", e);
 	}
-
+	return null;
     }
 
     public void draw(Graphics2D g2) {
