@@ -7,7 +7,6 @@ import se.liu.hanba478henan555.objects.abstract_game_object.ObjectType;
 import se.liu.hanba478henan555.objects.weapon.Projectile;
 
 import java.awt.*;
-import java.io.File;
 
 /**
  * Big boss
@@ -27,9 +26,9 @@ public class EnemyDragon extends Enemy
     }
 
     @Override public void setImages() {
-	String fs = File.separator;
-	up1 = down1 = getImage("images" + fs + "enemyImages" + fs + "dragon" + fs + "dragon_1.png");
-	up2 = down2 = getImage("images" + fs + "enemyImages" + fs + "dragon" + fs + "dragon_2.png");
+	String path = "images/enemyImages/dragon";
+	up1 = down1 = getImage(path + "dragon_1.png");
+	up2 = down2 = getImage(path + "dragon_2.png");
     }
 
     @Override public void draw(final Graphics2D g2) {

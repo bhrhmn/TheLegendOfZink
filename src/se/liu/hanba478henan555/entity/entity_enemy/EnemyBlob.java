@@ -5,7 +5,6 @@ import se.liu.hanba478henan555.entity.entity_abstract.EntityType;
 import se.liu.hanba478henan555.game_director.game_managers.ZinkPanel;
 
 import java.awt.*;
-import java.io.File;
 
 /**
  * Enemy
@@ -27,15 +26,15 @@ public class EnemyBlob extends Enemy
 
 
     @Override public void setImages() {
-	String fs = File.separator;
-	up1    = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "up" + fs + "blob_up_1.png");
-	up2    = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "up" + fs + "blob_up_2.png");
-	down1  = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "down" + fs + "blob_down_1.png");
-	down2  = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "down" + fs + "blob_down_2.png");
-	right1 = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "right" + fs + "blob_right_1.png");
-	right2 = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "right" + fs + "blob_right_2.png");
-	left1  = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "left" + fs + "blob_left_1.png");
-	left2  = getImage("images" + fs + "enemyImages" + fs + "blob" + fs + "left" + fs + "blob_left_2.png");
+	String path = "images/enemyImages/blob";
+	up1    = getImage( path + "/up/blob_up_1.png");
+	up2    = getImage(path + "/up/blob_up_2.png");
+	down1  = getImage(path + "/down/blob_down_1.png");
+	down2  = getImage(path + "/down/blob_down_2.png");
+	right1 = getImage(path + "/right/blob_right_1.png");
+	right2 = getImage(path + "/right/blob_right_2.png");
+	left1  = getImage(path + "/left/blob_left_1.png");
+	left2  = getImage(path + "/left/blob_left_2.png");
     }
 
     @Override public void setDefaultValues() {
