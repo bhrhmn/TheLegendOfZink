@@ -74,6 +74,7 @@ public abstract class AbstractEntity implements Entity
 	this.entityType = et;
 	this.collisionAreaSize = tileSize * 2 / 3;
 
+
     }
 
     protected BufferedImage getImage(final String filePath){
@@ -86,6 +87,37 @@ public abstract class AbstractEntity implements Entity
 	    result = readFile;
 	}
 	return result;
+    }
+
+    protected void setImages(){
+	switch (getEntityType()){
+	    case PLAYER: {
+		String path = "images/playerImages/";
+		up1    = getImage(path + "player_up_1.png");
+		up2    = getImage(path + "player_up_2.png");
+		left1  = getImage(path + "player_left_1.png");
+		left2  = getImage(path + "player_left_2.png");
+		right1 = getImage(path + "player_right_1.png");
+		right2 = getImage(path + "player_right_2.png");
+		down1  = getImage(path + "player_down_1.png");
+		down2  = getImage(path + "player_down_2.png");
+		break;
+	    }
+	    case ENEMY:{
+		String enemyType = getEntityType().toString().toLowerCase();
+		String path = "images/enemyImages/"+ enemyType;
+		up1    = getImage( path + "up/"+enemyType+"_up_1.png");
+		up2    = getImage(path + "up/"+enemyType+"_up_2.png");
+		down1  = getImage(path + "down/"+enemyType+"_down_1.png");
+		down2  = getImage(path + "down/"+enemyType+"_down_2.png");
+		right1 = getImage(path + "right/"+enemyType+"_right_1.png");
+		right2 = getImage(path + "right/"+enemyType+"_right_2.png");
+		left1  = getImage(path + "left/"+enemyType+"_left_1.png");
+		left2  = getImage(path + "left/"+enemyType+"_left_2.png");
+		break;
+	    }
+	}
+
     }
 
     protected void setCollisionArea(){

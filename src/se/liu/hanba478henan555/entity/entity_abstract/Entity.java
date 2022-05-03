@@ -15,7 +15,6 @@ public interface Entity
 {
     public void attack();
     public void takeDamage(int damage);
-    public void setImages();
     public void setDefaultValues();
     public void update();
     public void moveEntity(EntityInput pi, int direction, int ammount);
