@@ -41,7 +41,9 @@ istileColliding -> tileIsColliding
 Koden för setImages() är också rätt så repetitiv.  Det ser ut som att man skulle kunna förenkla genom att skapa ett namngivningsmönster
 för resurserna så att det t.ex. räcker att ange "blob" till AbstractEntity-konstruktorn, så kan den själv konstruera namnen och läsa in alla filer.
 -----------Lösning------------
-
+fixat genom att utöka det till 2 functioner. en som sätter
+path + "_up_1.png" och en annan funtionen som bestämmer path, där path är ej hordkodad
+men tar ut utifrån vilken entitytype den är.
 ------------------------------
 
 
