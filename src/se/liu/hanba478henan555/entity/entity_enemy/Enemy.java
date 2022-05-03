@@ -36,6 +36,11 @@ public abstract class Enemy extends AbstractEntity
 	zinkPanel.getGameObjects().add(bloodPile);
     }
 
+    @Override protected void setImages(){
+	String enemyType = getEnemyType().toString().toLowerCase();
+	String path = "images/enemyImages/"+enemyType+"/"+enemyType;
+	setImagesPath(path);
+    }
     @Override public void update() {
 	changeCanAttack();
 	attackRandom(attackBound);
