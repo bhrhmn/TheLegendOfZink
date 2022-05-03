@@ -10,12 +10,18 @@ så eftersom det står
 are automatically ignored. In other places it can be difficult to determine exactly where a string will be used."
 i kodgranskningen väljer vi att ignorera alla SHOWSTOP som har med File.seporator att göra.
 --------------------------------
+
+
+
 I loadMap() använder ni istället FileReader för att läsa direkt från fil, istället för att använda en resurs och be den resursen om en
 inputström.  Där behövs så klart File.separator användas, men samtidigt bryter det egentligen mot kravet för betyg 4.
 Nu använder ni resurser på andra ställen så jag tycker ändå en 4 är OK, men för femma behöver ni fixa detta.
 -------------Lösning--------------
 Skapat metod getResourceFileAsString som används i loadMap i RoomManager.
 ----------------------------------
+
+
+
 Metoden setImage() sätter inget, utan returnerar något.  Därmed kunde namngivningen förbättras.
 Gå gärna också genom det som sägs under "Analys av namngivning".  Exempel:
 
@@ -30,22 +36,33 @@ titleScreenConfirm -> showPlayerChoice
 istileColliding -> tileIsColliding
 --------------------------------------
 
+
+
 Koden för setImages() är också rätt så repetitiv.  Det ser ut som att man skulle kunna förenkla genom att skapa ett namngivningsmönster
 för resurserna så att det t.ex. räcker att ange "blob" till AbstractEntity-konstruktorn, så kan den själv konstruera namnen och läsa in alla filer.
 -----------Lösning------------
 
 ------------------------------
+
+
+
 Det vore bra att använda något annat än heltalsindex för att ange vilket ljud man ska spela.
 Exempelvis kunde man använda en enum-konstant eller kanske till och med ange namnet på wav-filen som argument till setClip().
 Det blir mer läsbart och mindre risk för problem när man inte vet vad "ljud 5" egentligen är.
 -----------------Lösning----------------
 Skapat enum SoundType och använder metoden ordinal() istället för hårdkodad index.
 ----------------------------------------
+
+
+
 Vissa uttryck kunde gärna ha extraherats till variabler, t.ex. (i istileColliding()) entity.getCollisionArea() som används 12 gånger
 och zinkPanel.getRoomManager() som används 8 gånger.  Det kan göra koden lite mer kortfattad och lättläst.
 ---------------Lösning----------------
 Skapat variablerna roomManager och collisionArea i istileColliding (tileIsColliding).
 --------------------------------
+
+
+
 Titta även lite mer på övriga varningar.
 
 ====
