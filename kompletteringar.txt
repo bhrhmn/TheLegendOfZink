@@ -11,16 +11,12 @@ are automatically ignored. In other places it can be difficult to determine exac
 i kodgranskningen väljer vi att ignorera alla SHOWSTOP som har med File.seporator att göra.
 --------------------------------
 
-
-
 I loadMap() använder ni istället FileReader för att läsa direkt från fil, istället för att använda en resurs och be den resursen om en
 inputström.  Där behövs så klart File.separator användas, men samtidigt bryter det egentligen mot kravet för betyg 4.
 Nu använder ni resurser på andra ställen så jag tycker ändå en 4 är OK, men för femma behöver ni fixa detta.
 -------------Lösning--------------
 Skapat metod getResourceFileAsString som används i loadMap i RoomManager.
 ----------------------------------
-
-
 
 Metoden setImage() sätter inget, utan returnerar något.  Därmed kunde namngivningen förbättras.
 Gå gärna också genom det som sägs under "Analys av namngivning".  Exempel:
@@ -36,8 +32,6 @@ titleScreenConfirm -> showPlayerChoice
 istileColliding -> isCollidingWithTile
 --------------------------------------
 
-
-
 Koden för setImages() är också rätt så repetitiv.  Det ser ut som att man skulle kunna förenkla genom att skapa ett namngivningsmönster
 för resurserna så att det t.ex. räcker att ange "blob" till AbstractEntity-konstruktorn, så kan den själv konstruera namnen och läsa in alla filer.
 -----------Lösning------------
@@ -46,8 +40,6 @@ path + "_up_1.png" och en annan funtionen som bestämmer path, där path är ej 
 men tar ut utifrån vilken entitytype den är.
 ------------------------------
 
-
-
 Det vore bra att använda något annat än heltalsindex för att ange vilket ljud man ska spela.
 Exempelvis kunde man använda en enum-konstant eller kanske till och med ange namnet på wav-filen som argument till setClip().
 Det blir mer läsbart och mindre risk för problem när man inte vet vad "ljud 5" egentligen är.
@@ -55,15 +47,11 @@ Det blir mer läsbart och mindre risk för problem när man inte vet vad "ljud 5
 Skapat enum SoundType och använder metoden ordinal() istället för hårdkodad index i varje klass som använder Sound.
 ----------------------------------------
 
-
-
 Vissa uttryck kunde gärna ha extraherats till variabler, t.ex. (i istileColliding()) entity.getCollisionArea() som används 12 gånger
 och zinkPanel.getRoomManager() som används 8 gånger.  Det kan göra koden lite mer kortfattad och lättläst.
 ---------------Lösning----------------
 Skapat variablerna roomManager och collisionArea i metoden isCollidingWithTile (istileColliding) i klassen CollisionHandler som byter ut get-anropen.
 --------------------------------
-
-
 
 Titta även lite mer på övriga varningar.
 
@@ -77,7 +65,7 @@ Namngivningen på klasserna ser bra ut.
 
 Ni har noggrant använt er av OOP vilket gör koden väldigt läsbar. Ni skyddar även de metoder som endast rör de specifika
 objektet på ett bra sätt genomgående. Även inne i subklasserna har ni strukturerat det väldigt snyggt istället för att bara
-sköta allt i konstruktorn (vilket man lätt gör när default-värden skall sättas).
+sköta allt i konstruktorn (vilket man lätt gör när default-värden skall sättas).z
 
 För att öka läsbarheten där ni kallar på vilken ljud som skall spelas hade ni kunnat lägga till ett förklarande namn
 (exempelvis i en enum) som argument istället för att hårdkoda in vilket index som gäller. Men detta nämner ni i rapporten.
