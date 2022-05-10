@@ -159,7 +159,7 @@ public abstract class AbstractEntity implements Entity
 	if (xy == PointXY.X) {
 	    pos.x += add;
 	    collisionArea.x += add;
-	    if (collisionHandler.tileIsColliding(this, input)){
+	    if (collisionHandler.isCollidingWithTile(this, input)){
 		pos.x -= add;
 		collisionArea.x -= add;
 	    }
@@ -167,7 +167,7 @@ public abstract class AbstractEntity implements Entity
 	else if (xy == PointXY.Y) {
 	    pos.y += add;
 	    collisionArea.y += add;
-	    if (collisionHandler.tileIsColliding(this, input)){
+	    if (collisionHandler.isCollidingWithTile(this, input)){
 		pos.y -= add;
 		collisionArea.y -= add;
 	    }

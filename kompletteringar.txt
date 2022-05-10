@@ -33,7 +33,7 @@ fixat givna exempel
 setImage -> getImage
 moreValues -> setMoreValues
 titleScreenConfirm -> showPlayerChoice
-istileColliding -> tileIsColliding
+istileColliding -> isCollidingWithTile
 --------------------------------------
 
 
@@ -42,7 +42,7 @@ Koden för setImages() är också rätt så repetitiv.  Det ser ut som att man s
 för resurserna så att det t.ex. räcker att ange "blob" till AbstractEntity-konstruktorn, så kan den själv konstruera namnen och läsa in alla filer.
 -----------Lösning------------
 fixat genom att utöka det till 2 functioner. en som sätter
-path + "_up_1.png" och en annan funtionen som bestämmer path, där path är ej hordkodad
+path + "_up_1.png" och en annan funtionen som bestämmer path, där path är ej hårdkodad
 men tar ut utifrån vilken entitytype den är.
 ------------------------------
 
@@ -52,7 +52,7 @@ Det vore bra att använda något annat än heltalsindex för att ange vilket lju
 Exempelvis kunde man använda en enum-konstant eller kanske till och med ange namnet på wav-filen som argument till setClip().
 Det blir mer läsbart och mindre risk för problem när man inte vet vad "ljud 5" egentligen är.
 -----------------Lösning----------------
-Skapat enum SoundType och använder metoden ordinal() istället för hårdkodad index.
+Skapat enum SoundType och använder metoden ordinal() istället för hårdkodad index i varje klass som använder Sound.
 ----------------------------------------
 
 
@@ -60,7 +60,7 @@ Skapat enum SoundType och använder metoden ordinal() istället för hårdkodad 
 Vissa uttryck kunde gärna ha extraherats till variabler, t.ex. (i istileColliding()) entity.getCollisionArea() som används 12 gånger
 och zinkPanel.getRoomManager() som används 8 gånger.  Det kan göra koden lite mer kortfattad och lättläst.
 ---------------Lösning----------------
-Skapat variablerna roomManager och collisionArea i istileColliding (tileIsColliding).
+Skapat variablerna roomManager och collisionArea i metoden isCollidingWithTile (istileColliding) i klassen CollisionHandler som byter ut get-anropen.
 --------------------------------
 
 

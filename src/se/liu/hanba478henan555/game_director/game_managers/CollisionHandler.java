@@ -41,7 +41,7 @@ public class CollisionHandler
        }
    }
 
-    public boolean tileIsColliding(AbstractEntity entity, EntityInput dir){
+    public boolean isCollidingWithTile(AbstractEntity entity, EntityInput dir){
         RoomManager roomManager = zinkPanel.getRoomManager();
         Rectangle collisionArea = entity.getCollisionArea();
 
