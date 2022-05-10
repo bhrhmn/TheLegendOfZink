@@ -37,7 +37,7 @@ public class Key extends AbstractObject
 	if (!entity.getEntityType().equals(EntityType.PLAYER))
 	    return;
 	zinkPanel.getWindowManager().showObjectMessage(this);
-	zinkPanel.getPlayer().addAmmountOfDoorKeys();
+	zinkPanel.getPlayer().addAmountOfDoorKeys();
 	zinkPanel.getSound().playSoundEffect(soundEffect);
 	zinkPanel.getGameObjects().remove(this);
     }

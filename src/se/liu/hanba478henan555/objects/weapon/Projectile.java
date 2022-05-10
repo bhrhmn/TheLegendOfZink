@@ -30,7 +30,7 @@ public class Projectile extends AbstractObject
     private static final int PROJECTILE_SPEED = 5;
     private static final int ARROW_DAMAGE = 1;
     private static final int SOUND_DISTANCE = 50;
-
+    private static final int COLLISION_AREA_RESCALE_FACTOR = 3;
     private int soundDistance;
     private int lifeSpan;
     private AbstractEntity entity;
@@ -104,8 +104,8 @@ public class Projectile extends AbstractObject
     }
 
     @Override public void setCollisionArea() {
-	this.collisionArea = new Rectangle(this.pos.x+zinkPanel.getTileSize()/3, this.pos.y+zinkPanel.getTileSize()/3,
-					   zinkPanel.getTileSize()/3, zinkPanel.getTileSize()/3);
+	int size = zinkPanel.getTileSize() / COLLISION_AREA_RESCALE_FACTOR;
+	this.collisionArea = new Rectangle(this.pos.x+ size, this.pos.y+size, size, size);
     }
 
 

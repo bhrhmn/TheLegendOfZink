@@ -45,11 +45,16 @@ public class CollisionHandler
         RoomManager roomManager = zinkPanel.getRoomManager();
         Rectangle collisionArea = entity.getCollisionArea();
 
-        Point topLeft  = new Point((collisionArea.x)/tileSize , (collisionArea.y)/tileSize);
-        Point topRight = new Point((collisionArea.x+collisionArea.width)/tileSize , (collisionArea.y)/tileSize);
+        int columnLeft  = (collisionArea.x)/tileSize;
+        int rowTop      = (collisionArea.y)/tileSize;
+        int columnRight = (collisionArea.x+collisionArea.width)/tileSize;
+        int rowBottom   = (collisionArea.height+collisionArea.y)/tileSize;
 
-        Point bottomLeft  = new Point((collisionArea.x)/tileSize , (collisionArea.height+collisionArea.y)/tileSize);
-        Point bottomRight = new Point((collisionArea.width+collisionArea.x)/tileSize , (collisionArea.height+collisionArea.y)/tileSize);
+        Point topLeft  = new Point(columnLeft , rowTop);
+        Point topRight = new Point(columnRight , rowTop);
+
+        Point bottomLeft  = new Point(columnLeft ,  rowBottom);
+        Point bottomRight = new Point(columnRight , rowBottom);
 
         switch (dir){
             case UP:{

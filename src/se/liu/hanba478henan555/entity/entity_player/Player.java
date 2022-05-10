@@ -57,7 +57,7 @@ public class Player extends AbstractEntity
 	return weapon;
     }
 
-    public void removeAmmountOfDoorkeys(){
+    public void removeAmountOfDoorkeys(){
 	for (AbstractObject object: inventory) {
 	    if (object.getGameObject() == ObjectType.KEY) {
 		inventory.remove(object);
@@ -66,19 +66,19 @@ public class Player extends AbstractEntity
 	}
     }
 
-    public void addAmmountOfDoorKeys(){
+    public void addAmountOfDoorKeys(){
 	Key key = new Key(zinkPanel);
 	key.readImage();
 	inventory.add(key);
     }
 
-    public int getAmmountOfDoorKeys(){
-	int ammountOfDoorKeys = 0;
+    public int getAmountOfDoorKeys(){
+	int amountOfDoorKeys = 0;
 	for (AbstractObject abstractObject : inventory) {
 	    if (abstractObject.getGameObject() == ObjectType.KEY)
-		ammountOfDoorKeys += 1;
+		amountOfDoorKeys += 1;
 	}
-	return ammountOfDoorKeys;
+	return amountOfDoorKeys;
     }
 
     @Override public void setDefaultValues() {
@@ -108,12 +108,8 @@ public class Player extends AbstractEntity
 	if (keyHandler.getKey(EntityInput.ATTACK)){
 	    attack();
 	}
-	if ((keyHandler.getKey(EntityInput.UP) || keyHandler.getKey(EntityInput.DOWN) ||
-	     keyHandler.getKey(EntityInput.LEFT) || keyHandler.getKey(EntityInput.RIGHT)) && canDelayAttack) {
-
-	    spriteCounter++;
-
-	    if (keyHandler.getKey(EntityInput.UP)) {
+	if (canDelayAttack){
+	    if (keyHandler.getKey(EntityInput.UP) ) {
 		movePlayerBasedOnInput(EntityInput.UP);
 	    }
 	    else if (keyHandler.getKey(EntityInput.DOWN)) {
@@ -136,6 +132,7 @@ public class Player extends AbstractEntity
     }
 
     private void movePlayerBasedOnInput(EntityInput pi){
+	spriteCounter++;
 	entityInput = pi;
 	moveEntity(entityInput,1, speed);
     }
