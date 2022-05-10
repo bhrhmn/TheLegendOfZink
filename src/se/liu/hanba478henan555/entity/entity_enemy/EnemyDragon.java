@@ -55,7 +55,7 @@ public class EnemyDragon extends Enemy
 
 	this.maxHealth = DRAGON_HEALTH;
 	this.health = maxHealth;
-	this.ammountOfDamage = zinkPanel.getPlayer().getMaxHealth();
+	this.amountOfDamage = zinkPanel.getPlayer().getMaxHealth();
 	this.attackBound = 1;
 	this.canDelayAttack = true;
 	this.attackSpeed = 0;

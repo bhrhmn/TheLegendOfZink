@@ -38,7 +38,7 @@ public class EnemyRed extends Enemy
 
 	this.moveTick = 0;
 
-	this.ammountOfDamage = 1;
+	this.amountOfDamage = 1;
 	this.canAttack = false;
     }
 

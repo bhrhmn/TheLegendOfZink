@@ -36,7 +36,7 @@ public class EnemyBlob extends Enemy
 
 	this.maxHealth = BLOB_HEALTH;
 	this.health = maxHealth;
-	this.ammountOfDamage = 1;
+	this.amountOfDamage = 1;
 
 	this.attackCounter = 0;
 	this.attackSpeed = 2;

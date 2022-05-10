@@ -36,7 +36,7 @@ public class CollisionHandler
        for (int i = 0; i < zinkPanel.getEnemyList().size(); i++){
            AbstractEntity enemy = zinkPanel.getEnemyList().get(i);
            if (enemy != null && enemy.hasCollision(entity.getCollisionArea()) && !enemy.getEntityType().equals(entity.getEntityType()) && enemy.getCollision()) {
-               entity.takeDamage(enemy.getammountOfDamage());
+               entity.takeDamage(enemy.getamountOfDamage());
            }
        }
    }

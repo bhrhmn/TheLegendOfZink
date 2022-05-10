@@ -88,20 +88,19 @@ public class Projectile extends AbstractObject
 	switch (gameObject){
 	    case PLAYER_BOW -> {
 		if (entity.getEntityType().equals(EntityType.ENEMY)){
-		    entity.takeDamage(ARROW_DAMAGE);
-		    zinkPanel.getGameObjects().remove(this);
+		    removeProjectile();
 		}
-
 	    }
 	    case ENEMY_BOW -> {
 		if (entity.getEntityType().equals(EntityType.PLAYER)) {
 		    entity.takeDamage(damage);
-		    zinkPanel.getGameObjects().remove(this);
+		    removeProjectile();
 		}
 	    }
 	}
-
-
+    }
+    private void removeProjectile(){
+	zinkPanel.getGameObjects().remove(this);
     }
 
     @Override public void setCollisionArea() {

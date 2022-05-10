@@ -34,13 +34,16 @@ public abstract class AbstractEntity implements Entity
 
     protected int tileSize;
 
-    protected Point pos = new Point(0,0);//om något går fel så är den längst upp till vänster
+    protected Point pos = new Point(0,0); /**om något går fel så är den längst upp till vänster*/
+
     protected int speed;
     protected int maxHealth, health;
 
     protected BufferedImage up1 = null,up2 = null,
 	    left1 = null,left2 = null,right1 = null,
 	    	right2 = null,down1 = null,down2 = null;
+
+
     protected EntityInput entityInput = EntityInput.UP;
 
     protected int spriteCounter;
@@ -53,7 +56,7 @@ public abstract class AbstractEntity implements Entity
 
     protected EntityType entityType;
 
-    protected int ammountOfDamage = 0;
+    protected int amountOfDamage = 0;
     protected boolean damaged = false;
     protected int damagedCounter = -1;
     protected int damagedFrameCounter = 0;
@@ -73,7 +76,6 @@ public abstract class AbstractEntity implements Entity
 	this.pos.y = pos.y * tileSize;
 	this.entityType = et;
 	this.collisionAreaSize = tileSize * 2 / 3;
-
 
     }
 
@@ -164,7 +166,7 @@ public abstract class AbstractEntity implements Entity
 		collisionArea.x -= add;
 	    }
 	}
-	else if (xy == PointXY.Y) {
+	else {
 	    pos.y += add;
 	    collisionArea.y += add;
 	    if (collisionHandler.isCollidingWithTile(this, input)){
@@ -243,7 +245,7 @@ public abstract class AbstractEntity implements Entity
 
     public EntityType getEntityType(){return entityType;}
 
-    public int getammountOfDamage(){return ammountOfDamage;}
+    public int getamountOfDamage(){return amountOfDamage;}
 
     protected void attackRandom(int procent) {
 	int randomInt = RANDOM.nextInt(100);
