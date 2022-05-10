@@ -26,6 +26,9 @@ import java.util.Map;
  */
 public class WindowManager
 {
+    private static final int AMOUNT_OPTIONS = 2;
+    private static final int SHADOW_VALUE = 4;
+    private static final float INVENTORY_SCREEN_ALPHA  = 0.6f;
     private boolean showingMessage = false;
     private String message = null;
     private Font font;
@@ -146,7 +149,7 @@ public class WindowManager
 	    return;
 	}
 
-	int amountOptions = 2;
+	int amountOptions = AMOUNT_OPTIONS;
 	Font font = new Font("Times New Roman", Font.BOLD, 60);
 	g2.setFont(font);
 	moveArrow(amountOptions);
@@ -154,7 +157,7 @@ public class WindowManager
 
 	String title1 = "The Adventure";
 	String title2 = "of Zink";
-	int shadow = 4;
+	int shadow = SHADOW_VALUE;
 	int textLength1 = getStringLength(g2, title1);
 	int textLength2 = getStringLength(g2, title2);
 	int screenMiddleX = screensizeX/2;
@@ -363,7 +366,7 @@ public class WindowManager
 
     private void drawWindow(Graphics2D g2, int x, int y, int width, int height) {
 
-	float subScreenAlpha = 0.6f;
+	float subScreenAlpha = INVENTORY_SCREEN_ALPHA;
 	setAlphaComposite(g2, subScreenAlpha);
 	g2.setColor(Color.black);
 	g2.fillRoundRect(x, y, width, height, ROUND_CORNERS, ROUND_CORNERS);

@@ -65,6 +65,7 @@ public abstract class AbstractEntity implements Entity
     protected boolean canDelayAttack;
     protected int attackBound;
 
+    private static final int FREEZE_TIME = 10;
     protected final static Random RANDOM = new Random();
     protected final int collisionAreaSize;
 
@@ -293,7 +294,7 @@ public abstract class AbstractEntity implements Entity
      */
     protected void animateDamage(final Graphics2D g2) {
 	damagedFrameCounter++;
-	int freezeTime = 10;
+	int freezeTime = FREEZE_TIME;
 	if (damagedCounter == 3) {
 	    damaged = false;
 	    damagedCounter = -1;
