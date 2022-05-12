@@ -2,7 +2,7 @@ package se.liu.hanba478henan555.game_director.game_managers;
 
 import se.liu.hanba478henan555.entity.entity_enemy.EnemyBlob;
 import se.liu.hanba478henan555.entity.entity_enemy.EnemyDragon;
-import se.liu.hanba478henan555.entity.entity_enemy.EnemyRed;
+import se.liu.hanba478henan555.entity.entity_enemy.EnemyEn;
 import se.liu.hanba478henan555.objects.life.BloodPile;
 import se.liu.hanba478henan555.objects.life.Heart;
 import se.liu.hanba478henan555.objects.weapon.Bow;
@@ -42,7 +42,7 @@ public class PlaceSuperObjectsSpawnEnemies
     }
 
     private void spawnRedEnemy(int x, int y){
-	EnemyRed en = new EnemyRed(zinkPanel, new Point(x, y));
+	EnemyEn en = new EnemyEn(zinkPanel, new Point(x, y));
 	zinkPanel.getEnemyList().add(en);
     }
 

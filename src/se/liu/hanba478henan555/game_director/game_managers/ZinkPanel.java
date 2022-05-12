@@ -25,7 +25,6 @@ import java.util.List;
 public class ZinkPanel extends JPanel
 {
     private static final int ORIGINAL_TILE_SIZE = 16;
-    private static final int HALF_ORIGINAL_TILE_SIZE = ORIGINAL_TILE_SIZE / 2;
     private static final int FACTOR = 3;
 
     private static final int TILE_SIZE = ORIGINAL_TILE_SIZE * FACTOR;

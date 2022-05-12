@@ -9,5 +9,5 @@ package se.liu.hanba478henan555.entity.entity_abstract;
  */
 public enum EntityType
 {
-    PLAYER, ENEMY, DRAGON, BLOB, RED
+    PLAYER, ENEMY, DRAGON, BLOB, EN
 }

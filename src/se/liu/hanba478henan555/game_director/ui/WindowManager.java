@@ -39,7 +39,7 @@ public class WindowManager
     private Heart[] hearts;
     private Point imagePoint;
 
-    private int screensizeX, screensizeY;
+    private int screenSizeX, screenSizeY;
     private Point currentScreen = new Point(0, 0);
     private int playerChoice = 0, arrowCounter = 0;
 
@@ -47,7 +47,6 @@ public class WindowManager
 
     private final static int INVENTORY_HEIGHT = 3, INVENTORY_WIDTH = 4, SLOT_SPEED = 5, ROUND_CORNERS = 25;
 
-    private Point slotPos = new Point(0,0);
     private int slotCol = 0, slotRow = 0, slotCounter = 0;
 
 
@@ -77,8 +76,8 @@ public class WindowManager
     }
 
     private void setValues() {
-	this.screensizeX = zinkPanel.getTileSize() * zinkPanel.getColumns();
-	this.screensizeY = zinkPanel.getTileSize() * zinkPanel.getRows();
+	this.screenSizeX = zinkPanel.getTileSize() * zinkPanel.getColumns();
+	this.screenSizeY = zinkPanel.getTileSize() * zinkPanel.getRows();
 	int coordinate = zinkPanel.getTileSize()/3;
 	this.imagePoint = new Point(coordinate, coordinate);
 	for (int i = 0; i < 3; i++) {
@@ -130,8 +129,8 @@ public class WindowManager
 
     private void showMessage(Graphics2D g2){
 	if (showingMessage) {
-	    g2.drawString(message, currentScreen.x + screensizeX/2 - getStringLength(g2, message)/2,
-			  currentScreen.y + screensizeY/2);
+	    g2.drawString(message, currentScreen.x + screenSizeX/2 - getStringLength(g2, message)/2,
+			  currentScreen.y + screenSizeY / 2);
 	}
     }
 
@@ -148,7 +147,7 @@ public class WindowManager
 	    showHowToPlay(g2);
 	    return;
 	}
-
+	int tileSize = zinkPanel.getTileSize();
 	int amountOptions = AMOUNT_OPTIONS;
 	Font font = new Font("Times New Roman", Font.BOLD, 60);
 	g2.setFont(font);
@@ -160,8 +159,8 @@ public class WindowManager
 	int shadow = SHADOW_VALUE;
 	int textLength1 = getStringLength(g2, title1);
 	int textLength2 = getStringLength(g2, title2);
-	int screenMiddleX = screensizeX/2;
-	int screenMiddleY = zinkPanel.getTileSize() *2;
+	int screenMiddleX = screenSizeX/2;
+	int screenMiddleY = tileSize *2;
 
 	g2.setColor(Color.darkGray);
 	g2.drawString(title1, screenMiddleX - textLength1/2 +shadow, screenMiddleY +shadow);
@@ -171,34 +170,35 @@ public class WindowManager
 	g2.drawString(title2, screenMiddleX - textLength2/2, screenMiddleY + font.getSize());
 
 	Point[] options = new Point[amountOptions];
-	Font font2 = new Font("Arial", Font.PLAIN, zinkPanel.getTileSize()*2 /3);
+	Font font2 = new Font("Arial", Font.PLAIN, tileSize*2 /3);
 	g2.setFont(font2);
 	String text = "START GAME";
 	int x1 = screenMiddleX - getStringLength(g2, text)/2;
-	int y1 = zinkPanel.getTileSize() *7;
+	int y1 = tileSize *7;
 	g2.drawString(text, x1, y1);
 	options[0] = new Point(x1, y1);
 
 	String text2 = "How to play";
 	int x2 = screenMiddleX - getStringLength(g2, text2)/2;
-	int y2 = zinkPanel.getTileSize() *8;
+	int y2 = tileSize *8;
 	g2.drawString(text2, x2, y2);
 	options[1] = new Point(x2, y2);
 
-	g2.drawString(">", options[playerChoice].x - zinkPanel.getTileSize(), options[playerChoice].y);
+	g2.drawString(">", options[playerChoice].x - tileSize, options[playerChoice].y);
     }
 
     private void showHowToPlay(Graphics2D g2) {
 	Font font = new Font("Times New Roman", Font.PLAIN, 30);
+	int tileSize = zinkPanel.getTileSize();
 	g2.setFont(font);
 	String instructions1 = "Move with wasd-keys ";
 	String instructions2 = "Attack enemies with SPACE";
 	String instructions3 = "Open inventory with ENTER";
-	g2.drawString(instructions1, zinkPanel.getTileSize(), zinkPanel.getTileSize());
-	g2.drawString(instructions2, zinkPanel.getTileSize(), zinkPanel.getTileSize() + font.getSize());
-	g2.drawString(instructions3, zinkPanel.getTileSize(), zinkPanel.getTileSize() + font.getSize()*2);
+	g2.drawString(instructions1, tileSize, tileSize);
+	g2.drawString(instructions2, tileSize, tileSize + font.getSize());
+	g2.drawString(instructions3, tileSize, tileSize + font.getSize()*2);
 	String exit = "Exit How To Play by pressing ENTER";
-	g2.drawString(exit, screensizeX - getStringLength(g2, exit) - zinkPanel.getTileSize(), screensizeY - g2.getFont().getSize());
+	g2.drawString(exit, screenSizeX - getStringLength(g2, exit) - tileSize, screenSizeY - g2.getFont().getSize());
     }
 
     private void moveArrow(int amountOptions) {
@@ -216,7 +216,6 @@ public class WindowManager
 	    showPlayerChoice();
 	    return;
 	}
-	resetSlotPos();
 	zinkPanel.setGameRunning(showingInventory);
 	showingInventory = !showingInventory;
 	if(showingInventory){
@@ -348,11 +347,6 @@ public class WindowManager
 	    }
 
 	}
-    }
-
-    private void resetSlotPos() {
-	slotPos.x = 0;
-	slotPos.y = 0;
     }
 
     private int getStringLength(Graphics2D g2, String text) {

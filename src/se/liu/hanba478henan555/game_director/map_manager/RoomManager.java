@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,7 +29,6 @@ public class RoomManager
     private Tile[] tileTypes;
     private int[][] roomTileData;
     private int tileSize,worldRows,worldColumns;
-    private String separator = File.separator;
     private int originalTileSize;
 
     public RoomManager(ZinkPanel zp) {
@@ -42,20 +40,21 @@ public class RoomManager
 	this.tileTypes = new Tile[10];
 	this.roomTileData = new int[worldColumns][worldRows];
 	defineTileTypes();
-	loadMap("world" + separator + "world.txt");
+	loadMap("world/world.txt");
     }
 
     private void defineTileTypes() {
-	loadTile(0, "images" + separator + "tiles" + separator + "wall.png", true);
-	loadTile(1, "images" + separator + "tiles" + separator + "earth.png", false);
-	loadTile(2, "images" + separator + "tiles" + separator + "pedestal.png", false);
+	loadTile(0, "wall.png", true);
+	loadTile(1, "earth.png", false);
+	loadTile(2, "pedestal.png", false);
     }
 
 
-    private void loadTile(int index, String filePath, boolean collision){
+    private void loadTile(int index, String file, boolean collision){
 	BufferedImage result, readFile = null;
 	try{
-	    readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
+	    String pathToTile = "images/tiles/";
+	    readFile = ImageIO.read(ClassLoader.getSystemResource(pathToTile + file));
 	} catch (IOException e){
 	    LoggingManager.getLogr().log(Level.SEVERE, "loadTile", e);
 	    readFile = new BufferedImage(originalTileSize,originalTileSize,BufferedImage.TYPE_BYTE_GRAY );
