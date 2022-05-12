@@ -54,6 +54,8 @@ Skapat variablerna roomManager och collisionArea i metoden isCollidingWithTile (
 --------------------------------
 
 Titta även lite mer på övriga varningar.
+Har tagt bort alla NonTrivialRepetition.
+
 
 ====
 
