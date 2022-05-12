@@ -160,20 +160,29 @@ public abstract class AbstractEntity implements Entity
     public void changePosition(EntityInput input, PointXY xy, int direction, int ammount) {
 	int add = ammount * direction;
 	if (xy == PointXY.X) {
-	    pos.x += add;
-	    collisionArea.x += add;
-	    if (collisionHandler.isCollidingWithTile(this, input)){
-		pos.x -= add;
-		collisionArea.x -= add;
-	    }
+	    addPosX(add, input);
 	}
 	else {
-	    pos.y += add;
-	    collisionArea.y += add;
-	    if (collisionHandler.isCollidingWithTile(this, input)){
-		pos.y -= add;
-		collisionArea.y -= add;
-	    }
+	    addPosY(add, input);
+	}
+    }
+
+    private void addPosX(int add, EntityInput input){
+	pos.x += add;
+	collisionArea.x += add;
+	boolean tilsColl = collisionHandler.isCollidingWithTile(this, input);
+	if(tilsColl){
+	    pos.x -= add;
+	    collisionArea.x -= add;
+	}
+    }
+    private void addPosY(int add, EntityInput input){
+	pos.y += add;
+	collisionArea.y += add;
+	boolean tilsColl = collisionHandler.isCollidingWithTile(this, input);
+	if(tilsColl){
+	    pos.y -= add;
+	    collisionArea.y -= add;
 	}
     }
 

@@ -109,21 +109,21 @@ public class Player extends AbstractEntity
 	    attack();
 	}
 	if (canDelayAttack){
-	    if (keyHandler.getKey(EntityInput.UP) ) {
-		movePlayerBasedOnInput(EntityInput.UP);
-	    }
-	    else if (keyHandler.getKey(EntityInput.DOWN)) {
-		movePlayerBasedOnInput(EntityInput.DOWN);
-	    }
-	    else if (keyHandler.getKey(EntityInput.LEFT)) {
-		movePlayerBasedOnInput(EntityInput.LEFT);
-	    }
-	    else if (keyHandler.getKey(EntityInput.RIGHT)) {
-		movePlayerBasedOnInput(EntityInput.RIGHT);
+	    EntityInput[] inputs = {EntityInput.UP, EntityInput.DOWN,EntityInput.LEFT,EntityInput.RIGHT};
+	    for (EntityInput input:
+		    inputs) {
+		if (checkInput(input)){
+		    movePlayerBasedOnInput(input);
+		    break;
+		}
 	    }
 	}
 	checkCollision();
 	changeImage();
+    }
+
+    private boolean checkInput(EntityInput input){
+	return keyHandler.getKey(input);
     }
 
     private void checkCollision(){

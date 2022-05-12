@@ -259,15 +259,16 @@ public class WindowManager
 	if (!showingInventory) {
 	    return;
 	}
+	int tileSize = zinkPanel.getTileSize();
 	//inventory window
-	int posX = (player.getPos().x  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
-	int posY = (player.getPos().y  + zinkPanel.getTileSize() / 2)/ zinkPanel.getTileSize();
+	int posX = (player.getPos().x  + tileSize / 2)/ tileSize;
+	int posY = (player.getPos().y  + tileSize / 2)/ tileSize;
 
-	final int frameX = (posX / zinkPanel.getColumns() *zinkPanel.getColumns()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*9;
-	final int frameY = (posY / zinkPanel.getRows() * zinkPanel.getRows()*zinkPanel.getTileSize()) + zinkPanel.getTileSize()*2;
+	final int frameX = (posX / zinkPanel.getColumns() *zinkPanel.getColumns()*tileSize) + tileSize*9;
+	final int frameY = (posY / zinkPanel.getRows() * zinkPanel.getRows()*tileSize) + tileSize*2;
 
-	int framewidth = zinkPanel.getTileSize() * 6;
-	int frameHeigth = zinkPanel.getTileSize() * 5;
+	int framewidth = tileSize * 6;
+	int frameHeigth = tileSize * 5;
 	drawWindow(g2, frameX, frameY, framewidth, frameHeigth);
 
 	//slot
@@ -275,7 +276,7 @@ public class WindowManager
 	final int slotYstart = frameY + 20;
 	int slotX = slotXstart;
 	int slotY = slotYstart;
-	final int slotSize = zinkPanel.getTileSize()+3;
+	final int slotSize = tileSize+3;
 
 	drawItems(g2, slotXstart, slotX, slotY, slotSize);
 	drawCursor(g2, slotSize, slotXstart, slotYstart);
@@ -285,14 +286,14 @@ public class WindowManager
     }
 
     private void drawItems(Graphics2D g2, int startX, int currentX, int currentY, int slotSize){
-
+	int tileSize = zinkPanel.getTileSize();
 	for (int i = 0; i < player.getInventory().size(); i++) {
 	    if(player.getInventory().get(i).getGameObject().equals(player.getWeapon())){
 		g2.setColor(Color.ORANGE);
-		g2.fillRoundRect(currentX,currentY,zinkPanel.getTileSize(),zinkPanel.getTileSize(),10,10);
+		g2.fillRoundRect(currentX,currentY,tileSize,tileSize,10,10);
 	    }
 
-	    g2.drawImage(player.getInventory().get(i).getImage(), currentX, currentY, zinkPanel.getTileSize(), zinkPanel.getTileSize(), null);
+	    g2.drawImage(player.getInventory().get(i).getImage(), currentX, currentY, tileSize, tileSize, null);
 	    currentX += slotSize;
 	    if (i == 4 || i == 9 || i == 14) {
 		currentX = startX;

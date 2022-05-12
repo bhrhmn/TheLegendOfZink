@@ -8,7 +8,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -28,7 +27,6 @@ public class Sound
     private URL[] soundURL = new URL[7];
 
     public Sound(){
-	String fs = File.separator;
 	//Backgroundmusic
 	soundURL[SoundType.MUSIC.ordinal()] = setURL("music.wav");
 	//pling sound
