@@ -41,6 +41,9 @@ public class CollisionHandler
        }
    }
 
+   private boolean hasSideCollision(RoomManager roomManager ,Point a,Point b){
+        return roomManager.hasCollision(a) || roomManager.hasCollision(b);
+   }
     public boolean isCollidingWithTile(AbstractEntity entity, EntityInput dir){
         RoomManager roomManager = zinkPanel.getRoomManager();
         Rectangle collisionArea = entity.getCollisionArea();
@@ -58,16 +61,16 @@ public class CollisionHandler
 
         switch (dir){
             case UP:{
-                return roomManager.hasCollision(topRight) || roomManager.hasCollision(topLeft);
+                return hasSideCollision(roomManager, topRight, topLeft);
             }
             case DOWN:{
-                return roomManager.hasCollision(bottomLeft) || roomManager.hasCollision(bottomRight);
+                return hasSideCollision(roomManager, bottomLeft, bottomRight);
             }
             case LEFT:{
-                return roomManager.hasCollision(bottomLeft) || roomManager.hasCollision(topLeft);
+                return hasSideCollision(roomManager, bottomLeft, topLeft);
             }
             case RIGHT:{
-                return roomManager.hasCollision(topRight) || roomManager.hasCollision(bottomRight);
+                return hasSideCollision(roomManager, bottomRight, topRight);
             }
             default:{return false;}
         }
