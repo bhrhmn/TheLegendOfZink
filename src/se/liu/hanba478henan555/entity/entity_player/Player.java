@@ -118,7 +118,7 @@ public class Player extends AbstractEntity
 		}
 	    }
 	}
-	collisionCheck();
+	testCollision();
 	changeImage();
     }
 
@@ -126,8 +126,8 @@ public class Player extends AbstractEntity
 	return keyHandler.getKey(input);
     }
 
-    private void collisionCheck(){
-	collisionHandler.objectCollision(this);
+    private void testCollision(){
+	collisionHandler.testObjectCollision(this);
 	collisionHandler.abstractEntityCollision(this);
     }
 

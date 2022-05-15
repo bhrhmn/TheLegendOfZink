@@ -150,7 +150,7 @@ public abstract class AbstractEntity implements Entity
 
     protected void updateCollision(){
 	setCollisionAreaRelativePos();
-	collisionHandler.objectCollision(this);
+	collisionHandler.testObjectCollision(this);
     }
 
     public void knockback(){

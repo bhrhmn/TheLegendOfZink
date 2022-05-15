@@ -23,7 +23,7 @@ public class CollisionHandler
         this.tileSize = zinkPanel.getTileSize();
     }
 
-    public void objectCollision(AbstractEntity entity) {
+    public void testObjectCollision(AbstractEntity entity) {
         for (int i = 0; i < zinkPanel.getGameObjects().size(); i++){
             GameObject gameObject = zinkPanel.getGameObjects().get(i);
             if (gameObject != null && gameObject.hasCollision(entity.getCollisionArea())) {
