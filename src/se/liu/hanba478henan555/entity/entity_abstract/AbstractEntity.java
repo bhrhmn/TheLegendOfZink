@@ -150,15 +150,15 @@ public abstract class AbstractEntity implements Entity
 
     protected void updateCollision(){
 	setCollisionAreaRelativePos();
-	collisionHandler.checkObjectCollision(this);
+	collisionHandler.objectCollision(this);
     }
 
     public void knockback(){
 	moveEntity(getEntityInput() ,-1, zinkPanel.getTileSize() / 2);
     }
 
-    public void changePosition(EntityInput input, PointXY xy, int direction, int ammount) {
-	int add = ammount * direction;
+    public void changePosition(EntityInput input, PointXY xy, int direction, int amount) {
+	int add = amount * direction;
 	if (xy == PointXY.X) {
 	    addPosX(add, input);
 	}
@@ -170,17 +170,18 @@ public abstract class AbstractEntity implements Entity
     private void addPosX(int add, EntityInput input){
 	pos.x += add;
 	collisionArea.x += add;
-	boolean tilsColl = collisionHandler.isCollidingWithTile(this, input);
-	if(tilsColl){
+	boolean tilsCollision = collisionHandler.isCollidingWithTile(this, input);
+	if(tilsCollision){
 	    pos.x -= add;
 	    collisionArea.x -= add;
 	}
     }
+
     private void addPosY(int add, EntityInput input){
 	pos.y += add;
 	collisionArea.y += add;
-	boolean tilsColl = collisionHandler.isCollidingWithTile(this, input);
-	if(tilsColl){
+	boolean tilsCollision = collisionHandler.isCollidingWithTile(this, input);
+	if(tilsCollision){
 	    pos.y -= add;
 	    collisionArea.y -= add;
 	}
@@ -255,7 +256,7 @@ public abstract class AbstractEntity implements Entity
 
     public EntityType getEntityType(){return entityType;}
 
-    public int getamountOfDamage(){return amountOfDamage;}
+    public int getAmountOfDamage(){return amountOfDamage;}
 
     protected void attackRandom(int procent) {
 	int randomInt = RANDOM.nextInt(100);

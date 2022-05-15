@@ -112,22 +112,22 @@ public class Player extends AbstractEntity
 	    EntityInput[] inputs = {EntityInput.UP, EntityInput.DOWN,EntityInput.LEFT,EntityInput.RIGHT};
 	    for (EntityInput input:
 		    inputs) {
-		if (checkInput(input)){
+		if (isKeyPressed(input)){
 		    movePlayerBasedOnInput(input);
 		    break;
 		}
 	    }
 	}
-	checkCollision();
+	collisionCheck();
 	changeImage();
     }
 
-    private boolean checkInput(EntityInput input){
+    private boolean isKeyPressed(EntityInput input){
 	return keyHandler.getKey(input);
     }
 
-    private void checkCollision(){
-	collisionHandler.checkObjectCollision(this);
+    private void collisionCheck(){
+	collisionHandler.objectCollision(this);
 	collisionHandler.abstractEntityCollision(this);
     }
 

@@ -30,7 +30,7 @@ public abstract class Enemy extends AbstractEntity
 
     @Override protected void die(){
 	zinkPanel.sound.playSoundEffect(SoundType.DEATH);
-	zinkPanel.getEnemyList().remove(this);
+	zinkPanel.getEnemys().remove(this);
 	BloodPile bloodPile = new BloodPile(zinkPanel);
 	bloodPile.setValues(this.pos.x/ zinkPanel.getTileSize(), this.pos.y/ zinkPanel.getTileSize());
 	zinkPanel.getGameObjects().add(bloodPile);

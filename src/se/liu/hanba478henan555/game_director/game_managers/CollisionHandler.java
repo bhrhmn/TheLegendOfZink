@@ -23,7 +23,7 @@ public class CollisionHandler
         this.tileSize = zinkPanel.getTileSize();
     }
 
-    public void checkObjectCollision(AbstractEntity entity) {
+    public void objectCollision(AbstractEntity entity) {
         for (int i = 0; i < zinkPanel.getGameObjects().size(); i++){
             GameObject gameObject = zinkPanel.getGameObjects().get(i);
             if (gameObject != null && gameObject.hasCollision(entity.getCollisionArea())) {
@@ -33,10 +33,10 @@ public class CollisionHandler
    }
 
    public void abstractEntityCollision(AbstractEntity entity){
-       for (int i = 0; i < zinkPanel.getEnemyList().size(); i++){
-           AbstractEntity enemy = zinkPanel.getEnemyList().get(i);
+       for (int i = 0; i < zinkPanel.getEnemys().size(); i++){
+           AbstractEntity enemy = zinkPanel.getEnemys().get(i);
            if (enemy != null && enemy.hasCollision(entity.getCollisionArea()) && !enemy.getEntityType().equals(entity.getEntityType()) && enemy.getCollision()) {
-               entity.takeDamage(enemy.getamountOfDamage());
+               entity.takeDamage(enemy.getAmountOfDamage());
            }
        }
    }

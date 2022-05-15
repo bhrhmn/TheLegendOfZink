@@ -135,14 +135,14 @@ public abstract class AbstractObject implements GameObject
         GraphicsDevice gd = ge.getDefaultScreenDevice();
         GraphicsConfiguration gc = gd.getDefaultConfiguration();
         double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
-        int w = image.getWidth(), h = image.getHeight();
-        int neww = (int) Math.floor(w * cos + h * sin), newh = (int) Math.floor(h
-                                                                                * cos + w * sin);
+        int width = image.getWidth(), height = image.getHeight();
+        int newWidth = (int) Math.floor(width * cos + height * sin), newh = (int) Math.floor(height
+                                                                                * cos + width * sin);
         int transparency = image.getColorModel().getTransparency();
-        BufferedImage result = gc.createCompatibleImage(neww, newh, transparency);
+        BufferedImage result = gc.createCompatibleImage(newWidth, newh, transparency);
         Graphics2D g = result.createGraphics();
-        g.translate((neww - w) / 2, (newh - h) / 2);
-        g.rotate(angle, w / 2.0f, h / 2.0f);
+        g.translate((newWidth - width) / 2, (newh - height) / 2);
+        g.rotate(angle, width / 2.0f, height / 2.0f);
         g.drawRenderedImage(image, null);
         return result;
     }

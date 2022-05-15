@@ -43,17 +43,17 @@ public class PlaceSuperObjectsSpawnEnemies
 
     private void spawnRedEnemy(int x, int y){
 	EnemyEn en = new EnemyEn(zinkPanel, new Point(x, y));
-	zinkPanel.getEnemyList().add(en);
+	zinkPanel.getEnemys().add(en);
     }
 
     private void spawnBlob(int x, int y) {
 	EnemyBlob blob = new EnemyBlob(zinkPanel, new Point(x, y));
-	zinkPanel.getEnemyList().add(blob);
+	zinkPanel.getEnemys().add(blob);
     }
 
     private void spawnDragon(int x, int y) {
 	EnemyDragon dragon = new EnemyDragon(zinkPanel, new Point(x, y));
-	zinkPanel.getEnemyList().add(dragon);
+	zinkPanel.getEnemys().add(dragon);
     }
 
     public void spawnBloodPile(int x, int y) {

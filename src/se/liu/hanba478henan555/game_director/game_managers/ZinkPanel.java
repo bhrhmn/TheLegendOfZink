@@ -57,7 +57,7 @@ public class ZinkPanel extends JPanel
 
     private Player player = new Player(this, new Point(7, 8), keyHandler);
 
-    private List<AbstractEntity> enemyList = new ArrayList<>();
+    private List<AbstractEntity> enemys = new ArrayList<>();
     private List<AbstractObject> gameObjects = new ArrayList<>();
 
     private PlaceSuperObjectsSpawnEnemies placeSuperObjectsSpawnEnemies = new PlaceSuperObjectsSpawnEnemies(this);
@@ -87,7 +87,7 @@ public class ZinkPanel extends JPanel
 
     public WindowManager getWindowManager() {return windowManager;}
 
-    public List<AbstractEntity> getEnemyList() {return enemyList;}
+    public List<AbstractEntity> getEnemys() {return enemys;}
 
     public List<AbstractObject> getGameObjects() {return gameObjects;}
 
@@ -151,8 +151,8 @@ public class ZinkPanel extends JPanel
     private void update() {
         player.update();
 
-        for (int i = 0; i < enemyList.size(); i++) {
-            enemyList.get(i).update();
+        for (int i = 0; i < enemys.size(); i++) {
+            enemys.get(i).update();
         }
         for (int i = 0; i<gameObjects.size(); i++) {
             gameObjects.get(i).update();
@@ -184,8 +184,8 @@ public class ZinkPanel extends JPanel
         for (int i = 0; i<gameObjects.size(); i++) {
             gameObjects.get(i).draw(g2);
         }
-        for (int i = 0; i < enemyList.size(); i++) {
-            enemyList.get(i).draw(g2);
+        for (int i = 0; i < enemys.size(); i++) {
+            enemys.get(i).draw(g2);
         }
 
         player.draw(g2);

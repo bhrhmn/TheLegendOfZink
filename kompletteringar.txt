@@ -57,17 +57,3 @@ Titta även lite mer på övriga varningar.
 Har tagt bort alla NonTrivialRepetition.
 
 
-====
-
-Ni använder väldigt väldigt många paket. Här hade det nog varit tillräckligt att endast använda entity,
-game_director och objects eller något i den stilen i paketväg, all kod ska däremot ligga i paket och därmed bör även
-LoggingManager och StartGame göra det.
-
-Namngivningen på klasserna ser bra ut.
-
-Ni har noggrant använt er av OOP vilket gör koden väldigt läsbar. Ni skyddar även de metoder som endast rör de specifika
-objektet på ett bra sätt genomgående. Även inne i subklasserna har ni strukturerat det väldigt snyggt istället för att bara
-sköta allt i konstruktorn (vilket man lätt gör när default-värden skall sättas).z
-
-För att öka läsbarheten där ni kallar på vilken ljud som skall spelas hade ni kunnat lägga till ett förklarande namn
-(exempelvis i en enum) som argument istället för att hårdkoda in vilket index som gäller. Men detta nämner ni i rapporten.
