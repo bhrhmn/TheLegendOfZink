@@ -6,7 +6,7 @@ URL:er, som alltid använder "/" som separator.
 Tog bort File.separator i alla entitys och objects.
 "String literals inside certain method calls, such as getResource(), are automatically ignored. In other places it can be difficult to
 determine exactly where a string will be used."
-Eftersom våra strings kommer direkt in i gerResource() så är dessa SHOWSTOPPERS false positives.
+Eftersom våra strings kommer direkt in i getResource() så är dessa SHOWSTOPPERS false positives (19 stycken/alla).
 --------------------------------
 
 I loadMap() använder ni istället FileReader för att läsa direkt från fil, istället för att använda en resurs och be den resursen om en
@@ -33,7 +33,7 @@ istileColliding -> isCollidingWithTile
 Koden för setImages() är också rätt så repetitiv.  Det ser ut som att man skulle kunna förenkla genom att skapa ett namngivningsmönster
 för resurserna så att det t.ex. räcker att ange "blob" till AbstractEntity-konstruktorn, så kan den själv konstruera namnen och läsa in alla filer.
 -----------Lösning------------
-fixat genom att utöka det till 2 functioner. en som sätter
+Fixat genom att utöka det till 2 funktioner. En som sätter
 path + "_up_1.png" och en annan funtionen som bestämmer path, där path är ej hårdkodad
 men tar ut utifrån vilken entitytype den är.
 ------------------------------
@@ -52,6 +52,18 @@ Skapat variablerna roomManager och collisionArea i metoden isCollidingWithTile (
 --------------------------------
 
 Titta även lite mer på övriga varningar.
+
 Har tagt bort alla NonTrivialRepetition.
+
+Fixat alla stavfel. 
+
+Vi har valt att ignorera magic numbers eftersom runt 80 st är koordinater för fiender och objekt. 
+De resterande magic numbers har vi bedömt är löjliga. 
+
+Som punkten ovan har vi fixat alla metodnamn.
+
+En severe är en false positive (manynamingissues) eftersom att den klagar på wordsplit med ordet "zink". 
+Den vill att vi ska ha "z" "ink" men det är fel eftersom vi hade en ord lek med link och zelda som blev zink.
+Dessutom är zink ett ord.
 
 
