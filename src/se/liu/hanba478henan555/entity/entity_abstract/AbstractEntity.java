@@ -124,25 +124,25 @@ public abstract class AbstractEntity implements Entity
 	this.collisionArea.y = this.pos.y + zinkPanel.getOriginalTileSize() / 2;
     }
 
-    @Override public void moveEntity(EntityInput pi, int direction, int ammount){
+    @Override public void moveEntity(EntityInput pi, int direction, int amount){
 	if (damaged) {
 	    return;
 	}
 	switch (pi){
 	    case UP: {
-		changePosition(EntityInput.UP, PointXY.Y, -direction, ammount);
+		changePosition(EntityInput.UP, PointXY.Y, -direction, amount);
 		break;
 	    }
 	    case DOWN: {
-		changePosition(EntityInput.DOWN, PointXY.Y, direction, ammount);
+		changePosition(EntityInput.DOWN, PointXY.Y, direction, amount);
 		break;
 	    }
 	    case RIGHT: {
-		changePosition(EntityInput.RIGHT, PointXY.X, direction, ammount);
+		changePosition(EntityInput.RIGHT, PointXY.X, direction, amount);
 		break;
 	    }
 	    case LEFT: {
-		changePosition(EntityInput.LEFT, PointXY.X, -direction, ammount);
+		changePosition(EntityInput.LEFT, PointXY.X, -direction, amount);
 		break;
 	    }
 	}

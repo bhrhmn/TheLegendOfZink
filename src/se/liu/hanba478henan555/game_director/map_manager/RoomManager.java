@@ -81,8 +81,8 @@ public class RoomManager
     private String getResourceFileAsString(String fileName) {
 	ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 	try (InputStream is = classLoader.getResourceAsStream(fileName)) {
-	    try (InputStreamReader isr = new InputStreamReader(is);
-		 BufferedReader reader = new BufferedReader(isr)) {
+	    try (InputStreamReader inputStreamReader = new InputStreamReader(is);
+		 BufferedReader reader = new BufferedReader(inputStreamReader)) {
 		return reader.lines().collect(Collectors.joining(System.lineSeparator()));
 	    }
 	} catch (IOException e) {

@@ -17,7 +17,7 @@ public interface Entity
     public void takeDamage(int damage);
     public void setDefaultValues();
     public void update();
-    public void moveEntity(EntityInput pi, int direction, int ammount);
+    public void moveEntity(EntityInput pi, int direction, int amount);
     public void draw(Graphics2D g2);
     public boolean hasCollision(Rectangle rectangle);
 }

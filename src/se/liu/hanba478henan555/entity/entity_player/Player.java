@@ -57,7 +57,7 @@ public class Player extends AbstractEntity
 	return weapon;
     }
 
-    public void removeAmountOfDoorkeys(){
+    public void removeAmountOfDoorKeys(){
 	for (AbstractObject object: inventory) {
 	    if (object.getGameObject() == ObjectType.KEY) {
 		inventory.remove(object);

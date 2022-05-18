@@ -211,7 +211,7 @@ public class WindowManager
 	arrowCounter = 0;
     }
 
-    public void confrimFromPlayer() {
+    public void confirmFromPlayer() {
 	if (zinkPanel.isShowingTitleScreen()) {
 	    showPlayerChoice();
 	    return;
@@ -267,19 +267,19 @@ public class WindowManager
 	final int frameX = (posX / zinkPanel.getColumns() *zinkPanel.getColumns()*tileSize) + tileSize*9;
 	final int frameY = (posY / zinkPanel.getRows() * zinkPanel.getRows()*tileSize) + tileSize*2;
 
-	int framewidth = tileSize * 6;
-	int frameHeigth = tileSize * 5;
-	drawWindow(g2, frameX, frameY, framewidth, frameHeigth);
+	int frameWidth = tileSize * 6;
+	int frameHeight = tileSize * 5;
+	drawWindow(g2, frameX, frameY, frameWidth, frameHeight);
 
 	//slot
-	final int slotXstart = frameX + 20;
-	final int slotYstart = frameY + 20;
-	int slotX = slotXstart;
-	int slotY = slotYstart;
+	final int slotXStart = frameX + 20;
+	final int slotYStart = frameY + 20;
+	int slotX = slotXStart;
+	int slotY = slotYStart;
 	final int slotSize = tileSize+3;
 
-	drawItems(g2, slotXstart, slotX, slotY, slotSize);
-	drawCursor(g2, slotSize, slotXstart, slotYstart);
+	drawItems(g2, slotXStart, slotX, slotY, slotSize);
+	drawCursor(g2, slotSize, slotXStart, slotYStart);
 
 	moveSlot();
 

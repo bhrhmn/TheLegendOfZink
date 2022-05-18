@@ -44,7 +44,7 @@ public class Door extends AbstractObject
 	Player player = zinkPanel.getPlayer();
 	int playerSpeed = player.getSpeed();
 	if (player.getAmountOfDoorKeys() > 0){
-	    player.removeAmountOfDoorkeys();
+	    player.removeAmountOfDoorKeys();
 	    zinkPanel.getGameObjects().remove(this);
 	    zinkPanel.getWindowManager().showObjectMessage(this);
 	    zinkPanel.getSound().playSoundEffect(soundEffect);
