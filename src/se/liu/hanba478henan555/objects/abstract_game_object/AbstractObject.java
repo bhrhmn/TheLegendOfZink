@@ -67,7 +67,7 @@ public abstract class AbstractObject implements GameObject
     protected BufferedImage getImage(final String filePath){
         BufferedImage result, readFile = null;
         try{
-            readFile = ImageIO.read(ClassLoader.getSystemResource(filePath));
+            readFile = ImageIO.read(ClassLoader.getSystemClassLoader().getResource(filePath));
         } catch (IOException e){
             LoggingManager.getLogr().log(Level.SEVERE, "AbstractObject", e);
             readFile = new BufferedImage(zinkPanel.getOriginalTileSize(),zinkPanel.getOriginalTileSize(),BufferedImage.TYPE_BYTE_GRAY );

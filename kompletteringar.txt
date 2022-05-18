@@ -4,11 +4,11 @@ I t.ex. setImages() använder ni File.separator, men det är fel i det här samm
 URL:er, som alltid använder "/" som separator.
 ----------------Lösning-------------
 Tog bort File.separator i alla entitys och objects.
-Vi anvcänder oss av getSystemResource som efterliknar getResource
+Vi använder oss av getSystemResource som efterliknar getResource
 så eftersom det står
 "String literals inside certain method calls, such as getResource(),
 are automatically ignored. In other places it can be difficult to determine exactly where a string will be used."
-i kodgranskningen väljer vi att ignorera alla SHOWSTOP som har med File.seporator att göra.
+i kodgranskningen väljer vi att ignorera alla SHOWSTOP som har med File.separator att göra.
 --------------------------------
 
 I loadMap() använder ni istället FileReader för att läsa direkt från fil, istället för att använda en resurs och be den resursen om en
