@@ -54,7 +54,7 @@ public class RoomManager
 	BufferedImage result, readFile = null;
 	try{
 	    String pathToTile = "images/tiles/";
-	    readFile = ImageIO.read(ClassLoader.getSystemResource(pathToTile + file));
+	    readFile = ImageIO.read(ClassLoader.getSystemClassLoader().getResource(pathToTile + file));
 	} catch (IOException e){
 	    LoggingManager.getLogr().log(Level.SEVERE, "loadTile", e);
 	    readFile = new BufferedImage(originalTileSize,originalTileSize,BufferedImage.TYPE_BYTE_GRAY );
